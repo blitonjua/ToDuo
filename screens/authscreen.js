@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Modal, StyleSheet, Text, View, TextInput, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
-// import firestore from '@react-native-firebase/firestore';
+import readFromDatabase from '../services/fire';
 
 const AuthScreen = () => {
   //manage state
@@ -18,6 +18,7 @@ const AuthScreen = () => {
   }
 
   const signUserIn = (email, pass) => {
+    console.log(readFromDatabase('Users', 'YoUpATpuGFym8fdfw4SB'));
     auth().signInWithEmailAndPassword(email, pass);
   };
   const createUser = (email, pass, number, age, firstName, lastName) => {
