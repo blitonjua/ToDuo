@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Modal, StyleSheet, Text, View, TextInput, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import readFromDatabase from '../services/fire';
+// import readFromDatabase from '../services/fire';
 
 const AuthScreen = () => {
   //manage state
