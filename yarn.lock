@@ -998,10 +998,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-8.0.4.tgz#bad66c363d2ff622750542d02c3383607fec44b8"
   integrity sha512-xG8SsttcSp8xcpvClfe516P/xLzeOnUpGQvXvcXcDiaZuiwWK/a/3G5BvpAEjV1uanXt9vlvbytVGwEScbskrQ==
 
-"@react-native-firebase/firestore@^7.1.5":
-  version "7.1.5"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-7.1.5.tgz#1ffd8597ef3453e96f1dcd7ec952ab7377e65c0e"
-  integrity sha512-C6E2RzQ0dq0/gynTufTjPB/HyYSlc7QM++Ofw5kEb/s6h/+P9hELG54jBSXfWnq0X4N7wvZ/9dTzAxtmta+XUg==
+"@react-native-firebase/firestore@^7.1.7":
+  version "7.1.7"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-7.1.7.tgz#b671f8011f1810f401778f2415640de28e6fbe18"
+  integrity sha512-gHoL9uW720pHxtq37YF/rvVEfDqCWRubwmGMbgwH6nbw9gCfbQNtwN3phkfMlnTyJCGFv0PUvdILAnqWPN2R3A==
 
 "@types/babel__core@^7.1.0":
   version "7.1.8"
@@ -6130,6 +6130,11 @@ walker@^1.0.7, walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
+
+watchman@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/watchman/-/watchman-1.0.0.tgz#a800f815957952ed9229c54610fb4a26897d2c21"
+  integrity sha512-f7sP6DSVQzNUAXIBctvYyJyq6/j/FtWoEn6yh/Ot/E14a3am7JMH0tygWt6iE+T+DT+BNOUAT3hM/gZ7W9Ycmw==
 
 wcwidth@^1.0.1:
   version "1.0.1"

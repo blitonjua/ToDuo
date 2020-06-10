@@ -47,7 +47,11 @@ const App: () => React$Node = () => {
 
   return (
     <View>
-      <Welcome />
+      <Welcome 
+        /*
+          call a function to get the user id
+        */ 
+      />
     </View>
   );
 };

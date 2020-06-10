@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Modal, StyleSheet, Text, View, TextInput, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
-// import readFromDatabase from '../services/fire';
+import readFromDatabase from '../services/fire';
+import addUser from "../services/fire"
 
 const AuthScreen = () => {
   //manage state
@@ -13,6 +14,7 @@ const AuthScreen = () => {
   const [firstNameText, setFirstNameText] = useState('');
   const [lastNameText, setLastNameText] = useState('');
 
+  
   function setNewScreen() {
     setScreen(!showSignIn);
   }
@@ -21,21 +23,13 @@ const AuthScreen = () => {
     console.log(readFromDatabase('Users', 'YoUpATpuGFym8fdfw4SB'));
     auth().signInWithEmailAndPassword(email, pass);
   };
-  const createUser = (email, pass, number, age, firstName, lastName) => {
+  const createUser = (email, pass) => {
     auth()
       .createUserWithEmailAndPassword(email, pass)
       .then(() => {
-        // firebase
-        //   .database()
-        //   .ref('users/' + res.user.uid)
-        //   .set({
-        //     firstName: firstName,
-        //     lastName: lastName,
-        //     email: email,
-        //     password:pass,
-        //     age:age,
-        //     number:number,
-        //   });
+        //firstName, lastName, newAge, email
+        var user= auth().currentUser;
+        addUser(user.uid, 'olim', 'jon', 88, email);
         console.log('User account created & signed in!');
       })
       .catch(error => {
