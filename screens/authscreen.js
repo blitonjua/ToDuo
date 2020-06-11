@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Modal, StyleSheet, Text, View, TextInput, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import readFromDatabase from '../services/fire';
+// import readFromDatabase from '../services/fire';
 import addUser from '../services/fire';
 
 const AuthScreen = () => {
@@ -9,7 +9,6 @@ const AuthScreen = () => {
   const [showSignIn, setScreen] = useState(true);
   const [emailText, setEmailText] = useState('');
   const [passwordText, setPasswordText] = useState('');
-  const [numberText, setNumberText] = useState('');
   const [ageText, setAgeText] = useState('');
   const [firstNameText, setFirstNameText] = useState('');
   const [lastNameText, setLastNameText] = useState('');
@@ -19,7 +18,7 @@ const AuthScreen = () => {
   }
 
   const signUserIn = (email, pass) => {
-    console.log(readFromDatabase('Users', 'YoUpATpuGFym8fdfw4SB'));
+    // console.log(readFromDatabase('Users', 'YoUpATpuGFym8fdfw4SB'));
     auth().signInWithEmailAndPassword(email, pass);
   };
   const createUser = (email, pass, firstName, lastName, age) => {
@@ -28,7 +27,7 @@ const AuthScreen = () => {
       .then(() => {
         //firstName, lastName, newAge, email
         var user = auth().currentUser;
-        addUser(user.uid, firstName, lastName, age, email);
+        addUser(user.uid, firstNameText, lastNameText, ageText, email);
         console.log('User account created & signed in!');
       })
       .catch(error => {
@@ -61,6 +60,7 @@ const AuthScreen = () => {
           <View style={styles.container}>
             <Text>Enter your password</Text>
             <TextInput
+              secureTextEntry={true}
               placeholder="Enter a passowrd"
               onChangeText={text => setPasswordText(text)}
             />

@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 import {View, Text, Button, TouchableOpacity, TextInput} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import readFromDatabase from '../services/fire';
+import getData from '../services/fire';
 import listOutDatabase from '../services/fire';
 
 const Welcome = props => {
+  // var firstName=,lastName=,age=, email=,goals=;
   const signOut = () => {
-    auth()
-      .signOut()
-      .then(() => listOutDatabase); // TODO why this pops up when we sign in rather than sign out????
+    auth().signOut(); // TODO why this pops up when we sign in rather than sign out????
   };
-
+  // listOutDatabase();
   const addGoalHandler = title => {
     //some stuff
   };

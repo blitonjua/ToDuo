@@ -47,7 +47,7 @@ const App: () => React$Node = () => {
 
   return (
     <View>
-      <Welcome uid={auth().currentUser.uid.toString()} />
+      <Welcome />
     </View>
   );
 };
