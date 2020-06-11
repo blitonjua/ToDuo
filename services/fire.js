@@ -8,7 +8,8 @@ const readFromDatabase = (collectionName, docName) => {
   return data;
 };
 
-var listOutDatabase = () => {
+const listOutDatabase = () => {
+  console.log('listOut Database');
   db.collection('Users')
     .get()
     .then(querySnapshot => {
@@ -34,6 +35,34 @@ var getData = uid => {
     });
   return [];
 };
+/*
+      db
+      .collection('Users')
+      .add({
+        firstName: firstName,
+        lastName:lastName,
+        age: newAge,
+        email: email,
+      })
+  //*/
+//firebase
+
+//*//
+
+//*/
+
+/* REFERENCE
+firestore()
+  .collection('Users')
+  .add({
+    name: 'Ada Lovelace',
+    age: 30,
+  })
+  .then(() => {
+    console.log('User added!');
+  });
+*/
+
 const addUser = (uid, firstName, lastName, newAge, email) => {
   db.collection('Users')
     .doc(uid)
