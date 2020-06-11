@@ -47,11 +47,7 @@ const App: () => React$Node = () => {
 
   return (
     <View>
-      <Welcome 
-        /*
-          call a function to get the user id
-        */ 
-      />
+      <Welcome uid={auth().currentUser.uid.toString()} />
     </View>
   );
 };
