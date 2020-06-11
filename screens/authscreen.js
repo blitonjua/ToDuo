@@ -14,7 +14,6 @@ const AuthScreen = () => {
   const [firstNameText, setFirstNameText] = useState('');
   const [lastNameText, setLastNameText] = useState('');
 
-  
   function setNewScreen() {
     setScreen(!showSignIn);
   }
