@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Modal, StyleSheet, Text, View, TextInput, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import readFromDatabase from '../services/fire';
-import addUser from "../services/fire"
+import addUser from '../services/fire';
 
 const AuthScreen = () => {
   //manage state
@@ -14,7 +14,6 @@ const AuthScreen = () => {
   const [firstNameText, setFirstNameText] = useState('');
   const [lastNameText, setLastNameText] = useState('');
 
-  
   function setNewScreen() {
     setScreen(!showSignIn);
   }
@@ -23,13 +22,13 @@ const AuthScreen = () => {
     console.log(readFromDatabase('Users', 'YoUpATpuGFym8fdfw4SB'));
     auth().signInWithEmailAndPassword(email, pass);
   };
-  const createUser = (email, pass) => {
+  const createUser = (email, pass, firstName, lastName, age) => {
     auth()
       .createUserWithEmailAndPassword(email, pass)
       .then(() => {
         //firstName, lastName, newAge, email
-        var user= auth().currentUser;
-        addUser(user.uid, 'olim', 'jon', 88, email);
+        var user = auth().currentUser;
+        addUser(user.uid, firstName, lastName, age, email);
         console.log('User account created & signed in!');
       })
       .catch(error => {
@@ -92,23 +91,33 @@ const AuthScreen = () => {
         <View>
           <Text style={styles.title}>REGISTER SCREEN</Text>
           <View style={styles.container}>
+            <Text>Enter your first name</Text>
+            <TextInput onChangeText={text => setFirstNameText(text)} />
+          </View>
+          <View style={styles.container}>
+            <Text>Enter your last name</Text>
+            <TextInput onChangeText={text => setLastNameText(text)} />
+          </View>
+          <View style={styles.container}>
+            <Text>Enter your age</Text>
+            <TextInput
+              keyboardType="numberic"
+              onChangeText={text => setAgeText(text)}
+            />
+          </View>
+          <View style={styles.container}>
             <Text>Enter email to register</Text>
             <TextInput
               placeholder="Enter your email"
               onChangeText={text => setEmailText(text)}
             />
           </View>
-
-          <View style={styles.container}>
-            <Text>Enter number to register</Text>
-            <TextInput placeholder="Enter your number" keyboardType="numeric" />
-          </View>
-
           <View style={styles.container}>
             <Text>Enter password to register</Text>
             <TextInput
               placeholder="Enter a passowrd"
               onChangeText={text => setPasswordText(text)}
+              secureTextEntry={true}
             />
           </View>
 
@@ -141,7 +150,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   container: {
-    marginTop: 80,
+    marginTop: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#4f3531',
     alignItems: 'center',
