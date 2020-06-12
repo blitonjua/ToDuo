@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
-import {View, Text, Button, TouchableOpacity, TextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+} from 'react-native';
 import auth from '@react-native-firebase/auth';
 // import listOutDatabase from '../services/fire';
 // import matchUser from '../services/fire';
-import { matchUser, addUser, listOutDatabase } from '../services/fire';
+import {matchUser, addUser, listOutDatabase} from '../services/fire';
 
 const Welcome = props => {
   // var firstName=,lastName=,age=, email=,goals=;
   const signOut = () => {
-    auth().signOut(); 
+    auth().signOut();
   };
   // listOutDatabase();
   const addGoalHandler = title => {
@@ -35,11 +42,16 @@ const Welcome = props => {
         <Text>Add Goal</Text>
       </TouchableOpacity>
       <TextInput onChangeText={() => onChangeTextHandler()} value={goal} />
-      <Text>{goal}</Text> 
-      
+      <Text>{goal}</Text>
+
       <View>
         {/* change the 'tempid' to goal id */}
-        <Button title="add a goal to waiting room" onPress={()=>{console.log("hi");matchUser('tempId');}}/>
+        <Button
+          title="add a goal to waiting room"
+          onPress={() => {
+            matchUser('tempId');
+          }}
+        />
       </View>
     </View>
   );

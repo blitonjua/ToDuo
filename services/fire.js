@@ -80,14 +80,12 @@ const addGoalToWaitingRoom = goalId => {
 
 function onResult(QuerySnapshot) {
   // do we need to leave/close/unsubscribe from onSnapshot?
-  console.log('Got goals collection result.');
   var x = 0;
   let goals = [];
   QuerySnapshot.forEach(doc => {
     goals[x++] = doc.id;
-    console.log(goals);
   });
-  if (x > 0) {
+  if (x > 1) {
     //if the number of goals are equal to 2, then update their matched Goal id, accountabuddy id and take them off the waiting room
     //update the goal fields
 
@@ -119,7 +117,7 @@ const matchTheUsersAndUpdateCollection = () => {
     */
 };
 
-//delete the two goal docs from he collection
+// delete the two goal docs from he collection
 const deleteTwoGoalsFromDocument = (goalId1, goalId2) => {
   db.collection('waitingRoom')
     .doc(goalId1)
