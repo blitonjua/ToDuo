@@ -4,7 +4,6 @@
 
 import firestore from '@react-native-firebase/firestore';
 
-
 const db = firestore();
 
 // returns data for specified document in collection, used for one time reads
@@ -28,7 +27,6 @@ export const listOutDatabase = () => {
     });
 };
 
-
 //creatres a document with id == uid and adds all the appropriate fields to it
 export const addUser = (uid, firstName, lastName, newAge, email) => {
   db.collection('Users')
@@ -43,9 +41,9 @@ export const addUser = (uid, firstName, lastName, newAge, email) => {
       console.log(ref);
     });
 };
- 
- export const matchUser=(goalId)=>{
-  console.log("you are lookign at match user functions")
+
+export const matchUser = goalId => {
+  console.log('you are lookign at match user functions');
   // ASK MICHAEL ABOUT DATABASE SYNCHRONIZATION
   // MVP just matches in a queue to avoid synch
   /* var user = auth().currentUser;
@@ -72,24 +70,32 @@ export const addUser = (uid, firstName, lastName, newAge, email) => {
   matchTheUsersAndUpdateCollection();
 };
 //adds goal to the waiting room
-const addGoalToWaitingRoom=(goalId)=>{
-  db.collection('waitingRoom').doc(goalId).set({
-    goalId:goalId
-  });
+const addGoalToWaitingRoom = goalId => {
+  db.collection('waitingRoom')
+    .doc(goalId)
+    .set({
+      goalId: goalId,
+    });
 };
 
-function onResult(QuerySnapshot) { // do we need to leave/close/unsubscribe from onSnapshot?
+function onResult(QuerySnapshot) {
+  // do we need to leave/close/unsubscribe from onSnapshot?
   console.log('Got goals collection result.');
   var x = 0;
-  let goals=[];
-  QuerySnapshot.forEach(documentSnapshot=>{
-    console.log('hey');
-    goals[x++]=documentSnapshot.Id;
+  let goals = [];
+  QuerySnapshot.forEach(doc => {
+    goals[x++] = doc.id;
+    console.log(goals);
   });
-  if (x>1){ //if the number of goals are equal to 2, then update their matched Goal id, accountabuddy id and take them off the waiting room
+  if (x > 0) {
+    //if the number of goals are equal to 2, then update their matched Goal id, accountabuddy id and take them off the waiting room
     //update the goal fields
 
     //take both goals off of waiting room
+    deleteTwoGoalsFromDocument(goals[0], goals[1]);
+    console.log(
+      'goals' + goals[0] + ' and ' + goals[1] + ' both goals have been deleted',
+    );
   }
 }
 
@@ -97,13 +103,11 @@ function onError(error) {
   console.error(error);
 }
 
-//check if there is another goal to match, if so, take them both away from 
-const matchTheUsersAndUpdateCollection =()=>{
-    db
-    .collection('waitingRoom')
-    .onSnapshot(onResult, onError); //this goes to onResult upon continuously checking any collection change, onError on error
+//check if there is another goal to match
+const matchTheUsersAndUpdateCollection = () => {
+  db.collection('waitingRoom').onSnapshot(onResult, onError); //this goes to onResult upon continuously checking any collection change, onError on error
 
-    /*
+  /*
     num= onsnapshot(getlength of collection)    // returns the number of docs in waiting rooms
 
       if(num>1)
@@ -115,11 +119,16 @@ const matchTheUsersAndUpdateCollection =()=>{
     */
 };
 
-
-const updateMatchFields = () => {
-
+//delete the two goal docs from he collection
+const deleteTwoGoalsFromDocument = (goalId1, goalId2) => {
+  db.collection('waitingRoom')
+    .doc(goalId1)
+    .delete();
+  db.collection('waitingRoom')
+    .doc(goalId2)
+    .delete();
 };
-
+const updateMatchFields = () => {};
 
 /* METHODS TO CREATE
   add self user to waiting rooms
@@ -129,4 +138,3 @@ const updateMatchFields = () => {
 
   get data about the matched goal (after match)
 */
-
