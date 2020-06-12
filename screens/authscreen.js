@@ -145,6 +145,8 @@ const AuthScreen = () => {
     </View>
   );
 };
+
+
 const styles = StyleSheet.create({
   title: {
     fontSize: 40,
