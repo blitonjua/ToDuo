@@ -1,30 +1,37 @@
 import React, {useState} from 'react';
-import {View, Text, Button, TouchableOpacity, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import readFromDatabase from '../services/fire';
-import listOutDatabase from "../services/fire";
+// import listOutDatabase from '../services/fire';
+// import matchUser from '../services/fire';
+import {matchUser, addUser, listOutDatabase} from '../services/fire';
 
 const Welcome = props => {
+  // var firstName=,lastName=,age=, email=,goals=;
   const signOut = () => {
-    auth()
-      .signOut()
-      .then(() => listOutDatabase); // TODO why this pops up when we sign in rather than sign out????
+    auth().signOut();
   };
-
-  const addGoalHandler = (title) => {
+  // listOutDatabase();
+  const addGoalHandler = title => {
     //some stuff
   };
 
-  const [goal, setGoal] = useState("");
+  const [goal, setGoal] = useState('');
 
-  const onChangeTextHandler = (enteredGoal) => {
+  const onChangeTextHandler = enteredGoal => {
     //some stuff
     setGoal(enteredGoal);
   };
 
   return (
     <View>
-      <Text>Welcome!</Text>
+      <Text>uid:{props.uid}</Text>
       <Button
         title="Sign out "
         onPress={() => {
@@ -34,8 +41,18 @@ const Welcome = props => {
       <TouchableOpacity onPress={() => addGoalHandler()}>
         <Text>Add Goal</Text>
       </TouchableOpacity>
-      <TextInput onChangeText={() => onChangeTextHandler()} value={goal}/>
+      <TextInput onChangeText={() => onChangeTextHandler()} value={goal} />
       <Text>{goal}</Text>
+
+      <View>
+        {/* change the 'tempid' to goal id */}
+        <Button
+          title="add a goal to waiting room"
+          onPress={() => {
+            matchUser('tempId2');
+          }}
+        />
+      </View>
     </View>
   );
 };
