@@ -49,7 +49,7 @@ const Welcome = props => {
         <Button
           title="add a goal to waiting room"
           onPress={() => {
-            matchUser('tempId');
+            matchUser('tempId2');
           }}
         />
       </View>
