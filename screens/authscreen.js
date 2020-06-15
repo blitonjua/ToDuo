@@ -101,7 +101,7 @@ const AuthScreen = () => {
           <View style={styles.container}>
             <Text>Enter your age</Text>
             <TextInput
-              keyboardType="numberic"
+              keyboardType="number-pad"
               onChangeText={text => setAgeText(text)}
             />
           </View>
@@ -145,7 +145,6 @@ const AuthScreen = () => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   title: {
