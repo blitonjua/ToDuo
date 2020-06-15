@@ -5,6 +5,7 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 const db = firestore();
+//todo this may need some help? is checked when not logged in which leads to error
 var goalId = '',
   userId = auth().currentUser.uid;
 
