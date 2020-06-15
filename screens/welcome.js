@@ -49,6 +49,7 @@ const Welcome = props => {
         <Button
           title="add a goal to waiting room"
           onPress={() => {
+            //pass in goal id, this is where we connect to Andrea
             matchUser('tempId2');
           }}
         />

@@ -3,8 +3,10 @@
  */
 
 import firestore from '@react-native-firebase/firestore';
-
+import auth from '@react-native-firebase/auth';
 const db = firestore();
+var goalId = '',
+  userId = auth().currentUser.uid;
 
 // returns data for specified document in collection, used for one time reads
 const readFromDatabase = (collectionName, docName) => {
@@ -42,97 +44,158 @@ export const addUser = (uid, firstName, lastName, newAge, email) => {
     });
 };
 
-export const matchUser = goalId => {
-  console.log('you are lookign at match user functions');
-  // ASK MICHAEL ABOUT DATABASE SYNCHRONIZATION
-  // MVP just matches in a queue to avoid synch
+export const matchUser = id => {
+  goalId = id;
+  // MVP just matches in a queue to avoid synch, def gonna change
   /* var user = auth().currentUser;
     -if ++docs(goals) in collections(room) >= 2
       else wait
     -get 2 goal ids
-    -to shirk synchronization resposibilities for mvp, match first come first serve
-    -update accountabuddy field with the matched user id x2
-      ----
-        goal : user id, goal id, accountabuddy id, matched goal id, title, etc
-        goal -> waiting room -> goal id
-        update: accountabuddy id, matched goal id x2
-        go to user collections-> find the accountabuddy using the goal's accountabuddy id
-        goals array-> use the matched goal id to find the matching goal
-
-        toDuo--app--apid1--userid--userid2--goalid2--goalid1
-        
-        sc--app--apid2--userid2--userid--goalid1--goalid2
-      ----
     -take both goals off waiting room
   */
+  addGoalToWaitingRoom();
 
-  addGoalToWaitingRoom(goalId);
+  //only proceed if current goal is goal [0]
+  //todo implement better syn
+  //let goaltoGetInfo = goalId == goals[0]? goals[1]: goals[0];
   matchTheUsersAndUpdateCollection();
 };
+
 //adds goal to the waiting room
-const addGoalToWaitingRoom = goalId => {
+const addGoalToWaitingRoom = () => {
   db.collection('waitingRoom')
     .doc(goalId)
     .set({
       goalId: goalId,
+      userId: userId,
+      accountaBuddyId: '',
+      matchedGoalId: '',
     });
 };
 
+//check if there is another goal to match
+const matchTheUsersAndUpdateCollection = () => {
+  //this goes to onResult upon continuously checking any collection change, onError on error TODO comment edtiqeutte
+  db.collection('waitingRoom').onSnapshot(onResult, onError);
+};
+
+// to be ran on successful snapshot
 function onResult(QuerySnapshot) {
-  // do we need to leave/close/unsubscribe from onSnapshot?
-  var x = 0;
+  // todo we need to leave/close/unsubscribe from onSnapshot?
+  // still listening, cannot wake up during a wakeup??
+  var x = 0,
+    y = 0;
   let goals = [];
+  let users = [];
   QuerySnapshot.forEach(doc => {
     goals[x++] = doc.id;
+    users[y++] = doc.data().userId; //might cause an error if so, change to .data.userId
   });
   if (x > 1) {
     //if the number of goals are equal to 2, then update their matched Goal id, accountabuddy id and take them off the waiting room
-    //update the goal fields
+    //update the original goal fields
+    updateMatchFields(goals, users);
 
     //take both goals off of waiting room
-    deleteTwoGoalsFromDocument(goals[0], goals[1]);
-    console.log(
-      'goals' + goals[0] + ' and ' + goals[1] + ' both goals have been deleted',
-    );
+    // first/delete->[0][1]last
   }
 }
 
+// to be ran on failed snapshot
 function onError(error) {
   console.error(error);
 }
 
-//check if there is another goal to match
-const matchTheUsersAndUpdateCollection = () => {
-  db.collection('waitingRoom').onSnapshot(onResult, onError); //this goes to onResult upon continuously checking any collection change, onError on error
-
-  /*
-    num= onsnapshot(getlength of collection)    // returns the number of docs in waiting rooms
-
-      if(num>1)
-        wait until num>1   
-      
-      take out both users
-
-      return a boolean  (true=goals are taken off of the collection)
-    */
-};
-
-// delete the two goal docs from he collection
-const deleteTwoGoalsFromDocument = (goalId1, goalId2) => {
+// delete the two goal docs from the collection
+const deleteGoalFromDocument = goalId1 => {
   db.collection('waitingRoom')
     .doc(goalId1)
     .delete();
-  db.collection('waitingRoom')
-    .doc(goalId2)
-    .delete();
 };
-const updateMatchFields = () => {};
 
+const updateMatchFields = (goals, users) => {
+  if (goalId == goals[0]) {
+    console.log('**********users: ' + users);
+    console.log('**********goals:' + goals);
+    db.collection('waitingRoom')
+      .get()
+      .then(querySnapshot => {
+        let i = 0;
+        querySnapshot.forEach(currentGoalDoc => {
+          db.collection('Users')
+            .doc(users[i])
+            .collection('goals')
+            .doc(goals[i])
+            .update({
+              accountaBuddyId: users[!i + 0],
+              matchedGoalId: goals[!i + 0],
+            });
+          i++;
+        });
+
+        /*-----
+      console.log("goal 1 id: "+querySnapshot.docs[0].data().goalId);
+          db.collection('Users')
+          .doc(querySnapshot.docs[0].data().userId)
+          .collection('goals')
+          .doc(querySnapshot.docs[0].data().goalId)
+          .update({
+            accountaBuddyId: querySnapshot.docs[1].data().userId,
+            matchedGoalId: querySnapshot.docs[1].data().userId,
+          });
+
+      console.log("goal 2 id: "+querySnapshot.docs[1].data().goalId);    
+          db.collection('Users')
+          .doc(querySnapshot.docs[1].data().userId)
+          .collection('goals')
+          .doc(querySnapshot.docs[1].data().goalId)
+          .update({
+            accountaBuddyId: querySnapshot.docs[0].data().userId,
+            matchedGoalId: querySnapshot.docs[0].data().userId,
+      });
+      //*/
+
+        //removes both documents from waiting room
+        deleteGoalFromDocument(goals[0]);
+        deleteGoalFromDocument(goals[1]);
+      })
+      .catch(err => {
+        console.log('Error getting snapshot', err);
+      });
+  }
+
+  ///////
+  /*
+  let goaltoGetInfo = goalId == goals[0]? goals[1]: goals[0];
+  let goalRef = db.collection('waitingRoom').doc(goaltoGetInfo);
+  let getDoc = goalRef.get()
+  .then(doc => {
+    if (!doc.exists) {
+      console.log('No such document!');
+    } else {
+      // thegoaluser = doc.data().userId
+      db.collection('Users')
+      .doc(userId)
+      .collection('goals')
+      .doc(goalId)
+      .update({
+        goalId: goalId,
+        userId: userId,
+        accountaBuddyId: doc.data().userId,
+        matchedGoalId: doc.data().goalId,
+      });
+
+      deleteGoalFromDocument(goalId);
+      deleteGoalFromDocument(goaltoGetInfo);
+    }
+  })
+  .catch(err => {
+    console.log('Error getting document', err);
+  });
+  */
+};
 /* METHODS TO CREATE
-  add self user to waiting rooms
   check for partner(find a way to interrupt/notify? listen for database change)
   force partner match/update fields
-  delete the 2 goals from waiting rooms
-
   get data about the matched goal (after match)
 */

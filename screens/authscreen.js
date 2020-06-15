@@ -26,6 +26,7 @@ const AuthScreen = () => {
       .createUserWithEmailAndPassword(email, pass)
       .then(() => {
         //firstName, lastName, newAge, email
+        //TODO make sure every user has goal collection
         var user = auth().currentUser;
         addUser(user.uid, firstNameText, lastNameText, ageText, email);
         console.log('User account created & signed in!');
