@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Modal, StyleSheet, Text, View, TextInput, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
 // import readFromDatabase from '../services/fire';
-import addUser from '../services/fire';
+import {addUser} from '../services/fire';
 
 const AuthScreen = () => {
   //manage state
@@ -102,7 +102,7 @@ const AuthScreen = () => {
           <View style={styles.container}>
             <Text>Enter your age</Text>
             <TextInput
-              keyboardType="numberic"
+              // keyboardType="number-pad"
               onChangeText={text => setAgeText(text)}
             />
           </View>
@@ -146,7 +146,6 @@ const AuthScreen = () => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   title: {
