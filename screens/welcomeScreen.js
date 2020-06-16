@@ -12,7 +12,7 @@ import auth from '@react-native-firebase/auth';
 // import matchUser from '../services/fire';
 import {matchUser, addUser, listOutDatabase} from '../services/fire';
 import {addGoalToUserGoalCollection} from '../services/createGoal';
-const Welcome = props => {
+const WelcomeScreen = props => {
   // var firstName=,lastName=,age=, email=,goals=;
   const signOut = () => {
     auth().signOut();
@@ -70,4 +70,4 @@ const Welcome = props => {
     </View>
   );
 };
-export default Welcome;
+export default WelcomeScreen;
