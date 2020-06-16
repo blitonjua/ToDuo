@@ -11,7 +11,7 @@ import auth from '@react-native-firebase/auth';
 // import listOutDatabase from '../services/fire';
 // import matchUser from '../services/fire';
 import {matchUser, addUser, listOutDatabase} from '../services/fire';
-
+import {addGoalToUserGoalCollection} from '../services/createGoal';
 const Welcome = props => {
   // var firstName=,lastName=,age=, email=,goals=;
   const signOut = () => {
@@ -51,6 +51,19 @@ const Welcome = props => {
           onPress={() => {
             //pass in goal id, this is where we connect to Andrea
             matchUser('tempId3');
+          }}
+        />
+
+        <Button
+          title="+"
+          onPress={() => {
+            //change static values for title, description and milestones
+            addGoalToUserGoalCollection(
+              auth().currentUser.uid,
+              'title',
+              'description',
+              ['milestone1', 'milestone2', 'milestone3'],
+            );
           }}
         />
       </View>
