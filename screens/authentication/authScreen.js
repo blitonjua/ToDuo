@@ -10,7 +10,12 @@ const Stack = createStackNavigator();
 function AuthScreen() {
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      mode='modal'
+      headerMode='none'
+      screenOptions={{
+        gestureEnabled: false
+      }} >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
     </Stack.Navigator>

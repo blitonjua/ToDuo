@@ -10,9 +10,7 @@ import {
 import auth from '@react-native-firebase/auth';
 import { addUser } from '../../services/fire';
 
-
-
-const SignupScreen = () => {
+function SignupScreen({ navigation }) {
     //manage state
     const [showSignIn, setScreen] = useState(true);
     const [emailText, setEmailText] = useState('');
@@ -22,8 +20,8 @@ const SignupScreen = () => {
     const [lastNameText, setLastNameText] = useState('');
 
 
-    function setNewScreen() {
-        setScreen(!showSignIn);
+    function gotoLogin() {
+        navigation.navigate('Login');
     }
 
     const createUser = (email, pass, firstName, lastName, age) => {
@@ -50,67 +48,68 @@ const SignupScreen = () => {
 
     return (
         <SafeAreaView style={styles.main}>
+            <View style={styles.padding}>
+                <Text style={styles.title}>Sign Up</Text>
 
-            <Text style={styles.title}>Sign Up</Text>
+                <View style={styles.container}>
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={text => setFirstNameText(text)}
+                        placeholder="First Name" />
+                </View>
 
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={text => setFirstNameText(text)}
-                    placeholder="First Name" />
-            </View>
+                <View style={styles.container}>
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={text => setLastNameText(text)}
+                        placeholder="Last Name" />
+                </View>
 
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={text => setLastNameText(text)}
-                    placeholder="Last Name" />
-            </View>
+                <View style={styles.container}>
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={text => setAgeText(text)}
+                        placeholder="Age" />
+                </View>
 
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={text => setAgeText(text)}
-                    placeholder="Age" />
-            </View>
+                <View style={styles.container}>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder="Email"
+                        onChangeText={text => setEmailText(text)}
+                    />
+                </View>
 
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Email"
-                    onChangeText={text => setEmailText(text)}
-                />
-            </View>
+                <View style={styles.container}>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder="Password"
+                        onChangeText={text => setPasswordText(text)}
+                        secureTextEntry={true}
+                    />
+                </View>
 
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Password"
-                    onChangeText={text => setPasswordText(text)}
-                    secureTextEntry={true}
-                />
-            </View>
+                <View style={styles.buttons}>
+                    <TouchableOpacity
+                        style={styles.signupButton}
+                        onPress={() => {
+                            console.log('creating user');
+                            //send user to the welcome screen
+                            createUser(emailText, passwordText);
+                        }}>
+                        <Text style={styles.buttonText}>SIGN UP</Text>
+                    </TouchableOpacity>
 
-            <View style={styles.buttons}>
-                <TouchableOpacity
-                    style={styles.signupButton}
-                    onPress={() => {
-                        console.log('creating user');
-                        //send user to the welcome screen
-                        createUser(emailText, passwordText);
-                    }}>
-                    <Text style={styles.buttonText}>SIGN UP</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.link}
+                        onPress={() => {
+                            //send user to log in screen
+                            gotoLogin();
+                        }}>
+                        <Text style={styles.loginLinkText}>LOG IN</Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity
-                    style={styles.link}
-                    onPress={() => {
-                        //send user to log in screen
-                        setNewScreen();
-                    }}>
-                    <Text style={styles.loginLinkText}>LOG IN</Text>
-                </TouchableOpacity>
-
+                </View>
             </View>
         </SafeAreaView>
     );
@@ -125,6 +124,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 20,
         backgroundColor: 'white',
+    },
+    padding: {
+        padding: 20
     },
     textInput: {
         fontWeight: '100',

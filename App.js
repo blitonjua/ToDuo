@@ -34,7 +34,8 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        headerMode='none'>
         {!user ? (
           <Stack.Screen name="Authentication" component={AuthScreen} />
         ) : (

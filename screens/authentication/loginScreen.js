@@ -8,10 +8,10 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import authStyles from './authScreen';
 
 function LoginScreen({ navigation }) {
     //manage state
-    const [showSignIn, setScreen] = useState(true);
     const [emailText, setEmailText] = useState('');
     const [passwordText, setPasswordText] = useState('');
 
@@ -27,47 +27,48 @@ function LoginScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.main}>
+            <View style={styles.padding}>
+                <Text style={styles.title}>ToDuo</Text>
+                <View style={styles.container}>
+                    <TextInput style={styles.textInput}
+                        placeholder="Email"
+                        onChangeText={text => setEmailText(text)}
+                    />
+                </View>
 
-            <Text style={styles.title}>ToDuo</Text>
-            <View style={styles.container}>
-                <TextInput style={styles.textInput}
-                    placeholder="Email"
-                    onChangeText={text => setEmailText(text)}
-                />
-            </View>
-
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.textInput}
-                    secureTextEntry={true}
-                    placeholder="Password"
-                    onChangeText={text => setPasswordText(text)}
-                />
-            </View>
+                <View style={styles.container}>
+                    <TextInput
+                        style={styles.textInput}
+                        secureTextEntry={true}
+                        placeholder="Password"
+                        onChangeText={text => setPasswordText(text)}
+                    />
+                </View>
 
 
-            <View style={styles.buttons}>
-                <TouchableOpacity
-                    style={styles.logInButton}
-                    onPress={() => {
-                        //send user to welcome screen
-                        signUserIn(emailText, passwordText);
-                    }}>
-                    <Text style={styles.buttonText}>
-                        LOG IN
-            </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.link}
-                    onPress={() => {
-                        //send user to sign up screen
-                        gotoSignup();
-                    }}>
-                    <Text style={styles.signupLinkText}>
-                        SIGN UP
-            </Text>
-                </TouchableOpacity>
+                <View style={styles.buttons}>
+                    <TouchableOpacity
+                        style={styles.logInButton}
+                        onPress={() => {
+                            //send user to welcome screen
+                            signUserIn(emailText, passwordText);
+                        }}>
+                        <Text style={styles.buttonText}>
+                            LOG IN
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.link}
+                        onPress={() => {
+                            //send user to sign up screen
+                            gotoSignup();
+                        }}>
+                        <Text style={styles.signupLinkText}>
+                            SIGN UP
+                        </Text>
+                    </TouchableOpacity>
 
+                </View>
             </View>
         </SafeAreaView>
     );
@@ -80,8 +81,11 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         alignItems: 'stretch',
         justifyContent: 'center',
-        padding: 20,
+        // padding: 20,
         backgroundColor: 'white',
+    },
+    padding: {
+        padding: 20
     },
     textInput: {
         fontWeight: '100',
