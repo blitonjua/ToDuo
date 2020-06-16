@@ -5,12 +5,9 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 const db = firestore();
-<<<<<<< HEAD
-=======
 //todo this may need some help? is checked when not logged in which leads to error
->>>>>>> b2a9624d134aab1a24dd14cebdf6942fb2fda4b7
-var goalId = '',
-  userId = auth().currentUser.uid;
+// var goalId = '',
+//   userId = auth().currentUser.uid;
 
 // returns data for specified document in collection, used for one time reads
 const readFromDatabase = (collectionName, docName) => {
@@ -99,12 +96,6 @@ function onResult(QuerySnapshot) {
     //if the number of goals are equal to 2, then update their matched Goal id, accountabuddy id and take them off the waiting room
     //update the original goal fields
     updateMatchFields(goals, users);
-<<<<<<< HEAD
-
-    //take both goals off of waiting room
-    // first/delete->[0][1]last
-=======
->>>>>>> b2a9624d134aab1a24dd14cebdf6942fb2fda4b7
   }
 }
 
@@ -113,21 +104,14 @@ function onError(error) {
   console.error(error);
 }
 
-<<<<<<< HEAD
-// delete the two goal docs from the collection
-=======
 // delete the goal doc from the collection
->>>>>>> b2a9624d134aab1a24dd14cebdf6942fb2fda4b7
 const deleteGoalFromDocument = goalId1 => {
   db.collection('waitingRoom')
     .doc(goalId1)
     .delete();
 };
 
-<<<<<<< HEAD
-=======
 // updates both
->>>>>>> b2a9624d134aab1a24dd14cebdf6942fb2fda4b7
 const updateMatchFields = (goals, users) => {
   if (goalId == goals[0]) {
     console.log('**********users: ' + users);
@@ -147,32 +131,6 @@ const updateMatchFields = (goals, users) => {
             });
           i++;
         });
-<<<<<<< HEAD
-
-        /*-----
-      console.log("goal 1 id: "+querySnapshot.docs[0].data().goalId);
-          db.collection('Users')
-          .doc(querySnapshot.docs[0].data().userId)
-          .collection('goals')
-          .doc(querySnapshot.docs[0].data().goalId)
-          .update({
-            accountaBuddyId: querySnapshot.docs[1].data().userId,
-            matchedGoalId: querySnapshot.docs[1].data().userId,
-          });
-
-      console.log("goal 2 id: "+querySnapshot.docs[1].data().goalId);    
-          db.collection('Users')
-          .doc(querySnapshot.docs[1].data().userId)
-          .collection('goals')
-          .doc(querySnapshot.docs[1].data().goalId)
-          .update({
-            accountaBuddyId: querySnapshot.docs[0].data().userId,
-            matchedGoalId: querySnapshot.docs[0].data().userId,
-      });
-      //*/
-
-=======
->>>>>>> b2a9624d134aab1a24dd14cebdf6942fb2fda4b7
         //removes both documents from waiting room
         deleteGoalFromDocument(goals[0]);
         deleteGoalFromDocument(goals[1]);
@@ -181,43 +139,4 @@ const updateMatchFields = (goals, users) => {
         console.log('Error getting snapshot', err);
       });
   }
-<<<<<<< HEAD
-
-  ///////
-  /*
-  let goaltoGetInfo = goalId == goals[0]? goals[1]: goals[0];
-  let goalRef = db.collection('waitingRoom').doc(goaltoGetInfo);
-  let getDoc = goalRef.get()
-  .then(doc => {
-    if (!doc.exists) {
-      console.log('No such document!');
-    } else {
-      // thegoaluser = doc.data().userId
-      db.collection('Users')
-      .doc(userId)
-      .collection('goals')
-      .doc(goalId)
-      .update({
-        goalId: goalId,
-        userId: userId,
-        accountaBuddyId: doc.data().userId,
-        matchedGoalId: doc.data().goalId,
-      });
-
-      deleteGoalFromDocument(goalId);
-      deleteGoalFromDocument(goaltoGetInfo);
-    }
-  })
-  .catch(err => {
-    console.log('Error getting document', err);
-  });
-  */
 };
-/* METHODS TO CREATE
-  check for partner(find a way to interrupt/notify? listen for database change)
-  force partner match/update fields
-  get data about the matched goal (after match)
-*/
-=======
-};
->>>>>>> b2a9624d134aab1a24dd14cebdf6942fb2fda4b7
