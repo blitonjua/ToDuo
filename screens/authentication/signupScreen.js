@@ -122,7 +122,6 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         alignItems: 'stretch',
         justifyContent: 'center',
-        padding: 20,
         backgroundColor: 'white',
     },
     padding: {
