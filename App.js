@@ -1,25 +1,20 @@
+import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+//navigation imports
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import auth from '@react-native-firebase/auth';
-import AuthScreen from './screens/authscreen';
-import Welcome from './screens/welcome';
-const App: () => React$Node = () => {
+
+//custom screens
+import AuthScreen from './screens/authentication/authScreen';
+import WelcomeScreen from './screens/welcomeScreen';
+
+
+
+const Stack = createStackNavigator();
+
+function App() {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState(true);
@@ -37,18 +32,17 @@ const App: () => React$Node = () => {
 
   if (initializing) return null;
 
-  if (!user) {
-    return (
-      <View>
-        <AuthScreen />
-      </View>
-    );
-  }
-
   return (
-    <View>
-      <Welcome />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        headerMode='none'>
+        {!user ? (
+          <Stack.Screen name="Authentication" component={AuthScreen} />
+        ) : (
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 export default App;
