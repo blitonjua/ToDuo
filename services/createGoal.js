@@ -22,15 +22,14 @@ export const addGoalToUserGoalCollection = (
       userId: userId,
     })
     .then(docRef => {
-      goalId = docRef.id;
       //add the goal id to current
       usersCollection
         .doc(userId)
         .collection('goals')
         .doc(docRef.id)
         .update({goalId: docRef.id});
-    });
 
-  //match the goals
-  matchGoals(goalId, auth().currentUser.uid);
+      //match the goals
+      matchGoals(docRef.id, auth().currentUser.uid);
+    });
 };
