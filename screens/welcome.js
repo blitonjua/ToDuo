@@ -46,13 +46,15 @@ const Welcome = props => {
 
       <View>
         {/* change the 'tempid' to goal id */}
-        <Button
+        {/* <Button
           title="add a goal to waiting room"
           onPress={() => {
             //pass in goal id, this is where we connect to Andrea
+
             matchUser('tempId3');
-          }}
-        />
+            
+          }} 
+        />*/}
 
         <Button
           title="+"

@@ -1,7 +1,9 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import {matchGoals} from './matchGoals';
 
 const usersCollection = firestore().collection('Users');
+var goalId = '';
 
 export const addGoalToUserGoalCollection = (
   userId,
@@ -26,5 +28,8 @@ export const addGoalToUserGoalCollection = (
         .collection('goals')
         .doc(docRef.id)
         .update({goalId: docRef.id});
+
+      //match the goals
+      matchGoals(docRef.id, auth().currentUser.uid);
     });
 };
