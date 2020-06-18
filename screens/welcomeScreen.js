@@ -31,18 +31,12 @@ const WelcomeScreen = props => {
 
   return (
     <View>
-      <Text>uid:{props.uid}</Text>
-      <Button
-        title="Sign out "
-        onPress={() => {
-          signOut();
-        }}
-      />
-      <TouchableOpacity onPress={() => addGoalHandler()}>
+      {/* <Text>uid:{props.uid}</Text> */}
+      {/* <TouchableOpacity onPress={() => addGoalHandler()}>
         <Text>Add Goal</Text>
       </TouchableOpacity>
       <TextInput onChangeText={() => onChangeTextHandler()} value={goal} />
-      <Text>{goal}</Text>
+      <Text>{goal}</Text> */}
 
       <View>
         {/* change the 'tempid' to goal id */}

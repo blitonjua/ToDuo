@@ -6,9 +6,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import auth from '@react-native-firebase/auth';
 
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 //custom screens
 import AuthScreen from './screens/authentication/authScreen';
 import WelcomeScreen from './screens/welcomeScreen';
+import MyTabs from './screens/tabs';
+
+
+
 
 
 
@@ -33,16 +39,18 @@ function App() {
   if (initializing) return null;
 
   return (
+    <SafeAreaProvider>
     <NavigationContainer>
       <Stack.Navigator
         headerMode='none'>
         {!user ? (
           <Stack.Screen name="Authentication" component={AuthScreen} />
         ) : (
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
+          <Stack.Screen name="Welcome" component={MyTabs} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 export default App;
