@@ -3,19 +3,19 @@ import React from 'react';
 
 //custom screens 
 import GoalScreen from "./goalScreen";
-import ProfileScreen from './profileScreen';
-import AddGoalScreen from './addGoal/addGoalScreen';
+import ProfileScreen from './profile/profileScreen';
+import AddGoalStack from './addGoal/addGoalStack';
 
 const Tab = createMaterialTopTabNavigator();
 
-function MyTabs() {
+function MainTab() {
     return (
         <Tab.Navigator initialRouteName="Goal" tabBarPosition="bottom">
-            <Tab.Screen name ="Settings" component={ProfileScreen}/>
+            <Tab.Screen name ="Profile" component={ProfileScreen}/>
             <Tab.Screen name ="Goal" component={GoalScreen}/>
-            <Tab.Screen name ="+" component={AddGoalScreen}/>
+            <Tab.Screen name ="+" component={AddGoalStack}/>
         </Tab.Navigator>
     )
 }
 
-export default MyTabs;
+export default MainTab;

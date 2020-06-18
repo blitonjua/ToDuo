@@ -9,12 +9,8 @@ import auth from '@react-native-firebase/auth';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 //custom screens
-import AuthScreen from './screens/authentication/authScreen';
-import MainScreen from './screens/main/mainScreen';
-
-
-
-
+import AuthStack from './screens/authentication/authStack';
+import MainTab from './screens/main/mainTab';
 
 
 const Stack = createStackNavigator();
@@ -42,9 +38,9 @@ function App() {
       <Stack.Navigator
         headerMode='none'>
         {!user ? (
-          <Stack.Screen name="Authentication" component={AuthScreen} />
+          <Stack.Screen name="Authentication" component={AuthStack} />
         ) : (
-          <Stack.Screen name="Welcome" component={MainScreen} />
+          <Stack.Screen name="Main" component={MainTab} />
         )}
       </Stack.Navigator>
     </NavigationContainer>

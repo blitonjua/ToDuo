@@ -1,28 +1,59 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
-    SafeAreaView
+    Text,
+    SafeAreaView,
+    TouchableOpacity,
+    TextInput,
+    View,
+    Button
 } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import auth from '@react-native-firebase/auth';
 
-//custom screens
-import AddGoalFormScreen from "./addGoalFormScreen";
-import PlusScreen from './plusScreen';
+import { addGoalToUserGoalCollection } from '../../../services/createGoal';
+ 
 
-const Stack = createStackNavigator();
+function AddGoalScreen({ navigation }) {
+    // listOutDatabase();
+    const addGoalHandler = title => {
+        //some stuff
+    };
 
-function GoalScreen() {
-  return (
-    <Stack.Navigator
-      mode='modal'
-      headerMode='none'
-      screenOptions={{
-        gestureEnabled: false
-      }} >
-      <Stack.Screen name="Plus" component={PlusScreen} />
-      <Stack.Screen name="Add Goals" component={AddGoalFormScreen} />
-      {/* todo: other screens on add goal go here */}
-    </Stack.Navigator>
-  );
+    const [goal, setGoal] = useState('');
+
+    const onChangeTextHandler = enteredGoal => {
+        //some stuff
+        setGoal(enteredGoal);
+    };
+
+
+    return (
+        <SafeAreaView>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Text>
+                    Go Back because you don't know what your goal is lame-o
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => addGoalHandler()}>
+                <Text>Add Goal</Text>
+            </TouchableOpacity>
+            <View style={{borderWidth:1}}>
+                <TextInput onChangeText={() => onChangeTextHandler()} value={goal} />
+            </View>
+            <Text>{goal}</Text>
+            <Button
+                title="+"
+                onPress={() => {
+                    //change static values for title, description and milestones
+                    addGoalToUserGoalCollection(
+                        auth().currentUser.uid,
+                        'title',
+                        'description',
+                        ['milestone1', 'milestone2', 'milestone3'],
+                    );
+                }}
+            />
+        </SafeAreaView>
+    );
 }
 
-export default GoalScreen;
+export default AddGoalScreen;
