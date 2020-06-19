@@ -39,7 +39,7 @@ function AddGoalScreen({ navigation }) {
 
     //sets description
     function descriptionHandler(enteredDescription) {
-        setDescription(enteredTitle);
+        setDescription(enteredDescription);
     }
 
     //sets milestone1
