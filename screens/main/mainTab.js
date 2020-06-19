@@ -2,7 +2,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import React from 'react';
 
 //custom screens 
-import GoalScreen from "./goalScreen";
+import GoalScreen from './goalScreen';
 import ProfileStack from './profile/profileStack';
 import AddGoalStack from './addGoal/addGoalStack';
 
