@@ -7,7 +7,7 @@ import SignupScreen from './signupScreen';
 
 const Stack = createStackNavigator();
 
-function AuthScreen() {
+function AuthStack() {
 
   return (
     <Stack.Navigator
@@ -22,4 +22,4 @@ function AuthScreen() {
   );
 };
 
-export default AuthScreen;
+export default AuthStack;
