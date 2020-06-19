@@ -7,14 +7,14 @@ import {
 } from 'react-native'
 
 function PlusScreen({ navigation }) {
-    function gotoAddGoalForm() {
+    function gotoAddGoal() {
         navigation.navigate('Add Goals');
     }
 
     return(
         <SafeAreaView  style={styles.main}>
             <TouchableOpacity 
-                onPress={() => gotoAddGoalForm()}
+                onPress={() => gotoAddGoal()}
                 style={styles.button}>
                 <Text style={styles.plus}>
                     +
