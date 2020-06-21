@@ -13,16 +13,22 @@ import {LongPressGestureHandler} from 'react-native-gesture-handler';
 const Stack = createStackNavigator();
 
 function GoalStack() {
-  // //read how many goals the user has from goals collection
-  // let uid = auth().currentUser.uid;
-  // let [length, goalData] = getGoalData(uid);
-  // console.log(length);
-  // console.log(goalData[0]);
-  // //create a loop that adds an element to an array of goals (title, desc, etc..)
+  // display buttons/ list items that user can click for each of their goals
 
-  // //return the flatlist with a stack.screen for each elemetn in the arr
+  //once its clicked, expands into the dashboard
+
+  //read how many goals the user has from goals collection
+
+  //create a loop that adds an element to an array of goals (title, desc, etc..)
+
+  //return the flatlist with a stack.screen for each elemetn in the arr
 
   return (
+    <Stack.Navigator>
+      <Stack.Screen name="listOfGoals" />
+      <Stack.Screen name="dashBoard" />
+    </Stack.Navigator>
+    /*
     <Stack.Navigator
       mode="modal"
       headerMode="none"
@@ -33,6 +39,7 @@ function GoalStack() {
       <Stack.Screen name="Message" component={MessageScreen} />
       <Stack.Screen name="Approve" component={ApproveScreen} />
     </Stack.Navigator>
+    //*/
   );
 }
 export default GoalStack;
