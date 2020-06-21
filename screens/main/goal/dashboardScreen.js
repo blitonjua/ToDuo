@@ -46,8 +46,8 @@ function DashboardScreen({navigation}) {
           dynamic tabs aren't feasible.
         </Text>
 
-        <TouchableOpacity onPress={() => gotoApprove()}>
-          <Text>Approve</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text>{'<-'}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

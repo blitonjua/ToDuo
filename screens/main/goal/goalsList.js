@@ -7,14 +7,18 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-function MessageScreen({navigation}) {
+function goalsListScreen({navigation}) {
+  function gotoDashBoard() {
+    navigation.navigate('dashBoard');
+  }
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
-        <TouchableOpacity>
-          <Text>Go Back</Text>
+        {/* add the flat list */}
+        <Text>This is the goals list</Text>
+        <TouchableOpacity onPress={() => gotoDashBoard()}>
+          <Text>Go to DashBoard</Text>
         </TouchableOpacity>
-        <Text>This is the MessageScreen</Text>
       </View>
     </SafeAreaView>
   );
@@ -35,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MessageScreen;
+export default goalsListScreen;

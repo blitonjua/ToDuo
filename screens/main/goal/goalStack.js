@@ -3,7 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 //custom screens
 import DashboardScreen from './dashboardScreen';
-import MessageScreen from './messageScreen';
+import goalsListScreen from './goalsList';
 import ApproveScreen from './approveScreen';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
@@ -24,9 +24,14 @@ function GoalStack() {
   //return the flatlist with a stack.screen for each elemetn in the arr
 
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="listOfGoals" />
-      <Stack.Screen name="dashBoard" />
+    <Stack.Navigator
+      mode="modal"
+      headerMode="none"
+      screenOptions={{
+        gestureEnabled: false,
+      }}>
+      <Stack.Screen name="listOfGoals" component={goalsListScreen} />
+      <Stack.Screen name="dashBoard" component={DashboardScreen} />
     </Stack.Navigator>
     /*
     <Stack.Navigator
