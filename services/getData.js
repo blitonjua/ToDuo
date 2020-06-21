@@ -4,11 +4,12 @@ import {matchGoals} from './matchGoals';
 
 var db = firestore().collection('Users');
 
-var length = 0;
-var goalData = [];
+
 
 async function getGoalData(uid) {
-  db.doc(uid)
+  var length = 0;
+  var goalData = [];
+  await db.doc(uid)
     .collection('goals')
     .get()
     .then(snap => {
@@ -32,9 +33,11 @@ async function getGoalData(uid) {
           matchedGoalId,
         ]);
       });
+      console.log('length inside the function: ' + length);
     });
+  console.log(goalData[0])
   console.log('length outside the function: ' + length);
-  return [await length, await goalData];
+  return [length, goalData];
 }
 
 export default getGoalData;
