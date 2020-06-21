@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   View,
   Text,
+  Button,
   TouchableOpacity,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
@@ -25,57 +26,22 @@ function goalsListScreen({navigation}) {
     });
   };
 
-  function Item({id, title, selected, onSelect}) {
-    return (
-      <TouchableOpacity
-        onPress={() => onSelect(id)}
-        style={[
-          styles.item,
-          {backgroundColor: selected ? '#6e3b6e' : '#f9c2ff'},
-        ]}>
-        <Text style={styles.title}>{title}</Text>
-      </TouchableOpacity>
-    );
-  }
-
-  const [selected, setSelected] = React.useState(new Map());
-
-  const onSelect = React.useCallback(
-    id => {
-      const newSelected = new Map(selected);
-      newSelected.set(id, !selected.get(id));
-
-      setSelected(newSelected);
-    },
-    [selected],
-  );
-
   setData();
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
         {/* add the flat list */}
-        <Text>This is the goals list</Text>
         <FlatList
           data={goalData}
           renderItem={({item}) => (
-            <Item
-              id={item.id}
+            <Button
               title={item.title}
-              selected={!!selected.get(item.id)}
-              onSelect={onSelect}
+              onPress={() => {
+                navigation.navigate('dashBoard');
+              }}
             />
           )}
-          keyExtractor={item => item.id}
-          extraData={selected}
         />
-
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('dashBoard');
-          }}>
-          <Text>Go to DashBoard</Text>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
