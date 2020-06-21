@@ -12,7 +12,7 @@ import getGoalData from '../../../services/getData'
 
 
 function DashboardScreen({ navigation }) {
-    const [goalData, setGoalData] = useState({});
+    const [goalData, setGoalData] = useState([]);
     let uid = auth().currentUser.uid;
     
    
@@ -22,8 +22,8 @@ function DashboardScreen({ navigation }) {
     }
 
     const setData = () => {
-        getGoals().then(function(response) {
-            setGoalData({response});
+        getGoals().then(function(val) {
+            setGoalData(val);
             })
     }
     console.log(goalData);
