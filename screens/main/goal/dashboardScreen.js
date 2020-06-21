@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     StyleSheet,
     SafeAreaView,
@@ -8,13 +8,26 @@ import {
 } from 'react-native';
 
 import auth from '@react-native-firebase/auth';
-import getGoalData from '../../../services/getData';
+import getGoalData from '../../../services/getData'
+
 
 function DashboardScreen({ navigation }) {
+    const [goalData, setGoalData] = useState({});
     let uid = auth().currentUser.uid;
-    let l = getGoalData(uid);
-    console.log(l[0])
+    
+   
+    async function getGoals() {
+        let data = await getGoalData(uid);
+        return data;
+    }
 
+    const setData = () => {
+        getGoals().then(function(response) {
+            setGoalData({response});
+            })
+    }
+    console.log(goalData);
+    
     function gotoMessage() {
         navigation.navigate('Message');
     };
@@ -26,9 +39,9 @@ function DashboardScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.safe}>
             <View style={styles.main}>
-                <TouchableOpacity onPress={() => gotoMessage()}>
+                <TouchableOpacity onPress={() => setData()}>
                     <Text>
-                        Messages
+                        Set Goals
                     </Text>
                 </TouchableOpacity>
 

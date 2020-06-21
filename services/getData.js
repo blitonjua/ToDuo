@@ -1,6 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import {matchGoals} from './matchGoals';
 
 var db = firestore().collection('Users');
 
@@ -31,11 +30,8 @@ async function getGoalData(uid) {
           matchedGoalId,
         ]);
       });
-      console.log('length inside the function: ' + length);
     });
-  console.log(goalData[0])
-  console.log('length outside the function: ' + length);
-  return [length, goalData];
+  return goalData;
 }
 
 export default getGoalData;
