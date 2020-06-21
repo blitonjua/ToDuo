@@ -41,7 +41,7 @@ function DashboardScreen({ navigation }) {
             <View style={styles.main}>
                 <TouchableOpacity onPress={() => setData()}>
                     <Text>
-                        Set Goals
+                        SetGoals
                     </Text>
                 </TouchableOpacity>
 

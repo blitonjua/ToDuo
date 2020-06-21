@@ -15,20 +15,18 @@ async function getGoalData(uid) {
         //update number of goals the user has
         length++;
         //get all the info about each goal
-        let title = docData.goalTitle,
-          description = docData.goalDescription,
-          milestones = docData.goalMilestones,
-          accountabuddyId = docData.accountaBuddyId,
-          matchedGoalId = docData.matchedGoalId;
+        // let title = docData.goalTitle,
+        //   description = docData.goalDescription,
+        //   milestones = docData.goalMilestones,
+        //   accountabuddyId = docData.accountaBuddyId,
+        //   matchedGoalId = docData.matchedGoalId;
+
+          let dataObject = {title: docData.goalTitle, description: docData.goalDescription, milestones: docData.goalMilestones,
+          accountabuddyId: docData.accountaBuddyId, matchedGoalId: docData.matchedGoalId}
+          ;
 
         //add the info to goal data
-        goalData.push([
-          title,
-          description,
-          milestones,
-          accountabuddyId,
-          matchedGoalId,
-        ]);
+        goalData.push(dataObject);
       });
     });
   return goalData;
