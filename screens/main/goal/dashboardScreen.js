@@ -12,9 +12,8 @@ import getGoalData from '../../../services/getData';
 
 function DashboardScreen({ navigation }) {
     let uid = auth().currentUser.uid;
-    let [length, goalData] = getGoalData(uid);
-    console.log(length);
-    console.log(goalData[0]);
+    let l = getGoalData(uid);
+    console.log(l[0])
 
     function gotoMessage() {
         navigation.navigate('Message');

@@ -4,8 +4,6 @@ import {matchGoals} from './matchGoals';
 
 var db = firestore().collection('Users');
 
-
-
 async function getGoalData(uid) {
   var length = 0;
   var goalData = [];
