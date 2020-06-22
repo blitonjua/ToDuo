@@ -13,8 +13,7 @@ import getGoalData from '../../../services/getData';
 function DashboardScreen({route, navigation}) {
   const [goalData, setGoalData] = useState([]);
 
-  const {text} = route.params;
-  const {id} = route.params;
+  const {goal} = route.params;
 
   let uid = auth().currentUser.uid;
 
@@ -37,7 +36,7 @@ function DashboardScreen({route, navigation}) {
     navigation.navigate('Approve');
   }
 
-  console.log(text);
+  console.log();
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
