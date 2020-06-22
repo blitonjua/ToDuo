@@ -10,8 +10,12 @@ import {
 import auth from '@react-native-firebase/auth';
 import getGoalData from '../../../services/getData';
 
-function DashboardScreen({navigation}) {
+function DashboardScreen({route, navigation}) {
   const [goalData, setGoalData] = useState([]);
+
+  const {text} = route.params;
+  const {id} = route.params;
+
   let uid = auth().currentUser.uid;
 
   async function getGoals() {
@@ -24,7 +28,6 @@ function DashboardScreen({navigation}) {
       setGoalData(val);
     });
   };
-  console.log(goalData);
 
   function gotoMessage() {
     navigation.navigate('Message');
@@ -34,6 +37,7 @@ function DashboardScreen({navigation}) {
     navigation.navigate('Approve');
   }
 
+  console.log(text);
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>

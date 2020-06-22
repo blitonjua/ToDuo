@@ -37,7 +37,7 @@ function goalsListScreen({navigation}) {
             <Button
               title={item.title}
               onPress={() => {
-                navigation.navigate('dashBoard');
+                navigation.navigate('dashBoard', {text: 'blaaaa', id: 89});
               }}
             />
           )}
