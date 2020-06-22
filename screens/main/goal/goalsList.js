@@ -37,7 +37,7 @@ function goalsListScreen({navigation}) {
             <Button
               title={item.title}
               onPress={() => {
-                navigation.navigate('dashBoard', {goal: item});
+                navigation.navigate('individualGoalScreen', {goal: item});
               }}
             />
           )}
