@@ -10,6 +10,7 @@ export const addGoalToUserGoalCollection = (
   goalTitle,
   goalDescription,
   goalMilestones,
+  goalCategory,
 ) => {
   //create a document with auto generated ID and add title, description and milestones.
   usersCollection
@@ -30,6 +31,6 @@ export const addGoalToUserGoalCollection = (
         .update({goalId: docRef.id});
 
       //match the goals
-      matchGoals(docRef.id, auth().currentUser.uid);
+      matchGoals(docRef.id, auth().currentUser.uid, goalCategory);
     });
 };

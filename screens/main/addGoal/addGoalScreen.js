@@ -20,6 +20,8 @@ function AddGoalScreen({ navigation }) {
     const [milestone2, setMilestone2] = useState('');
     const [milestone3, setMilestone3] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    //devtesting goal-categories branch
+    const [category, setCategory] = useState('');
 
     //creates a goal and adds it to the database
     function addGoalHandler() {
@@ -28,6 +30,7 @@ function AddGoalScreen({ navigation }) {
             title,
             description,
             [milestone1, milestone2, milestone3],
+            category,
         );
         setSubmitted(true);
     };
@@ -55,6 +58,16 @@ function AddGoalScreen({ navigation }) {
     //sets milestone3
     function milestone3Handler(enteredMilestone) {
         setMilestone3(enteredMilestone);
+    }
+
+    // completely for devtesting goal-categories branch
+    function categoryHander(enteredCategory) {
+        switch (enteredCategory){
+            case '1': setCategory(enteredCategory);
+            case '2': setCategory(enteredCategory);
+            case '3': setCategory(enteredCategory);
+            case '': setCategory(enteredCategory);
+        }
     }
 
     return (
@@ -90,6 +103,10 @@ function AddGoalScreen({ navigation }) {
                     {/* milestone3 */}
                     <View style={{ borderWidth: 1 }}>
                         <TextInput placeholder="milestone3" onChangeText={milestone3Handler} value={milestone3} />
+                    </View>
+
+                    <View style={{ borderWidth: 1 }}>
+                        <TextInput placeholder="1" onChangeText={categoryHander} value={category} />
                     </View>
 
                     {/* add goal Button */}

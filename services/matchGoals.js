@@ -5,19 +5,23 @@ const db = firestore();
 var goalId = '',
   userId = '';
 
-export const matchGoals = (id, uid) => {
+export const matchGoals = (id, uid, cat) => {
   goalId = id;
   userId = uid;
+  category = cat
+  console.log(category)
 
   //add goal to waiting room collection
   addGoalToWaitingRoom();
   //listen for when there are 2 goals in waiting room and match them
-  matchTheUsersAndUpdateCollection();
+  // matchTheUsersAndUpdateCollection();
 };
 
 //adds goal to the waiting room
 const addGoalToWaitingRoom = () => {
   db.collection('waitingRoom')
+    .doc(category)
+    .collection('goals')
     .doc(goalId)
     .set({
       goalId: goalId,
