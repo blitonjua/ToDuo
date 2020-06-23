@@ -1,6 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import {matchGoals} from './matchGoals';
+import { matchGoals } from './matchGoals';
 
 const usersCollection = firestore().collection('Users');
 var goalId = '';
@@ -22,7 +22,7 @@ export const addGoalToUserGoalCollection = (
       userId: userId,
     })
     .then(docRef => {
-      //add the goal id to current
+      //add the goal id to current user
       usersCollection
         .doc(userId)
         .collection('goals')
