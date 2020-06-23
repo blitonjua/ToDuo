@@ -4,17 +4,17 @@ import auth from '@react-native-firebase/auth';
 const db = firestore();
 var goalId = '',
   userId = '';
+var category = '';
 
 export const matchGoals = (id, uid, cat) => {
   goalId = id;
   userId = uid;
-  category = cat
-  console.log(category)
+  category = cat;
 
   //add goal to waiting room collection
   addGoalToWaitingRoom();
   //listen for when there are 2 goals in waiting room and match them
-  // matchTheUsersAndUpdateCollection();
+  matchTheUsersAndUpdateCollection();
 };
 
 //adds goal to the waiting room
@@ -33,7 +33,10 @@ const addGoalToWaitingRoom = () => {
 
 const matchTheUsersAndUpdateCollection = () => {
   //this goes to onResult upon continuously checking any collection change, onError on error TODO comment edtiqeutte
-  db.collection('waitingRoom').onSnapshot(onResult, onError);
+  db.collection('waitingRoom')
+    .doc(category)
+    .collection('goals')
+    .onSnapshot(onResult, onError);
 };
 
 // to be ran on successful snapshot
@@ -61,6 +64,8 @@ function onError(error) {
 // delete the goal doc from the collection
 const deleteGoalFromDocument = goalId1 => {
   db.collection('waitingRoom')
+    .doc(category)
+    .collection('goals')
     .doc(goalId1)
     .delete();
 };
@@ -68,9 +73,9 @@ const deleteGoalFromDocument = goalId1 => {
 // updates both
 const updateMatchFields = (goals, users) => {
   if (goalId == goals[0]) {
-    console.log('**********users: ' + users);
-    console.log('**********goals:' + goals);
     db.collection('waitingRoom')
+      .doc(category)
+      .collection('goals')
       .get()
       .then(querySnapshot => {
         let i = 0;
