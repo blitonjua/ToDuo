@@ -36,15 +36,18 @@ function individualGoalScreen({route, navigation}) {
           {goal.description}
         </Text>
 
-        <FlatList style={styles.flatListContainer}
+        <View style={styles.flatListContainer}>
+          <Text style={styles.milestonesText}>Milestones</Text>
+        <FlatList
           data={goal.milestones}
           renderItem={({item}) => (
-            <View style={styles.goalContainer}>
+            <View style={styles.goalContainerTwo}>
               <Text style={styles.goalText}>{item}</Text>  
               <Text>Due Date</Text>
             </View>       
           )}
         />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -57,23 +60,48 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   main: {
-    padding: 20
+    padding: 10,
   },
   title: {
     fontSize:30,
     fontWeight: 'bold',
-    paddingBottom:10,
+    paddingBottom:1,
+  },
+  milestonesText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20
   },
   flatListContainer: {
-    borderColor: 'black'
+    marginTop:10
+    
+  
   },
   goalContainer: {
-    margin:10,
+    marginTop:10,
     padding:10,
     borderWidth:1,
     borderColor: 'black',
     borderRadius: 10,
-
+  },
+  goalContainerTwo: {
+    backgroundColor: 'white',
+    padding: 7,
+    marginTop: 10,
+    marginRight:.5,
+    marginLeft:.5,
+    marginBottom:1,
+    alignItems: 'stretch',
+    borderColor: '#EBEBEB',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 10,
+    elevation: 4
   },
   goalText: {
 
