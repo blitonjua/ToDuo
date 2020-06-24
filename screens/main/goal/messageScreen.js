@@ -1,5 +1,7 @@
 import React from 'react';
-import {ChatLink} from '../chat/';
+import HooksExample from '../chat/components/HooksExample';
+import auth from '@react-native-firebase/auth';
+import { UserContext, ToContext } from '../chat/contexts'
 import {
   StyleSheet,
   SafeAreaView,
@@ -10,15 +12,17 @@ import {
 
 function MessageScreen({navigation}) {
   return (
-    // <SafeAreaView style={styles.safe}>
-    //   <View style={styles.main}>
-    //     <TouchableOpacity onPress={() => navigation.goBack()}>
-    //       <Text>Go Back</Text>
-    //     </TouchableOpacity>
-    //     <Text>This is the MessageScreen</Text>
-    //   </View>
-    // </SafeAreaView>
-    ChatLink
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.main}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text>Go Back</Text>
+        </TouchableOpacity>
+        <Text>This is the MessageScreen</Text>
+      </View>
+      <UserContext.Provider value={auth().currentUser}>
+        <HooksExample />
+      </UserContext.Provider>
+    </SafeAreaView>
   );
 }
 

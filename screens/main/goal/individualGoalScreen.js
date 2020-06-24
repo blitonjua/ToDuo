@@ -11,7 +11,6 @@ import {
 import auth from '@react-native-firebase/auth';
 import getGoalData from '../../../services/getData';
 import {FlatList} from 'react-native-gesture-handler';
-import 
 
 function individualGoalScreen({route, navigation}) {
 
@@ -47,6 +46,7 @@ function individualGoalScreen({route, navigation}) {
           )}
         />
       </View>
+      <Button title='msg' onPress={() => {navigation.navigate('messageScreen')}}/>
     </SafeAreaView>
   );
 }

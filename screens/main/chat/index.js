@@ -10,7 +10,7 @@ import { firebaseService } from './services'
 //todo added
 import auth from '@react-native-firebase/auth';
 
-const ChatLink  {
+const ChatLink = () => {
   //const [user, setUser] = useState(null)
 
   // useEffect(
