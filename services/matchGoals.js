@@ -6,10 +6,14 @@ var goalId = '',
   userId = '';
 var category = '';
 
-export const matchGoals = (id, uid, cat) => {
+export const setCategory = (cat) => {
+  category = cat;
+  console.log('category is now ' + category);
+}
+
+export const matchGoals = (id, uid) => {
   goalId = id;
   userId = uid;
-  category = cat;
 
   //add goal to waiting room collection
   addGoalToWaitingRoom();

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
+//custom imports
 import { addGoalToUserGoalCollection } from '../../../services/createGoal';
 
 
@@ -119,12 +120,12 @@ function AddGoalScreen({ navigation }) {
                 <View>
                     <Text>
                         Goal Added! This will be some confirmation text.
-                </Text>
+                    </Text>
 
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Plus')}>
                         <Text>
                             Go Back
-                    </Text>
+                        </Text>
                     </TouchableOpacity>
                 </View>
             )}
