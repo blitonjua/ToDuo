@@ -11,7 +11,7 @@ import styles from './styles'
 
 export default function Input () {
   const { uid } = useContext(UserContext)
-  const { tid } = useContext(ToContext)
+  //const { tid } = useContext(ToContext)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
 
@@ -19,7 +19,7 @@ export default function Input () {
     function () {
       setIsLoading(true)
       firebaseService
-        .createMessage({ message, uid, tid})
+        .createMessage({ message, uid})
         .then(function () {
           setIsLoading(false)
           setMessage('')

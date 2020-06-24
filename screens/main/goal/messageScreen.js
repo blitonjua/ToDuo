@@ -1,7 +1,7 @@
 import React from 'react';
 import HooksExample from '../chat/components/HooksExample';
 import auth from '@react-native-firebase/auth';
-import { UserContext, ToContext } from '../chat/contexts'
+import { UserContext } from '../chat/contexts'
 import {
   StyleSheet,
   SafeAreaView,
@@ -17,7 +17,7 @@ function MessageScreen({navigation}) {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text>Go Back</Text>
         </TouchableOpacity>
-        <Text>This is the MessageScreen</Text>
+        {/* <Text>This is the MessageScreen</Text> */}
       </View>
       <UserContext.Provider value={auth().currentUser}>
         <HooksExample />

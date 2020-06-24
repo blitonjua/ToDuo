@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useContext } from 'react'
 import { FlatList, SafeAreaView, View } from 'react-native'
 
 import { firebaseService } from '../../services'
-import UserContext from '../../contexts'
+//import { UserContext } from '../../contexts'
 
 import Input from '../Input'
 import Message from '../Message'
