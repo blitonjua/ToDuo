@@ -22,7 +22,7 @@ function AddGoalScreen({ navigation }) {
     const [milestone3, setMilestone3] = useState('');
     const [submitted, setSubmitted] = useState(false);
     //devtesting goal-categories branch
-    const [category, setCategory] = useState('');
+    // const [category, setCategory] = useState('');
 
     //creates a goal and adds it to the database
     function addGoalHandler() {
@@ -31,7 +31,6 @@ function AddGoalScreen({ navigation }) {
             title,
             description,
             [milestone1, milestone2, milestone3],
-            category,
         );
         setSubmitted(true);
     };
@@ -61,15 +60,15 @@ function AddGoalScreen({ navigation }) {
         setMilestone3(enteredMilestone);
     }
 
-    // completely for devtesting goal-categories branch
-    function categoryHander(enteredCategory) {
-        switch (enteredCategory){
-            case '1': setCategory(enteredCategory);
-            case '2': setCategory(enteredCategory);
-            case '3': setCategory(enteredCategory);
-            case '': setCategory(enteredCategory);
-        }
-    }
+    // // completely for devtesting goal-categories branch
+    // function categoryHander(enteredCategory) {
+    //     switch (enteredCategory){
+    //         case '1': setCategory(enteredCategory);
+    //         case '2': setCategory(enteredCategory);
+    //         case '3': setCategory(enteredCategory);
+    //         case '': setCategory(enteredCategory);
+    //     }
+    // }
 
     return (
         <SafeAreaView>
@@ -106,9 +105,9 @@ function AddGoalScreen({ navigation }) {
                         <TextInput placeholder="milestone3" onChangeText={milestone3Handler} value={milestone3} />
                     </View>
 
-                    <View style={{ borderWidth: 1 }}>
+                    {/* <View style={{ borderWidth: 1 }}>
                         <TextInput placeholder="1" onChangeText={categoryHander} value={category} />
-                    </View>
+                    </View> */}
 
                     {/* add goal Button */}
                     <Button
