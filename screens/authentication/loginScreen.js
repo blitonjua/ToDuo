@@ -16,9 +16,6 @@ function LoginScreen({ navigation }) {
     const [emailText, setEmailText] = useState('');
     const [passwordText, setPasswordText] = useState('');
 
-  
-
-
     function gotoSignup() {
         // setScreen(!showSignIn);
         navigation.navigate('Signup');
