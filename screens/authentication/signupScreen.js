@@ -8,7 +8,10 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
+
+//custom imports
 import { addUser } from '../../services/fire';
+import { authStyles } from './authStack';
 
 function SignupScreen({ navigation }) {
     //manage state
@@ -89,7 +92,7 @@ function SignupScreen({ navigation }) {
                     />
                 </View>
 
-                <View style={styles.buttons}>
+                <View style={styles.buttonView}>
                     <TouchableOpacity
                         style={styles.signupButton}
                         onPress={() => {
@@ -101,7 +104,7 @@ function SignupScreen({ navigation }) {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={styles.link}
+                        style={styles.linkView}
                         onPress={() => {
                             //send user to log in screen
                             gotoLogin();
@@ -116,54 +119,10 @@ function SignupScreen({ navigation }) {
 };
 
 const styles = StyleSheet.create({
-
-    main: {
-        flex: 1,
-        alignContent: 'center',
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        backgroundColor: 'white',
-    },
-    padding: {
-        padding: 20
-    },
-    textInput: {
-        fontWeight: '100',
-        fontSize: 16
-    },
+    ...authStyles,
     title: {
         fontSize: 40,
         alignSelf: 'center',
-    },
-    container: {
-        backgroundColor: 'white',
-        padding: 7,
-        marginTop: 10,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        borderColor: '#EBEBEB',
-        borderRadius: 10,
-        marginBottom: 8,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
-        elevation: 3
-    },
-
-    //buttons--------------------
-    buttons: {
-        justifyContent: 'center',
-        marginTop: 15,
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 15,
-        letterSpacing: 2,
     },
     signupButton: {
         alignItems: 'center',
@@ -171,12 +130,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#e33232',
         borderRadius: 60,
         height: 40
-    },
-
-    //links----------------------
-    link: {
-        alignItems: 'center',
-        marginTop: 10
     },
     loginLinkText: {
         color: '#42aaf5',
