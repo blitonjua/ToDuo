@@ -10,38 +10,28 @@ import {
 import auth from '@react-native-firebase/auth';
 import getGoalData from '../../../services/getData';
 import {FlatList} from 'react-native-gesture-handler';
-import { useLinkBuilder } from '@react-navigation/native';
+import {useLinkBuilder} from '@react-navigation/native';
 
 function goalsListScreen({navigation}) {
   const [goalData, setGoalData] = useState([]);
-  
 
   auth().onAuthStateChanged(function(user) {
     if (user) {
       let uid = auth().currentUser.uid;
-  async function getGoals() {
-    let data = await getGoalData(uid);
-    return data;
-  }
-  const setData = () => {
-    getGoals().then(function(val) {
-      setGoalData(val);
-    });
-  };
-  setData();
+      async function getGoals() {
+        let data = await getGoalData(uid);
+        return data;
+      }
+      const setData = () => {
+        getGoals().then(function(val) {
+          setGoalData(val);
+        });
+      };
+      setData();
     }
   });
 
-  
-
-
-
-
-
-  console.log(goalData);
-  
-
-  
+  // console.log(goalData);
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -53,6 +43,7 @@ function goalsListScreen({navigation}) {
             <Button
               title={item.title}
               onPress={() => {
+                console.log(item);
                 navigation.navigate('individualGoalScreen', {goal: item});
               }}
             />

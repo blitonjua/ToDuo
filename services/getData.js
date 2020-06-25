@@ -13,13 +13,14 @@ async function getGoalData(uid) {
     .then(snap => {
       snap.forEach(currentGoal => {
         let docData = currentGoal.data();
-
+        // console.log(docData);
         let dataObject = {
           title: docData.goalTitle,
           description: docData.goalDescription,
           milestones: docData.goalMilestones,
           accountabuddyId: docData.accountaBuddyId,
           matchedGoalId: docData.matchedGoalId,
+          goalId: docData.goalId,
         };
         //add the info to goal data
         goalData.push(dataObject);
