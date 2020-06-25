@@ -1,10 +1,11 @@
 import React from 'react';
 import { 
-    StyleSheet,
     SafeAreaView,
     TouchableOpacity,
     Text
 } from 'react-native'
+import { plusStyles } from '../../../assets/styles/styles';
+const styles = plusStyles;
 
 function PlusScreen({ navigation }) {
     return(
@@ -19,21 +20,5 @@ function PlusScreen({ navigation }) {
         </SafeAreaView>
     )
 };
-
-const styles = StyleSheet.create({
-    main: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    button: {
-        backgroundColor: 'red',
-        borderRadius: 160,
-
-    },  
-    plus: {
-        fontSize: 300,
-    }
-})
 
 export default PlusScreen;

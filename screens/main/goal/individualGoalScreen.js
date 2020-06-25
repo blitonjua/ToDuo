@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {
-  StyleSheet,
   SafeAreaView,
+  FlatList,
   Text,
   View,
   TouchableOpacity,
@@ -10,7 +10,8 @@ import {
 
 import auth from '@react-native-firebase/auth';
 import getGoalData from '../../../services/getData';
-import {FlatList} from 'react-native-gesture-handler';
+import { individualGoalStyles } from '../../../assets/styles/styles';
+const styles = individualGoalStyles;
 
 function individualGoalScreen({route, navigation}) {
 
@@ -30,7 +31,7 @@ function individualGoalScreen({route, navigation}) {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <View style={styles.main}>
+      <View style={styles.padding}>
           <Text style={styles.title}>{goal.title}</Text>
         <Text>
           {goal.description}
@@ -52,60 +53,5 @@ function individualGoalScreen({route, navigation}) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  safe: {
-    flex: 1,
-    alignItems: 'stretch',
-    backgroundColor: 'white',
-  },
-  main: {
-    padding: 10,
-  },
-  title: {
-    fontSize:30,
-    fontWeight: 'bold',
-    paddingBottom:1,
-  },
-  milestonesText: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 20
-  },
-  flatListContainer: {
-    marginTop:10
-    
-  
-  },
-  goalContainer: {
-    marginTop:10,
-    padding:10,
-    borderWidth:1,
-    borderColor: 'black',
-    borderRadius: 10,
-  },
-  goalContainerTwo: {
-    backgroundColor: 'white',
-    padding: 7,
-    marginTop: 10,
-    marginRight:.5,
-    marginLeft:.5,
-    marginBottom:1,
-    alignItems: 'stretch',
-    borderColor: '#EBEBEB',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-        width: 0,
-        height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 10,
-    elevation: 4
-  },
-  goalText: {
-
-  }
-});
 
 export default individualGoalScreen;
