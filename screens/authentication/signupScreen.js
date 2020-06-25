@@ -8,10 +8,11 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
-
 //custom imports
 import { addUser } from '../../services/fire';
-import { authStyles } from './authStack';
+import { signupStyles } from '../../assets/styles/styles';
+
+const styles = signupStyles;
 
 function SignupScreen({ navigation }) {
     //manage state
@@ -118,20 +119,4 @@ function SignupScreen({ navigation }) {
     );
 };
 
-const styles = StyleSheet.create({
-    ...authStyles,
-    signupButton: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#e33232',
-        borderRadius: 60,
-        height: 40
-    },
-    loginLinkText: {
-        color: '#42aaf5',
-        fontWeight: 'bold',
-        fontSize: 15,
-        letterSpacing: 2,
-    },
-});
 export default SignupScreen;

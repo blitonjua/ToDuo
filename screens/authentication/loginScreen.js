@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-    StyleSheet,
     Text,
     View,
     TextInput,
@@ -10,8 +9,10 @@ import {
 import auth from '@react-native-firebase/auth';
 
 //custom imports
-import { authStyles } from './authStack';
-import { colors } from '../../assets/styles/styleVars';
+// import { authStyles } from './authStack';
+import { loginStyles } from '../../assets/styles/styles';
+
+const styles = loginStyles;
 
 function LoginScreen({ navigation }) {
     //manage state
@@ -76,29 +77,5 @@ function LoginScreen({ navigation }) {
         </SafeAreaView>
     );
 };
-
-const styles = StyleSheet.create({
-    ...authStyles,
-    //buttons--------------------
-    logInButton: {	
-        alignItems: 'center',	
-        justifyContent: 'center',	
-        backgroundColor: '#42aaf5',	
-        borderRadius: 60,	
-        height: 40	
-    },
-
-    //links----------------------
-    link: {
-        alignItems: 'center',
-        marginTop: 10
-    },
-    signupLinkText: {
-        color: colors.red,
-        fontSize: 15,
-        letterSpacing: 2,
-        fontWeight: 'bold'
-    }
-});
 
 export default LoginScreen;
