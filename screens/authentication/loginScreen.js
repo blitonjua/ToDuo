@@ -88,11 +88,13 @@ const styles = StyleSheet.create({
     },
     textInput: {
         fontWeight: '100',
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'BloggerSans-Medium'
     },
     title: {
-        fontSize: 40,
-        alignSelf: 'center',
+        fontSize: 60,
+        textAlign: 'left',
+        fontFamily: 'BloggerSans-BoldItalic'
     },
     container: {
         backgroundColor: 'white',
