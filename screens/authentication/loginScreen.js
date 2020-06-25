@@ -8,11 +8,15 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import LinearGradient from 'react-native-linear-gradient';
+
 
 function LoginScreen({ navigation }) {
     //manage state
     const [emailText, setEmailText] = useState('');
     const [passwordText, setPasswordText] = useState('');
+
+  
 
 
     function gotoSignup() {
@@ -26,124 +30,113 @@ function LoginScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.main}>
+            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4568dc', '#b06ab3']} style={styles.background}>
             <View style={styles.padding}>
                 <Text style={styles.title}>ToDuo</Text>
                 <View style={styles.container}>
-                    <TextInput style={styles.textInput}
+                    <TextInput style={styles.textInput} placeholderTextColor="white"
                         placeholder="Email"
                         onChangeText={text => setEmailText(text)}
                     />
                 </View>
-
+                
                 <View style={styles.container}>
                     <TextInput
                         style={styles.textInput}
-                        secureTextEntry={true}
+                        secureTextEntry={true} placeholderTextColor="white"
                         placeholder="Password"
                         onChangeText={text => setPasswordText(text)}
                     />
                 </View>
-
-
                 <View style={styles.buttons}>
                     <TouchableOpacity
-                        style={styles.logInButton}
+                        style={styles.designButton}
                         onPress={() => {
                             //send user to welcome screen
                             signUserIn(emailText, passwordText);
                         }}>
                         <Text style={styles.buttonText}>
-                            LOG IN
+                            Login
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.link}
+                        style={styles.designButton}
                         onPress={() => {
                             //send user to sign up screen
                             gotoSignup();
                         }}>
-                        <Text style={styles.signupLinkText}>
-                            SIGN UP
+                        <Text style={styles.buttonText}>
+                            Sign Up
                         </Text>
                     </TouchableOpacity>
 
                 </View>
             </View>
+            </LinearGradient>
         </SafeAreaView>
+        
     );
 };
 
 const styles = StyleSheet.create({
 
     main: {
-        flex: 1,
+        flex:1,
         alignContent: 'center',
         alignItems: 'stretch',
         justifyContent: 'center',
-        // padding: 20,
-        backgroundColor: 'white',
     },
     padding: {
-        padding: 20
+        padding: 20,
     },
     textInput: {
-        fontWeight: '100',
         fontSize: 16,
-        fontFamily: 'BloggerSans-Medium'
+        borderRadius:10,
+        backgroundColor: 'rgba(000,000,000,0.3)',
+        fontFamily: 'BloggerSans-Medium',
+        textAlign:'left',
+        height:50,
+        paddingLeft:10,
+        color:'white'
     },
     title: {
-        fontSize: 60,
-        textAlign: 'left',
-        fontFamily: 'BloggerSans-BoldItalic'
+        fontSize: 80,
+        color:'white',
+        textAlign: 'center',
+        fontFamily: 'BloggerSans-BoldItalic',
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 10,
     },
     container: {
-        backgroundColor: 'white',
-        padding: 7,
-        marginTop: 10,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        borderColor: '#EBEBEB',
-        borderRadius: 10,
-        marginBottom: 8,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
-        elevation: 3
+        marginBottom:10, 
     },
 
     //buttons--------------------
     buttons: {
         justifyContent: 'center',
-        marginTop: 15,
+        marginTop: 10,
     },
     buttonText: {
         color: 'white',
-        fontWeight: 'bold',
-        fontSize: 15,
-        letterSpacing: 2,
+        fontFamily:'BloggerSans-MediumItalic',
+        fontSize: 20
     },
-    logInButton: {
+    designButton: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#42aaf5',
+        borderWidth:1,
+        backgroundColor:'transparent',
+        borderColor:'white',
         borderRadius: 60,
-        height: 40
+        height: 40,
+        marginBottom:10
     },
-
-    //links----------------------
-    link: {
-        alignItems: 'center',
-        marginTop: 10
-    },
-    signupLinkText: {
-        color: '#e33232',
-        fontSize: 15,
-        letterSpacing: 2,
-        fontWeight: 'bold'
+    background: {
+        flex: 1,
+        alignContent: 'center',
+        alignItems: 'stretch',
+        justifyContent: 'center'
     }
 });
 
