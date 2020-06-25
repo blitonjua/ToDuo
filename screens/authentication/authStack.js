@@ -24,7 +24,7 @@ function AuthStack() {
 };
 
 export const authStyles = StyleSheet.create({
-  main: {
+  safe: {
     flex: 1,
     alignContent: 'center',
     alignItems: 'stretch',
@@ -41,7 +41,7 @@ export const authStyles = StyleSheet.create({
   },
   title: {
     fontSize: 60,
-    textAlign: 'left',
+    textAlign: 'center',
     fontFamily: 'BloggerSans-BoldItalic'
   },
   container: {

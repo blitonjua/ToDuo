@@ -50,9 +50,9 @@ function SignupScreen({ navigation }) {
     };
 
     return (
-        <SafeAreaView style={styles.main}>
+        <SafeAreaView style={styles.safe}>
             <View style={styles.padding}>
-                <Text style={styles.title}>Sign Up</Text>
+                <Text style={styles.title}>ToDuo</Text>
 
                 <View style={styles.container}>
                     <TextInput
@@ -120,10 +120,6 @@ function SignupScreen({ navigation }) {
 
 const styles = StyleSheet.create({
     ...authStyles,
-    title: {
-        fontSize: 40,
-        alignSelf: 'center',
-    },
     signupButton: {
         alignItems: 'center',
         justifyContent: 'center',

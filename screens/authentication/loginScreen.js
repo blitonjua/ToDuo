@@ -29,7 +29,7 @@ function LoginScreen({ navigation }) {
     };
 
     return (
-        <SafeAreaView style={styles.main}>
+        <SafeAreaView style={styles.safe}>
             <View style={styles.padding}>
                 <Text style={styles.title}>ToDuo</Text>
                 <View style={styles.container}>
@@ -79,11 +79,6 @@ function LoginScreen({ navigation }) {
 
 const styles = StyleSheet.create({
     ...authStyles,
-    title: {
-        fontSize: 60,
-        textAlign: 'left',
-        fontFamily: 'BloggerSans-BoldItalic'
-    },
     //buttons--------------------
     logInButton: {	
         alignItems: 'center',	
