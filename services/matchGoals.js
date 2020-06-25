@@ -43,9 +43,21 @@ function onResult(QuerySnapshot) {
     users[y++] = doc.data().userId;
   });
   if (x > 1) {
+    console.log("got to before if statement");
     //if the number of goals are equal to 2, then update their matched Goal id, accountabuddy id and take them off the waiting room
     //update the original goal fields
-    updateMatchFields(goals, users);
+    console.log(goals);
+    if (goalId == goals[0]) {
+      console.log("got to before first promise");
+      // let chatRef = db.collection('ChatRooms').add({
+      //   exists: true, //todo
+      // });
+      // console.log("got to before second promise");
+      // chatRef.then(updateMatchFields(goals, users, chatRef.id));
+      db.collection('ChatRooms').add({
+        exists: true, //todo
+      }).then(documentRef => {updateMatchFields(goals, users, documentRef.id)});
+    }
   }
 }
 
@@ -61,14 +73,25 @@ const deleteGoalFromDocument = goalId1 => {
     .delete();
 };
 
+// //creates a chatroom when pair is found, returns chatroomid
+// async function makeChatRoom() {
+//   return await db.collection('ChatRooms').add({
+//     holder: 'messages' //todo
+//   }).id;
+// }
+
 // updates both
-const updateMatchFields = (goals, users) => {
-  if (goalId == goals[0]) {
+const updateMatchFields = (goals, users, chatID) => {
+  // if (goalId == goals[0]) {
     console.log('**********users: ' + users);
     console.log('**********goals:' + goals);
+    console.log('chat ID is ' + chatID);
+    console.log("inside second promise, boutta go in third");
     db.collection('waitingRoom')
       .get()
-      .then(querySnapshot => {
+      .then(querySnapshot => { 
+        console.log("now in the resultion of the third");
+        console.log("chatID is " + chatID);       
         let i = 0;
         querySnapshot.forEach(currentGoalDoc => {
           db.collection('Users')
@@ -78,6 +101,7 @@ const updateMatchFields = (goals, users) => {
             .update({
               accountaBuddyId: users[!i + 0],
               matchedGoalId: goals[!i + 0],
+              chatRoomId: chatID,
             });
           i++;
         });
@@ -88,5 +112,5 @@ const updateMatchFields = (goals, users) => {
       .catch(err => {
         console.log('Error getting snapshot', err);
       });
-  }
+  //}
 };
