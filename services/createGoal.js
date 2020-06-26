@@ -1,6 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import {matchGoals} from './matchGoals';
+import { matchGoals } from './matchGoals';
 
 const usersCollection = firestore().collection('Users');
 var goalId = '';
@@ -10,6 +10,7 @@ export const addGoalToUserGoalCollection = (
   goalTitle,
   goalDescription,
   goalMilestones,
+  goalCategory,
 ) => {
   //create a document with auto generated ID and add title, description and milestones.
   usersCollection
@@ -22,7 +23,7 @@ export const addGoalToUserGoalCollection = (
       userId: userId,
     })
     .then(docRef => {
-      //add the goal id to current
+      //add the goal id to current user
       usersCollection
         .doc(userId)
         .collection('goals')
@@ -30,6 +31,6 @@ export const addGoalToUserGoalCollection = (
         .update({goalId: docRef.id});
 
       //match the goals
-      matchGoals(docRef.id, auth().currentUser.uid);
+      matchGoals(docRef.id, auth().currentUser.uid, goalCategory);
     });
 };

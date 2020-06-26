@@ -4,6 +4,12 @@ import auth from '@react-native-firebase/auth';
 const db = firestore();
 var goalId = '',
   userId = '';
+var category = '';
+
+export const setCategory = (cat) => {
+  category = cat;
+  console.log('category is now ' + category);
+}
 
 export const matchGoals = (id, uid) => {
   goalId = id;
@@ -18,6 +24,8 @@ export const matchGoals = (id, uid) => {
 //adds goal to the waiting room
 const addGoalToWaitingRoom = () => {
   db.collection('waitingRoom')
+    .doc(category)
+    .collection('goals')
     .doc(goalId)
     .set({
       goalId: goalId,
@@ -29,7 +37,10 @@ const addGoalToWaitingRoom = () => {
 
 const matchTheUsersAndUpdateCollection = () => {
   //this goes to onResult upon continuously checking any collection change, onError on error TODO comment edtiqeutte
-  db.collection('waitingRoom').onSnapshot(onResult, onError);
+  db.collection('waitingRoom')
+    .doc(category)
+    .collection('goals')
+    .onSnapshot(onResult, onError);
 };
 
 // to be ran on successful snapshot
@@ -69,6 +80,8 @@ function onError(error) {
 // delete the goal doc from the collection
 const deleteGoalFromDocument = goalId1 => {
   db.collection('waitingRoom')
+    .doc(category)
+    .collection('goals')
     .doc(goalId1)
     .delete();
 };
@@ -88,6 +101,8 @@ const updateMatchFields = (goals, users, chatID) => {
     console.log('chat ID is ' + chatID);
     console.log("inside second promise, boutta go in third");
     db.collection('waitingRoom')
+      .doc(category)
+      .collection('goals')
       .get()
       .then(querySnapshot => { 
         console.log("now in the resultion of the third");
