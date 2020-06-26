@@ -108,7 +108,7 @@ const updateMatchFields = (goals, users, chatID) => {
         //removes both documents from waiting room
         deleteGoalFromDocument(goals[0]);
         deleteGoalFromDocument(goals[1]);
-        //see if this deletes extra chatrooms
+        //see if this deletes extra chatrooms, it does
         db.collection('ChatRooms')
         .doc(chatID)
         .delete();
