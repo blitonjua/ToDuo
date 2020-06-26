@@ -26,14 +26,12 @@ function individualGoalScreen({route, navigation}) {
     navigation.navigate('Approve');
   }
 
-  console.log(goal.title);
-
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
         <Text style={styles.title}>{goal.title}</Text>
         <Text>{goal.description}</Text>
-
+        <Button title="Messages" onPress={() => gotoMessage()} />
         <View style={styles.flatListContainer}>
           <Text style={styles.milestonesText}>Milestones</Text>
           <FlatList
