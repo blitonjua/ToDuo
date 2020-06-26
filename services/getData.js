@@ -20,6 +20,7 @@ async function getGoalData(uid) {
           milestones: docData.goalMilestones,
           accountabuddyId: docData.accountaBuddyId,
           matchedGoalId: docData.matchedGoalId,
+          chatRoomId: docData.chatRoomId,
         };
         //add the info to goal data
         goalData.push(dataObject);

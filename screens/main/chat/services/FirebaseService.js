@@ -27,11 +27,10 @@ export default class FirebaseService {
     return messages.docs
   }
 
-  async createMessage ({ message, uid, tid }) {
-    await this.messageRef.add({
+  async createMessage ({ message, uid, chatRef }) {
+    await chatRef.add({
       message,
       user_id: uid,
-      to_id: tid,
       created_at: new Date()
     })
   }
