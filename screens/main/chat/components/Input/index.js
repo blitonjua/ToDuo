@@ -12,6 +12,7 @@ import styles from './styles'
 export default function Input () {
   const { uid } = useContext(UserContext)
   const chatRef = useContext(ChatContext)
+  console.log("in index, chatref is " + chatRef)
   //const { tid } = useContext(ToContext)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')

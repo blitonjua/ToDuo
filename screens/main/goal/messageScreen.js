@@ -13,7 +13,7 @@ import {
 
 function MessageScreen({route, navigation}) {
   const {goal} = route.params;
-  console.log(goal);
+  console.log(goal.params.goal.chatRoomId);
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
@@ -23,7 +23,7 @@ function MessageScreen({route, navigation}) {
         {/* <Text>This is the MessageScreen</Text> */}
       </View>
       {/*need to figure out way to remove tabs in chat*/}
-      <ChatContext.Provider value={firestore().collection('ChatRooms').doc(goal.chatRoomId).collection('messages')}>
+      <ChatContext.Provider value={firestore().collection('ChatRooms').doc(goal.params.goal.chatRoomId).collection('messages')}>
       <UserContext.Provider value={auth().currentUser}>
         <HooksExample />
       </UserContext.Provider>
