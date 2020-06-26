@@ -2,7 +2,7 @@ import React, { useCallback, useState, useContext } from 'react'
 import { View, TextInput } from 'react-native'
 
 import { firebaseService } from '../../services'
-import { UserContext, ToContext } from '../../contexts'
+import { UserContext, ChatContext } from '../../contexts'
 
 import Button from '../common/Button'
 import Loader from '../common/Loader'
@@ -11,6 +11,7 @@ import styles from './styles'
 
 export default function Input () {
   const { uid } = useContext(UserContext)
+  const chatRef = useContext(ChatContext)
   //const { tid } = useContext(ToContext)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
@@ -19,7 +20,7 @@ export default function Input () {
     function () {
       setIsLoading(true)
       firebaseService
-        .createMessage({ message, uid})
+        .createMessage({ message, uid, chatRef})
         .then(function () {
           setIsLoading(false)
           setMessage('')
