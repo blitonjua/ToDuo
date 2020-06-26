@@ -15,21 +15,21 @@ import {useLinkBuilder} from '@react-navigation/native';
 function goalsListScreen({navigation}) {
   const [goalData, setGoalData] = useState([]);
 
-  auth().onAuthStateChanged(function(user) {
-    if (user) {
-      let uid = auth().currentUser.uid;
-      async function getGoals() {
-        let data = await getGoalData(uid);
-        return data;
-      }
-      const setData = () => {
-        getGoals().then(function(val) {
-          setGoalData(val);
-        });
-      };
-      setData();
+  // auth().onAuthStateChanged(function(user) {
+  if (auth().currentUser) {
+    let uid = auth().currentUser.uid;
+    async function getGoals() {
+      let data = await getGoalData(uid);
+      return data;
     }
-  });
+    const setData = () => {
+      getGoals().then(function(val) {
+        setGoalData(val);
+      });
+    };
+    setData();
+  }
+  // });
 
   // console.log(goalData);
 

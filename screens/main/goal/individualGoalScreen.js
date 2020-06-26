@@ -54,8 +54,6 @@ function individualGoalScreen({route, navigation}) {
           <Button
             title="+"
             onPress={() => {
-              console.log(auth().currentUser.uid);
-              console.log(goal.goalId);
               addToDo(auth().currentUser.uid, goal.goalId, 'example 1');
             }}
           />
