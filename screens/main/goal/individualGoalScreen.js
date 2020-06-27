@@ -8,12 +8,14 @@ import {
   TextInput,
   Button,
 } from 'react-native';
-
+// import {CheckBox} from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import getGoalData from '../../../services/getData';
 import {FlatList} from 'react-native-gesture-handler';
 import {addToDo} from '../../../services/toDoList';
 import {getToDoList} from '../../../services/toDoList';
+import {deleteItem} from '../../../services/toDoList';
+
 function individualGoalScreen({route, navigation}) {
   const {goal} = route.params;
   const [toDoList, setToDoList] = useState([]);
@@ -30,16 +32,15 @@ function individualGoalScreen({route, navigation}) {
 
   async function getToDoListData() {
     let data = await getToDoList(uid, goal.goalId);
-    // console.log('data: ' + data);
     return data;
   }
+
   function setToDo() {
     getToDoListData().then(function(items) {
-      // console.log(items);
       setToDoList(items);
     });
   }
-  // console.log('hi');
+
   setToDo();
   return (
     <SafeAreaView style={styles.safe}>
@@ -64,21 +65,40 @@ function individualGoalScreen({route, navigation}) {
           <FlatList
             data={toDoList}
             renderItem={({item}) => (
-              <View>
+              <View style={styles.toDoItem}>
                 <Text>{item.itemDescription}</Text>
+                {/* <CheckBox
+                  center
+                  title="Click Here"
+                  checkedIcon="dot-circle-o"
+                  uncheckedIcon="circle-o"
+                  checked={this.state.checked}
+                /> */}
+                <Button
+                  title="done"
+                  onPress={() => {
+                    let itemId = item.itemDescription;
+                    console.log(uid + '--' + goal.goalId + '--' + itemId);
+                    deleteItem(uid, goal.goalId, itemId);
+                  }}
+                />
               </View>
             )}
           />
-          <View>
+          <View style={styles.toDoItem}>
             <TextInput
               placeholder="Add item to do list"
               onChangeText={text => setToDoText(text)}
+              ref={input => {
+                this.textInput = input;
+              }}
             />
             <Button
               title="+"
               onPress={() => {
                 addToDo(auth().currentUser.uid, goal.goalId, toDoText);
                 setToDoText('');
+                this.textInput.clear();
               }}
             />
           </View>
@@ -136,7 +156,10 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 4,
   },
-  goalText: {},
+  toDoItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 });
 
 export default individualGoalScreen;

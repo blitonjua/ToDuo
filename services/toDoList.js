@@ -3,6 +3,16 @@ import firestore from '@react-native-firebase/firestore';
 
 var db = firestore().collection('Users');
 
+export const deleteItem = (uid, goalId, ToDoId) => {
+  console.log(ToDoId);
+  db.doc(uid)
+    .collection('goals')
+    .doc(goalId)
+    .collection('ToDo')
+    .doc(ToDoId)
+    .delete();
+};
+
 export const addToDo = (uid, goalId, item) => {
   db.doc(uid)
     .collection('goals')
