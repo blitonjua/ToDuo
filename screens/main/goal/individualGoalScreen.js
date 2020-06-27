@@ -67,24 +67,6 @@ function individualGoalScreen({route, navigation}) {
             data={toDoList}
             renderItem={({item}) => (
               <View style={styles.toDoItem}>
-                {/* <Text>{item.itemDescription}</Text> */}
-                {/* <CheckBox
-                  center
-                  title="Click Here"
-                  checkedIcon="dot-circle-o"
-                  uncheckedIcon="circle-o"
-                  // checked={this.state.checked}
-                /> */}
-
-                {/* <Button
-                  title="done"
-                  onPress={() => {
-                    let itemId = item.itemDescription;
-                    console.log(uid + '--' + goal.goalId + '--' + itemId);
-                    deleteItem(uid, goal.goalId, itemId);
-                  }}
-                /> */}
-
                 <CircleCheckBox
                   checked={false}
                   onToggle={checked => {
@@ -108,9 +90,11 @@ function individualGoalScreen({route, navigation}) {
             <Button
               title="+"
               onPress={() => {
-                addToDo(auth().currentUser.uid, goal.goalId, toDoText);
-                setToDoText('');
-                this.textInput.clear();
+                if (toDoText != '') {
+                  addToDo(auth().currentUser.uid, goal.goalId, toDoText);
+                  setToDoText('');
+                  this.textInput.clear();
+                }
               }}
             />
           </View>
