@@ -8,13 +8,14 @@ import {
   TextInput,
   Button,
 } from 'react-native';
-// import {CheckBox} from 'react-native-elements';
+import {CheckBox} from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
-import getGoalData from '../../../services/getData';
+// import getGoalData from '../../../services/getData';
 import {FlatList} from 'react-native-gesture-handler';
 import {addToDo} from '../../../services/toDoList';
 import {getToDoList} from '../../../services/toDoList';
 import {deleteItem} from '../../../services/toDoList';
+import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
 
 function individualGoalScreen({route, navigation}) {
   const {goal} = route.params;
@@ -66,21 +67,32 @@ function individualGoalScreen({route, navigation}) {
             data={toDoList}
             renderItem={({item}) => (
               <View style={styles.toDoItem}>
-                <Text>{item.itemDescription}</Text>
+                {/* <Text>{item.itemDescription}</Text> */}
                 {/* <CheckBox
                   center
                   title="Click Here"
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
-                  checked={this.state.checked}
+                  // checked={this.state.checked}
                 /> */}
-                <Button
+
+                {/* <Button
                   title="done"
                   onPress={() => {
                     let itemId = item.itemDescription;
                     console.log(uid + '--' + goal.goalId + '--' + itemId);
                     deleteItem(uid, goal.goalId, itemId);
                   }}
+                /> */}
+
+                <CircleCheckBox
+                  checked={false}
+                  onToggle={checked => {
+                    let itemId = item.itemDescription;
+                    deleteItem(uid, goal.goalId, itemId);
+                  }}
+                  labelPosition={LABEL_POSITION.RIGHT}
+                  label={item.itemDescription}
                 />
               </View>
             )}
