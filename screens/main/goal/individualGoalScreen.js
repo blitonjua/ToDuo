@@ -5,6 +5,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  TextInput,
   Button,
 } from 'react-native';
 
@@ -12,10 +13,11 @@ import auth from '@react-native-firebase/auth';
 import getGoalData from '../../../services/getData';
 import {FlatList} from 'react-native-gesture-handler';
 import {addToDo} from '../../../services/toDoList';
-
+import {getToDoList} from '../../../services/toDoList';
 function individualGoalScreen({route, navigation}) {
   const {goal} = route.params;
-
+  const [toDoList, setToDoList] = useState([]);
+  const [toDoText, setToDoText] = useState('');
   let uid = auth().currentUser.uid;
 
   function gotoMessage() {
@@ -26,6 +28,19 @@ function individualGoalScreen({route, navigation}) {
     navigation.navigate('Approve');
   }
 
+  async function getToDoListData() {
+    let data = await getToDoList(uid, goal.goalId);
+    // console.log('data: ' + data);
+    return data;
+  }
+  function setToDo() {
+    getToDoListData().then(function(items) {
+      // console.log(items);
+      setToDoList(items);
+    });
+  }
+  // console.log('hi');
+  setToDo();
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
@@ -44,17 +59,29 @@ function individualGoalScreen({route, navigation}) {
             )}
           />
         </View>
-        <View>
+        <View style={styles.main}>
           <Text>To Do</Text>
           <FlatList
-          // data
+            data={toDoList}
+            renderItem={({item}) => (
+              <View>
+                <Text>{item.itemDescription}</Text>
+              </View>
+            )}
           />
-          <Button
-            title="+"
-            onPress={() => {
-              addToDo(auth().currentUser.uid, goal.goalId, 'example 1');
-            }}
-          />
+          <View>
+            <TextInput
+              placeholder="Add item to do list"
+              onChangeText={text => setToDoText(text)}
+            />
+            <Button
+              title="+"
+              onPress={() => {
+                addToDo(auth().currentUser.uid, goal.goalId, toDoText);
+                setToDoText('');
+              }}
+            />
+          </View>
         </View>
       </View>
     </SafeAreaView>

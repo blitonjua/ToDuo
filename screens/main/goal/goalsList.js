@@ -20,6 +20,7 @@ function goalsListScreen({navigation}) {
     let uid = auth().currentUser.uid;
     async function getGoals() {
       let data = await getGoalData(uid);
+
       return data;
     }
     const setData = () => {
@@ -31,8 +32,6 @@ function goalsListScreen({navigation}) {
   }
   // });
 
-  // console.log(goalData);
-
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
@@ -41,6 +40,7 @@ function goalsListScreen({navigation}) {
           data={goalData}
           renderItem={({item}) => (
             <Button
+              style={styles.button}
               title={item.title}
               onPress={() => {
                 console.log(item);
@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#000',
   },
 });
 

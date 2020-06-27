@@ -8,8 +8,30 @@ export const addToDo = (uid, goalId, item) => {
     .collection('goals')
     .doc(goalId)
     .collection('ToDo')
-    .add({
+    .doc(item)
+    .set({
       itemDescription: item,
       done: false,
     });
 };
+export async function getToDoList(uid, goalId) {
+  var items = [];
+  // console.log('you are at the TO Do list');
+  await db
+    .doc(uid)
+    .collection('goals')
+    .doc(goalId)
+    .collection('ToDo')
+    .get()
+    .then(snap => {
+      snap.forEach(currentItem => {
+        let currentData = currentItem.data();
+        let itemObject = {
+          completed: currentData.done,
+          itemDescription: currentData.itemDescription,
+        };
+        items.push(itemObject);
+      });
+    });
+  return items;
+}
