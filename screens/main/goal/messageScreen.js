@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  StyleSheet,
   SafeAreaView,
   View,
   Text,
@@ -19,20 +18,5 @@ function MessageScreen({navigation}) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  safe: {
-    flex: 1,
-    alignContent: 'center',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
-  main: {
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default MessageScreen;

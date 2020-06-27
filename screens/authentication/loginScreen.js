@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-    StyleSheet,
     Text,
     View,
     TextInput,
@@ -8,6 +7,12 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
+
+//custom imports
+// import { authStyles } from './authStack';
+import { loginStyles } from '../../assets/styles/styles';
+
+const styles = loginStyles;
 
 function LoginScreen({ navigation }) {
     //manage state
@@ -25,7 +30,7 @@ function LoginScreen({ navigation }) {
     };
 
     return (
-        <SafeAreaView style={styles.main}>
+        <SafeAreaView style={styles.safe}>
             <View style={styles.padding}>
                 <Text style={styles.title}>ToDuo</Text>
                 <View style={styles.container}>
@@ -45,7 +50,7 @@ function LoginScreen({ navigation }) {
                 </View>
 
 
-                <View style={styles.buttons}>
+                <View style={styles.buttonView}>
                     <TouchableOpacity
                         style={styles.logInButton}
                         onPress={() => {
@@ -72,79 +77,5 @@ function LoginScreen({ navigation }) {
         </SafeAreaView>
     );
 };
-
-const styles = StyleSheet.create({
-
-    main: {
-        flex: 1,
-        alignContent: 'center',
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        // padding: 20,
-        backgroundColor: 'white',
-    },
-    padding: {
-        padding: 20
-    },
-    textInput: {
-        fontWeight: '100',
-        fontSize: 16,
-        fontFamily: 'BloggerSans-Medium'
-    },
-    title: {
-        fontSize: 60,
-        textAlign: 'left',
-        fontFamily: 'BloggerSans-BoldItalic'
-    },
-    container: {
-        backgroundColor: 'white',
-        padding: 7,
-        marginTop: 10,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        borderColor: '#EBEBEB',
-        borderRadius: 10,
-        marginBottom: 8,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
-        elevation: 3
-    },
-
-    //buttons--------------------
-    buttons: {
-        justifyContent: 'center',
-        marginTop: 15,
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 15,
-        letterSpacing: 2,
-    },
-    logInButton: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#42aaf5',
-        borderRadius: 60,
-        height: 40
-    },
-
-    //links----------------------
-    link: {
-        alignItems: 'center',
-        marginTop: 10
-    },
-    signupLinkText: {
-        color: '#e33232',
-        fontSize: 15,
-        letterSpacing: 2,
-        fontWeight: 'bold'
-    }
-});
 
 export default LoginScreen;
