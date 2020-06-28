@@ -4,7 +4,6 @@ import firestore from '@react-native-firebase/firestore';
 var db = firestore().collection('Users');
 
 export const deleteItem = (uid, goalId, ToDoId) => {
-  console.log(ToDoId);
   db.doc(uid)
     .collection('goals')
     .doc(goalId)
@@ -26,7 +25,6 @@ export const addToDo = (uid, goalId, item) => {
 };
 export async function getToDoList(uid, goalId) {
   var items = [];
-  // console.log('you are at the TO Do list');
   await db
     .doc(uid)
     .collection('goals')

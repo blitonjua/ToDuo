@@ -13,7 +13,6 @@ async function getGoalData(uid) {
     .then(snap => {
       snap.forEach(currentGoal => {
         let docData = currentGoal.data();
-        // console.log(docData);
         let dataObject = {
           title: docData.goalTitle,
           description: docData.goalDescription,

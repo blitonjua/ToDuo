@@ -43,7 +43,6 @@ function goalsListScreen({navigation}) {
               style={styles.button}
               title={item.title}
               onPress={() => {
-                console.log(item);
                 navigation.navigate('individualGoalScreen', {goal: item});
               }}
             />
