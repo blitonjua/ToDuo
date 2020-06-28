@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import individualGoalScreen from './individualGoalScreen';
 import goalsListScreen from './goalsList';
 import ApproveScreen from './approveScreen';
+import MessageScreen from './messageScreen';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import getGoalData from '../../../services/getData';
@@ -22,6 +23,7 @@ function GoalStack() {
       }}>
       <Stack.Screen name="listOfGoals" component={goalsListScreen} />
       <Stack.Screen name="individualGoalScreen" component={individualGoalScreen} />
+      <Stack.Screen name="messageScreen" component={MessageScreen} />
     </Stack.Navigator>
     /*
     <Stack.Navigator

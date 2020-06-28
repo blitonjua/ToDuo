@@ -50,6 +50,7 @@ function individualGoalScreen({route, navigation}) {
         />
         </View>
       </View>
+      <Button title='msg' onPress={() => {navigation.navigate('messageScreen', {goal: route})}}/>
     </SafeAreaView>
   );
 }
