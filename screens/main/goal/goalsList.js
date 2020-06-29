@@ -16,34 +16,23 @@ const styles = appStyles;
 
 function goalsListScreen({navigation}) {
   const [goalData, setGoalData] = useState([]);
-  
 
-  auth().onAuthStateChanged(function(user) {
-    if (user) {
-      let uid = auth().currentUser.uid;
-  async function getGoals() {
-    let data = await getGoalData(uid);
-    return data;
-  }
-  const setData = () => {
-    getGoals().then(function(val) {
-      setGoalData(val);
-    });
-  };
-  setData();
+  // auth().onAuthStateChanged(function(user) {
+  if (auth().currentUser) {
+    let uid = auth().currentUser.uid;
+    async function getGoals() {
+      let data = await getGoalData(uid);
+
+      return data;
     }
-  });
-
-  
-
-
-
-
-
-  console.log(goalData);
-  
-
-  
+    const setData = () => {
+      getGoals().then(function(val) {
+        setGoalData(val);
+      });
+    };
+    setData();
+  }
+  // });
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -53,6 +42,7 @@ function goalsListScreen({navigation}) {
           data={goalData}
           renderItem={({item}) => (
             <Button
+              style={styles.button}
               title={item.title}
               onPress={() => {
                 navigation.navigate('individualGoalScreen', {goal: item});
