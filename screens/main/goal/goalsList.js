@@ -40,6 +40,7 @@ function goalsListScreen({ navigation }) {
       <View style={devFlatListStyles.ListItem}>
         <TouchableOpacity onPress={() => {
           navigation.navigate('individualGoalScreen', { goal: item });
+          console.log('pressed');
         }}>
           <Text>{item.title}</Text>
         </TouchableOpacity>
