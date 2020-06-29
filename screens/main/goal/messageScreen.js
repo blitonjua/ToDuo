@@ -14,6 +14,7 @@ import {
 import { appStyles } from '../../../assets/styles/styles'
 styles = appStyles;
 
+//user can send messages to their accountabuddy here
 function MessageScreen({route, navigation}) {
   const {goal} = route.params;
   return (
