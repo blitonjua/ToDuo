@@ -3,13 +3,10 @@ import React, {useState, useEffect} from 'react';
 //navigation imports
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import auth from '@react-native-firebase/auth';
-
 //custom screens
 import AuthStack from './screens/authentication/authStack';
 import MainTab from './screens/main/mainTab';
-
 
 const Stack = createStackNavigator();
 

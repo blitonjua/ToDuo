@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    StyleSheet,
     SafeAreaView,
     TouchableOpacity,
     Text,
@@ -20,9 +19,5 @@ function SettingsScreen({ navigation }) {
         </SafeAreaView>
     );
 };
-
-const styles = StyleSheet.create({
-
-});
 
 export default SettingsScreen;

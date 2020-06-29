@@ -22,11 +22,8 @@ function GoalStack() {
         gestureEnabled: false,
       }}>
       <Stack.Screen name="listOfGoals" component={goalsListScreen} />
-      <Stack.Screen
-        name="individualGoalScreen"
-        component={individualGoalScreen}
-      />
-      <Stack.Screen name="Message" component={MessageScreen} />
+      <Stack.Screen name="individualGoalScreen" component={individualGoalScreen} />
+      <Stack.Screen name="messageScreen" component={MessageScreen} />
     </Stack.Navigator>
     /*
     <Stack.Navigator

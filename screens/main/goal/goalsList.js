@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
 import {
-  StyleSheet,
   SafeAreaView,
   View,
+  FlatList,
   Text,
   Button,
   TouchableOpacity,
 } from 'react-native';
+//firebase
 import auth from '@react-native-firebase/auth';
 import getGoalData from '../../../services/getData';
-import {FlatList} from 'react-native-gesture-handler';
-import {useLinkBuilder} from '@react-navigation/native';
+import { useLinkBuilder } from '@react-navigation/native';
+import { appStyles } from '../../../assets/styles/styles';
+const styles = appStyles;
 
 function goalsListScreen({navigation}) {
   const [goalData, setGoalData] = useState([]);
@@ -52,23 +54,5 @@ function goalsListScreen({navigation}) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  safe: {
-    flex: 1,
-    alignContent: 'center',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
-  main: {
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: '#000',
-  },
-});
 
 export default goalsListScreen;
