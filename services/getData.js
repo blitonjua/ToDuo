@@ -1,5 +1,4 @@
 import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
 
 var db = firestore().collection('Users');
 
@@ -20,6 +19,7 @@ async function getGoalData(uid) {
           milestones: docData.goalMilestones,
           accountabuddyId: docData.accountaBuddyId,
           matchedGoalId: docData.matchedGoalId,
+          id: docData.goalId,
         };
         //add the info to goal data
         goalData.push(dataObject);

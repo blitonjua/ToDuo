@@ -184,7 +184,7 @@ export const plusStyles = StyleSheet.create({
         backgroundColor: 'red',
         borderRadius: 160,
 
-    },  
+    },
     plus: {
         fontSize: 300,
     }
@@ -194,22 +194,22 @@ export const plusStyles = StyleSheet.create({
 export const individualGoalStyles = StyleSheet.create({
     ...appStyles,
     safe: {
-      flex: 1,
-      alignItems: 'stretch',
-      backgroundColor: 'white',
+        flex: 1,
+        alignItems: 'stretch',
+        backgroundColor: 'white',
     },
     title: {
-      fontSize: 30,
-      fontWeight: 'bold',
-      paddingBottom: 1,
+        fontSize: 30,
+        fontWeight: 'bold',
+        paddingBottom: 1,
     },
     milestonesText: {
-      textAlign: 'center',
-      fontWeight: 'bold',
-      fontSize: 20
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 20
     },
     flatListContainer: {
-      marginTop: 10
+        marginTop: 10
     },
     // goalContainer: {
     //   marginTop:10,
@@ -219,25 +219,38 @@ export const individualGoalStyles = StyleSheet.create({
     //   borderRadius: 10,
     // },
     goalContainerTwo: {
-      backgroundColor: 'white',
-      padding: 7,
-      marginTop: 10,
-      marginRight: .5,
-      marginLeft: .5,
-      marginBottom: 1,
-      alignItems: 'stretch',
-      borderColor: '#EBEBEB',
-      borderRadius: 10,
-      shadowColor: '#000',
-      shadowOffset: {
-          width: 0,
-          height: 1,
-      },
-      shadowOpacity: 0.22,
-      shadowRadius: 10,
-      elevation: 4
+        backgroundColor: 'white',
+        padding: 7,
+        marginTop: 10,
+        marginRight: .5,
+        marginLeft: .5,
+        marginBottom: 1,
+        alignItems: 'stretch',
+        borderColor: '#EBEBEB',
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 10,
+        elevation: 4
     },
     goalText: {
-  
+
     }
-  });
+});
+
+//TODO
+export const devFlatListStyles = StyleSheet.create({
+    ListItem: {
+        backgroundColor: 'gray',
+        borderWidth: 1,
+        height: 50,
+        marginVertical: 5,
+        borderRadius: 8,
+        alignSelf: 'stretch',
+        width: 300,
+    }
+});

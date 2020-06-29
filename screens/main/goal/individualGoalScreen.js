@@ -1,53 +1,55 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   FlatList,
   Text,
   View,
   TouchableOpacity,
-  Button
 } from 'react-native';
 
-import auth from '@react-native-firebase/auth';
-import getGoalData from '../../../services/getData';
+//styles
 import { individualGoalStyles } from '../../../assets/styles/styles';
 const styles = individualGoalStyles;
 
-function individualGoalScreen({route, navigation}) {
+//the detailed page of a particular goal, displaying milestones, their daily goals, etc.
+function individualGoalScreen({ route, navigation }) {
 
-  const {goal} = route.params;
+  const { goal } = route.params;
 
-  let uid = auth().currentUser.uid;
-
-  function gotoMessage() {
-    navigation.navigate('Message');
+  //list item renderer
+  function ListItem({ item }) {
+    return (
+      <View style={styles.goalContainerTwo}>
+        <Text style={styles.goalText}>{item}</Text>
+        <Text>Due Date</Text>
+      </View>
+    )
   }
-
-  function gotoApprove() {
-    navigation.navigate('Approve');
-  }
-
-  console.log(goal.title);
 
   return (
     <SafeAreaView style={styles.safe}>
+      {/* back button */}
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Text>
+          GO BACK
+        </Text>
+      </TouchableOpacity>
+
       <View style={styles.padding}>
-          <Text style={styles.title}>{goal.title}</Text>
+        {/* overview info */}
+        <Text style={styles.title}>{goal.title}</Text>
         <Text>
           {goal.description}
         </Text>
 
+        {/* milestones */}
         <View style={styles.flatListContainer}>
           <Text style={styles.milestonesText}>Milestones</Text>
-        <FlatList
-          data={goal.milestones}
-          renderItem={({item}) => (
-            <View style={styles.goalContainerTwo}>
-              <Text style={styles.goalText}>{item}</Text>  
-              <Text>Due Date</Text>
-            </View>       
-          )}
-        />
+          <FlatList
+            data={goal.milestones}
+            renderItem={({ item }) => <ListItem item={item}/>}
+            keyExtractor={(item, index) => index.toString()}
+          />
         </View>
       </View>
     </SafeAreaView>
