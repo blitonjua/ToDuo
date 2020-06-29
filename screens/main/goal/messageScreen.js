@@ -28,7 +28,13 @@ function MessageScreen({route, navigation}) {
 
       {/*TODO need to figure out way to remove tabs in chat*/}
       {/* messaging */}
-      <ChatContext.Provider value={firestore().collection('ChatRooms').doc(goal.params.goal.chatRoomId).collection('messages')}>
+      <ChatContext.Provider 
+        value={
+          firestore()
+            .collection('ChatRooms')
+            .doc(goal.params.goal.chatRoomId)
+            .collection('messages')
+        }>
       <UserContext.Provider value={auth().currentUser}>
         <HooksExample />
       </UserContext.Provider>
