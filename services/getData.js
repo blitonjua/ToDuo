@@ -2,8 +2,8 @@ import firestore from '@react-native-firebase/firestore';
 
 var db = firestore().collection('Users');
 
+//retrieve data on user's goals
 async function getGoalData(uid) {
-  var length = 0;
   var goalData = [];
   await db
     .doc(uid)
@@ -19,7 +19,7 @@ async function getGoalData(uid) {
           milestones: docData.goalMilestones,
           accountabuddyId: docData.accountaBuddyId,
           matchedGoalId: docData.matchedGoalId,
-          id: docData.goalId,
+          goalId: docData.goalId,
           chatRoomId: docData.chatRoomId,
         };
         //add the info to goal data

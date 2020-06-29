@@ -5,6 +5,7 @@ import {
   FlatList,
   Text,
   TouchableOpacity,
+  Button,
 } from 'react-native';
 //firebase
 import auth from '@react-native-firebase/auth';
@@ -18,33 +19,35 @@ function goalsListScreen({ navigation }) {
   const [goalData, setGoalData] = useState([]);
 
   //retrieve goals from Firebase
-  auth().onAuthStateChanged(function (user) {
-    if (user) {
-      let uid = auth().currentUser.uid;
-      async function getGoals() {
-        let data = await getGoalData(uid);
-        return data;
-      }
-      function setData() {
-        getGoals().then(function (val) {
-          setGoalData(val);
-        });
-      };
-      setData();
+  if (auth().currentUser) {
+    let uid = auth().currentUser.uid;
+    async function getGoals() {
+      let data = await getGoalData(uid);
+      return data;
     }
-  });
+    function setData() {
+      getGoals().then(function (val) {
+        setGoalData(val);
+      });
+    };
+    setData();
+  }
 
   //item renderer for FlatList
   function ListItem({ item }) {
     return (
-      <View style={devFlatListStyles.ListItem}>
-        <TouchableOpacity onPress={() => {
-          navigation.navigate('individualGoalScreen', { goal: item });
-          console.log('pressed');
-        }}>
-          <Text>{item.title}</Text>
-        </TouchableOpacity>
-      </View>
+      // <View style={devFlatListStyles.ListItem}>
+      <Button
+        title={item.title}
+        onPress={() => navigation.navigate('individualGoalScreen', { goal: item })}
+      />
+      //   <TouchableOpacity onPress={() => {
+      //     navigation.navigate('individualGoalScreen', { goal: item });
+      //     console.log('pressed');
+      //   }}>
+      //     <Text>{item.title}</Text>
+      //   </TouchableOpacity>
+      // </View>
     )
   }
 
@@ -54,8 +57,12 @@ function goalsListScreen({ navigation }) {
         {/* Lists out goals */}
         <FlatList
           data={goalData}
-          renderItem={({ item }) => <ListItem item={item} />}
-          keyExtractor={item => item.id}
+          renderItem={({ item }) =>
+            <Button
+              title={item.title}
+              onPress={() => navigation.navigate('individualGoalScreen', { goal: item })}
+            />}
+          keyExtractor={item => item.goalId}
         />
       </View>
     </SafeAreaView>

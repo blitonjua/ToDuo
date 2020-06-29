@@ -239,7 +239,11 @@ export const individualGoalStyles = StyleSheet.create({
     },
     goalText: {
 
-    }
+    },
+    toDoItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
 });
 
 //TODO
