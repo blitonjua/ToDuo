@@ -12,7 +12,7 @@ async function getGoalData(uid) {
     .then(snap => {
       snap.forEach(currentGoal => {
         let docData = currentGoal.data();
-
+        //console.log('in getdata, chatroomid is ' + docData.chatRoomId);
         let dataObject = {
           title: docData.goalTitle,
           description: docData.goalDescription,
@@ -20,6 +20,7 @@ async function getGoalData(uid) {
           accountabuddyId: docData.accountaBuddyId,
           matchedGoalId: docData.matchedGoalId,
           id: docData.goalId,
+          chatRoomId: docData.chatRoomId,
         };
         //add the info to goal data
         goalData.push(dataObject);
