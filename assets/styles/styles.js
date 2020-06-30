@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const colors = {
+const colors = {
     blue: '#42aaf5',
     red: '#e33232',
 };
@@ -249,6 +249,7 @@ export const individualGoalStyles = StyleSheet.create({
 //TODO
 export const devFlatListStyles = StyleSheet.create({
     ListItem: {
+        zIndex: 1,
         backgroundColor: 'gray',
         borderWidth: 1,
         height: 50,
@@ -256,5 +257,11 @@ export const devFlatListStyles = StyleSheet.create({
         borderRadius: 8,
         alignSelf: 'stretch',
         width: 300,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    ListItemText: {
+        color: 'white',
+        fontSize: 30,
     }
 });

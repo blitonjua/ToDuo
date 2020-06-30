@@ -5,7 +5,6 @@ import {
   FlatList,
   Text,
   TouchableOpacity,
-  Button,
 } from 'react-native';
 //firebase
 import auth from '@react-native-firebase/auth';
@@ -33,22 +32,9 @@ function goalsListScreen({ navigation }) {
     setData();
   }
 
-  //item renderer for FlatList
-  function ListItem({ item }) {
-    return (
-      // <View style={devFlatListStyles.ListItem}>
-      <Button
-        title={item.title}
-        onPress={() => navigation.navigate('individualGoalScreen', { goal: item })}
-      />
-      //   <TouchableOpacity onPress={() => {
-      //     navigation.navigate('individualGoalScreen', { goal: item });
-      //     console.log('pressed');
-      //   }}>
-      //     <Text>{item.title}</Text>
-      //   </TouchableOpacity>
-      // </View>
-    )
+  function handlePress(item) {
+    console.log('button pressed');
+    navigation.navigate('individualGoalScreen', { goal: item });
   }
 
   return (
@@ -58,10 +44,13 @@ function goalsListScreen({ navigation }) {
         <FlatList
           data={goalData}
           renderItem={({ item }) =>
-            <Button
-              title={item.title}
-              onPress={() => navigation.navigate('individualGoalScreen', { goal: item })}
-            />}
+            // TODO: preferable to move this into a separate function
+            <TouchableOpacity onPress={() => handlePress(item)}>
+              <View style={devFlatListStyles.ListItem}>
+                <Text style={devFlatListStyles.ListItemText}>{item.title}</Text>
+              </View>
+            </TouchableOpacity>
+          }
           keyExtractor={item => item.goalId}
         />
       </View>

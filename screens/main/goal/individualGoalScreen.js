@@ -8,19 +8,19 @@ import {
   TouchableOpacity,
   Button,
 } from 'react-native';
-import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
+import CircleCheckBox, { LABEL_POSITION } from 'react-native-circle-checkbox';
 //firebase
 import auth from '@react-native-firebase/auth';
-import {addToDo} from '../../../services/toDoList';
-import {getToDoList} from '../../../services/toDoList';
-import {deleteItem} from '../../../services/toDoList';
+import { addToDo } from '../../../services/toDoList';
+import { getToDoList } from '../../../services/toDoList';
+import { deleteItem } from '../../../services/toDoList';
 //styles
 import { individualGoalStyles } from '../../../assets/styles/styles';
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
-function individualGoalScreen({route, navigation}) {
-  const {goal} = route.params;
+function individualGoalScreen({ route, navigation }) {
+  const { goal } = route.params;
   const [toDoList, setToDoList] = useState([]);
   const [toDoText, setToDoText] = useState('');
   let uid = auth().currentUser.uid;
@@ -39,7 +39,7 @@ function individualGoalScreen({route, navigation}) {
   }
 
   function setToDo() {
-    getToDoListData().then(function(items) {
+    getToDoListData().then(function (items) {
       setToDoList(items);
     });
   }
@@ -76,7 +76,7 @@ function individualGoalScreen({route, navigation}) {
           <Text style={styles.milestonesText}>Milestones</Text>
           <FlatList
             data={goal.milestones}
-            renderItem={({ item }) => <ListItem item={item}/>}
+            renderItem={({ item }) => <ListItem item={item} />}
             keyExtractor={(item, index) => index.toString()}
           />
         </View>
@@ -84,7 +84,7 @@ function individualGoalScreen({route, navigation}) {
           <Text>To Do</Text>
           <FlatList
             data={toDoList}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <View style={styles.toDoItem}>
                 <CircleCheckBox
                   checked={false}
@@ -119,7 +119,12 @@ function individualGoalScreen({route, navigation}) {
           </View>
         </View>
       </View>
-      <Button title='msg' onPress={() => {navigation.navigate('messageScreen', {goal: route})}}/>
+
+      {/* messages button */}
+      <Button
+        title='msg'
+        onPress={() => navigation.navigate('messageScreen', { goal: route }) }
+      />
     </SafeAreaView>
   );
 }
