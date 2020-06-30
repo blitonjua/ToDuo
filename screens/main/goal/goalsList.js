@@ -33,7 +33,6 @@ function goalsListScreen({ navigation }) {
   }
 
   function handlePress(item) {
-    console.log('button pressed');
     navigation.navigate('individualGoalScreen', { goal: item });
   }
 

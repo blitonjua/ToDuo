@@ -43,16 +43,20 @@ const addGoalToWaitingRoom = () => {
 };
 
 async function matchUsersUpdateCollection() {
+  //find match
   let match = await matchUsers('<');
   if (match.length == 0)
     match = await matchUsers('>');
-  
+
   //if match found
   if (match.length > 0) {
     otherGoal = match[0].goalId;
     otherUser = match[0].userId;
+
+    console.log('OTHER USER:', otherUser, otherGoal)
+    //update collection
+    await updateCollection();
   }
-  console.log(otherGoal, otherUser)
 }
 
 //finds another user to match to this goal
@@ -72,9 +76,37 @@ async function matchUsers(compare) {
         match.push(dataObject)
       })
     })
-  console.log(match.length)
   return match;
 }
+
+//updates the fields of both goals
+async function updateCollection() {
+  console.log('IN UPDATE COLLECTION')
+  //updating this user's goal
+  await db
+    .collection('Users')
+    .doc(userId)
+    .collection('goals')
+    .doc(goalId)
+    .update({
+      accountaBuddyId: otherUser,
+      matchedGoalId: otherGoal,
+      // chatRoomId: chatID,
+    });
+
+    //updating matched user's goal
+    await db.collection('Users')
+    .doc(otherUser)
+    .collection('goals')
+    .doc(otherGoal)
+    .update({
+      accountaBuddyId: userId,
+      matchedGoalId: goalId,
+      // chatRoomId: chatID,
+    })
+}
+
+
 
 
 
@@ -87,7 +119,7 @@ const matchTheUsersAndUpdateCollection = () => {
     .get()
     .then(querySnapshot => {
       querySnapshot.forEach(doc => {
-        console
+
       })
     })
   console.log(result)
