@@ -7,12 +7,12 @@ import {
   View,
   Button,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
 
-//custom imports
+//firebase
+import auth from '@react-native-firebase/auth';
 import { addGoalToUserGoalCollection } from '../../../services/createGoal';
 
-
+//the form to add a goal and handles creating the goal.
 function AddGoalScreen({ navigation }) {
     //hooks for goal creation
     const [title, setTitle] = useState('');
@@ -21,8 +21,6 @@ function AddGoalScreen({ navigation }) {
     const [milestone2, setMilestone2] = useState('');
     const [milestone3, setMilestone3] = useState('');
     const [submitted, setSubmitted] = useState(false);
-    //devtesting goal-categories branch
-    // const [category, setCategory] = useState('');
 
     //creates a goal and adds it to the database
     function addGoalHandler() {
@@ -60,16 +58,6 @@ function AddGoalScreen({ navigation }) {
         setMilestone3(enteredMilestone);
     }
 
-    // // completely for devtesting goal-categories branch
-    // function categoryHander(enteredCategory) {
-    //     switch (enteredCategory){
-    //         case '1': setCategory(enteredCategory);
-    //         case '2': setCategory(enteredCategory);
-    //         case '3': setCategory(enteredCategory);
-    //         case '': setCategory(enteredCategory);
-    //     }
-    // }
-
     return (
         <SafeAreaView>
             {!submitted ? (
@@ -105,10 +93,6 @@ function AddGoalScreen({ navigation }) {
                         <TextInput placeholder="milestone3" onChangeText={milestone3Handler} value={milestone3} />
                     </View>
 
-                    {/* <View style={{ borderWidth: 1 }}>
-                        <TextInput placeholder="1" onChangeText={categoryHander} value={category} />
-                    </View> */}
-
                     {/* add goal Button */}
                     <Button
                         title="+"
@@ -116,6 +100,7 @@ function AddGoalScreen({ navigation }) {
                     />
                 </View>
             ) : (
+                //renders on successfully adding goal
                 <View>
                     <Text>
                         Goal Added! This will be some confirmation text.

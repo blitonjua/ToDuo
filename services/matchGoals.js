@@ -8,7 +8,6 @@ var category = '';
 
 export const setCategory = (cat) => {
   category = cat;
-  console.log('category is now ' + category);
 }
 
 export const matchGoals = (id, uid) => {
