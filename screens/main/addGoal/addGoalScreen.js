@@ -106,7 +106,7 @@ function AddGoalScreen({ navigation }) {
                         Goal Added! This will be some confirmation text.
                     </Text>
 
-                    <TouchableOpacity onPress={() => navigation.navigate('Plus')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('plusScreen')}>
                         <Text>
                             Go Back
                         </Text>
