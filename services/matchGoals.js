@@ -49,7 +49,6 @@ async function matchUsersUpdateCollection() {
     otherGoal = match[0].goalId;
     otherUser = match[0].userId;
 
-    console.log('OTHER USER:', otherUser, otherGoal)
     //update collection
     await db.collection('ChatRooms').add({
       exists: true, //todo
@@ -81,7 +80,6 @@ async function matchUsers(compare) {
 
 //updates the fields of both goals
 async function updateCollection(chatId) {
-  console.log('IN UPDATE COLLECTION')
   //updating this user's goal
   await db
     .collection('Users')
