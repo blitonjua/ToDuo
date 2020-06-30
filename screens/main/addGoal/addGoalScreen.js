@@ -20,8 +20,10 @@ function AddGoalScreen({navigation}) {
   const [milestone1, setMilestone1] = useState('');
   const [milestone2, setMilestone2] = useState('');
   const [milestone3, setMilestone3] = useState('');
-  const [milestones, setMilestone3] = useState([]);
   const [submitted, setSubmitted] = useState(false);
+
+  const [milestones, setMilestones] = useState([]);
+  const [milestoneText, setMilestoneText] = useState('');
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
@@ -56,6 +58,13 @@ function AddGoalScreen({navigation}) {
   //sets milestone3
   function milestone3Handler(enteredMilestone) {
     setMilestone3(enteredMilestone);
+  }
+
+  //add a milestone to array
+  function addMilestone(enterText) {
+    setMilestones(milestones + enterText);
+    console.log(milestones);
+    setMilestoneText('');
   }
 
   return (
@@ -111,8 +120,19 @@ function AddGoalScreen({navigation}) {
             />
           </View>
 
+          {/* Display milestones added */}
+
+          {/* adding a new milestone */}
+          <View style={{borderWidth: 1, backgroundColor: 'pink'}}>
+            <TextInput
+              placeholder="add milestone"
+              onChangeText={text => setMilestoneText(text)}
+            />
+            <Button title="+" />
+          </View>
+
           {/* add goal Button */}
-          <Button title="+" onPress={() => addGoalHandler()} />
+          <Button title="+" onPress={() => addMilestone} />
         </View>
       ) : (
         //renders on successfully adding goal
