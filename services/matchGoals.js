@@ -14,7 +14,7 @@ var waitingRoom;
 export const setCategory = (cat) => {
   category = cat;
   waitingRoom = db
-    .collection('waitingRoom')
+    .collection('WaitingRooms')
     .doc(cat)
     .collection('goals');
 }
@@ -95,7 +95,8 @@ async function updateCollection() {
     });
 
     //updating matched user's goal
-    await db.collection('Users')
+    await db
+    .collection('Users')
     .doc(otherUser)
     .collection('goals')
     .doc(otherGoal)
@@ -104,6 +105,16 @@ async function updateCollection() {
       matchedGoalId: goalId,
       // chatRoomId: chatID,
     })
+
+    //remove goals from waiting room
+    await removeGoals(goalId);
+    await removeGoals(otherGoal);
+}
+
+async function removeGoals(goal) {
+  await waitingRoom
+    .doc(goal)
+    .delete()
 }
 
 
