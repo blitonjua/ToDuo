@@ -11,9 +11,7 @@ import {
 import CircleCheckBox, { LABEL_POSITION } from 'react-native-circle-checkbox';
 //firebase
 import auth from '@react-native-firebase/auth';
-import { addToDo } from '../../../services/toDoList';
-import { getToDoList } from '../../../services/toDoList';
-import { deleteItem } from '../../../services/toDoList';
+import { addToDo, getToDoList, deleteItem } from '../../../services/toDoList';
 //styles
 import { individualGoalStyles } from '../../../assets/styles/styles';
 const styles = individualGoalStyles;
@@ -26,7 +24,7 @@ function individualGoalScreen({ route, navigation }) {
   let uid = auth().currentUser.uid;
 
   function gotoMessage() {
-    navigation.navigate('Message');
+    navigation.navigate('messageScreen', { goal: route });
   }
 
   function gotoApprove() {
@@ -44,8 +42,8 @@ function individualGoalScreen({ route, navigation }) {
     });
   }
 
-  //list item renderer
-  function ListItem({ item }) {
+  //milestone list item renderer
+  function MilestoneListItem({ item }) {
     return (
       <View style={styles.goalContainerTwo}>
         <Text style={styles.goalText}>{item}</Text>
@@ -76,19 +74,22 @@ function individualGoalScreen({ route, navigation }) {
           <Text style={styles.milestonesText}>Milestones</Text>
           <FlatList
             data={goal.milestones}
-            renderItem={({ item }) => <ListItem item={item} />}
+            renderItem={({ item }) => <MilestoneListItem item={item} />}
             keyExtractor={(item, index) => index.toString()}
           />
         </View>
+
+        {/* todo list */}
         <View style={styles.main}>
           <Text>To Do</Text>
           <FlatList
             data={toDoList}
-            renderItem={({ item }) => (
+            renderItem={({ item }) => 
+              //TODO: preferable to move this into a separate function
               <View style={styles.toDoItem}>
                 <CircleCheckBox
                   checked={false}
-                  onToggle={checked => {
+                  onToggle={() => {
                     let itemId = item.itemDescription;
                     deleteItem(uid, goal.goalId, itemId);
                   }}
@@ -96,7 +97,8 @@ function individualGoalScreen({ route, navigation }) {
                   label={item.itemDescription}
                 />
               </View>
-            )}
+            }
+            keyExtractor={(item, index) => index.toString()}
           />
           <View style={styles.toDoItem}>
             <TextInput
@@ -123,7 +125,7 @@ function individualGoalScreen({ route, navigation }) {
       {/* messages button */}
       <Button
         title='msg'
-        onPress={() => navigation.navigate('messageScreen', { goal: route }) }
+        onPress={() => gotoMessage()}
       />
     </SafeAreaView>
   );
