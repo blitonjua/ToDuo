@@ -55,7 +55,12 @@ async function matchUsersUpdateCollection() {
 
     console.log('OTHER USER:', otherUser, otherGoal)
     //update collection
-    await updateCollection();
+    // await updateCollection();
+    await db.collection('ChatRooms').add({
+      exists: true, //todo
+    }).then(documentRef => {
+      updateCollection(documentRef.id);
+    });
   }
 }
 
@@ -80,7 +85,7 @@ async function matchUsers(compare) {
 }
 
 //updates the fields of both goals
-async function updateCollection() {
+async function updateCollection(chatId) {
   console.log('IN UPDATE COLLECTION')
   //updating this user's goal
   await db
@@ -91,11 +96,11 @@ async function updateCollection() {
     .update({
       accountaBuddyId: otherUser,
       matchedGoalId: otherGoal,
-      // chatRoomId: chatID,
+      chatRoomId: chatId,
     });
 
-    //updating matched user's goal
-    await db
+  //updating matched user's goal
+  await db
     .collection('Users')
     .doc(otherUser)
     .collection('goals')
@@ -103,12 +108,17 @@ async function updateCollection() {
     .update({
       accountaBuddyId: userId,
       matchedGoalId: goalId,
-      // chatRoomId: chatID,
+      chatRoomId: chatId,
     })
 
-    //remove goals from waiting room
-    await removeGoals(goalId);
-    await removeGoals(otherGoal);
+  //remove goals from waiting room
+  await removeGoals(goalId);
+  await removeGoals(otherGoal);
+
+  //see if this deletes extra chatrooms, it does
+  db.collection('ChatRooms')
+    .doc(chatID)
+    .delete();
 }
 
 async function removeGoals(goal) {
