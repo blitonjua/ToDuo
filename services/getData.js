@@ -17,10 +17,11 @@ async function getGoalData(uid) {
           title: docData.goalTitle,
           description: docData.goalDescription,
           milestones: docData.goalMilestones,
-          accountabuddyId: docData.accountaBuddyId,
+          accountaBuddyId: docData.accountaBuddyId,
           matchedGoalId: docData.matchedGoalId,
           goalId: docData.goalId,
           chatRoomId: docData.chatRoomId,
+          status: docData.status,
         };
         //add the info to goal data
         goalData.push(dataObject);
