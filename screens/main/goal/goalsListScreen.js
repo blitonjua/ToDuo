@@ -14,7 +14,7 @@ import { appStyles, devFlatListStyles } from '../../../assets/styles/styles';
 const styles = appStyles;
 
 //Displays the list of goals that belong to the user and navigates to each goal when pressed
-function goalsListScreen({ navigation }) {
+function GoalsListScreen({ navigation }) {
   const [goalData, setGoalData] = useState([]);
 
   //retrieve goals from Firebase
@@ -32,8 +32,8 @@ function goalsListScreen({ navigation }) {
     setData();
   }
 
-  function handlePress(item) {
-    navigation.navigate('individualGoalScreen', { goal: item });
+  function gotoIndividualGoal(item) {
+    navigation.navigate('individualGoalDisplay', { goal: item });
   }
 
   return (
@@ -44,7 +44,7 @@ function goalsListScreen({ navigation }) {
           data={goalData}
           renderItem={({ item }) =>
             // TODO: preferable to move this into a separate function
-            <TouchableOpacity onPress={() => handlePress(item)}>
+            <TouchableOpacity onPress={() => gotoIndividualGoal(item)}>
               <View style={devFlatListStyles.ListItem}>
                 <Text style={devFlatListStyles.ListItemText}>{item.title}</Text>
               </View>
@@ -56,4 +56,4 @@ function goalsListScreen({ navigation }) {
     </SafeAreaView>
   );
 }
-export default goalsListScreen;
+export default GoalsListScreen;
