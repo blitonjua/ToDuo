@@ -94,7 +94,7 @@ async function updateCollection(chatId) {
       accountaBuddyId: otherUser,
       matchedGoalId: otherGoal,
       chatRoomId: chatId,
-      status: status.inProgress,
+      status: status.inProgress, //TODO: once stage 2 implemented, change to status.planning
     });
 
   //updating matched user's goal
@@ -107,7 +107,7 @@ async function updateCollection(chatId) {
       accountaBuddyId: userId,
       matchedGoalId: goalId,
       chatRoomId: chatId,
-      status: status.inProgress,
+      status: status.inProgress,//TODO: once stage 2 implemented, change to status.planning
     })
 
   //remove goals from waiting room

@@ -12,6 +12,9 @@ import CircleCheckBox, { LABEL_POSITION } from 'react-native-circle-checkbox';
 //firebase
 import auth from '@react-native-firebase/auth';
 import { addToDo, getToDoList, deleteItem } from '../../../services/toDoList';
+import { updateStatus } from '../../../services/updateGoal';
+//constants
+import { status } from '../../../services/universalConstants';
 //styles
 import { individualGoalStyles } from '../../../assets/styles/styles';
 const styles = individualGoalStyles;
@@ -22,6 +25,17 @@ function IndividualGoalScreen({ route, navigation }) {
   const [toDoList, setToDoList] = useState([]);
   const [toDoText, setToDoText] = useState('');
   let uid = auth().currentUser.uid;
+
+  function archiveGoal() {
+    updateStatus(uid, goal.goalId, status.archived);
+    //TODO: prompt user to see if they're sure about archiving
+    navigation.navigate('goalsListScreen');
+  }
+
+  function completeGoal() {
+    updateStatus(uid, goal.goalId, status.completed);
+    navigation.navigate('goalsListScreen');
+  }
 
   function gotoMessage() {
     navigation.navigate('messageScreen', { goal: route });
@@ -122,6 +136,18 @@ function IndividualGoalScreen({ route, navigation }) {
       <Button
         title='msg'
         onPress={() => gotoMessage()}
+      />
+
+      {/* archive goal */}
+      <Button
+        title='archive'
+        onPress={() => archiveGoal()}
+      />
+
+      {/* complete goal */}
+      <Button
+        title='complete'
+        onPress={() => completeGoal()}
       />
     </SafeAreaView>
   );
