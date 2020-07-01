@@ -9,6 +9,8 @@ import {
 //firebase
 import auth from '@react-native-firebase/auth';
 import getGoalData from '../../../services/getData';
+//constants
+import { status } from '../../../services/universalConstants';
 //styles
 import { appStyles, devFlatListStyles } from '../../../assets/styles/styles';
 const styles = appStyles;
@@ -25,8 +27,15 @@ function GoalsListScreen({ navigation }) {
       return data;
     }
     function setData() {
-      getGoals().then(function (val) {
-        setGoalData(val);
+      getGoals().then(function (goals) {
+        //checks if status is displayable
+        function checkStatus(goal) {
+          return goal.status < status.goalListDisplayable;
+        }
+
+        //filters array to only displayable goals
+        let displayableGoals = goals.filter(checkStatus);
+        setGoalData(displayableGoals);
       });
     };
     setData();
