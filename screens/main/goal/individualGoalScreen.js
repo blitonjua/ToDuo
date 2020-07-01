@@ -1,30 +1,30 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   FlatList,
   Text,
   View,
   TextInput,
+  TouchableOpacity,
   Button,
 } from 'react-native';
-import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
+import CircleCheckBox, { LABEL_POSITION } from 'react-native-circle-checkbox';
 //firebase
 import auth from '@react-native-firebase/auth';
-import {addToDo} from '../../../services/toDoList';
-import {getToDoList} from '../../../services/toDoList';
-import {deleteItem} from '../../../services/toDoList';
+import { addToDo, getToDoList, deleteItem } from '../../../services/toDoList';
 //styles
 import { individualGoalStyles } from '../../../assets/styles/styles';
 const styles = individualGoalStyles;
 
-function individualGoalScreen({route, navigation}) {
-  const {goal} = route.params;
+//the detailed page of a particular goal, displaying milestones, their daily goals, etc.
+function individualGoalScreen({ route, navigation }) {
+  const { goal } = route.params;
   const [toDoList, setToDoList] = useState([]);
   const [toDoText, setToDoText] = useState('');
   let uid = auth().currentUser.uid;
 
   function gotoMessage() {
-    navigation.navigate('Message');
+    navigation.navigate('messageScreen', { goal: route });
   }
 
   function gotoApprove() {
@@ -37,41 +37,59 @@ function individualGoalScreen({route, navigation}) {
   }
 
   function setToDo() {
-    getToDoListData().then(function(items) {
+    getToDoListData().then(function (items) {
       setToDoList(items);
     });
+  }
+
+  //milestone list item renderer
+  function MilestoneListItem({ item }) {
+    return (
+      <View style={styles.goalContainerTwo}>
+        <Text style={styles.goalText}>{item}</Text>
+        <Text>Due Date</Text>
+      </View>
+    )
   }
 
   setToDo();
   return (
     <SafeAreaView style={styles.safe}>
+      {/* back button */}
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Text>
+          GO BACK
+        </Text>
+      </TouchableOpacity>
+
       <View style={styles.padding}>
-          <Text style={styles.title}>{goal.title}</Text>
+        {/* overview info */}
+        <Text style={styles.title}>{goal.title}</Text>
         <Text>
           {goal.description}
         </Text>
 
+        {/* milestones */}
         <View style={styles.flatListContainer}>
           <Text style={styles.milestonesText}>Milestones</Text>
           <FlatList
             data={goal.milestones}
-            renderItem={({item}) => (
-              <View style={styles.goalContainerTwo}>
-                <Text style={styles.goalText}>{item}</Text>
-                <Text>Due Date</Text>
-              </View>
-            )}
+            renderItem={({ item }) => <MilestoneListItem item={item} />}
+            keyExtractor={(item, index) => index.toString()}
           />
         </View>
+
+        {/* todo list */}
         <View style={styles.main}>
           <Text>To Do</Text>
           <FlatList
             data={toDoList}
-            renderItem={({item}) => (
+            renderItem={({ item }) => 
+              //TODO: preferable to move this into a separate function
               <View style={styles.toDoItem}>
                 <CircleCheckBox
                   checked={false}
-                  onToggle={checked => {
+                  onToggle={() => {
                     let itemId = item.itemDescription;
                     deleteItem(uid, goal.goalId, itemId);
                   }}
@@ -79,7 +97,8 @@ function individualGoalScreen({route, navigation}) {
                   label={item.itemDescription}
                 />
               </View>
-            )}
+            }
+            keyExtractor={(item, index) => index.toString()}
           />
           <View style={styles.toDoItem}>
             <TextInput
@@ -102,7 +121,12 @@ function individualGoalScreen({route, navigation}) {
           </View>
         </View>
       </View>
-      <Button title='msg' onPress={() => {navigation.navigate('messageScreen', {goal: route})}}/>
+
+      {/* messages button */}
+      <Button
+        title='msg'
+        onPress={() => gotoMessage()}
+      />
     </SafeAreaView>
   );
 }

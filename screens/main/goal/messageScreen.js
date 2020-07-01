@@ -10,19 +10,31 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+//styles
+import { appStyles } from '../../../assets/styles/styles'
+styles = appStyles;
+
+//user can send messages to their accountabuddy here
 function MessageScreen({route, navigation}) {
   const {goal} = route.params;
-  console.log(goal.params.goal.chatRoomId);
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
+        {/* back button */}
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text>Go Back</Text>
         </TouchableOpacity>
-        {/* <Text>This is the MessageScreen</Text> */}
       </View>
-      {/*need to figure out way to remove tabs in chat*/}
-      <ChatContext.Provider value={firestore().collection('ChatRooms').doc(goal.params.goal.chatRoomId).collection('messages')}>
+
+      {/*TODO need to figure out way to remove tabs in chat*/}
+      {/* messaging */}
+      <ChatContext.Provider 
+        value={
+          firestore()
+            .collection('ChatRooms')
+            .doc(goal.params.goal.chatRoomId)
+            .collection('messages')
+        }>
       <UserContext.Provider value={auth().currentUser}>
         <HooksExample />
       </UserContext.Provider>

@@ -1,58 +1,60 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   View,
   FlatList,
   Text,
-  Button,
   TouchableOpacity,
 } from 'react-native';
 //firebase
 import auth from '@react-native-firebase/auth';
 import getGoalData from '../../../services/getData';
-import { useLinkBuilder } from '@react-navigation/native';
-import { appStyles } from '../../../assets/styles/styles';
+//styles
+import { appStyles, devFlatListStyles } from '../../../assets/styles/styles';
 const styles = appStyles;
 
-function goalsListScreen({navigation}) {
+//Displays the list of goals that belong to the user and navigates to each goal when pressed
+function goalsListScreen({ navigation }) {
   const [goalData, setGoalData] = useState([]);
 
-  // auth().onAuthStateChanged(function(user) {
+  //retrieve goals from Firebase
   if (auth().currentUser) {
     let uid = auth().currentUser.uid;
     async function getGoals() {
       let data = await getGoalData(uid);
-
       return data;
     }
-    const setData = () => {
-      getGoals().then(function(val) {
+    function setData() {
+      getGoals().then(function (val) {
         setGoalData(val);
       });
     };
     setData();
   }
-  // });
+
+  function handlePress(item) {
+    console.log('button pressed');
+    navigation.navigate('individualGoalScreen', { goal: item });
+  }
 
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
-        {/* add the flat list */}
+        {/* Lists out goals */}
         <FlatList
           data={goalData}
-          renderItem={({item}) => (
-            <Button
-              style={styles.button}
-              title={item.title}
-              onPress={() => {
-                navigation.navigate('individualGoalScreen', {goal: item});
-              }}
-            />
-          )}
+          renderItem={({ item }) =>
+            // TODO: preferable to move this into a separate function
+            <TouchableOpacity onPress={() => handlePress(item)}>
+              <View style={devFlatListStyles.ListItem}>
+                <Text style={devFlatListStyles.ListItemText}>{item.title}</Text>
+              </View>
+            </TouchableOpacity>
+          }
+          keyExtractor={item => item.goalId}
         />
       </View>
     </SafeAreaView>
   );
 }
-
 export default goalsListScreen;
