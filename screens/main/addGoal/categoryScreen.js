@@ -19,7 +19,7 @@ function CategoryScreen({ navigation }) {
 
     function handlePress(title) {
         setCategory(title);
-        navigation.navigate('Add Goals');
+        navigation.navigate('addGoalScreen');
     }
 
     //item renderer for FlatList
