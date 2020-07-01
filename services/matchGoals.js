@@ -1,3 +1,6 @@
+//constants
+import {status} from './universalConstants';
+//firebase
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
@@ -8,6 +11,7 @@ var goalId = '',
   otherUser = '';
 var waitingRoom;
 
+//sets the category for the goal
 export const setCategory = (cat) => {
   category = cat;
   waitingRoom = db
@@ -90,6 +94,7 @@ async function updateCollection(chatId) {
       accountaBuddyId: otherUser,
       matchedGoalId: otherGoal,
       chatRoomId: chatId,
+      status: status.inProgress,
     });
 
   //updating matched user's goal
@@ -102,6 +107,7 @@ async function updateCollection(chatId) {
       accountaBuddyId: userId,
       matchedGoalId: goalId,
       chatRoomId: chatId,
+      status: status.inProgress,
     })
 
   //remove goals from waiting room

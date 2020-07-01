@@ -1,9 +1,11 @@
+//constants
+import { status } from './universalConstants';
+//firebase
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { matchGoals } from './matchGoals';
 
 const usersCollection = firestore().collection('Users');
-var goalId = '';
 
 export const addGoalToUserGoalCollection = (
   userId,
@@ -21,6 +23,7 @@ export const addGoalToUserGoalCollection = (
       goalDescription: goalDescription,
       goalMilestones: goalMilestones,
       userId: userId,
+      status: status.matching,
     })
     .then(docRef => {
       //add the goal id to current user
@@ -28,7 +31,7 @@ export const addGoalToUserGoalCollection = (
         .doc(userId)
         .collection('goals')
         .doc(docRef.id)
-        .update({goalId: docRef.id});
+        .update({ goalId: docRef.id });
 
       //match the goals
       matchGoals(docRef.id, auth().currentUser.uid, goalCategory);
