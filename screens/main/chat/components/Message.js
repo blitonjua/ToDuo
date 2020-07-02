@@ -3,8 +3,6 @@ import { View, Text } from 'react-native'
 
 import { StyleSheet } from 'react-native'
 
-import { COLORS } from '../styles'
-
 export default function Message ({ message, side }) {
   const isLeftSide = side === 'left'
 
@@ -34,7 +32,7 @@ const messageStyles = StyleSheet.create({
   },
   textContainer: {
     width: 160,
-    backgroundColor: COLORS.GREY,
+    backgroundColor: '#B4B4B4',
 
     borderRadius: 40,
     paddingHorizontal: 15,
@@ -45,7 +43,7 @@ const messageStyles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   rightTextContainer: {
-    backgroundColor: COLORS.PRIMARY,
+    backgroundColor: '#5FB0FF',
     marginRight: 10
   },
   leftText: {

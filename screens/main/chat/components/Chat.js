@@ -8,12 +8,12 @@ import Input from './Input'
 import Message from './Message'
 
 //import { messagesReducer } from './reducers'
-import { chatRoomStyles as styles } from './../styles'
-
 import auth from '@react-native-firebase/auth';
 import {ChatContext} from './../contexts';
 
 import { unionWith } from 'lodash'
+
+import { StyleSheet } from 'react-native'
 
 function messagesReducer (state, action) {
   switch (action.type) {
@@ -53,7 +53,7 @@ export default function Chat () {
 
   return (
     <SafeAreaView>
-      <View style={styles.messagesContainer}>
+      <View style={chatStyles.messagesContainer}>
         <FlatList
           inverted
           data={messages}
@@ -70,9 +70,27 @@ export default function Chat () {
         />
       </View>
 
-      <View style={styles.inputContainer}>
+      <View style={chatStyles.inputContainer}>
         <Input/>
       </View>
     </SafeAreaView>
   )
 }
+
+const chatStyles = StyleSheet.create({
+  messagesContainer: {
+    height: '100%',
+    paddingBottom: 100
+  },
+  inputContainer: {
+    width: '100%',
+    height: 100,
+    position: 'absolute',
+    bottom: 0,
+    paddingVertical: 10,
+    paddingLeft: 20,
+
+    borderTopWidth: 1,
+    borderTopColor: '#B4B4B4'
+  }
+})

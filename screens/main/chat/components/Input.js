@@ -1,27 +1,32 @@
 import React, { useCallback, useState, useContext } from 'react'
 import { View, TextInput } from 'react-native'
 
-import { firebaseService } from '../services'
+//import { firebaseService } from '../services'
 import { UserContext, ChatContext } from '../contexts'
 
-import Button from './common/Button'
-import Loader from './common/Loader'
+import Button from './custom/Button'
+import Loader from './custom/Loader'
 
 import { StyleSheet } from 'react-native'
-
-import { COLORS } from '../styles'
 
 export default function Input () {
   const { uid } = useContext(UserContext)
   const chatRef = useContext(ChatContext)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
+  
+  const createMessage = async ({ message, uid, chatRef }) => {
+    await chatRef.add({
+      message,
+      user_id: uid,
+      created_at: new Date()
+    })
+  }
 
   const handlePress = useCallback(
     function () {
       setIsLoading(true)
-      firebaseService
-        .createMessage({ message, uid, chatRef})
+      createMessage({ message, uid, chatRef})
         .then(function () {
           setIsLoading(false)
           setMessage('')
@@ -55,7 +60,7 @@ const inputStyles =  StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: COLORS.GREY,
+    borderColor: '#B4B4B4',
     borderWidth: 1,
     borderRadius: 3,
     flexDirection: 'row',

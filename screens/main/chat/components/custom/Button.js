@@ -3,8 +3,6 @@ import { Text, TouchableOpacity } from 'react-native'
 
 import { StyleSheet } from 'react-native'
 
-import { COLORS } from '../../styles'
-
 export default function Button ({ text, disabled, onPress }) {
   return (
     <TouchableOpacity style={buttonStyles.container} onPress={onPress} disabled={disabled}>
@@ -18,10 +16,10 @@ const buttonStyles = StyleSheet.create({
     marginHorizontal: 20,
     paddingVertical: 10,
     paddingHorizontal: 16,
-    backgroundColor: COLORS.PRIMARY,
+    backgroundColor: '#5FB0FF',
     borderRadius: 3
   },
   text: {
-    color: COLORS.WHITE
+    color: '#FFF'
   }
 })
