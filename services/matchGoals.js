@@ -105,8 +105,8 @@ async function updateCollection(chatId) {
     })
 
   //remove goals from waiting room
-  await removeGoals(goalId);
-  await removeGoals(otherGoal);
+  removeGoals(goalId);
+  removeGoals(otherGoal);
 
   //see if this deletes extra chatrooms, it does
   await db.collection('ChatRooms')
@@ -115,8 +115,8 @@ async function updateCollection(chatId) {
 }
 
 //removes specified goal from the waiting room
-async function removeGoals(goal) {
-  await waitingRoom
+function removeGoals(goal) {
+  waitingRoom
     .doc(goal)
     .delete()
 }
