@@ -7,10 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 //firebase
-// import auth from '@react-native-firebase/auth';
 import { getDisplayableGoals } from '../../../services/getGoals';
-//constants
-import { status } from '../../../services/universalConstants';
 //styles
 import { appStyles, devFlatListStyles } from '../../../assets/styles/styles';
 const styles = appStyles;
