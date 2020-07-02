@@ -26,15 +26,16 @@ function IndividualGoalScreen({ route, navigation }) {
   const [toDoText, setToDoText] = useState('');
   let uid = auth().currentUser.uid;
 
+  /////////////////////TODO put this and the next function into one single function
   function archiveGoal() {
     updateStatus(uid, goal.goalId, status.archived);
     //TODO: prompt user to see if they're sure about archiving
-    navigation.navigate('goalsListScreen');
+    navigation.navigate('doneScreen', { status: 'archived' });
   }
 
   function completeGoal() {
     updateStatus(uid, goal.goalId, status.completed);
-    navigation.navigate('congratulationsScreen');
+    navigation.navigate('doneScreen', { status: 'completed' });
   }
 
   function gotoMessage() {

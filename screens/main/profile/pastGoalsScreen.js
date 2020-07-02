@@ -25,6 +25,7 @@ function PastGoalsScreen({ navigation }) {
         setGoals(await getArchivedGoals());
     }
 
+    //renders the items in the list
     function ListItem({ item }) {
         return (
             <View style={devFlatListStyles.ListItem}>

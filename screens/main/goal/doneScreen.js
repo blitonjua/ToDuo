@@ -10,16 +10,25 @@ import { appStyles } from '../../../assets/styles/styles';
 const styles = appStyles;
 
 //a screen that congratulates the user upon completing a goal
-function CongratulationsScreen({ navigation }) {
+function DoneScreen({ route, navigation }) {
+    const status = route.params.status;
     //brings user back to goalsListScreen
     function gotoGoalsListScreen() {
         navigation.navigate('goalsListScreen');
     }
 
+    //displays different message depending on status
+    function DoneMessage() {
+        if (status == 'completed')
+            return (<Text>CONGRATULATIONS!!!!!! YOU'VE ACHIEVED YOUR GOAL!!!!!</Text>);
+        if (status == 'archived')
+            return (<Text>wow.... lame.</Text>);
+    }
+
     return (
         <SafeAreaView style={styles.safe}>
             <View style={styles.main}>
-                <Text> CONGRATULATIONS!!!!!! YOU'VE ACHIEVED YOUR GOAL!!!!!</Text>
+                <DoneMessage />
                 <TouchableOpacity
                     onPress={() => gotoGoalsListScreen()}>
                     <Text>
@@ -31,4 +40,4 @@ function CongratulationsScreen({ navigation }) {
     );
 }
 
-export default CongratulationsScreen;
+export default DoneScreen;
