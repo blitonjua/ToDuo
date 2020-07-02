@@ -26,16 +26,10 @@ function IndividualGoalScreen({ route, navigation }) {
   const [toDoText, setToDoText] = useState('');
   let uid = auth().currentUser.uid;
 
-  /////////////////////TODO put this and the next function into one single function
-  function archiveGoal() {
-    updateStatus(uid, goal.goalId, status.archived);
-    //TODO: prompt user to see if they're sure about archiving
-    navigation.navigate('doneScreen', { status: 'archived' });
-  }
-
-  function completeGoal() {
-    updateStatus(uid, goal.goalId, status.completed);
-    navigation.navigate('doneScreen', { status: 'completed' });
+  //updates the status of the goal and goes to the done screen
+  function goalDone(status) {
+    updateStatus(uid, goal.goalId, status);
+    navigation.navigate('doneScreen', { status: status})
   }
 
   function gotoMessage() {
@@ -142,13 +136,13 @@ function IndividualGoalScreen({ route, navigation }) {
       {/* archive goal */}
       <Button
         title='archive'
-        onPress={() => archiveGoal()}
+        onPress={() => goalDone(status.archived)}
       />
 
       {/* complete goal */}
       <Button
         title='complete'
-        onPress={() => completeGoal()}
+        onPress={() => goalDone(status.completed)}
       />
     </SafeAreaView>
   );

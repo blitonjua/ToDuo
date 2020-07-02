@@ -5,13 +5,15 @@ import {
     Text,
     TouchableOpacity,
 } from 'react-native';
+//constants
+import { status } from '../../../services/universalConstants';
 //style
 import { appStyles } from '../../../assets/styles/styles';
 const styles = appStyles;
 
 //a screen that congratulates the user upon completing a goal
 function DoneScreen({ route, navigation }) {
-    const status = route.params.status;
+    const stat = route.params.status;
     //brings user back to goalsListScreen
     function gotoGoalsListScreen() {
         navigation.navigate('goalsListScreen');
@@ -19,9 +21,9 @@ function DoneScreen({ route, navigation }) {
 
     //displays different message depending on status
     function DoneMessage() {
-        if (status == 'completed')
+        if (stat == status.completed)
             return (<Text>CONGRATULATIONS!!!!!! YOU'VE ACHIEVED YOUR GOAL!!!!!</Text>);
-        if (status == 'archived')
+        if (stat == status.archived)
             return (<Text>wow.... lame.</Text>);
     }
 
