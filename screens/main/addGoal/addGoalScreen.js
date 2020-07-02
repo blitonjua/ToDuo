@@ -6,11 +6,13 @@ import {
   TextInput,
   View,
   Button,
+  // FlatList,
 } from 'react-native';
 
 //firebase
 import auth from '@react-native-firebase/auth';
 import {addGoalToUserGoalCollection} from '../../../services/createGoal';
+import {FlatList} from 'react-native-gesture-handler';
 
 //the form to add a goal and handles creating the goal.
 function AddGoalScreen({navigation}) {
@@ -22,7 +24,7 @@ function AddGoalScreen({navigation}) {
   const [milestone3, setMilestone3] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const [milestones, setMilestones] = useState([]);
+  const [milestones, setMilestones] = useState(['']);
   const [milestoneText, setMilestoneText] = useState('');
 
   //creates a goal and adds it to the database
@@ -74,65 +76,77 @@ function AddGoalScreen({navigation}) {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text>Go Back because you don't know what your goal is lame-o</Text>
           </TouchableOpacity>
+          <View>
+            {/* title */}
+            <View style={{borderWidth: 1}}>
+              <TextInput
+                placeholder="title"
+                onChangeText={titleHandler}
+                value={title}
+              />
+            </View>
 
-          {/* title */}
-          <View style={{borderWidth: 1}}>
-            <TextInput
-              placeholder="title"
-              onChangeText={titleHandler}
-              value={title}
-            />
+            {/* description */}
+            <View style={{borderWidth: 1}}>
+              <TextInput
+                placeholder="description"
+                onChangeText={descriptionHandler}
+                value={description}
+              />
+            </View>
+
+            {/* milestone1 */}
+            <View style={{borderWidth: 1}}>
+              <TextInput
+                placeholder="milestone1"
+                onChangeText={milestone1Handler}
+                value={milestone1}
+              />
+            </View>
+
+            {/* milestone2 */}
+            <View style={{borderWidth: 1}}>
+              <TextInput
+                placeholder="milestone2"
+                onChangeText={milestone2Handler}
+                value={milestone2}
+              />
+            </View>
+
+            {/* milestone3 */}
+            <View style={{borderWidth: 1}}>
+              <TextInput
+                placeholder="milestone3"
+                onChangeText={milestone3Handler}
+                value={milestone3}
+              />
+            </View>
           </View>
-
-          {/* description */}
-          <View style={{borderWidth: 1}}>
-            <TextInput
-              placeholder="description"
-              onChangeText={descriptionHandler}
-              value={description}
-            />
-          </View>
-
-          {/* milestone1 */}
-          <View style={{borderWidth: 1}}>
-            <TextInput
-              placeholder="milestone1"
-              onChangeText={milestone1Handler}
-              value={milestone1}
-            />
-          </View>
-
-          {/* milestone2 */}
-          <View style={{borderWidth: 1}}>
-            <TextInput
-              placeholder="milestone2"
-              onChangeText={milestone2Handler}
-              value={milestone2}
-            />
-          </View>
-
-          {/* milestone3 */}
-          <View style={{borderWidth: 1}}>
-            <TextInput
-              placeholder="milestone3"
-              onChangeText={milestone3Handler}
-              value={milestone3}
-            />
-          </View>
-
           {/* Display milestones added */}
-
+          <FlatList
+            data={milestones}
+            renderItem={({item}) => <Text>{item}</Text>}
+          />
           {/* adding a new milestone */}
           <View style={{borderWidth: 1, backgroundColor: 'pink'}}>
             <TextInput
               placeholder="add milestone"
               onChangeText={text => setMilestoneText(text)}
+              ref={input => {
+                this.textInput = input;
+              }}
             />
-            <Button title="+" />
+            <Button
+              title="+"
+              onPress={() => {
+                addMilestone(milestoneText);
+                this.textInput.clear();
+              }}
+            />
           </View>
 
           {/* add goal Button */}
-          <Button title="+" onPress={() => addMilestone} />
+          <Button title="create " onPress={() => addGoalHandler()} />
         </View>
       ) : (
         //renders on successfully adding goal

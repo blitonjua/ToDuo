@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   FlatList,
@@ -8,23 +8,23 @@ import {
   TouchableOpacity,
   Button,
 } from 'react-native';
-import CircleCheckBox, { LABEL_POSITION } from 'react-native-circle-checkbox';
+import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
 //firebase
 import auth from '@react-native-firebase/auth';
-import { addToDo, getToDoList, deleteItem } from '../../../services/toDoList';
+import {addToDo, getToDoList, deleteItem} from '../../../services/toDoList';
 //styles
-import { individualGoalStyles } from '../../../assets/styles/styles';
+import {individualGoalStyles} from '../../../assets/styles/styles';
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
-function individualGoalScreen({ route, navigation }) {
-  const { goal } = route.params;
+function individualGoalScreen({route, navigation}) {
+  const {goal} = route.params;
   const [toDoList, setToDoList] = useState([]);
   const [toDoText, setToDoText] = useState('');
   let uid = auth().currentUser.uid;
 
   function gotoMessage() {
-    navigation.navigate('messageScreen', { goal: route });
+    navigation.navigate('messageScreen', {goal: route});
   }
 
   function gotoApprove() {
@@ -37,19 +37,19 @@ function individualGoalScreen({ route, navigation }) {
   }
 
   function setToDo() {
-    getToDoListData().then(function (items) {
+    getToDoListData().then(function(items) {
       setToDoList(items);
     });
   }
 
   //milestone list item renderer
-  function MilestoneListItem({ item }) {
+  function MilestoneListItem({item}) {
     return (
       <View style={styles.goalContainerTwo}>
         <Text style={styles.goalText}>{item}</Text>
         <Text>Due Date</Text>
       </View>
-    )
+    );
   }
 
   setToDo();
@@ -57,24 +57,20 @@ function individualGoalScreen({ route, navigation }) {
     <SafeAreaView style={styles.safe}>
       {/* back button */}
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text>
-          GO BACK
-        </Text>
+        <Text>GO BACK</Text>
       </TouchableOpacity>
 
       <View style={styles.padding}>
         {/* overview info */}
         <Text style={styles.title}>{goal.title}</Text>
-        <Text>
-          {goal.description}
-        </Text>
+        <Text>{goal.description}</Text>
 
         {/* milestones */}
         <View style={styles.flatListContainer}>
           <Text style={styles.milestonesText}>Milestones</Text>
           <FlatList
             data={goal.milestones}
-            renderItem={({ item }) => <MilestoneListItem item={item} />}
+            renderItem={({item}) => <MilestoneListItem item={item} />}
             keyExtractor={(item, index) => index.toString()}
           />
         </View>
@@ -84,7 +80,7 @@ function individualGoalScreen({ route, navigation }) {
           <Text>To Do</Text>
           <FlatList
             data={toDoList}
-            renderItem={({ item }) => 
+            renderItem={({item}) => (
               //TODO: preferable to move this into a separate function
               <View style={styles.toDoItem}>
                 <CircleCheckBox
@@ -97,7 +93,7 @@ function individualGoalScreen({ route, navigation }) {
                   label={item.itemDescription}
                 />
               </View>
-            }
+            )}
             keyExtractor={(item, index) => index.toString()}
           />
           <View style={styles.toDoItem}>
@@ -123,10 +119,7 @@ function individualGoalScreen({ route, navigation }) {
       </View>
 
       {/* messages button */}
-      <Button
-        title='msg'
-        onPress={() => gotoMessage()}
-      />
+      <Button title="msg" onPress={() => gotoMessage()} />
     </SafeAreaView>
   );
 }

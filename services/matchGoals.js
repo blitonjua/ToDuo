@@ -8,13 +8,13 @@ var goalId = '',
   otherUser = '';
 var waitingRoom;
 
-export const setCategory = (cat) => {
+export const setCategory = cat => {
   category = cat;
   waitingRoom = db
     .collection('WaitingRooms')
     .doc(cat)
     .collection('goals');
-}
+};
 
 export const matchGoals = (id, uid) => {
   goalId = id;
@@ -28,21 +28,18 @@ export const matchGoals = (id, uid) => {
 
 //adds goal to the waiting room
 function addGoalToWaitingRoom() {
-  waitingRoom
-    .doc(goalId)
-    .set({
-      goalId: goalId,
-      userId: auth().currentUser.uid,
-      accountaBuddyId: '',
-      matchedGoalId: '',
-    });
-};
+  waitingRoom.doc(goalId).set({
+    goalId: goalId,
+    userId: auth().currentUser.uid,
+    accountaBuddyId: '',
+    matchedGoalId: '',
+  });
+}
 
 async function matchUsersUpdateCollection() {
   //find match
   let match = await matchUsers('<');
-  if (match.length == 0)
-    match = await matchUsers('>');
+  if (match.length == 0) match = await matchUsers('>');
 
   //if match found
   if (match.length > 0) {
@@ -50,11 +47,14 @@ async function matchUsersUpdateCollection() {
     otherUser = match[0].userId;
 
     //update collection
-    await db.collection('ChatRooms').add({
-      exists: true, //todo
-    }).then(documentRef => {
-      updateCollection(documentRef.id);
-    });
+    await db
+      .collection('ChatRooms')
+      .add({
+        exists: true, //todo
+      })
+      .then(documentRef => {
+        updateCollection(documentRef.id);
+      });
   }
 }
 
@@ -67,14 +67,14 @@ async function matchUsers(compare) {
     .get()
     .then(snap => {
       snap.forEach(doc => {
-        let docData = doc.data()
+        let docData = doc.data();
         let dataObject = {
           goalId: docData.goalId,
           userId: docData.userId,
         };
-        match.push(dataObject)
-      })
-    })
+        match.push(dataObject);
+      });
+    });
   return match;
 }
 
@@ -102,21 +102,20 @@ async function updateCollection(chatId) {
       accountaBuddyId: userId,
       matchedGoalId: goalId,
       chatRoomId: chatId,
-    })
+    });
 
   //remove goals from waiting room
   removeGoals(goalId);
   removeGoals(otherGoal);
 
   //see if this deletes extra chatrooms, it does
-  await db.collection('ChatRooms')
+  await db
+    .collection('ChatRooms')
     .doc(chatId)
     .delete();
 }
 
 //removes specified goal from the waiting room
 function removeGoals(goal) {
-  waitingRoom
-    .doc(goal)
-    .delete()
+  waitingRoom.doc(goal).delete();
 }
