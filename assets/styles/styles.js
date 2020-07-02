@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const colors = {
+const colors = {
     blue: '#42aaf5',
     red: '#e33232',
 };
@@ -211,13 +211,6 @@ export const individualGoalStyles = StyleSheet.create({
     flatListContainer: {
         marginTop: 10
     },
-    // goalContainer: {
-    //   marginTop:10,
-    //   padding:10,
-    //   borderWidth:1,
-    //   borderColor: 'black',
-    //   borderRadius: 10,
-    // },
     goalContainerTwo: {
         backgroundColor: 'white',
         padding: 7,
@@ -237,13 +230,30 @@ export const individualGoalStyles = StyleSheet.create({
         shadowRadius: 10,
         elevation: 4
     },
-    goalText: {
-
-    },
     toDoItem: {
         flexDirection: 'row',
         alignItems: 'center',
+        alignSelf: 'flex-start',
     },
+});
+
+//TODO
+export const devFlatListStyles = StyleSheet.create({
+    ListItem: {
+        backgroundColor: 'gray',
+        borderWidth: 1,
+        height: 50,
+        marginVertical: 5,
+        borderRadius: 8,
+        alignSelf: 'stretch',
+        width: 300,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    ListItemText: {
+        color: 'white',
+        fontSize: 30,
+    }
 });
 
 //chat input
@@ -359,3 +369,4 @@ export const chatStyles = StyleSheet.create({
       borderTopColor: '#B4B4B4'
     }
   });
+    
