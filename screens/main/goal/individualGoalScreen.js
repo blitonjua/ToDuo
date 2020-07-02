@@ -34,7 +34,7 @@ function IndividualGoalScreen({ route, navigation }) {
 
   function completeGoal() {
     updateStatus(uid, goal.goalId, status.completed);
-    navigation.navigate('goalsListScreen');
+    navigation.navigate('congratulationsScreen');
   }
 
   function gotoMessage() {

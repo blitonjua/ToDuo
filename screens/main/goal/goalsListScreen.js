@@ -18,28 +18,6 @@ const styles = appStyles;
 //Displays the list of goals that belong to the user and navigates to each goal when pressed
 function GoalsListScreen({ navigation }) {
   const [goalData, setGoalData] = useState([]);
-
-  //retrieve goals from Firebase
-  // if (auth().currentUser) {
-  //   let uid = auth().currentUser.uid;
-  //   async function getGoals() {
-  //     let data = await getGoalData(uid);
-  //     return data;
-  //   }
-  //   function setData() {
-  //     getGoals().then(function (goals) {
-  //       //checks if status is displayable
-  //       function checkStatus(goal) {
-  //         return goal.status < status.goalListDisplayable;
-  //       }
-
-  //       //filters array to only displayable goals
-  //       let displayableGoals = goals.filter(checkStatus);
-  //       setGoalData(displayableGoals);
-  //     });
-  //   };
-  //   setData();
-  // }
   
   async function getGoals() {
     let goals;
