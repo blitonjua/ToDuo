@@ -13,7 +13,7 @@ import {ChatContext} from './../contexts';
 
 import { unionWith } from 'lodash'
 
-import { StyleSheet } from 'react-native'
+import {chatStyles} from '../../../../assets/styles/styles'
 
 function messagesReducer (state, action) {
   switch (action.type) {
@@ -76,21 +76,3 @@ export default function Chat () {
     </SafeAreaView>
   )
 }
-
-const chatStyles = StyleSheet.create({
-  messagesContainer: {
-    height: '100%',
-    paddingBottom: 100
-  },
-  inputContainer: {
-    width: '100%',
-    height: 100,
-    position: 'absolute',
-    bottom: 0,
-    paddingVertical: 10,
-    paddingLeft: 20,
-
-    borderTopWidth: 1,
-    borderTopColor: '#B4B4B4'
-  }
-})

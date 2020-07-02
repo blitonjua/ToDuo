@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 
-import { StyleSheet } from 'react-native'
+import {buttonStyles} from '../../../../../assets/styles/styles'
 
 export default function Button ({ text, disabled, onPress }) {
   return (
@@ -11,15 +11,3 @@ export default function Button ({ text, disabled, onPress }) {
   )
 }
 
-const buttonStyles = StyleSheet.create({
-  container: {
-    marginHorizontal: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    backgroundColor: '#5FB0FF',
-    borderRadius: 3
-  },
-  text: {
-    color: '#FFF'
-  }
-})

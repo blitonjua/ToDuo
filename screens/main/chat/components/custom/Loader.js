@@ -1,7 +1,7 @@
 import React from 'react'
 import { ActivityIndicator, View } from 'react-native'
 
-import { StyleSheet } from 'react-native'
+import {loaderStyles} from '../../../../../assets/styles/styles'
 
 export default function Loader () {
   return (
@@ -11,17 +11,4 @@ export default function Loader () {
   )
 }
 
-const loaderStyles = StyleSheet.create({
-  container: {
-    position: 'absolute',
 
-    top: 0,
-    left: 0,
-
-    height: '100%',
-    width: '100%',
-
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})

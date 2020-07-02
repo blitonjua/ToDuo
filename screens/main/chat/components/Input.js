@@ -7,7 +7,7 @@ import { UserContext, ChatContext } from '../contexts'
 import Button from './custom/Button'
 import Loader from './custom/Loader'
 
-import { StyleSheet } from 'react-native'
+import {inputStyles} from '../../../../assets/styles/styles'
 
 export default function Input () {
   const { uid } = useContext(UserContext)
@@ -48,23 +48,5 @@ export default function Input () {
   )
 }
 
-const inputStyles =  StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: '100%'
-  },
-  inputContainer: {
-    width: '70%'
-  },
-  input: {
-    height: 40,
-    borderColor: '#B4B4B4',
-    borderWidth: 1,
-    borderRadius: 3,
-    flexDirection: 'row',
-    paddingHorizontal: 10
-  }
-})
+
 
