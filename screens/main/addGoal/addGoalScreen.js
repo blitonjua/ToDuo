@@ -24,7 +24,7 @@ function AddGoalScreen({navigation}) {
   const [milestone3, setMilestone3] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const [milestones, setMilestones] = useState(['']);
+  const [milestones, setMilestones] = useState([]);
   const [milestoneText, setMilestoneText] = useState('');
 
   //creates a goal and adds it to the database
@@ -64,9 +64,7 @@ function AddGoalScreen({navigation}) {
 
   //add a milestone to array
   function addMilestone(enterText) {
-    setMilestones(milestones + enterText);
-    console.log(milestones);
-    setMilestoneText('');
+    setMilestones(milestones.concat(enterText));
   }
 
   return (
@@ -146,7 +144,13 @@ function AddGoalScreen({navigation}) {
           </View>
 
           {/* add goal Button */}
-          <Button title="create " onPress={() => addGoalHandler()} />
+          <Button
+            title="create "
+            onPress={() => {
+              console.log(milestones);
+              addGoalHandler();
+            }}
+          />
         </View>
       ) : (
         //renders on successfully adding goal
