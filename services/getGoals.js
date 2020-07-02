@@ -67,10 +67,10 @@ function checkDisplayable(goal) {
 
 //checks whether goal is completed
 function checkCompleted(goal) {
-  return goal.status < status.completed;
+  return goal.status == status.completed;
 }
 
 //checks whether goal is completed
 function checkArchived(goal) {
-  return goal.status < status.archived;
+  return goal.status == status.archived;
 }
