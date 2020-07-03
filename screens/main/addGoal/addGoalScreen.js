@@ -13,15 +13,13 @@ import {
 import auth from '@react-native-firebase/auth';
 import {addGoalToUserGoalCollection} from '../../../services/createGoal';
 import {FlatList} from 'react-native-gesture-handler';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 //the form to add a goal and handles creating the goal.
 function AddGoalScreen({navigation}) {
   //hooks for goal creation
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [milestone1, setMilestone1] = useState('');
-  const [milestone2, setMilestone2] = useState('');
-  const [milestone3, setMilestone3] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const [milestones, setMilestones] = useState([]);
@@ -50,7 +48,7 @@ function AddGoalScreen({navigation}) {
 
   //add a milestone to array
   function addMilestone(enterText) {
-    setMilestones(milestones.concat(enterText));
+    setMilestones(milestones.concat([enterText]));
   }
 
   return (
@@ -93,6 +91,15 @@ function AddGoalScreen({navigation}) {
                 this.textInput = input;
               }}
             />
+            {milestoneText !== '' && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={new Date(1598051730000)}
+                mode={'date'}
+                is24Hour={true}
+                display="default"
+              />
+            )}
             <Button
               title="+"
               onPress={() => {
