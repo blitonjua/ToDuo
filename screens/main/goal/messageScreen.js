@@ -1,5 +1,5 @@
 import React from 'react';
-import HooksExample from '../chat/components/HooksExample';
+import Chat from '../chat/components/Chat';
 import auth from '@react-native-firebase/auth';
 import { UserContext, ChatContext } from '../chat/contexts'
 import firestore from '@react-native-firebase/firestore';
@@ -20,7 +20,6 @@ function MessageScreen({ route, navigation }) {
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
-        {/* back button */}
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text>Go Back</Text>
         </TouchableOpacity>
@@ -35,9 +34,9 @@ function MessageScreen({ route, navigation }) {
             .doc(goal.params.goal.chatRoomId)
             .collection('messages')
         }>
-        <UserContext.Provider value={auth().currentUser}>
-          <HooksExample />
-        </UserContext.Provider>
+      <UserContext.Provider value={auth().currentUser}>
+        <Chat />
+      </UserContext.Provider>
       </ChatContext.Provider>
     </SafeAreaView>
   );
