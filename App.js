@@ -8,6 +8,8 @@ import auth from '@react-native-firebase/auth';
 import AuthStack from './screens/authentication/authStack';
 import MainTab from './screens/main/mainTab';
 
+import {notificationManager} from './screens/NotificationManager'
+
 const Stack = createStackNavigator();
 
 function App() {
