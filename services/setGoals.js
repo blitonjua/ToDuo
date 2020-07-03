@@ -22,6 +22,7 @@ export const addGoalToUserGoalCollection = (
     goalCategory,
 ) => {
     //create a document with auto generated ID and add title, description and milestones.
+    setCategory(goalCategory);
     user
         .collection('goals')
         .add({
@@ -30,6 +31,7 @@ export const addGoalToUserGoalCollection = (
             goalMilestones: goalMilestones,
             userId: userId,
             status: status.matching,
+            category: goalCategory,
         })
         .then(docRef => {
             //add the goal id to current user
@@ -44,10 +46,10 @@ export const addGoalToUserGoalCollection = (
 };
 
 //sets the category for the goal
-export const setCategory = (cat) => {
+const setCategory = (category) => {
     waitingRoom = db
         .collection('WaitingRooms')
-        .doc(cat)
+        .doc(category)
         .collection('goals');
 }
 

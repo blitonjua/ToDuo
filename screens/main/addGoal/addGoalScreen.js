@@ -13,8 +13,9 @@ import auth from '@react-native-firebase/auth';
 import { addGoalToUserGoalCollection } from '../../../services/setGoals';
 
 //the form to add a goal and handles creating the goal.
-function AddGoalScreen({ navigation }) {
+function AddGoalScreen({ route, navigation }) {
     //hooks for goal creation
+    const category = route.params.category;
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [milestone1, setMilestone1] = useState('');
@@ -28,6 +29,7 @@ function AddGoalScreen({ navigation }) {
             title,
             description,
             [milestone1, milestone2, milestone3],
+            category
         );
         setSubmitted(true);
     };

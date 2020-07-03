@@ -9,8 +9,6 @@ import {
 
 //constants
 import { categories } from '../../../services/universalConstants';
-//firebase
-import { setCategory } from '../../../services/setGoals';
 //styles
 import { appStyles, devFlatListStyles } from '../../../assets/styles/styles';
 const styles = appStyles;
@@ -18,8 +16,7 @@ const styles = appStyles;
 function CategoryScreen({ navigation }) {
 
     function handlePress(title) {
-        setCategory(title);
-        navigation.navigate('addGoalScreen');
+        navigation.navigate('addGoalScreen', { category: title });
     }
 
     //item renderer for FlatList
