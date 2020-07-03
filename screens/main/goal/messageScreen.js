@@ -15,8 +15,8 @@ import { appStyles } from '../../../assets/styles/styles'
 styles = appStyles;
 
 //user can send messages to their accountabuddy here
-function MessageScreen({route, navigation}) {
-  const {goal} = route.params;
+function MessageScreen({ route, navigation }) {
+  const { goal } = route.params;
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
@@ -27,7 +27,7 @@ function MessageScreen({route, navigation}) {
 
       {/*TODO need to figure out way to remove tabs in chat*/}
       {/* messaging */}
-      <ChatContext.Provider 
+      <ChatContext.Provider
         value={
           firestore()
             .collection('ChatRooms')

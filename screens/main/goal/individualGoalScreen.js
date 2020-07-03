@@ -17,7 +17,7 @@ import { individualGoalStyles } from '../../../assets/styles/styles';
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
-function individualGoalScreen({ route, navigation }) {
+function IndividualGoalScreen({ route, navigation }) {
   const { goal } = route.params;
   const [toDoList, setToDoList] = useState([]);
   const [toDoText, setToDoText] = useState('');
@@ -25,10 +25,6 @@ function individualGoalScreen({ route, navigation }) {
 
   function gotoMessage() {
     navigation.navigate('messageScreen', { goal: route });
-  }
-
-  function gotoApprove() {
-    navigation.navigate('Approve');
   }
 
   async function getToDoListData() {
@@ -84,7 +80,7 @@ function individualGoalScreen({ route, navigation }) {
           <Text>To Do</Text>
           <FlatList
             data={toDoList}
-            renderItem={({ item }) => 
+            renderItem={({ item }) =>
               //TODO: preferable to move this into a separate function
               <View style={styles.toDoItem}>
                 <CircleCheckBox
@@ -131,4 +127,4 @@ function individualGoalScreen({ route, navigation }) {
   );
 }
 
-export default individualGoalScreen;
+export default IndividualGoalScreen;
