@@ -73,7 +73,7 @@ function GoalsListScreen({ navigation }) {
     )
   }
 
-  function goToIndividualGoal(item) {
+  function gotoIndividualGoal(item) {
     navigation.navigate('individualGoalDisplay', { goal: item });
   }
 
