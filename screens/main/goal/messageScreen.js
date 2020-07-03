@@ -18,8 +18,8 @@ styles = appStyles;
 function MessageScreen({route, navigation}) {
   const {goal} = route.params;
   return (
-    <SafeAreaView style={appStyles.safe}>
-      <View style={appStyles.main}>
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.main}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text>Go Back</Text>
         </TouchableOpacity>
