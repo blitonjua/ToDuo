@@ -29,11 +29,12 @@ function AddGoalScreen({navigation}) {
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
-    addGoalToUserGoalCollection(auth().currentUser.uid, title, description, [
-      milestone1,
-      milestone2,
-      milestone3,
-    ]);
+    addGoalToUserGoalCollection(
+      auth().currentUser.uid,
+      title,
+      description,
+      milestones,
+    );
     setSubmitted(true);
   }
 
@@ -45,21 +46,6 @@ function AddGoalScreen({navigation}) {
   //sets description
   function descriptionHandler(enteredDescription) {
     setDescription(enteredDescription);
-  }
-
-  //sets milestone1
-  function milestone1Handler(enteredMilestone) {
-    setMilestone1(enteredMilestone);
-  }
-
-  //sets milestone2
-  function milestone2Handler(enteredMilestone) {
-    setMilestone2(enteredMilestone);
-  }
-
-  //sets milestone3
-  function milestone3Handler(enteredMilestone) {
-    setMilestone3(enteredMilestone);
   }
 
   //add a milestone to array
@@ -90,33 +76,6 @@ function AddGoalScreen({navigation}) {
                 placeholder="description"
                 onChangeText={descriptionHandler}
                 value={description}
-              />
-            </View>
-
-            {/* milestone1 */}
-            <View style={{borderWidth: 1}}>
-              <TextInput
-                placeholder="milestone1"
-                onChangeText={milestone1Handler}
-                value={milestone1}
-              />
-            </View>
-
-            {/* milestone2 */}
-            <View style={{borderWidth: 1}}>
-              <TextInput
-                placeholder="milestone2"
-                onChangeText={milestone2Handler}
-                value={milestone2}
-              />
-            </View>
-
-            {/* milestone3 */}
-            <View style={{borderWidth: 1}}>
-              <TextInput
-                placeholder="milestone3"
-                onChangeText={milestone3Handler}
-                value={milestone3}
               />
             </View>
           </View>
