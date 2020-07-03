@@ -10,7 +10,7 @@ import {
 
 //firebase
 import auth from '@react-native-firebase/auth';
-import { addGoalToUserGoalCollection } from '../../../services/createGoal';
+import { addGoalToUserGoalCollection } from '../../../services/setGoals';
 
 //the form to add a goal and handles creating the goal.
 function AddGoalScreen({ navigation }) {

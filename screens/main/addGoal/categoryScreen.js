@@ -10,7 +10,7 @@ import {
 //constants
 import { categories } from '../../../services/universalConstants';
 //firebase
-import { setCategory } from '../../../services/matchGoals';
+import { setCategory } from '../../../services/setGoals';
 //styles
 import { appStyles, devFlatListStyles } from '../../../assets/styles/styles';
 const styles = appStyles;
