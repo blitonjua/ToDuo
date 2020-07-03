@@ -1,19 +1,38 @@
 import React, { useEffect, useReducer, useContext } from 'react'
 import { FlatList, SafeAreaView, View } from 'react-native'
 
-import { firebaseService } from '../../services'
-import { UserContext } from '../../contexts'
+//import { firebaseService } from '../../services'
+import { UserContext } from './../contexts'
 
-import Input from '../Input'
-import Message from '../Message'
+import Input from './Input'
+import Message from './Message'
 
-import { messagesReducer } from './reducers'
-import { chatRoomStyles as styles } from '../../styles'
-
+//import { messagesReducer } from './reducers'
 import auth from '@react-native-firebase/auth';
-import {ChatContext} from '../../contexts';
+import {ChatContext} from './../contexts';
 
-export default function HooksExample () {
+import { unionWith } from 'lodash'
+
+import {chatStyles} from '../../../../assets/styles/styles'
+
+function messagesReducer (state, action) {
+  switch (action.type) {
+    case 'add':
+      return unionWith(state, action.payload, function (a, b) {
+        return a.id === b.id
+      }).sort(function (a, b) {
+        const aData = a.data()
+        const bData = b.data()
+
+        return bData.created_at.seconds - aData.created_at.seconds
+      })
+    default:
+      throw new Error('Action type is not implemented!')
+  }
+}
+
+
+export default function Chat () {
   const { uid } = useContext(UserContext)
   console.log(uid);
   //const {uid} = auth().currentUser;
@@ -34,7 +53,7 @@ export default function HooksExample () {
 
   return (
     <SafeAreaView>
-      <View style={styles.messagesContainer}>
+      <View style={chatStyles.messagesContainer}>
         <FlatList
           inverted
           data={messages}
@@ -51,7 +70,7 @@ export default function HooksExample () {
         />
       </View>
 
-      <View style={styles.inputContainer}>
+      <View style={chatStyles.inputContainer}>
         <Input/>
       </View>
     </SafeAreaView>

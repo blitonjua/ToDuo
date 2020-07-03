@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 //screens
-import { categories } from '../../../services/universalVariables';
+import { categories } from '../../../services/universalConstants';
 //firebase
 import { setCategory } from '../../../services/matchGoals';
 //styles

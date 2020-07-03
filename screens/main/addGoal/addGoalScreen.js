@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  TextInput,
-  View,
-  Button,
+    Text,
+    SafeAreaView,
+    TouchableOpacity,
+    TextInput,
+    View,
+    Button,
 } from 'react-native';
 
 //firebase
@@ -100,19 +100,19 @@ function AddGoalScreen({ navigation }) {
                     />
                 </View>
             ) : (
-                //renders on successfully adding goal
-                <View>
-                    <Text>
-                        Goal Added! This will be some confirmation text.
+                    //renders on successfully adding goal
+                    <View>
+                        <Text>
+                            Goal Added! You can access your goal in the Goal tab.
                     </Text>
 
-                    <TouchableOpacity onPress={() => navigation.navigate('plusScreen')}>
-                        <Text>
-                            Go Back
+                        <TouchableOpacity onPress={() => navigation.navigate('plusScreen')}>
+                            <Text>
+                                Go Back
                         </Text>
-                    </TouchableOpacity>
-                </View>
-            )}
+                        </TouchableOpacity>
+                    </View>
+                )}
         </SafeAreaView>
     );
 }
