@@ -25,7 +25,6 @@ function AddGoalScreen({ navigation }) {
     //creates a goal and adds it to the database
     function addGoalHandler() {
         addGoalToUserGoalCollection(
-            auth().currentUser.uid,
             title,
             description,
             [milestone1, milestone2, milestone3],

@@ -28,7 +28,7 @@ function IndividualGoalScreen({ route, navigation }) {
 
   //updates the status of the goal and goes to the done screen
   function goalDone(status) {
-    updateStatus(uid, goal.goalId, status);
+    updateStatus(goal.goalId, status);
     navigation.navigate('doneScreen', { status: status})
   }
 

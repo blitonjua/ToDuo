@@ -5,25 +5,24 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 // import { matchGoals } from './matchGoals';
 
+const userId = auth().currentUser.uid;
 const db = firestore();
 const usersCollection = db.collection('Users');
+const user = usersCollection.doc(userId);
 var goalId = '',
-    userId = '',
     otherGoal = '',
     otherUser = '';
 var waitingRoom;
 
 //creates a goal and adds it to the user's goal collection
 export const addGoalToUserGoalCollection = (
-    userId,
     goalTitle,
     goalDescription,
     goalMilestones,
     goalCategory,
 ) => {
     //create a document with auto generated ID and add title, description and milestones.
-    usersCollection
-        .doc(userId)
+    user
         .collection('goals')
         .add({
             goalTitle: goalTitle,
@@ -34,14 +33,13 @@ export const addGoalToUserGoalCollection = (
         })
         .then(docRef => {
             //add the goal id to current user
-            usersCollection
-                .doc(userId)
+            user
                 .collection('goals')
                 .doc(docRef.id)
                 .update({ goalId: docRef.id });
 
             //match the goals
-            matchGoals(docRef.id, auth().currentUser.uid, goalCategory);
+            matchGoals(docRef.id, goalCategory);
         });
 };
 
@@ -54,9 +52,8 @@ export const setCategory = (cat) => {
 }
 
 //matches the goals of two different users in the same waitingRoom
-const matchGoals = (id, uid) => {
+const matchGoals = (id) => {
     goalId = id;
-    userId = uid;
 
     //add goal to waiting room
     addGoalToWaitingRoom();
@@ -70,7 +67,7 @@ function addGoalToWaitingRoom() {
         .doc(goalId)
         .set({
             goalId: goalId,
-            userId: auth().currentUser.uid,
+            userId: userId,
             accountaBuddyId: '',
             matchedGoalId: '',
         });
@@ -120,8 +117,7 @@ async function matchUsers(compare) {
 //updates the fields of both goals
 async function updateCollection(chatId) {
     //updating this user's goal
-    await usersCollection
-        .doc(userId)
+    await user
         .collection('goals')
         .doc(goalId)
         .update({
@@ -161,9 +157,8 @@ function removeGoals(goal) {
 }
 
 //updates the status of the provided goal to the provided status
-export function updateStatus(userID, goalID, status) {
-    usersCollection
-        .doc(userID)
+export function updateStatus(goalID, status) {
+    user
         .collection('goals')
         .doc(goalID)
         .update({
