@@ -7,7 +7,7 @@ import {
     Text,
 } from 'react-native';
 
-//screens
+//constants
 import { categories } from '../../../services/universalConstants';
 //firebase
 import { setCategory } from '../../../services/matchGoals';
