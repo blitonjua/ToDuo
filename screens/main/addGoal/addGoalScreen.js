@@ -24,9 +24,10 @@ function AddGoalScreen({navigation}) {
 
   const [milestones, setMilestones] = useState([]);
   const [milestoneText, setMilestoneText] = useState('');
-
+  const [datePicked, setDatePicked] = useState('');
   //creates a goal and adds it to the database
   function addGoalHandler() {
+    console.log(milestones);
     addGoalToUserGoalCollection(
       auth().currentUser.uid,
       title,
@@ -88,23 +89,31 @@ function AddGoalScreen({navigation}) {
               placeholder="add milestone"
               onChangeText={text => setMilestoneText(text)}
               ref={input => {
-                this.textInput = input;
+                this.myTextInput = input;
               }}
             />
             {milestoneText !== '' && (
               <DateTimePicker
+                placeholder="Choose a deadline"
                 testID="dateTimePicker"
                 value={new Date(1598051730000)}
                 mode={'date'}
                 is24Hour={true}
-                display="default"
+                display="display"
+                format="DD/MM/YYYY"
+                onChange={date => {
+                  console.log(date.timeStamp);
+                  setDatePicked(date);
+                }}
               />
             )}
             <Button
               title="+"
               onPress={() => {
+                console.log('picked' + datePicked);
                 addMilestone(milestoneText);
-                this.textInput.clear();
+                setMilestoneText('');
+                this.myTextInput.clear();
               }}
             />
           </View>

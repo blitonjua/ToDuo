@@ -14,6 +14,8 @@ import auth from '@react-native-firebase/auth';
 import {addToDo, getToDoList, deleteItem} from '../../../services/toDoList';
 //styles
 import {individualGoalStyles} from '../../../assets/styles/styles';
+import {getMilestonesAsObjects} from '../../../services/getData';
+
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
@@ -21,6 +23,8 @@ function individualGoalScreen({route, navigation}) {
   const {goal} = route.params;
   const [toDoList, setToDoList] = useState([]);
   const [toDoText, setToDoText] = useState('');
+  const [milestones, setMilestones] = useState([]);
+
   let uid = auth().currentUser.uid;
 
   function gotoMessage() {
@@ -46,13 +50,19 @@ function individualGoalScreen({route, navigation}) {
   function MilestoneListItem({item}) {
     return (
       <View style={styles.goalContainerTwo}>
-        <Text style={styles.goalText}>{item}</Text>
-        <Text>Due Date</Text>
+        <Text style={styles.goalText}>{item.milestoneText}</Text>
+        <Text>{item.milestoneDeadline}</Text>
+        <Text>status{item.milestoneStatus}</Text>
       </View>
     );
   }
-
+  async function getMilestones() {
+    let data = await getMilestonesAsObjects(uid, goal.goalId);
+    setMilestones(data);
+    // console.log(data);
+  }
   setToDo();
+  getMilestones();
   return (
     <SafeAreaView style={styles.safe}>
       {/* back button */}
@@ -69,7 +79,7 @@ function individualGoalScreen({route, navigation}) {
         <View style={styles.flatListContainer}>
           <Text style={styles.milestonesText}>Milestones</Text>
           <FlatList
-            data={goal.milestones}
+            data={milestones}
             renderItem={({item}) => <MilestoneListItem item={item} />}
             keyExtractor={(item, index) => index.toString()}
           />

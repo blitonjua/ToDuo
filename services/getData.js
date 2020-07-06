@@ -3,8 +3,8 @@ import firestore from '@react-native-firebase/firestore';
 var db = firestore().collection('Users');
 
 //retrieve data on user's goals
-async function getGoalData(uid) {
-  var goalData = [];
+export async function getGoalData(uid) {
+  let goalData = [];
   await db
     .doc(uid)
     .collection('goals')
@@ -12,21 +12,40 @@ async function getGoalData(uid) {
     .then(snap => {
       snap.forEach(currentGoal => {
         let docData = currentGoal.data();
-        //console.log('in getdata, chatroomid is ' + docData.chatRoomId);
         let dataObject = {
           title: docData.goalTitle,
           description: docData.goalDescription,
-          milestones: docData.goalMilestones,
           accountabuddyId: docData.accountaBuddyId,
           matchedGoalId: docData.matchedGoalId,
           goalId: docData.goalId,
           chatRoomId: docData.chatRoomId,
         };
-        //add the info to goal data
+        //add the info to goal datas
         goalData.push(dataObject);
       });
     });
   return goalData;
 }
 
-export default getGoalData;
+export async function getMilestonesAsObjects(uid, goalId) {
+  let milestoneList = [];
+  await db
+    .doc(uid)
+    .collection('goals')
+    .doc(goalId)
+    .collection('milestones')
+    .get()
+    .then(snap => {
+      snap.forEach(currentGoal => {
+        let docData = currentGoal.data();
+        let dataObject = {
+          milestoneText: docData.milestoneText,
+          milestoneStatus: docData.milestoneStatus,
+          milestoneDeadline: docData.milestoneDeadline,
+        };
+        milestoneList.push(dataObject);
+      });
+    });
+
+  return milestoneList;
+}
