@@ -12,7 +12,7 @@ import CircleCheckBox, { LABEL_POSITION } from 'react-native-circle-checkbox';
 //firebase
 import auth from '@react-native-firebase/auth';
 import { addToDo, getToDoList, deleteItem } from '../../../services/toDoList';
-import { updateStatus } from '../../../services/updateGoal';
+import { updateStatus } from '../../../services/setGoals';
 //constants
 import { status } from '../../../services/universalConstants';
 //styles
@@ -28,7 +28,7 @@ function IndividualGoalScreen({ route, navigation }) {
 
   //updates the status of the goal and goes to the done screen
   function goalDone(status) {
-    updateStatus(uid, goal.goalId, status);
+    updateStatus(goal.goalId, status);
     navigation.navigate('doneScreen', { status: status})
   }
 
