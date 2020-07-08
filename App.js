@@ -41,8 +41,8 @@ function App() {
           {!loggedIn ? (
             <Stack.Screen name="Authentication" component={AuthStack} />
           ) : (
-              <Stack.Screen name="Main" component={MainTab} />
-            )}
+            <Stack.Screen name="Main" component={MainTab} />
+          )}
         </Stack.Navigator>
       </UserContext.Provider>
     </NavigationContainer>

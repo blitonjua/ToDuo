@@ -2,11 +2,11 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import React, { useContext } from 'react';
 //firebase
 import auth from '@react-native-firebase/auth';
+import { UserContext } from '../../services/userContext';
 //screens
 import GoalStack from './goal/goalStack';
 import ProfileStack from './profile/profileStack';
 import AddGoalStack from './addGoal/addGoalStack';
-import { UserContext } from '../../services/userContext';
 
 const Tab = createMaterialTopTabNavigator();
 
