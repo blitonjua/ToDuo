@@ -36,8 +36,8 @@ export async function getMilestonesAsObjects(uid, goalId) {
     .collection('milestones')
     .get()
     .then(snap => {
-      snap.forEach(currentGoal => {
-        let docData = currentGoal.data();
+      snap.forEach(currentMilestone => {
+        let docData = currentMilestone.data();
         let dataObject = {
           milestoneText: docData.milestoneText,
           milestoneStatus: docData.milestoneStatus,

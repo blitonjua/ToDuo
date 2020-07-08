@@ -11,15 +11,18 @@ import auth from '@react-native-firebase/auth';
 import {getGoalData} from '../../../services/getData';
 //styles
 import {appStyles, devFlatListStyles} from '../../../assets/styles/styles';
+import {getMilestonesAsObjects} from '../../../services/getData';
 const styles = appStyles;
 
 //Displays the list of goals that belong to the user and navigates to each goal when pressed
 function goalsListScreen({navigation}) {
   const [goalData, setGoalData] = useState([]);
+  const [milestones, setMilestones] = useState([]);
 
   //retrieve goals from Firebase
   if (auth().currentUser) {
     let uid = auth().currentUser.uid;
+
     async function getGoals() {
       let data = await getGoalData(uid);
       return data;

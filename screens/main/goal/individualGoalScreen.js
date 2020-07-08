@@ -56,13 +56,18 @@ function individualGoalScreen({route, navigation}) {
       </View>
     );
   }
+
   async function getMilestones() {
     let data = await getMilestonesAsObjects(uid, goal.goalId);
-    setMilestones(data);
-    // console.log(data);
+    return data;
   }
+  function getMilestoneData() {
+    getMilestones().then(function(val) {
+      setMilestones(val);
+    });
+  }
+  getMilestoneData();
   setToDo();
-  getMilestones();
   return (
     <SafeAreaView style={styles.safe}>
       {/* back button */}

@@ -52,6 +52,11 @@ function AddGoalScreen({navigation}) {
     setMilestones(milestones.concat([enterText]));
   }
 
+  function onDataSelected(event, selectedDate) {
+    const currentDate = selectedDate || datePicked;
+    setDatePicked(currentDate);
+    console.log(currentDate);
+  }
   return (
     <SafeAreaView>
       {!submitted ? (
@@ -101,10 +106,7 @@ function AddGoalScreen({navigation}) {
                 is24Hour={true}
                 display="display"
                 format="DD/MM/YYYY"
-                onChange={date => {
-                  console.log(date.timeStamp);
-                  setDatePicked(date);
-                }}
+                onChange={onDataSelected}
               />
             )}
             <Button
@@ -122,7 +124,6 @@ function AddGoalScreen({navigation}) {
           <Button
             title="create "
             onPress={() => {
-              console.log(milestones);
               addGoalHandler();
             }}
           />
