@@ -3,12 +3,16 @@ import { status } from './universalConstants';
 //firebase
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-// import { matchGoals } from './matchGoals';
 
-const userId = auth().currentUser.uid;
+var userId;
+var user;
 const db = firestore();
 const usersCollection = db.collection('Users');
-const user = usersCollection.doc(userId);
+if (auth().currentUser) {
+    console.log('setgoals: ', auth().currentUser.uid);
+    userId = auth().currentUser.uid;
+    user = usersCollection.doc(userId);
+}
 var goalId = '',
     otherGoal = '',
     otherUser = '';
