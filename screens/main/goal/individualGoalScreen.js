@@ -19,7 +19,7 @@ import {getMilestonesAsObjects} from '../../../services/getData';
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
-function individualGoalScreen({route, navigation}) {
+function IndividualGoalScreen({route, navigation}) {
   const {goal} = route.params;
   const [toDoList, setToDoList] = useState([]);
   const [toDoText, setToDoText] = useState('');
@@ -29,10 +29,6 @@ function individualGoalScreen({route, navigation}) {
 
   function gotoMessage() {
     navigation.navigate('messageScreen', {goal: route});
-  }
-
-  function gotoApprove() {
-    navigation.navigate('Approve');
   }
 
   async function getToDoListData() {
@@ -139,4 +135,4 @@ function individualGoalScreen({route, navigation}) {
   );
 }
 
-export default individualGoalScreen;
+export default IndividualGoalScreen;

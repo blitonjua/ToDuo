@@ -6,7 +6,6 @@ import {
   TextInput,
   View,
   Button,
-  // FlatList,
 } from 'react-native';
 
 //firebase
