@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     Text,
     SafeAreaView,
@@ -10,6 +10,7 @@ import {
 
 //firebase
 import { addGoalToUserGoalCollection } from '../../../services/setGoals';
+import { UserContext } from '../../../services/userContext';
 
 //the form to add a goal and handles creating the goal.
 function AddGoalScreen({ route, navigation }) {
@@ -21,10 +22,12 @@ function AddGoalScreen({ route, navigation }) {
     const [milestone2, setMilestone2] = useState('');
     const [milestone3, setMilestone3] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const { user, setUser } = useContext(UserContext);
 
     //creates a goal and adds it to the database
     function addGoalHandler() {
         addGoalToUserGoalCollection(
+            user,
             title,
             description,
             [milestone1, milestone2, milestone3],
