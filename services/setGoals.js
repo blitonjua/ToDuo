@@ -5,10 +5,10 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 // import { matchGoals } from './matchGoals';
 
-const userId = auth().currentUser.uid;
+//const userId = auth().currentUser.uid;
 const db = firestore();
 const usersCollection = db.collection('Users');
-const user = usersCollection.doc(userId);
+//const user = usersCollection.doc(userId);
 var goalId = '',
     otherGoal = '',
     otherUser = '';

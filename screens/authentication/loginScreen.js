@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import messaging from '@react-native-firebase/messaging';
+import firestore from '@react-native-firebase/firestore';
+
 
 //custom imports
 // import { authStyles } from './authStack';
@@ -19,6 +22,21 @@ function LoginScreen({ navigation }) {
   const [emailText, setEmailText] = useState('');
   const [passwordText, setPasswordText] = useState('');
 
+  //notifs
+  FCM = messaging();
+  ref = firestore().collection("Users");
+  // check to make sure the user is authenticated  
+  auth().onAuthStateChanged(user => {
+  // requests permissions from the user
+  FCM.requestPermission();
+  // gets the device's push token
+  FCM.getToken().then(token => {
+   
+   // stores the token in the user's document
+   this.ref.doc(user.uid).update({ pushToken: token });
+  });
+  
+});
 
   function gotoSignup() {
     // setScreen(!showSignIn);
