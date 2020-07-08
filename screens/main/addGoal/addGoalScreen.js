@@ -24,7 +24,7 @@ function AddGoalScreen({navigation}) {
 
   const [milestones, setMilestones] = useState([]);
   const [milestoneText, setMilestoneText] = useState('');
-  const [datePicked, setDatePicked] = useState('');
+  const [datePicked, setDatePicked] = useState([]);
   //creates a goal and adds it to the database
   function addGoalHandler() {
     console.log(milestones);
@@ -48,13 +48,19 @@ function AddGoalScreen({navigation}) {
   }
 
   //add a milestone to array
-  function addMilestone(enterText) {
-    setMilestones(milestones.concat([enterText]));
+  function addMilestone(enterText, date) {
+    setMilestones(milestones.concat([[enterText], [date]]));
+    console.log(milestones);
   }
 
   function onDataSelected(event, selectedDate) {
     const currentDate = selectedDate || datePicked;
-    setDatePicked(currentDate);
+    setDatePicked([
+      [currentDate.getMonth() + 1],
+      [currentDate.getDate()],
+      [currentDate.getFullYear()],
+      [currentDate.valueOf()],
+    ]);
     console.log(currentDate);
   }
   return (
@@ -112,8 +118,7 @@ function AddGoalScreen({navigation}) {
             <Button
               title="+"
               onPress={() => {
-                console.log('picked' + datePicked);
-                addMilestone(milestoneText);
+                addMilestone(milestoneText, datePicked);
                 setMilestoneText('');
                 this.myTextInput.clear();
               }}
