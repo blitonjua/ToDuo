@@ -13,7 +13,6 @@ export const addGoalToUserGoalCollection = (
   goalMilestones,
   datesPicked,
 ) => {
-  console.log('beginning of fucntiuon ' + datesPicked);
   //create a document with auto generated ID and add title, description and milestones.
   usersCollection
     .doc(userId)

@@ -29,8 +29,7 @@ function AddGoalScreen({route, navigation}) {
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
-    // console.log(milestones);
-    // console.log(datesArray);
+    console.log(category);
     addGoalToUserGoalCollection(
       auth().currentUser.uid,
       title,
