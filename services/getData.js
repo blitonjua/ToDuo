@@ -26,7 +26,6 @@ export async function getGoalData(uid) {
     });
   return goalData;
 }
-
 export async function getMilestonesAsObjects(uid, goalId) {
   let milestoneList = [];
   await db

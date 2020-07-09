@@ -15,8 +15,9 @@ import {FlatList} from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 //the form to add a goal and handles creating the goal.
-function AddGoalScreen({navigation}) {
+function AddGoalScreen({route, navigation}) {
   //hooks for goal creation
+  const category = route.params.category;
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -24,14 +25,19 @@ function AddGoalScreen({navigation}) {
   const [milestones, setMilestones] = useState([]);
   const [milestoneText, setMilestoneText] = useState('');
   const [datePicked, setDatePicked] = useState([]);
+  const [datesArray, setDateArray] = useState([]);
+
   //creates a goal and adds it to the database
   function addGoalHandler() {
-    console.log(milestones);
+    // console.log(milestones);
+    // console.log(datesArray);
     addGoalToUserGoalCollection(
       auth().currentUser.uid,
       title,
       description,
+      category,
       milestones,
+      datesArray,
     );
     setSubmitted(true);
   }
@@ -48,7 +54,8 @@ function AddGoalScreen({navigation}) {
 
   //add a milestone to array
   function addMilestone(enterText, date) {
-    setMilestones(milestones.concat([[enterText], [date]]));
+    setMilestones(milestones.concat([enterText]));
+    setDateArray(datesArray.concat([date]));
     console.log(milestones);
   }
 

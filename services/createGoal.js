@@ -9,9 +9,11 @@ export const addGoalToUserGoalCollection = (
   userId,
   goalTitle,
   goalDescription,
-  goalMilestones,
   goalCategory,
+  goalMilestones,
+  datesPicked,
 ) => {
+  console.log('beginning of fucntiuon ' + datesPicked);
   //create a document with auto generated ID and add title, description and milestones.
   usersCollection
     .doc(userId)
@@ -29,9 +31,11 @@ export const addGoalToUserGoalCollection = (
         .collection('goals')
         .doc(docRef.id)
         .update({goalId: docRef.id});
-
-      console.log(goalMilestones);
+      console.log('in doc ' + datesPicked);
       for (let i = 0; i < goalMilestones.length; i++) {
+        let currentMilestone = goalMilestones[i];
+        let currentDeadline = datesPicked[i];
+        console.log('dates:' + currentDeadline);
         usersCollection
           .doc(userId)
           .collection('goals')
@@ -39,9 +43,12 @@ export const addGoalToUserGoalCollection = (
           .collection('milestones')
           .doc(goalMilestones[i])
           .set({
-            milestoneText: goalMilestones[i],
+            milestoneText: currentMilestone,
             milestoneStatus: false,
-            milestoneDeadline: goalMilestones[1],
+            milestoneMonth: currentDeadline[0],
+            milestoneDay: currentDeadline[1],
+            milestoneFullYear: currentDeadline[2],
+            milestoneDeadlineValue: currentDeadline[3],
           });
       }
 
