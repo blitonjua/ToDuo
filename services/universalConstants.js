@@ -22,3 +22,12 @@ export const categories = [
         title: 'Projects',
     },
 ];
+
+export const status = {
+    matching: 1,
+    planning: 2,
+    inProgress: 3,
+    goalListDisplayable: 4,
+    completed: 5,
+    archived: 6,
+}

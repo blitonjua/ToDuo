@@ -9,6 +9,7 @@ import {
 //firebase
 import auth from '@react-native-firebase/auth';
 import {getGoalData} from '../../../services/getData';
+import {getDisplayableGoals} from '../../../services/getGoals';
 //styles
 import {appStyles, devFlatListStyles} from '../../../assets/styles/styles';
 import {getMilestonesAsObjects} from '../../../services/getData';
@@ -20,6 +21,7 @@ function GoalsListScreen({navigation}) {
   const [milestones, setMilestones] = useState([]);
 
   //retrieve goals from Firebase
+  /*
   if (auth().currentUser) {
     let uid = auth().currentUser.uid;
 
@@ -33,7 +35,13 @@ function GoalsListScreen({navigation}) {
       });
     }
     setData();
+  //*/
+  async function getGoals() {
+    let goals;
+    goals = await getDisplayableGoals();
+    setGoalData(goals);
   }
+  getGoals();
 
   function gotoIndividualGoal(item) {
     navigation.navigate('individualGoalDisplay', {goal: item});

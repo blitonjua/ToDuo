@@ -5,10 +5,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
+//firebase
 import auth from '@react-native-firebase/auth';
+//styles
 import { profileStyles } from '../../../assets/styles/styles';
-
 const styles = profileStyles;
 
 
@@ -18,8 +18,14 @@ function ProfileScreen({ navigation }) {
     auth().signOut();
   };
 
+  //navigates to the settings
   function gotoSettings() {
-    navigation.navigate("Settings");
+    navigation.navigate("settingsScreen");
+  }
+
+  //navigates to the past goals
+  function gotoPastGoals() {
+    navigation.navigate("pastGoalsScreen");
   }
 
   return (
@@ -53,6 +59,12 @@ function ProfileScreen({ navigation }) {
           </Text>
         </View>
       
+        <TouchableOpacity
+          onPress={() => gotoPastGoals()}>
+          <Text>
+            See past goals
+          </Text>
+        </TouchableOpacity>
         {/* Settings button */}
         <TouchableOpacity 
           onPress={() => gotoSettings()}
