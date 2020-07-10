@@ -10,7 +10,7 @@ import {
 
 //firebase
 import auth from '@react-native-firebase/auth';
-import {addGoalToUserGoalCollection} from '../../../services/createGoal';
+import {addGoalToUserGoalCollection} from '../../../services/setGoals';
 import {FlatList} from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -29,14 +29,13 @@ function AddGoalScreen({route, navigation}) {
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
-    console.log(category);
+    console.log(datePicked);
     addGoalToUserGoalCollection(
-      auth().currentUser.uid,
       title,
       description,
-      category,
       milestones,
       datesArray,
+      category,
     );
     setSubmitted(true);
   }
@@ -58,8 +57,9 @@ function AddGoalScreen({route, navigation}) {
     console.log(milestones);
   }
 
-  function onDataSelected(event, selectedDate) {
+  function onDateSelected(event, selectedDate) {
     const currentDate = selectedDate || datePicked;
+    console.log('hi u r on date selected');
     setDatePicked([
       [currentDate.getMonth() + 1],
       [currentDate.getDate()],
@@ -111,13 +111,17 @@ function AddGoalScreen({route, navigation}) {
             {milestoneText !== '' && (
               <DateTimePicker
                 placeholder="Choose a deadline"
-                testID="dateTimePicker"
-                value={new Date(1598051730000)}
-                mode={'date'}
-                is24Hour={true}
-                display="display"
-                format="DD/MM/YYYY"
-                onChange={onDataSelected}
+                // testID="dateTimePicker"
+                value={new Date()}
+                // mode="date"
+                // display="display"
+                onChange={(e, d) => {
+                  if (Platform.OS === 'ios') {
+                    onDateSelected(e, d);
+                  } else {
+                    onClose(d);
+                  }
+                }}
               />
             )}
             <Button
