@@ -61,10 +61,10 @@ function AddGoalScreen({route, navigation}) {
     const currentDate = selectedDate || datePicked;
     console.log('hi u r on date selected');
     setDatePicked([
-      [currentDate.getMonth() + 1],
-      [currentDate.getDate()],
-      [currentDate.getFullYear()],
-      [currentDate.valueOf()],
+      currentDate.getMonth() + 1,
+      currentDate.getDate(),
+      currentDate.getFullYear(),
+      currentDate.valueOf(),
     ]);
     console.log(currentDate);
   }
