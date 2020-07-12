@@ -42,37 +42,24 @@ function IndividualGoalScreen({route, navigation}) {
 
   async function getToDoListData() {
     let data = await getToDoList(uid, goal.goalId);
-    return data;
+    setToDoList(data);
   }
-
-  function setToDo() {
-    getToDoListData().then(function(items) {
-      setToDoList(items);
-    });
+  async function getMilestones() {
+    let data = await getMilestonesAsObjects(uid, goal.goalId);
+    setMilestones(data);
   }
-
-  //milestone list item renderer
+  getMilestones();
   function MilestoneListItem({item}) {
     return (
       <View style={styles.goalContainerTwo}>
         <Text style={styles.goalText}>{item.milestoneText}</Text>
-        <Text>{item.milestoneDeadline}</Text>
-        <Text>status{item.milestoneStatus}</Text>
+        <Text>
+          due: {item.milestoneMonth}/{item.milestoneDay}/
+          {item.milestoneFullYear}
+        </Text>
       </View>
     );
   }
-
-  async function getMilestones() {
-    let data = await getMilestonesAsObjects(uid, goal.goalId);
-    return data;
-  }
-  function getMilestoneData() {
-    getMilestones().then(function(val) {
-      setMilestones(val);
-    });
-  }
-  getMilestoneData();
-  setToDo();
   return (
     <SafeAreaView style={styles.safe}>
       {/* back button */}
@@ -94,49 +81,15 @@ function IndividualGoalScreen({route, navigation}) {
             keyExtractor={(item, index) => index.toString()}
           />
         </View>
-
-        {/* todo list */}
-        <View style={styles.main}>
-          <Text>To Do</Text>
-          <FlatList
-            data={toDoList}
-            renderItem={({item}) => (
-              //TODO: preferable to move this into a separate function
-              <View style={styles.toDoItem}>
-                <CircleCheckBox
-                  checked={false}
-                  onToggle={() => {
-                    let itemId = item.itemDescription;
-                    deleteItem(uid, goal.goalId, itemId);
-                  }}
-                  labelPosition={LABEL_POSITION.RIGHT}
-                  label={item.itemDescription}
-                />
-              </View>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
-          <View style={styles.toDoItem}>
-            <TextInput
-              placeholder="Add item to do list"
-              onChangeText={text => setToDoText(text)}
-              ref={input => {
-                this.textInput = input;
-              }}
-            />
-            <Button
-              title="+"
-              onPress={() => {
-                if (toDoText != '') {
-                  addToDo(auth().currentUser.uid, goal.goalId, toDoText);
-                  setToDoText('');
-                  this.textInput.clear();
-                }
-              }}
-            />
-          </View>
-        </View>
       </View>
+
+      {/* toDo list button */}
+      <Button
+        title="to-do list"
+        onPress={() => {
+          navigation.navigate('toDoListScreen', {goal: goal});
+        }}
+      />
 
       {/* messages button */}
       <Button title="msg" onPress={() => gotoMessage()} />

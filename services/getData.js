@@ -40,7 +40,10 @@ export async function getMilestonesAsObjects(uid, goalId) {
         let dataObject = {
           milestoneText: docData.milestoneText,
           milestoneStatus: docData.milestoneStatus,
-          milestoneDeadline: docData.milestoneDeadline,
+          milestoneDeadlineValue: docData.milestoneDeadlineValue,
+          milestoneMonth: docData.milestoneMonth,
+          milestoneDay: docData.milestoneDay,
+          milestoneFullYear: docData.milestoneFullYear,
         };
         milestoneList.push(dataObject);
       });
