@@ -26,6 +26,7 @@ function ToDoListSceen({route, navigation}) {
   getToDoListData();
   return (
     <SafeAreaView>
+      <Button title="<-" onPress={() => navigation.goBack()} />
       {/* todo list */}
       <View style={styles.main}>
         <Text>To Do</Text>
