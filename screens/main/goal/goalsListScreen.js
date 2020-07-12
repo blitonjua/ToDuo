@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -41,7 +41,10 @@ function GoalsListScreen({navigation}) {
     goals = await getDisplayableGoals();
     setGoalData(goals);
   }
-  getGoals();
+
+  useEffect(() => {
+    getGoals();
+  });
 
   function gotoIndividualGoal(item) {
     navigation.navigate('individualGoalDisplay', {goal: item});
