@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   SafeAreaView,
   FlatList,
@@ -17,6 +17,7 @@ import { updateStatus } from '../../../services/setGoals';
 import { status } from '../../../services/universalConstants';
 //styles
 import { individualGoalStyles } from '../../../assets/styles/styles';
+import { UserContext } from '../../../services/userContext';
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
@@ -24,12 +25,13 @@ function IndividualGoalScreen({ route, navigation }) {
   const { goal } = route.params;
   const [toDoList, setToDoList] = useState([]);
   const [toDoText, setToDoText] = useState('');
-  let uid = auth().currentUser.uid;
+  // let user = auth().currentUser.uid;
+  const { user, setUser } = useContext(UserContext)
 
   //updates the status of the goal and goes to the done screen
   function goalDone(status) {
-    updateStatus(goal.goalId, status);
-    navigation.navigate('doneScreen', { status: status})
+    updateStatus(user ,goal.goalId, status);
+    navigation.navigate('doneScreen', { status: status })
   }
 
   function gotoMessage() {
@@ -37,7 +39,7 @@ function IndividualGoalScreen({ route, navigation }) {
   }
 
   async function getToDoListData() {
-    let data = await getToDoList(uid, goal.goalId);
+    let data = await getToDoList(user, goal.goalId);
     return data;
   }
 
@@ -96,7 +98,7 @@ function IndividualGoalScreen({ route, navigation }) {
                   checked={false}
                   onToggle={() => {
                     let itemId = item.itemDescription;
-                    deleteItem(uid, goal.goalId, itemId);
+                    deleteItem(user, goal.goalId, itemId);
                   }}
                   labelPosition={LABEL_POSITION.RIGHT}
                   label={item.itemDescription}
