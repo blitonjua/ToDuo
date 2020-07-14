@@ -14,17 +14,18 @@ var goalId = '',
 var waitingRoom;
 
 //creates a goal and adds it to the user's goal collection
-export const addGoalToUserGoalCollection = (
+export function addGoalToUserGoalCollection(
   user,
   goalTitle,
   goalDescription,
   goalMilestones,
   datesPicked,
   goalCategory,
-) => {
+) {
   //create a document with auto generated ID and add title, description and milestones.
   setCategory(goalCategory);
-  user
+  setConsts(user);
+  userDoc
     .collection('goals')
     .add({
       goalTitle: goalTitle,
@@ -36,7 +37,7 @@ export const addGoalToUserGoalCollection = (
     })
     .then(docRef => {
       //add the goal id to current user
-      user
+      userDoc
         .collection('goals')
         .doc(docRef.id)
         .update({goalId: docRef.id});
@@ -63,15 +64,15 @@ export const addGoalToUserGoalCollection = (
       //match the goals
       matchGoals(docRef.id, goalCategory);
     });
-};
+}
 
 //sets the category for the goal
-const setCategory = category => {
+function setCategory(category) {
   waitingRoom = db
     .collection('WaitingRooms')
     .doc(category)
     .collection('goals');
-};
+}
 
 //sets the constatns for this file
 function setConsts(user) {

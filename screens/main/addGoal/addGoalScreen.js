@@ -8,11 +8,10 @@ import {
   Button,
 } from 'react-native';
 
-//firebase
-import auth from '@react-native-firebase/auth';
 import {addGoalToUserGoalCollection} from '../../../services/setGoals';
 import {FlatList} from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {UserContext} from '../../../services/userContext';
 
 //the form to add a goal and handles creating the goal.
 function AddGoalScreen({route, navigation}) {
@@ -44,10 +43,12 @@ function AddGoalScreen({route, navigation}) {
     );
     setSubmitted(true);
   }
+
   //sets title
   function titleHandler(enteredTitle) {
     setTitle(enteredTitle);
   }
+
   //sets description
   function descriptionHandler(enteredDescription) {
     setDescription(enteredDescription);
@@ -153,7 +154,7 @@ function AddGoalScreen({route, navigation}) {
       ) : (
         //renders on successfully adding goal
         <View>
-          <Text>Goal Added! This will be some confirmation text.</Text>
+          <Text>Goal Added! You can access your goal in the Goal tab.</Text>
 
           <TouchableOpacity onPress={() => navigation.navigate('plusScreen')}>
             <Text>Go Back</Text>
