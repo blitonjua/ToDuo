@@ -119,6 +119,7 @@ function AddGoalScreen({route, navigation}) {
                 // display="display"
                 onChange={(e, d) => {
                   onDateSelected(e, d);
+                  setShowDateTimePicker(false);
                   // if (Platform.OS === 'ios') {
                   //   onDateSelected(e, d);
                   // } else {
