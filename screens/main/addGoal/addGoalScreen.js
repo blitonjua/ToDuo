@@ -27,6 +27,8 @@ function AddGoalScreen({route, navigation}) {
   const [datePicked, setDatePicked] = useState([]);
   const [datesArray, setDateArray] = useState([]);
   const [defaultDate, setDefaultDate] = useState(new Date());
+
+  const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   //creates a goal and adds it to the database
   function addGoalHandler() {
     console.log(datePicked);
@@ -104,7 +106,11 @@ function AddGoalScreen({route, navigation}) {
                 this.myTextInput = input;
               }}
             />
-            {milestoneText !== '' && (
+            <Button
+              title="Show Calendar"
+              onPress={() => setShowDateTimePicker(!showDateTimePicker)}
+            />
+            {showDateTimePicker && (
               <DateTimePicker
                 placeholder="Choose a deadline"
                 testID="dateTimePicker"
@@ -126,6 +132,7 @@ function AddGoalScreen({route, navigation}) {
               onPress={() => {
                 addMilestone(milestoneText, datePicked);
                 setMilestoneText('');
+                setShowDateTimePicker(false);
                 this.myTextInput.clear();
               }}
             />
