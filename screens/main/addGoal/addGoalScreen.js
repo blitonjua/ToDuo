@@ -26,7 +26,7 @@ function AddGoalScreen({route, navigation}) {
   const [milestoneText, setMilestoneText] = useState('');
   const [datePicked, setDatePicked] = useState([]);
   const [datesArray, setDateArray] = useState([]);
-
+  const [defaultDate, setDefaultDate] = useState(new Date());
   //creates a goal and adds it to the database
   function addGoalHandler() {
     console.log(datePicked);
@@ -39,33 +39,29 @@ function AddGoalScreen({route, navigation}) {
     );
     setSubmitted(true);
   }
-
   //sets title
   function titleHandler(enteredTitle) {
     setTitle(enteredTitle);
   }
-
   //sets description
   function descriptionHandler(enteredDescription) {
     setDescription(enteredDescription);
   }
-
   //add a milestone to array
   function addMilestone(enterText, date) {
     setMilestones(milestones.concat([enterText]));
     setDateArray(datesArray.concat([date]));
     console.log(milestones);
   }
-
   function onDateSelected(event, selectedDate) {
     const currentDate = selectedDate || datePicked;
-    console.log('hi u r on date selected');
     setDatePicked([
       currentDate.getMonth() + 1,
       currentDate.getDate(),
       currentDate.getFullYear(),
       currentDate.valueOf(),
     ]);
+    setDefaultDate(selectedDate);
     console.log(currentDate);
   }
   return (
@@ -111,16 +107,17 @@ function AddGoalScreen({route, navigation}) {
             {milestoneText !== '' && (
               <DateTimePicker
                 placeholder="Choose a deadline"
-                // testID="dateTimePicker"
-                value={new Date()}
-                // mode="date"
+                testID="dateTimePicker"
+                value={defaultDate}
+                mode="date"
                 // display="display"
                 onChange={(e, d) => {
-                  if (Platform.OS === 'ios') {
-                    onDateSelected(e, d);
-                  } else {
-                    onClose(d);
-                  }
+                  onDateSelected(e, d);
+                  // if (Platform.OS === 'ios') {
+                  //   onDateSelected(e, d);
+                  // } else {
+                  //   onClose(d);
+                  // }
                 }}
               />
             )}
