@@ -27,12 +27,15 @@ function AddGoalScreen({route, navigation}) {
   const [datePicked, setDatePicked] = useState([]);
   const [datesArray, setDateArray] = useState([]);
   const [defaultDate, setDefaultDate] = useState(new Date());
-
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
+
+  const {user, setUser} = useContext(UserContext);
+
   //creates a goal and adds it to the database
   function addGoalHandler() {
     console.log(datePicked);
     addGoalToUserGoalCollection(
+      user,
       title,
       description,
       milestones,

@@ -15,6 +15,7 @@ var waitingRoom;
 
 //creates a goal and adds it to the user's goal collection
 export const addGoalToUserGoalCollection = (
+  user,
   goalTitle,
   goalDescription,
   goalMilestones,
