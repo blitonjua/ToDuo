@@ -3,18 +3,18 @@ import {status} from './universalConstants';
 //firebase
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-// import { matchGoals } from './matchGoals';
 
-const userId = auth().currentUser.uid;
 const db = firestore();
 const usersCollection = db.collection('Users');
-const user = usersCollection.doc(userId);
+var userId = '';
+var userDoc = '';
 var goalId = '',
   otherGoal = '',
   otherUser = '';
 var waitingRoom;
 
 //creates a goal and adds it to the user's goal collection
+<<<<<<< HEAD
 export const addGoalToUserGoalCollection = (
   goalTitle,
   goalDescription,
@@ -72,10 +72,62 @@ const setCategory = category => {
     .doc(category)
     .collection('goals');
 };
+=======
+export function addGoalToUserGoalCollection(
+    user,
+    goalTitle,
+    goalDescription,
+    goalMilestones,
+    goalCategory,
+) {
+    //create a document with auto generated ID and add title, description and milestones.
+    setCategory(goalCategory);
+    setConsts(user);
+    userDoc
+        .collection('goals')
+        .add({
+            goalTitle: goalTitle,
+            goalDescription: goalDescription,
+            goalMilestones: goalMilestones,
+            userId: userId,
+            status: status.matching,
+            category: goalCategory,
+        })
+        .then(docRef => {
+            //add the goal id to current user
+            userDoc
+                .collection('goals')
+                .doc(docRef.id)
+                .update({ goalId: docRef.id });
+
+            //match the goals
+            matchGoals(docRef.id, goalCategory);
+        });
+};
+
+//sets the category for the goal
+function setCategory(category) {
+    waitingRoom = db
+        .collection('WaitingRooms')
+        .doc(category)
+        .collection('goals');
+}
+>>>>>>> master
+
+//sets the constatns for this file
+function setConsts(user) {
+    userId = auth().currentUser.uid;
+    userDoc = usersCollection.doc(userId);
+}
 
 //matches the goals of two different users in the same waitingRoom
+<<<<<<< HEAD
 const matchGoals = id => {
   goalId = id;
+=======
+function matchGoals(id) {
+    goalId = id;
+>>>>>>> master
 
   //add goal to waiting room
   addGoalToWaitingRoom();
@@ -138,6 +190,7 @@ async function matchUsers(compare) {
 
 //updates the fields of both goals
 async function updateCollection(chatId) {
+<<<<<<< HEAD
   //updating this user's goal
   await user
     .collection('goals')
@@ -170,6 +223,39 @@ async function updateCollection(chatId) {
     .collection('ChatRooms')
     .doc(chatId)
     .delete();
+=======
+    //updating this user's goal
+    await userDoc
+        .collection('goals')
+        .doc(goalId)
+        .update({
+            accountaBuddyId: otherUser,
+            matchedGoalId: otherGoal,
+            chatRoomId: chatId,
+            status: status.inProgress, //TODO: once stage 2 implemented, change to status.planning
+        });
+
+    //updating matched user's goal
+    await usersCollection
+        .doc(otherUser)
+        .collection('goals')
+        .doc(otherGoal)
+        .update({
+            accountaBuddyId: userId,
+            matchedGoalId: goalId,
+            chatRoomId: chatId,
+            status: status.inProgress,//TODO: once stage 2 implemented, change to status.planning
+        })
+
+    //remove goals from waiting room
+    removeGoals(goalId);
+    removeGoals(otherGoal);
+
+    //see if this deletes extra chatrooms, it does
+    await db.collection('ChatRooms')
+        .doc(chatId)
+        .delete();
+>>>>>>> master
 }
 
 //removes specified goal from the waiting room
@@ -178,6 +264,7 @@ function removeGoals(goal) {
 }
 
 //updates the status of the provided goal to the provided status
+<<<<<<< HEAD
 export function updateStatus(goalID, status) {
   user
     .collection('goals')
@@ -186,3 +273,14 @@ export function updateStatus(goalID, status) {
       status: status,
     });
 }
+=======
+export function updateStatus(user, goalID, status) {
+    setConsts(user)
+    userDoc
+        .collection('goals')
+        .doc(goalID)
+        .update({
+            status: status
+        });
+}
+>>>>>>> master

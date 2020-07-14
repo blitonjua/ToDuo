@@ -59,7 +59,7 @@ function LoginScreen({ navigation }) {
             }}>
             <Text style={styles.buttonText}>
               LOG IN
-                        </Text>
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.link}
@@ -69,7 +69,7 @@ function LoginScreen({ navigation }) {
             }}>
             <Text style={styles.signupLinkText}>
               SIGN UP
-                        </Text>
+            </Text>
           </TouchableOpacity>
 
         </View>

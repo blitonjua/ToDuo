@@ -23,6 +23,7 @@ export const categories = [
     },
 ];
 
+//status that goals can be
 export const status = {
     matching: 1,
     planning: 2,

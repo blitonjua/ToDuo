@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, {useState} from 'react';
+=======
+import React, { useState, useContext } from 'react';
+>>>>>>> master
 import {
   SafeAreaView,
   FlatList,
@@ -16,9 +20,14 @@ import {updateStatus} from '../../../services/setGoals';
 //constants
 import {status} from '../../../services/universalConstants';
 //styles
+<<<<<<< HEAD
 import {individualGoalStyles} from '../../../assets/styles/styles';
 import {getMilestonesAsObjects} from '../../../services/getData';
 
+=======
+import { individualGoalStyles } from '../../../assets/styles/styles';
+import { UserContext } from '../../../services/userContext';
+>>>>>>> master
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
@@ -26,6 +35,7 @@ function IndividualGoalScreen({route, navigation}) {
   const {goal} = route.params;
   const [toDoList, setToDoList] = useState([]);
   const [toDoText, setToDoText] = useState('');
+<<<<<<< HEAD
   const [milestones, setMilestones] = useState([]);
 
   let uid = auth().currentUser.uid;
@@ -34,6 +44,15 @@ function IndividualGoalScreen({route, navigation}) {
   function goalDone(status) {
     updateStatus(goal.goalId, status);
     navigation.navigate('doneScreen', {status: status});
+=======
+  // let user = auth().currentUser.uid;
+  const { user, setUser } = useContext(UserContext)
+
+  //updates the status of the goal and goes to the done screen
+  function goalDone(status) {
+    updateStatus(user ,goal.goalId, status);
+    navigation.navigate('doneScreen', { status: status })
+>>>>>>> master
   }
 
   function gotoMessage() {
@@ -41,8 +60,13 @@ function IndividualGoalScreen({route, navigation}) {
   }
 
   async function getToDoListData() {
+<<<<<<< HEAD
     let data = await getToDoList(uid, goal.goalId);
     setToDoList(data);
+=======
+    let data = await getToDoList(user, goal.goalId);
+    return data;
+>>>>>>> master
   }
   async function getMilestones() {
     let data = await getMilestonesAsObjects(uid, goal.goalId);
@@ -81,6 +105,51 @@ function IndividualGoalScreen({route, navigation}) {
             keyExtractor={(item, index) => index.toString()}
           />
         </View>
+<<<<<<< HEAD
+=======
+
+        {/* todo list */}
+        <View style={styles.main}>
+          <Text>To Do</Text>
+          <FlatList
+            data={toDoList}
+            renderItem={({ item }) =>
+              //TODO: preferable to move this into a separate function
+              <View style={styles.toDoItem}>
+                <CircleCheckBox
+                  checked={false}
+                  onToggle={() => {
+                    let itemId = item.itemDescription;
+                    deleteItem(user, goal.goalId, itemId);
+                  }}
+                  labelPosition={LABEL_POSITION.RIGHT}
+                  label={item.itemDescription}
+                />
+              </View>
+            }
+            keyExtractor={(item, index) => index.toString()}
+          />
+          <View style={styles.toDoItem}>
+            <TextInput
+              placeholder="Add item to do list"
+              onChangeText={text => setToDoText(text)}
+              ref={input => {
+                this.textInput = input;
+              }}
+            />
+            <Button
+              title="+"
+              onPress={() => {
+                if (toDoText != '') {
+                  addToDo(auth().currentUser.uid, goal.goalId, toDoText);
+                  setToDoText('');
+                  this.textInput.clear();
+                }
+              }}
+            />
+          </View>
+        </View>
+>>>>>>> master
       </View>
 
       {/* toDo list button */}

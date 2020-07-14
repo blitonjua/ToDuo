@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Text,
   SafeAreaView,
@@ -7,15 +7,20 @@ import {
 } from 'react-native';
 //firebase
 import auth from '@react-native-firebase/auth';
+import { UserContext } from '../../../services/userContext';
 //styles
 import { profileStyles } from '../../../assets/styles/styles';
 const styles = profileStyles;
 
 
 function ProfileScreen({ navigation }) {
+  //current user state
+  const { user, setUser } = useContext(UserContext);
+
   //signs the user out and redirects to login screen
   const signOut = () => {
     auth().signOut();
+    setUser(null);
   };
 
   //navigates to the settings
@@ -33,7 +38,7 @@ function ProfileScreen({ navigation }) {
       <View style={styles.main}>
         {/* Profile picture */}
         <View style={styles.profilePic} />
-        
+
         {/* name */}
         <Text style={styles.name}>
           Firstname Lastname
@@ -43,7 +48,7 @@ function ProfileScreen({ navigation }) {
           {/* User ID */}
           <View style={styles.row}>
             <Text style={styles.detailsTitle}>
-              User ID: 
+              User ID:
             </Text>
             <Text style={styles.detailsBody}>
               *User ID here*
@@ -58,7 +63,7 @@ function ProfileScreen({ navigation }) {
             {'\t'}This will be where the main description of the user will be.
           </Text>
         </View>
-      
+
         <TouchableOpacity
           onPress={() => gotoPastGoals()}>
           <Text>
@@ -66,7 +71,7 @@ function ProfileScreen({ navigation }) {
           </Text>
         </TouchableOpacity>
         {/* Settings button */}
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={() => gotoSettings()}
           style={styles.settings}>
           <Text style={styles.buttonText}>
