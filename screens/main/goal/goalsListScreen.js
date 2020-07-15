@@ -64,7 +64,7 @@ function GoalsListScreen({navigation}) {
               </View>
             </TouchableOpacity>
           )}
-          keyExtractor={item => item.goalId}
+          keyExtractor={item => item.title}
         />
       </View>
     </SafeAreaView>
