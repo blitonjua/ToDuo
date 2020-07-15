@@ -12,7 +12,7 @@ import CircleCheckBox, { LABEL_POSITION } from 'react-native-circle-checkbox';
 //firebase
 import auth from '@react-native-firebase/auth';
 import { addToDo, getToDoList, deleteItem } from '../../../services/toDoList';
-import { updateStatus } from '../../../services/setGoals';
+import { updateStatus, bailPartnership } from '../../../services/setGoals';
 //constants
 import { status } from '../../../services/universalConstants';
 //styles
@@ -57,6 +57,12 @@ function IndividualGoalScreen({ route, navigation }) {
         <Text>Due Date</Text>
       </View>
     )
+  }
+
+  //bails the user out of the partnership
+  function bail() {
+    navigation.goBack();
+    bailPartnership(user, goal);
   }
 
   setToDo();
@@ -145,6 +151,12 @@ function IndividualGoalScreen({ route, navigation }) {
       <Button
         title='complete'
         onPress={() => goalDone(status.completed)}
+      />
+
+      {/* accountabuddy bail */}
+      <Button
+        title='bail buddy'
+        onPress={() => bail()}
       />
     </SafeAreaView>
   );

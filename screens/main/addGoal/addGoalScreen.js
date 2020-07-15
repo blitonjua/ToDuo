@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Text,
   SafeAreaView,
@@ -9,11 +9,11 @@ import {
 } from 'react-native';
 
 //firebase
-import {addGoalToUserGoalCollection} from '../../../services/setGoals';
-import {UserContext} from '../../../services/userContext';
+import { addGoalToUserGoalCollection } from '../../../services/setGoals';
+import { UserContext } from '../../../services/userContext';
 
 //the form to add a goal and handles creating the goal.
-function AddGoalScreen({route, navigation}) {
+function AddGoalScreen({ route, navigation }) {
   //hooks for goal creation
   const category = route.params.category;
   const [title, setTitle] = useState('');
@@ -22,7 +22,7 @@ function AddGoalScreen({route, navigation}) {
   const [milestone2, setMilestone2] = useState('');
   const [milestone3, setMilestone3] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const {user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
@@ -70,7 +70,7 @@ function AddGoalScreen({route, navigation}) {
           </TouchableOpacity>
 
           {/* title */}
-          <View style={{borderWidth: 1}}>
+          <View style={{ borderWidth: 1 }}>
             <TextInput
               placeholder="title"
               onChangeText={titleHandler}
@@ -79,7 +79,7 @@ function AddGoalScreen({route, navigation}) {
           </View>
 
           {/* description */}
-          <View style={{borderWidth: 1}}>
+          <View style={{ borderWidth: 1 }}>
             <TextInput
               placeholder="description"
               onChangeText={descriptionHandler}
@@ -88,7 +88,7 @@ function AddGoalScreen({route, navigation}) {
           </View>
 
           {/* milestone1 */}
-          <View style={{borderWidth: 1}}>
+          <View style={{ borderWidth: 1 }}>
             <TextInput
               placeholder="milestone1"
               onChangeText={milestone1Handler}
@@ -97,7 +97,7 @@ function AddGoalScreen({route, navigation}) {
           </View>
 
           {/* milestone2 */}
-          <View style={{borderWidth: 1}}>
+          <View style={{ borderWidth: 1 }}>
             <TextInput
               placeholder="milestone2"
               onChangeText={milestone2Handler}
@@ -106,7 +106,7 @@ function AddGoalScreen({route, navigation}) {
           </View>
 
           {/* milestone3 */}
-          <View style={{borderWidth: 1}}>
+          <View style={{ borderWidth: 1 }}>
             <TextInput
               placeholder="milestone3.0"
               onChangeText={milestone3Handler}
@@ -118,15 +118,15 @@ function AddGoalScreen({route, navigation}) {
           <Button title="+" onPress={() => addGoalHandler()} />
         </View>
       ) : (
-        //renders on successfully adding goal
-        <View>
-          <Text>Goal Added! You can access your goal in the Goal tab.</Text>
+          //renders on successfully adding goal
+          <View>
+            <Text>Goal Added! You can access your goal in the Goal tab.</Text>
 
-          <TouchableOpacity onPress={() => navigation.navigate('plusScreen')}>
-            <Text>Go Back</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+            <TouchableOpacity onPress={() => navigation.navigate('plusScreen')}>
+              <Text>Go Back</Text>
+            </TouchableOpacity>
+          </View>
+        )}
     </SafeAreaView>
   );
 }

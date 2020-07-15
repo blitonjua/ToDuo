@@ -1,5 +1,5 @@
 //constants
-import {status} from './universalConstants';
+import { status } from './universalConstants';
 //firebase
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
@@ -23,7 +23,7 @@ export function addGoalToUserGoalCollection(
 ) {
   //create a document with auto generated ID and add title, description and milestones.
   setCategory(goalCategory);
-  setConsts(user);
+  setUserConsts(user);
   userDoc
     .collection('goals')
     .add({
@@ -39,7 +39,7 @@ export function addGoalToUserGoalCollection(
       userDoc
         .collection('goals')
         .doc(docRef.id)
-        .update({goalId: docRef.id});
+        .update({ goalId: docRef.id });
 
       //match the goals
       matchGoals(docRef.id, goalCategory);
@@ -55,7 +55,7 @@ function setCategory(category) {
 }
 
 //sets the constatns for this file
-function setConsts(user) {
+function setUserConsts(user) {
   userId = auth().currentUser.uid;
   userDoc = usersCollection.doc(userId);
 }
@@ -85,6 +85,8 @@ async function matchUsersUpdateCollection() {
   //find match
   let match = await matchUsers('<');
   if (match.length == 0) match = await matchUsers('>');
+
+  console.log('MATCH: ', match)
 
   //if match found
   if (match.length > 0) {
@@ -126,6 +128,9 @@ async function matchUsers(compare) {
 //updates the fields of both goals
 async function updateCollection(chatId) {
   //updating this user's goal
+  console.log('other user: ', otherUser)
+  console.log('other goal: ', otherGoal)
+
   await userDoc
     .collection('goals')
     .doc(goalId)
@@ -148,6 +153,7 @@ async function updateCollection(chatId) {
       status: status.inProgress, //TODO: once stage 2 implemented, change to status.planning
     });
 
+  console.log('ready to remove')
   //remove goals from waiting room
   removeGoals(goalId);
   removeGoals(otherGoal);
@@ -166,11 +172,33 @@ function removeGoals(goal) {
 
 //updates the status of the provided goal to the provided status
 export function updateStatus(user, goalID, status) {
-  setConsts(user);
+  setUserConsts(user);
   userDoc
     .collection('goals')
     .doc(goalID)
     .update({
       status: status,
     });
+}
+
+//allows the user to leave the partnership with an accountabuddy
+export function bailPartnership(user, goal) {
+  setUserConsts(user);
+  //resetting goal's fields
+  userDoc
+    .collection('goals')
+    .doc(goal.goalId)
+    .update({
+      status: status.matching,
+      accountaBuddyId: '',
+      matchedGoalId: '',
+      chatRoomId: '',
+    })
+  setCategory(goal.category);
+  //match to another user
+  console.log('USER: ', user)
+  console.log('GOAL: ', goal.category)
+  // console.log('WAITING: ', waitingRoom)
+
+  matchGoals(goal.goalId)
 }

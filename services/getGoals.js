@@ -52,6 +52,7 @@ async function getGoalData(uid) {
           goalId: docData.goalId,
           chatRoomId: docData.chatRoomId,
           status: docData.status,
+          category: docData.category,
         };
         //add the info to goal data
         goalData.push(dataObject);
