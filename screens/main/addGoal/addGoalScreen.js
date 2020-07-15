@@ -70,9 +70,9 @@ function AddGoalScreen({route, navigation}) {
     ]);
     setDefaultDate(selectedDate);
     console.log(currentDate);
-    if (Platform.OS === 'android') {
-      setShowDateTimePicker(false);
-    }
+    // if (Platform.OS === 'android') {
+    //   setShowDateTimePicker(false);
+    // }
   }
   return (
     <SafeAreaView>
@@ -103,7 +103,14 @@ function AddGoalScreen({route, navigation}) {
           {/* Display milestones added */}
           <FlatList
             data={milestones}
-            renderItem={({item}) => <Text>{item}</Text>}
+            renderItem={({item}) => (
+              <View>
+                <Text>{item}</Text>
+              </View>
+            )}
+            keyExtractor={item => {
+              item + 'x';
+            }}
           />
           {/* adding a new milestone */}
           <View style={{borderWidth: 1, backgroundColor: 'pink'}}>
@@ -124,20 +131,21 @@ function AddGoalScreen({route, navigation}) {
                 value={defaultDate}
                 mode="date"
                 onChange={(e, d) => {
-                  onDateSelected(e, d);
-                  if (Platform.OS != 'ios') {
-                    // setShowDateTimePicker(false);
-                    console.log('android');
+                  if (Platform.OS === 'android') {
+                    setShowDateTimePicker(false);
                   }
+                  onDateSelected(e, d);
                 }}
               />
             )}
             <Button
               title="Add milestone"
               onPress={() => {
+                if (Platform.OS === 'ios') {
+                  setShowDateTimePicker(false);
+                }
                 addMilestone(milestoneText, datePicked);
                 setMilestoneText('');
-                setShowDateTimePicker(false);
                 this.myTextInput.clear();
               }}
             />
