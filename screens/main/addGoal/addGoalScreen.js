@@ -6,6 +6,7 @@ import {
   TextInput,
   View,
   Button,
+  Platform,
 } from 'react-native';
 
 import {addGoalToUserGoalCollection} from '../../../services/setGoals';
@@ -69,6 +70,9 @@ function AddGoalScreen({route, navigation}) {
     ]);
     setDefaultDate(selectedDate);
     console.log(currentDate);
+    if (Platform.OS === 'android') {
+      setShowDateTimePicker(false);
+    }
   }
   return (
     <SafeAreaView>
@@ -112,28 +116,24 @@ function AddGoalScreen({route, navigation}) {
             />
             <Button
               title="Show Calendar"
-              onPress={() => setShowDateTimePicker(!showDateTimePicker)}
+              onPress={() => setShowDateTimePicker(true)}
             />
             {showDateTimePicker && (
               <DateTimePicker
-                placeholder="Choose a deadline"
                 testID="dateTimePicker"
                 value={defaultDate}
                 mode="date"
-                // display="display"
                 onChange={(e, d) => {
                   onDateSelected(e, d);
-                  setShowDateTimePicker(false);
-                  // if (Platform.OS === 'ios') {
-                  //   onDateSelected(e, d);
-                  // } else {
-                  //   onClose(d);
-                  // }
+                  if (Platform.OS != 'ios') {
+                    // setShowDateTimePicker(false);
+                    console.log('android');
+                  }
                 }}
               />
             )}
             <Button
-              title="+"
+              title="Add milestone"
               onPress={() => {
                 addMilestone(milestoneText, datePicked);
                 setMilestoneText('');

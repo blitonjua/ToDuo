@@ -15,6 +15,7 @@ var waitingRoom;
 
 //creates a goal and adds it to the user's goal collection
 export function addGoalToUserGoalCollection(
+  //make sure to add user
   user,
   goalTitle,
   goalDescription,
