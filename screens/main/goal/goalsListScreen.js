@@ -6,36 +6,16 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-//firebase
-import auth from '@react-native-firebase/auth';
-import {getGoalData} from '../../../services/getData';
+
 import {getDisplayableGoals} from '../../../services/getGoals';
 //styles
 import {appStyles, devFlatListStyles} from '../../../assets/styles/styles';
-import {getMilestonesAsObjects} from '../../../services/getData';
 const styles = appStyles;
 
 //Displays the list of goals that belong to the user and navigates to each goal when pressed
 function GoalsListScreen({navigation}) {
   const [goalData, setGoalData] = useState([]);
-  const [milestones, setMilestones] = useState([]);
 
-  //retrieve goals from Firebase
-  /*
-  if (auth().currentUser) {
-    let uid = auth().currentUser.uid;
-
-    async function getGoals() {
-      let data = await getGoalData(uid);
-      return data;
-    }
-    function setData() {
-      getGoals().then(function(val) {
-        setGoalData(val);
-      });
-    }
-    setData();
-  //*/
   async function getGoals() {
     let goals;
     goals = await getDisplayableGoals();
@@ -64,7 +44,7 @@ function GoalsListScreen({navigation}) {
               </View>
             </TouchableOpacity>
           )}
-          keyExtractor={item => item.title}
+          keyExtractor={item => item.goalId}
         />
       </View>
     </SafeAreaView>

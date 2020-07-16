@@ -9,8 +9,7 @@ import {
 
 //screens
 import {categories} from '../../../services/universalConstants';
-//firebase
-import {setCategory} from '../../../services/matchGoals';
+
 //styles
 import {appStyles, devFlatListStyles} from '../../../assets/styles/styles';
 const styles = appStyles;

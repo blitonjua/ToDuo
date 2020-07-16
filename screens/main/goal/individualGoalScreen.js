@@ -11,13 +11,12 @@ import {
 import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
 //firebase
 import auth from '@react-native-firebase/auth';
-import {addToDo, getToDoList, deleteItem} from '../../../services/toDoList';
 import {updateStatus} from '../../../services/setGoals';
 //constants
 import {status} from '../../../services/universalConstants';
 //styles
 import {individualGoalStyles} from '../../../assets/styles/styles';
-import {getMilestonesAsObjects} from '../../../services/getData';
+import {getMilestonesAsObjects} from '../../../services/getMilestoneData';
 
 import {UserContext} from '../../../services/userContext';
 const styles = individualGoalStyles;
