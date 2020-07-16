@@ -53,6 +53,7 @@ async function getGoalData(uid) {
           chatRoomId: docData.chatRoomId,
           status: docData.status,
           category: docData.category,
+          blacklist: docData.blacklist,
         };
         //add the info to goal data
         goalData.push(dataObject);

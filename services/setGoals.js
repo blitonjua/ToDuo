@@ -23,6 +23,10 @@ export function addGoalToUserGoalCollection(
 ) {
   //create a document with auto generated ID and add title, description and milestones.
   setCategory(goalCategory);
+  //creating the user's blacklist value
+  const blacklistedUser = {};
+  blacklistedUser[user] = true;
+
   setUserConsts(user);
   userDoc
     .collection('goals')
@@ -33,6 +37,7 @@ export function addGoalToUserGoalCollection(
       userId: userId,
       status: status.matching,
       category: goalCategory,
+      blacklist: blacklistedUser,
     })
     .then(docRef => {
       //add the goal id to current user
@@ -42,7 +47,7 @@ export function addGoalToUserGoalCollection(
         .update({ goalId: docRef.id });
 
       //match the goals
-      matchGoals(docRef.id, goalCategory);
+      matchGoals(docRef.id, blacklistedUser);
     });
 }
 
@@ -61,13 +66,13 @@ function setUserConsts(user) {
 }
 
 //matches the goals of two different users in the same waitingRoom
-function matchGoals(id) {
+function matchGoals(id, blacklist) {
   goalId = id;
 
   //add goal to waiting room
   addGoalToWaitingRoom();
   //match goals when goals from 2 different users are in a waiting room
-  matchUsersUpdateCollection();
+  matchUsersUpdateCollection(blacklist);
 }
 
 //adds goal to the waiting room
@@ -81,10 +86,9 @@ function addGoalToWaitingRoom() {
 }
 
 //matches users and updates the database with the match data
-async function matchUsersUpdateCollection() {
+async function matchUsersUpdateCollection(blacklist) {
   //find match
-  let match = await matchUsers('<');
-  if (match.length == 0) match = await matchUsers('>');
+  match = await matchUsers(blacklist);
 
   //if match found
   if (match.length > 0) {
@@ -104,20 +108,21 @@ async function matchUsersUpdateCollection() {
 }
 
 //finds another user to match to this goal
-async function matchUsers(compare) {
+async function matchUsers(blacklist) {
   var match = [];
   await waitingRoom
-    .where('userId', compare, userId)
-    .limit(1)
     .get()
     .then(snap => {
       snap.forEach(doc => {
         let docData = doc.data();
-        let dataObject = {
-          goalId: docData.goalId,
-          userId: docData.userId,
-        };
-        match.push(dataObject);
+        if (!(blacklist[docData.userId] == true)) {
+          true;
+          let dataObject = {
+            goalId: docData.goalId,
+            userId: docData.userId,
+          };
+          match.push(dataObject);
+        }          
       });
     });
   return match;
@@ -178,6 +183,8 @@ export function updateStatus(user, goalID, status) {
 //allows the user to leave the partnership with an accountabuddy
 export function bailPartnership(user, goal) {
   setUserConsts(user);
+  const blacklistedUser = { ...goal.blacklist };
+  blacklistedUser[goal.accountaBuddyId] = true;
   //resetting goal's fields
   userDoc
     .collection('goals')
@@ -187,8 +194,10 @@ export function bailPartnership(user, goal) {
       accountaBuddyId: '',
       matchedGoalId: '',
       chatRoomId: '',
+      // blacklist: goal.blacklist.concat([goal.accountaBuddyId]),
+      // blacklist: 
     })
   setCategory(goal.category);
   //match to another user
-  matchGoals(goal.goalId)
+  matchGoals(goal.goalId, blacklistedUser);
 }
