@@ -86,8 +86,6 @@ async function matchUsersUpdateCollection() {
   let match = await matchUsers('<');
   if (match.length == 0) match = await matchUsers('>');
 
-  console.log('MATCH: ', match)
-
   //if match found
   if (match.length > 0) {
     otherGoal = match[0].goalId;
@@ -128,9 +126,6 @@ async function matchUsers(compare) {
 //updates the fields of both goals
 async function updateCollection(chatId) {
   //updating this user's goal
-  console.log('other user: ', otherUser)
-  console.log('other goal: ', otherGoal)
-
   await userDoc
     .collection('goals')
     .doc(goalId)
@@ -153,7 +148,6 @@ async function updateCollection(chatId) {
       status: status.inProgress, //TODO: once stage 2 implemented, change to status.planning
     });
 
-  console.log('ready to remove')
   //remove goals from waiting room
   removeGoals(goalId);
   removeGoals(otherGoal);
@@ -196,9 +190,5 @@ export function bailPartnership(user, goal) {
     })
   setCategory(goal.category);
   //match to another user
-  console.log('USER: ', user)
-  console.log('GOAL: ', goal.category)
-  // console.log('WAITING: ', waitingRoom)
-
   matchGoals(goal.goalId)
 }
