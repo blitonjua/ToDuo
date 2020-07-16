@@ -183,6 +183,7 @@ export function updateStatus(user, goalID, status) {
 //allows the user to leave the partnership with an accountabuddy
 export function bailPartnership(user, goal) {
   setUserConsts(user);
+  //updating user's blacklist
   const blacklistedUser = { ...goal.blacklist };
   blacklistedUser[goal.accountaBuddyId] = true;
   //resetting goal's fields
@@ -194,8 +195,7 @@ export function bailPartnership(user, goal) {
       accountaBuddyId: '',
       matchedGoalId: '',
       chatRoomId: '',
-      // blacklist: goal.blacklist.concat([goal.accountaBuddyId]),
-      // blacklist: 
+      blacklist: goal.blacklist.concat([goal.accountaBuddyId]),
     })
   setCategory(goal.category);
   //match to another user
