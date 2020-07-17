@@ -4,6 +4,7 @@ const colors = {
     blue: '#42aaf5',
     red: '#e33232',
     white: '#ffffff',
+    mustard: '#FFDB58',
     //titles, text
     spinach: '#1a3d20',
     //background, highlights, secondary
