@@ -65,12 +65,6 @@ function AddGoalScreen({ route, navigation }) {
         <SafeAreaView>
             {!submitted ? (
                 <View>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Text>
-                            Go Back because you don't know what your goal is lame-o
-                        </Text>
-                    </TouchableOpacity>
-
                     {/* title */}
                     <View style={{ borderWidth: 1 }}>
                         <TextInput placeholder="title" onChangeText={titleHandler} value={title} />

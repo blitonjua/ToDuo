@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 const colors = {
     blue: '#42aaf5',
     red: '#e33232',
+    white: '#ffffff',
     //titles, text
     spinach: '#1a3d20',
     //background, highlights, secondary
@@ -195,8 +196,11 @@ export const plusStyles = StyleSheet.create({
     },
     button: {
         backgroundColor: colors.hollendaise,
-        borderRadius: 160,
-
+        borderRadius: 300,
+        width:300,
+        height:300,
+        alignItems:'center',
+        justifyContent:'center',
     },
     plus: {
         fontSize: 300,
@@ -254,7 +258,6 @@ export const individualGoalStyles = StyleSheet.create({
 export const devFlatListStyles = StyleSheet.create({
     ListItem: {
         backgroundColor: colors.lime,
-        borderWidth: 1,
         height: 50,
         marginVertical: 5,
         borderRadius: 8,
@@ -264,7 +267,7 @@ export const devFlatListStyles = StyleSheet.create({
         justifyContent: 'center',
     },
     ListItemText: {
-        color: colors.spinach,
+        color: colors.white,
         fontSize: 30,
     }
 });
