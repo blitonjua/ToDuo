@@ -13,13 +13,12 @@ function AddGoalStack() {
   return (
     <Stack.Navigator
       mode='modal'
-      headerMode='none'
       screenOptions={{
         gestureEnabled: false
       }} >
-      <Stack.Screen name="plusScreen" component={PlusScreen} />
-      <Stack.Screen name="categoryScreen" component={CategoryScreen} />
-      <Stack.Screen name="addGoalScreen" component={AddGoalScreen} />
+      <Stack.Screen name="plusScreen" component={PlusScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="categoryScreen" component={CategoryScreen} options={{title:'Categories'}}/>
+      <Stack.Screen name="addGoalScreen" component={AddGoalScreen} options={{title:'Add a new goal'}}/>
     </Stack.Navigator>
   );
 }

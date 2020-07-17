@@ -14,14 +14,13 @@ function GoalStack() {
   return (
     <Stack.Navigator
       mode="modal"
-      headerMode="none"
       screenOptions={{
         gestureEnabled: false,
       }}>
-      <Stack.Screen name="goalsListScreen" component={GoalsListScreen} />
-      <Stack.Screen name="individualGoalDisplay" component={IndividualGoalDisplay} />
-      <Stack.Screen name="messageScreen" component={MessageScreen} />
-      <Stack.Screen name="doneScreen" component={DoneScreen} />
+      <Stack.Screen name="goalsListScreen" component={GoalsListScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="individualGoalDisplay" component={IndividualGoalDisplay} options={{title:'TODO goal title here'}}/>
+      <Stack.Screen name="messageScreen" component={MessageScreen} options={{title:'TODO chat buddy\'s first name'}}/>
+      <Stack.Screen name="doneScreen" component={DoneScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
   );
 }
