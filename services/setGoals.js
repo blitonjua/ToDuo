@@ -171,8 +171,10 @@ function removeGoals(goal) {
 
 //updates the status of the provided goal to the provided status
 export function updateStatus(user, goalID, status) {
-  setUserConsts(user);
-  userDoc
+  // setUserConsts(user);
+  // userDoc
+  db.collection('Users')
+    .doc(user)
     .collection('goals')
     .doc(goalID)
     .update({
@@ -182,10 +184,17 @@ export function updateStatus(user, goalID, status) {
 
 //allows the user to leave the partnership with an accountabuddy
 export function bailPartnership(user, goal) {
-  setUserConsts(user);
+  updateStatus(goal.accountaBuddyId, goal.matchedGoalId, status.matching);
+  replaceToWaitingRoom(goal);
+}
+
+//places the goal back into the waiting room
+export function replaceToWaitingRoom(goal) {
+  setUserConsts(goal.userId);
   //updating user's blacklist
-  const blacklistedUser = { ...goal.blacklist };
-  blacklistedUser[goal.accountaBuddyId] = true;
+  const blacklistedUsers = { ...goal.blacklist};
+  blacklistedUsers[goal.accountaBuddyId] = true;
+
   //resetting goal's fields
   userDoc
     .collection('goals')
@@ -195,9 +204,9 @@ export function bailPartnership(user, goal) {
       accountaBuddyId: '',
       matchedGoalId: '',
       chatRoomId: '',
-      blacklist: goal.blacklist.concat([goal.accountaBuddyId]),
+      blacklist: blacklistedUsers,
     })
   setCategory(goal.category);
-  //match to another user
-  matchGoals(goal.goalId, blacklistedUser);
+
+  matchGoals(goal.goalId, blacklistedUsers);
 }
