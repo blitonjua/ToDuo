@@ -3,6 +3,12 @@ import { StyleSheet } from 'react-native';
 const colors = {
     blue: '#42aaf5',
     red: '#e33232',
+    //titles, text
+    spinach: '#1a3d20',
+    //background, highlights, secondary
+    hollendaise: '#ffd978',
+    //main background, primary
+    lime: '#53d681'
 };
 
 export const appStyles = StyleSheet.create({
@@ -11,7 +17,6 @@ export const appStyles = StyleSheet.create({
         alignContent: 'center',
         alignItems: 'stretch',
         justifyContent: 'center',
-        backgroundColor: 'white',
     },
     padding: {
         padding: 20
@@ -21,6 +26,13 @@ export const appStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    themedSafe: {
+        flex: 1,
+        alignContent: 'center',
+        alignItems: 'stretch',
+        justifyContent: 'center',
+        backgroundColor: colors.hollendaise,
+    }
 });
 
 //authentication
@@ -34,7 +46,8 @@ export const authStyles = StyleSheet.create({
     title: {
         fontSize: 60,
         textAlign: 'center',
-        fontFamily: 'BloggerSans-BoldItalic'
+        fontFamily: 'BloggerSans-BoldItalic',
+        color: colors.spinach,
     },
     container: {
         backgroundColor: 'white',
@@ -78,7 +91,7 @@ export const loginStyles = StyleSheet.create({
     logInButton: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#42aaf5',
+        backgroundColor: colors.lime,
         borderRadius: 60,
         height: 40
     },
@@ -88,7 +101,7 @@ export const loginStyles = StyleSheet.create({
         marginTop: 10
     },
     signupLinkText: {
-        color: colors.red,
+        color: colors.spinach,
         fontSize: 15,
         letterSpacing: 2,
         fontWeight: 'bold'
@@ -100,12 +113,12 @@ export const signupStyles = StyleSheet.create({
     signupButton: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: colors.red,
+        backgroundColor: colors.lime,
         borderRadius: 60,
         height: 40
     },
     loginLinkText: {
-        color: colors.blue,
+        color: colors.spinach,
         fontWeight: 'bold',
         fontSize: 15,
         letterSpacing: 2,
@@ -148,7 +161,7 @@ export const profileStyles = StyleSheet.create({
         marginVertical: 6,
     },
     settings: {
-        backgroundColor: 'gray',
+        backgroundColor: colors.lime,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
@@ -157,7 +170,7 @@ export const profileStyles = StyleSheet.create({
         marginBottom: 20,
     },
     signout: {
-        backgroundColor: 'red',
+        backgroundColor: colors.lime,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
@@ -181,7 +194,7 @@ export const plusStyles = StyleSheet.create({
         alignItems: 'center',
     },
     button: {
-        backgroundColor: 'red',
+        backgroundColor: colors.hollendaise,
         borderRadius: 160,
 
     },
@@ -240,7 +253,7 @@ export const individualGoalStyles = StyleSheet.create({
 //TODO
 export const devFlatListStyles = StyleSheet.create({
     ListItem: {
-        backgroundColor: 'gray',
+        backgroundColor: colors.lime,
         borderWidth: 1,
         height: 50,
         marginVertical: 5,
@@ -251,7 +264,7 @@ export const devFlatListStyles = StyleSheet.create({
         justifyContent: 'center',
     },
     ListItemText: {
-        color: 'white',
+        color: colors.spinach,
         fontSize: 30,
     }
 });

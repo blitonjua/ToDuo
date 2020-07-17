@@ -12,13 +12,12 @@ function ProfileStack() {
     return (
         <Stack.Navigator
             mode='modal'
-            headerMode='none'
-            screenOptions={{
-                gestureEnabled: false
+                screenOptions={{
+                gestureEnabled: false,
             }}>
-            <Stack.Screen name="profileScreen" component={ProfileScreen} />
-            <Stack.Screen name="settingsScreen" component={SettingsScreen} />
-            <Stack.Screen name="pastGoalsScreen" component={PastGoalsScreen} />
+            <Stack.Screen name="profileScreen" component={ProfileScreen} options={{headerShown: false}}/>
+            <Stack.Screen name="settingsScreen" component={SettingsScreen} options={{title:'Settings'}}/>
+            <Stack.Screen name="pastGoalsScreen" component={PastGoalsScreen} options={{title:'Past Goals'}}/>
         </Stack.Navigator>
     );
 };

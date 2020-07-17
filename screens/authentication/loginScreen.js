@@ -30,7 +30,7 @@ function LoginScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.safe}>
+    <SafeAreaView style={styles.themedSafe}>
       <View style={styles.padding}>
         <Text style={styles.title}>ToDuo</Text>
         <View style={styles.container}>

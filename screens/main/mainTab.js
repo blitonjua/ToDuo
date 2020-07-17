@@ -1,4 +1,4 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import React, { useContext } from 'react';
 //firebase
 import auth from '@react-native-firebase/auth';
@@ -8,40 +8,43 @@ import GoalStack from './goal/goalStack';
 import ProfileStack from './profile/profileStack';
 import AddGoalStack from './addGoal/addGoalStack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-const Tab = createBottomTabNavigator();
 
 function MainTab() {
+  const Tab = createMaterialTopTabNavigator();
   const { user, setUser } = useContext(UserContext);
   let cUser = auth().currentUser;
   if (cUser)
     setUser(cUser.uid)
 
   return (
-    <Tab.Navigator initialRouteName="Goal" tabBarPosition="bottom"
+    <Tab.Navigator initialRouteName="Goal" tabBarPosition="bottom" 
+    tabBarOptions={{
+      //labelStyle: { fontSize: 12 },
+      //tabStyle: { height: 40 },
+      style: { backgroundColor: '#53d681'},
+      showIcon: true,
+      activeTintColor: '#ffd978',
+      inactiveTintColor: '#1a3d20',
+      indicatorStyle: {backgroundColor: '#ffd978'},
+    }}
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
 
-        if (route.name === 'Home') {
-          iconName = focused
-            ? 'ios-information-circle'
-            : 'ios-information-circle-outline';
-        } else if (route.name === 'Settings') {
-          iconName = focused ? 'ios-list-box' : 'ios-list';
+        if (route.name === 'Profile') {
+          iconName = 'ios-person';
+        } else if (route.name === 'Goals') {
+          iconName = 'ios-disc';
         } else if (route.name === 'New'){
-          iconName = focused? 'ios-list-box' : 'ios-list';
+          iconName = 'ios-add-circle-outline';
         }
 
-        // You can return any component that you like here!
-        return <Ionicons name={iconName} size={size} color={color} />;
+        return <Ionicons name={iconName} size={25} color={color} />;
       },
     })}
-    tabBarOptions={{
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
-    }}>
+    >
       <Tab.Screen name="Profile" component={ProfileStack} />
-      <Tab.Screen name="Goal" component={GoalStack} />
+      <Tab.Screen name="Goals" component={GoalStack} />
       <Tab.Screen name="New" component={AddGoalStack} />
     </Tab.Navigator>
   );
