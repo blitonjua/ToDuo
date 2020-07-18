@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -6,28 +6,28 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-//firebase
-import { getDisplayableGoals } from '../../../services/getGoals';
+
+import {getDisplayableGoals} from '../../../services/getGoals';
 //styles
-import { appStyles, devFlatListStyles } from '../../../assets/styles/styles';
+import {appStyles, devFlatListStyles} from '../../../assets/styles/styles';
 const styles = appStyles;
 
 //Displays the list of goals that belong to the user and navigates to each goal when pressed
-function GoalsListScreen({ navigation }) {
+function GoalsListScreen({navigation}) {
   const [goalData, setGoalData] = useState([]);
-  
+
   async function getGoals() {
     let goals;
-    goals = await getDisplayableGoals()
+    goals = await getDisplayableGoals();
     setGoalData(goals);
   }
 
   useEffect(() => {
     getGoals();
-  })
+  });
 
   function gotoIndividualGoal(item) {
-    navigation.navigate('individualGoalDisplay', { goal: item });
+    navigation.navigate('individualGoalDisplay', {goal: item});
   }
 
   return (
@@ -36,14 +36,14 @@ function GoalsListScreen({ navigation }) {
         {/* Lists out goals */}
         <FlatList
           data={goalData}
-          renderItem={({ item }) =>
+          renderItem={({item}) => (
             // TODO: preferable to move this into a separate function
             <TouchableOpacity onPress={() => gotoIndividualGoal(item)}>
               <View style={devFlatListStyles.ListItem}>
                 <Text style={devFlatListStyles.ListItemText}>{item.title}</Text>
               </View>
             </TouchableOpacity>
-          }
+          )}
           keyExtractor={item => item.goalId}
         />
       </View>
