@@ -9,7 +9,8 @@ var goalId = '';
 //   userId = auth().currentUser.uid;
 
 // returns data for specified document in collection, used for one time reads
-const readFromDatabase = (collectionName, docName) => {
+export const readFromDatabase = (collectionName, docName) => {
+  console.log("colleciton name is " + collectionName + " and docname is " + docName);
   let data = db.collection(collectionName.toString()).doc(docName.toString())
     .get;
   return data;

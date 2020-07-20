@@ -16,7 +16,7 @@ function PlusScreen({ navigation }) {
             <TouchableOpacity 
                 onPress={() => navigation.navigate('categoryScreen')}
                 style={styles.button}>
-                <Ionicons name={'ios-add-circle-outline'} size={300} color={'#ffffff'} />
+                <Ionicons name={'ios-add-circle-outline'} size={200} color={'#ffffff'} />
             </TouchableOpacity>
         </SafeAreaView>
     )

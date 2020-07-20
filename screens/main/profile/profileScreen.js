@@ -65,8 +65,9 @@ function ProfileScreen({ navigation }) {
         </View>
 
         <TouchableOpacity
-          onPress={() => gotoPastGoals()}>
-          <Text>
+          onPress={() => gotoPastGoals()}
+          style={styles.settings}>
+          <Text style={styles.buttonText}>
             See past goals
           </Text>
         </TouchableOpacity>

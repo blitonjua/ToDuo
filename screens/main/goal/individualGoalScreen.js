@@ -62,13 +62,6 @@ function IndividualGoalScreen({ route, navigation }) {
   setToDo();
   return (
     <SafeAreaView style={styles.safe}>
-      {/* back button */}
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text>
-          GO BACK
-        </Text>
-      </TouchableOpacity>
-
       <View style={styles.padding}>
         {/* overview info */}
         <Text style={styles.title}>{goal.title}</Text>

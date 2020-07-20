@@ -21,11 +21,11 @@ function MainTab() {
     tabBarOptions={{
       //labelStyle: { fontSize: 12 },
       //tabStyle: { height: 40 },
-      style: { backgroundColor: '#53d681'},
+      style: { backgroundColor: 'white'},
       showIcon: true,
-      activeTintColor: '#ffd978',
-      inactiveTintColor: '#1a3d20',
-      indicatorStyle: {backgroundColor: '#ffd978'},
+      activeTintColor: '#53d681',
+      inactiveTintColor: 'gray',
+      indicatorStyle: {backgroundColor: '#53d681'},
     }}
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {

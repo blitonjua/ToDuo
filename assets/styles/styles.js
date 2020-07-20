@@ -198,8 +198,8 @@ export const plusStyles = StyleSheet.create({
     button: {
         backgroundColor: colors.hollendaise,
         borderRadius: 300,
-        width:300,
-        height:300,
+        width:250,
+        height:250,
         alignItems:'center',
         justifyContent:'center',
     },

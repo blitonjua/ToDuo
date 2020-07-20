@@ -34,7 +34,7 @@ function messagesReducer (state, action) {
 
 export default function Chat () {
   const { uid } = useContext(UserContext)
-  console.log(uid);
+  console.log("chat opened, chatting with " + uid);
   //const {uid} = auth().currentUser;
   const [messages, dispatchMessages] = useReducer(messagesReducer, [])
   console.log("printed 1")
