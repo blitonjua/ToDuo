@@ -11,6 +11,7 @@ import auth from '@react-native-firebase/auth';
 //custom imports
 // import { authStyles } from './authStack';
 import { loginStyles } from '../../assets/styles/styles';
+import LinearGradient from 'react-native-linear-gradient';
 
 const styles = loginStyles;
 
@@ -30,7 +31,9 @@ function LoginScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.themedSafe}>
+    
+    <SafeAreaView style={styles.safe}>
+    <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4568dc', '#b06ab3']}>
       <View style={styles.padding}>
         <Text style={styles.title}>ToDuo</Text>
         <View style={styles.container}>
@@ -74,6 +77,7 @@ function LoginScreen({ navigation }) {
 
         </View>
       </View>
+      </LinearGradient>
     </SafeAreaView>
   );
 };

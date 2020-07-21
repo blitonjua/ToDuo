@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const colors = {
     blue: '#42aaf5',
@@ -15,10 +15,12 @@ const colors = {
 
 export const appStyles = StyleSheet.create({
     safe: {
-        flex: 1,
+        //flex: 1,
         alignContent: 'center',
         alignItems: 'stretch',
         justifyContent: 'center',
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
     },
     padding: {
         padding: 20
