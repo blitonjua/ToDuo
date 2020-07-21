@@ -9,13 +9,14 @@ var goalId = '';
 //   userId = auth().currentUser.uid;
 
 // returns data for specified document in collection, used for one time reads
+// TODO so far unused
 export const readFromDatabase = (collectionName, docName) => {
   console.log("colleciton name is " + collectionName + " and docname is " + docName);
   let data = db.collection(collectionName.toString()).doc(docName.toString())
     .get;
   return data;
 };
-
+d
 // testing method to list out database through a snapshot
 export const listOutDatabase = () => {
   console.log('listOut Database');

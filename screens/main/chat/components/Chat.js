@@ -34,13 +34,9 @@ function messagesReducer (state, action) {
 
 export default function Chat () {
   const { uid } = useContext(UserContext)
-  console.log("chat opened, chatting with " + uid);
   //const {uid} = auth().currentUser;
   const [messages, dispatchMessages] = useReducer(messagesReducer, [])
-  console.log("printed 1")
-  console.log("context is " + ChatContext);
   const chatRef = useContext(ChatContext);
-  console.log("printed 2")
   useEffect( //changed from funciotn () {} //change target database here
      () => {
       return chatRef.orderBy('created_at', 'desc')
