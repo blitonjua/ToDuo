@@ -8,7 +8,7 @@ const colors = {
     //titles, text
     spinach: '#1a3d20',
     //background, highlights, secondary
-    hollendaise: '#ffd978',
+    hollendaise: '#1e0e75',
     //main background, primary
     lime: '#53d681'
 };

@@ -5,7 +5,6 @@ import { UserContext, ChatContext } from '../chat/contexts'
 import firestore from '@react-native-firebase/firestore';
 import { useFocusEffect } from '@react-navigation/native';
 //to read buddy data
-import {readFromDatabase} from '../../../services/fire';
 import {
   SafeAreaView,
   View,
@@ -25,7 +24,6 @@ function MessageScreen({ route, navigation }) {
   //buddy name
   useFocusEffect(() => {
     firestore().collection("Users").doc(goal.params.goal.accountaBuddyId).get().then((docSnap) => {
-      console.log(docSnap.data());
       navigation.setOptions({ title: docSnap.data().firstName });
     });
   }, [route]);

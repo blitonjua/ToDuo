@@ -16,7 +16,7 @@ export const readFromDatabase = (collectionName, docName) => {
     .get;
   return data;
 };
-d
+
 // testing method to list out database through a snapshot
 export const listOutDatabase = () => {
   console.log('listOut Database');
