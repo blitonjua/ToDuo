@@ -16,6 +16,7 @@ import {updateStatus} from '../../../services/setGoals';
 import {status} from '../../../services/universalConstants';
 //styles
 import {individualGoalStyles} from '../../../assets/styles/styles';
+
 import {getMilestonesAsObjects} from '../../../services/getMilestoneData';
 
 import {UserContext} from '../../../services/userContext';
@@ -24,10 +25,9 @@ const styles = individualGoalStyles;
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
 function IndividualGoalScreen({route, navigation}) {
   const {goal} = route.params;
-  const [toDoList, setToDoList] = useState([]);
-  const [toDoText, setToDoText] = useState('');
   const [milestones, setMilestones] = useState([]);
 
+  // console.log(goal);
   let uid = auth().currentUser.uid;
 
   // let user = auth().currentUser.uid;
@@ -98,6 +98,10 @@ function IndividualGoalScreen({route, navigation}) {
 
       {/* complete goal */}
       <Button title="complete" onPress={() => goalDone(status.completed)} />
+      <Button
+        title="approve buddy milestones"
+        onPress={() => navigation.navigate('approveMilestones', {goal: goal})}
+      />
     </SafeAreaView>
   );
 }

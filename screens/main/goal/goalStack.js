@@ -7,6 +7,8 @@ import MessageScreen from './messageScreen';
 import DoneScreen from './doneScreen';
 import IndividualGoalDisplay from './individualGoalDisplay';
 import ToDoListScreen from './toDoListScreen';
+import ApproveMilestone from './approveMilestones';
+
 const Stack = createStackNavigator();
 
 //the stack navigator of the goals stack where users can access existing goals.
@@ -26,6 +28,7 @@ function GoalStack() {
       <Stack.Screen name="messageScreen" component={MessageScreen} />
       <Stack.Screen name="doneScreen" component={DoneScreen} />
       <Stack.Screen name="toDoListScreen" component={ToDoListScreen} />
+      <Stack.Screen name="approveMilestones" component={ApproveMilestone} />
     </Stack.Navigator>
   );
 }
