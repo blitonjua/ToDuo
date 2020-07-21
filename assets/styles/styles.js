@@ -6,11 +6,11 @@ const colors = {
     white: '#ffffff',
     mustard: '#FFDB58',
     //titles, text
-    spinach: '#1a3d20',
+    spinach: 'white',
     //background, highlights, secondary
     hollendaise: '#1e0e75',
     //main background, primary
-    lime: '#53d681'
+    lime: 'white',
 };
 
 export const appStyles = StyleSheet.create({
@@ -45,31 +45,44 @@ export const authStyles = StyleSheet.create({
     textInput: {
         fontWeight: '100',
         fontSize: 16,
-        fontFamily: 'BloggerSans-Medium'
+        fontFamily: 'BloggerSans-Medium',
+        color: 'white',
     },
-    title: {
+    //To-Duo
+    logoView: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    titleTo: {
         fontSize: 60,
         textAlign: 'center',
         fontFamily: 'BloggerSans-BoldItalic',
         color: colors.spinach,
     },
+    titleDuo: {
+        fontSize: 60,
+        textAlign: 'center',
+        fontFamily: 'BloggerSans-BoldItalic',
+        color: 'green',
+    },
     container: {
-        backgroundColor: 'white',
+        //backgroundColor: 'white',
         padding: 7,
         marginTop: 10,
         alignItems: 'stretch',
         justifyContent: 'center',
-        borderColor: '#EBEBEB',
-        borderRadius: 10,
+        //borderColor: '#EBEBEB',
+        borderBottomWidth: 2,
+        borderBottomColor: 'white',
         marginBottom: 8,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
-        elevation: 3
+        // shadowColor: '#000',
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 1,
+        // },
+        // shadowOpacity: 0.22,
+        // shadowRadius: 2.22,
+        // elevation: 3
     },
     //buttons--------------------
     buttonView: {
@@ -77,7 +90,7 @@ export const authStyles = StyleSheet.create({
         marginTop: 15,
     },
     buttonText: {
-        color: 'white',
+        color: '#002b54',
         fontWeight: 'bold',
         fontSize: 15,
         letterSpacing: 2,

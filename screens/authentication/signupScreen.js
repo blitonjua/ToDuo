@@ -50,7 +50,10 @@ function SignupScreen({navigation}) {
   return (
     <SafeAreaView style={styles.themedSafe}>
       <View style={styles.padding}>
-        <Text style={styles.title}>ToDuo</Text>
+      <View style={styles.logoView}>
+        <Text style={styles.titleTo}>To</Text>
+        <Text style={styles.titleDuo}>Duo</Text>
+            </View>
 
         <View style={styles.container}>
           <TextInput

@@ -33,9 +33,12 @@ function LoginScreen({ navigation }) {
   return (
     
     <SafeAreaView style={styles.safe}>
-    <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4568dc', '#b06ab3']}>
+    <LinearGradient start={{x: 0, y: 0}} end={{x: 0, y: 1}} colors={['#002b54', '#53d681']} style={styles.safe}>
       <View style={styles.padding}>
-        <Text style={styles.title}>ToDuo</Text>
+          <View style={styles.logoView}>
+        <Text style={styles.titleTo}>To</Text>
+        <Text style={styles.titleDuo}>Duo</Text>
+            </View>
         <View style={styles.container}>
           <TextInput style={styles.textInput}
             placeholder="Email"
