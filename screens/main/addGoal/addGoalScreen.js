@@ -6,11 +6,13 @@ import {
   TextInput,
   View,
   Button,
+  Platform,
 } from 'react-native';
 
-//firebase
-import { addGoalToUserGoalCollection } from '../../../services/setGoals';
-import { UserContext } from '../../../services/userContext';
+import {addGoalToUserGoalCollection} from '../../../services/setGoals';
+import {FlatList} from 'react-native-gesture-handler';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import {UserContext} from '../../../services/userContext';
 
 //the form to add a goal and handles creating the goal.
 function AddGoalScreen({ route, navigation }) {
@@ -18,19 +20,26 @@ function AddGoalScreen({ route, navigation }) {
   const category = route.params.category;
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [milestone1, setMilestone1] = useState('');
-  const [milestone2, setMilestone2] = useState('');
-  const [milestone3, setMilestone3] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const { user, setUser } = useContext(UserContext);
+
+  const [milestones, setMilestones] = useState([]);
+  const [milestoneText, setMilestoneText] = useState('');
+  const [datePicked, setDatePicked] = useState([]);
+  const [datesArray, setDateArray] = useState([]);
+  const [defaultDate, setDefaultDate] = useState(new Date());
+  const [showDateTimePicker, setShowDateTimePicker] = useState(false);
+
+  const {user, setUser} = useContext(UserContext);
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
+    console.log(datePicked);
     addGoalToUserGoalCollection(
       user,
       title,
       description,
-      [milestone1, milestone2, milestone3],
+      milestones,
+      datesArray,
       category,
     );
     setSubmitted(true);
@@ -45,22 +54,26 @@ function AddGoalScreen({ route, navigation }) {
   function descriptionHandler(enteredDescription) {
     setDescription(enteredDescription);
   }
-
-  //sets milestone1
-  function milestone1Handler(enteredMilestone) {
-    setMilestone1(enteredMilestone);
+  //add a milestone to array
+  function addMilestone(enterText, date) {
+    setMilestones(milestones.concat([enterText]));
+    setDateArray(datesArray.concat([date]));
+    console.log(milestones);
   }
-
-  //sets milestone2
-  function milestone2Handler(enteredMilestone) {
-    setMilestone2(enteredMilestone);
+  function onDateSelected(event, selectedDate) {
+    const currentDate = selectedDate || datePicked;
+    setDatePicked([
+      currentDate.getMonth() + 1,
+      currentDate.getDate(),
+      currentDate.getFullYear(),
+      currentDate.valueOf(),
+    ]);
+    setDefaultDate(selectedDate);
+    console.log(currentDate);
+    // if (Platform.OS === 'android') {
+    //   setShowDateTimePicker(false);
+    // }
   }
-
-  //sets milestone3
-  function milestone3Handler(enteredMilestone) {
-    setMilestone3(enteredMilestone);
-  }
-
   return (
     <SafeAreaView>
       {!submitted ? (
@@ -68,54 +81,83 @@ function AddGoalScreen({ route, navigation }) {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text>Go Back because you don't know what your goal is lame-o</Text>
           </TouchableOpacity>
+          <View>
+            {/* title */}
+            <View style={{borderWidth: 1}}>
+              <TextInput
+                placeholder="title"
+                onChangeText={titleHandler}
+                value={title}
+              />
+            </View>
 
-          {/* title */}
-          <View style={{ borderWidth: 1 }}>
-            <TextInput
-              placeholder="title"
-              onChangeText={titleHandler}
-              value={title}
-            />
+            {/* description */}
+            <View style={{borderWidth: 1}}>
+              <TextInput
+                placeholder="description"
+                onChangeText={descriptionHandler}
+                value={description}
+              />
+            </View>
           </View>
-
-          {/* description */}
-          <View style={{ borderWidth: 1 }}>
+          {/* Display milestones added */}
+          <FlatList
+            data={milestones}
+            renderItem={({item}) => (
+              <View>
+                <Text>{item}</Text>
+              </View>
+            )}
+            keyExtractor={item => {
+              item + 'x';
+            }}
+          />
+          {/* adding a new milestone */}
+          <View style={{borderWidth: 1, backgroundColor: 'pink'}}>
             <TextInput
-              placeholder="description"
-              onChangeText={descriptionHandler}
-              value={description}
+              placeholder="add milestone"
+              onChangeText={text => setMilestoneText(text)}
+              ref={input => {
+                this.myTextInput = input;
+              }}
             />
-          </View>
-
-          {/* milestone1 */}
-          <View style={{ borderWidth: 1 }}>
-            <TextInput
-              placeholder="milestone1"
-              onChangeText={milestone1Handler}
-              value={milestone1}
+            <Button
+              title="Show Calendar"
+              onPress={() => setShowDateTimePicker(true)}
             />
-          </View>
-
-          {/* milestone2 */}
-          <View style={{ borderWidth: 1 }}>
-            <TextInput
-              placeholder="milestone2"
-              onChangeText={milestone2Handler}
-              value={milestone2}
-            />
-          </View>
-
-          {/* milestone3 */}
-          <View style={{ borderWidth: 1 }}>
-            <TextInput
-              placeholder="milestone3.0"
-              onChangeText={milestone3Handler}
-              value={milestone3}
+            {showDateTimePicker && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={defaultDate}
+                mode="date"
+                onChange={(e, d) => {
+                  if (Platform.OS === 'android') {
+                    setShowDateTimePicker(false);
+                  }
+                  onDateSelected(e, d);
+                }}
+              />
+            )}
+            <Button
+              title="Add milestone"
+              onPress={() => {
+                if (Platform.OS === 'ios') {
+                  setShowDateTimePicker(false);
+                }
+                addMilestone(milestoneText, datePicked);
+                setMilestoneText('');
+                this.myTextInput.clear();
+              }}
             />
           </View>
 
           {/* add goal Button */}
-          <Button title="+" onPress={() => addGoalHandler()} />
+          <Button
+            title="create "
+            onPress={() => {
+              addGoalHandler();
+            }}
+          />
         </View>
       ) : (
           //renders on successfully adding goal
@@ -130,5 +172,4 @@ function AddGoalScreen({ route, navigation }) {
     </SafeAreaView>
   );
 }
-
 export default AddGoalScreen;

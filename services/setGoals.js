@@ -15,10 +15,12 @@ var waitingRoom;
 
 //creates a goal and adds it to the user's goal collection
 export function addGoalToUserGoalCollection(
+  //make sure to add user
   user,
   goalTitle,
   goalDescription,
   goalMilestones,
+  datesPicked,
   goalCategory,
 ) {
   //create a document with auto generated ID and add title, description and milestones.
@@ -44,8 +46,27 @@ export function addGoalToUserGoalCollection(
       userDoc
         .collection('goals')
         .doc(docRef.id)
-        .update({ goalId: docRef.id });
-
+        .update({goalId: docRef.id});
+      //add milestones
+      for (let i = 0; i < goalMilestones.length; i++) {
+        let currentMilestone = goalMilestones[i];
+        let currentDeadline = datesPicked[i];
+        console.log('dates:' + currentDeadline);
+        usersCollection
+          .doc(userId)
+          .collection('goals')
+          .doc(docRef.id)
+          .collection('milestones')
+          .doc(goalMilestones[i])
+          .set({
+            milestoneText: currentMilestone,
+            milestoneStatus: false,
+            milestoneMonth: currentDeadline[0],
+            milestoneDay: currentDeadline[1],
+            milestoneFullYear: currentDeadline[2],
+            milestoneDeadlineValue: currentDeadline[3],
+          });
+      }
       //match the goals
       matchGoals(docRef.id, blacklistedUser);
     });
