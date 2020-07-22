@@ -34,15 +34,20 @@ function AddGoalScreen({ route, navigation }) {
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
-    addGoalToUserGoalCollection(
-      user,
-      title,
-      description,
-      milestones,
-      datesArray,
-      category,
-    );
-    setSubmitted(true);
+    if (title == '' || description == '') {
+      console.log("can't add; must have title and description");
+    }
+    else {
+      addGoalToUserGoalCollection(
+        user,
+        title,
+        description,
+        milestones,
+        datesArray,
+        category,
+      );
+      setSubmitted(true);
+    }
   }
 
   //sets title
@@ -61,8 +66,8 @@ function AddGoalScreen({ route, navigation }) {
   }
   function onDateSelected(event, selectedDate) {
     const currentDate = selectedDate || datePicked;
-    console.log('hi')
-    if (currentDate <= new Date()) {
+    console.log(currentDate >= new Date() && milestoneText.length > 0)
+    if (milestoneText.length > 0 && currentDate >= new Date()) {
       setDatePicked([
         currentDate.getMonth() + 1,
         currentDate.getDate(),
@@ -71,11 +76,13 @@ function AddGoalScreen({ route, navigation }) {
       ]);
       setDefaultDate(selectedDate);
       setValidDate(true);
+      console.log('here')
     }
     else {
       setValidDate(false);
-      console.log("invalid, try again")
+      console.log('else')
     }
+    console.log('validdate: ', validDate);
   }
   return (
     <SafeAreaView>
@@ -134,7 +141,7 @@ function AddGoalScreen({ route, navigation }) {
               title="Show Calendar"
               onPress={() => setShowDateTimePicker(true)}
             />
-            {validDate && (
+            {!validDate && (
               <Text>Date must be today or later</Text>
             )}
 
@@ -154,7 +161,7 @@ function AddGoalScreen({ route, navigation }) {
 
             <Button
               title="Add milestone"
-              disabled={validDate}
+              disabled={!validDate}
               onPress={() => {
                 if (Platform.OS === 'ios') {
                   setShowDateTimePicker(false);
