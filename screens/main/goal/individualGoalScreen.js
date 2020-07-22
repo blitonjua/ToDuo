@@ -8,10 +8,9 @@ import {
   TouchableOpacity,
   Button,
 } from 'react-native';
-import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
 //firebase
 import auth from '@react-native-firebase/auth';
-import {updateStatus} from '../../../services/setGoals';
+import { updateStatus, bailPartnership } from '../../../services/setGoals';
 //constants
 import {status} from '../../../services/universalConstants';
 //styles
@@ -24,8 +23,6 @@ const styles = individualGoalStyles;
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
 function IndividualGoalScreen({route, navigation}) {
   const {goal} = route.params;
-  const [toDoList, setToDoList] = useState([]);
-  const [toDoText, setToDoText] = useState('');
   const [milestones, setMilestones] = useState([]);
 
   let uid = auth().currentUser.uid;
@@ -59,6 +56,13 @@ function IndividualGoalScreen({route, navigation}) {
       </View>
     );
   }
+
+  //bails the user out of the partnership
+  function bail() {
+    navigation.goBack();
+    bailPartnership(user, goal);
+  }
+
   return (
     <SafeAreaView style={styles.safe}>
       {/* back button */}
@@ -97,7 +101,16 @@ function IndividualGoalScreen({route, navigation}) {
       <Button title="archive" onPress={() => goalDone(status.archived)} />
 
       {/* complete goal */}
-      <Button title="complete" onPress={() => goalDone(status.completed)} />
+      <Button
+        title='complete'
+        onPress={() => goalDone(status.completed)}
+      />
+
+      {/* accountabuddy bail */}
+      <Button
+        title='bail buddy'
+        onPress={() => bail()}
+      />
     </SafeAreaView>
   );
 }

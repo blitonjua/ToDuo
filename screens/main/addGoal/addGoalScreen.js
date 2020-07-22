@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Text,
   SafeAreaView,
@@ -15,7 +15,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import {UserContext} from '../../../services/userContext';
 
 //the form to add a goal and handles creating the goal.
-function AddGoalScreen({route, navigation}) {
+function AddGoalScreen({ route, navigation }) {
   //hooks for goal creation
   const category = route.params.category;
   const [title, setTitle] = useState('');
@@ -160,15 +160,15 @@ function AddGoalScreen({route, navigation}) {
           />
         </View>
       ) : (
-        //renders on successfully adding goal
-        <View>
-          <Text>Goal Added! You can access your goal in the Goal tab.</Text>
+          //renders on successfully adding goal
+          <View>
+            <Text>Goal Added! You can access your goal in the Goal tab.</Text>
 
-          <TouchableOpacity onPress={() => navigation.navigate('plusScreen')}>
-            <Text>Go Back</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+            <TouchableOpacity onPress={() => navigation.navigate('plusScreen')}>
+              <Text>Go Back</Text>
+            </TouchableOpacity>
+          </View>
+        )}
     </SafeAreaView>
   );
 }
