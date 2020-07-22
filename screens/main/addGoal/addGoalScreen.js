@@ -9,10 +9,10 @@ import {
   Platform,
 } from 'react-native';
 
-import {addGoalToUserGoalCollection} from '../../../services/setGoals';
-import {FlatList} from 'react-native-gesture-handler';
+import { addGoalToUserGoalCollection } from '../../../services/setGoals';
+import { FlatList } from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {UserContext} from '../../../services/userContext';
+import { UserContext } from '../../../services/userContext';
 
 //the form to add a goal and handles creating the goal.
 function AddGoalScreen({ route, navigation }) {
@@ -29,11 +29,10 @@ function AddGoalScreen({ route, navigation }) {
   const [defaultDate, setDefaultDate] = useState(new Date());
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
 
-  const {user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
-    console.log(datePicked);
     addGoalToUserGoalCollection(
       user,
       title,
@@ -58,7 +57,6 @@ function AddGoalScreen({ route, navigation }) {
   function addMilestone(enterText, date) {
     setMilestones(milestones.concat([enterText]));
     setDateArray(datesArray.concat([date]));
-    console.log(milestones);
   }
   function onDateSelected(event, selectedDate) {
     const currentDate = selectedDate || datePicked;
@@ -69,10 +67,6 @@ function AddGoalScreen({ route, navigation }) {
       currentDate.valueOf(),
     ]);
     setDefaultDate(selectedDate);
-    console.log(currentDate);
-    // if (Platform.OS === 'android') {
-    //   setShowDateTimePicker(false);
-    // }
   }
   return (
     <SafeAreaView>
@@ -83,27 +77,29 @@ function AddGoalScreen({ route, navigation }) {
           </TouchableOpacity>
           <View>
             {/* title */}
-            <View style={{borderWidth: 1}}>
+            <View style={{ borderWidth: 1 }}>
               <TextInput
                 placeholder="title"
                 onChangeText={titleHandler}
                 value={title}
+                maxLength={30}
               />
             </View>
 
             {/* description */}
-            <View style={{borderWidth: 1}}>
+            <View style={{ borderWidth: 1 }}>
               <TextInput
                 placeholder="description"
                 onChangeText={descriptionHandler}
                 value={description}
+                maxLength={150}
               />
             </View>
           </View>
           {/* Display milestones added */}
           <FlatList
             data={milestones}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <View>
                 <Text>{item}</Text>
               </View>
@@ -113,7 +109,7 @@ function AddGoalScreen({ route, navigation }) {
             }}
           />
           {/* adding a new milestone */}
-          <View style={{borderWidth: 1, backgroundColor: 'pink'}}>
+          <View style={{ borderWidth: 1, backgroundColor: 'pink' }}>
             <TextInput
               placeholder="add milestone"
               onChangeText={text => setMilestoneText(text)}
