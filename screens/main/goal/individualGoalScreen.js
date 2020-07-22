@@ -61,15 +61,17 @@ function IndividualGoalScreen({route, navigation}) {
         </Text>
 
         <TouchableOpacity
-          onPress={() => {
+          onPress={async () => {
             console.log('pressed');
-            // await requestMilestoneCompletion(
-            //   uid,
-            //   goal.goalId,
-            //   item.milestoneText,
-            // );
+            await requestMilestoneCompletion(
+              uid,
+              goal.goalId,
+              item.milestoneText,
+            );
           }}>
-          <Text>request completions</Text>
+          <View>
+            <Text>request completions</Text>
+          </View>
         </TouchableOpacity>
       </View>
     );

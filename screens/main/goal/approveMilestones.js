@@ -51,7 +51,9 @@ export default function ApproveMilestone({route, navigation}) {
                   item.milestoneText,
                 );
               }}>
-              <Text> mark as complete</Text>
+              <View>
+                <Text> mark as complete</Text>
+              </View>
             </TouchableOpacity>
           </View>
         )}
