@@ -60,6 +60,8 @@ export function addGoalToUserGoalCollection(
             milestoneDay: currentDeadline[1],
             milestoneFullYear: currentDeadline[2],
             milestoneDeadlineValue: currentDeadline[3],
+            requestMark: false,
+            completed: false,
           });
       }
       //match the goals

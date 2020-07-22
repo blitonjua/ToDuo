@@ -20,6 +20,9 @@ import {individualGoalStyles} from '../../../assets/styles/styles';
 import {getMilestonesAsObjects} from '../../../services/getMilestoneData';
 
 import {UserContext} from '../../../services/userContext';
+
+import {requestMilestoneCompletion} from '../../../services/getMilestoneData';
+
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
@@ -56,9 +59,22 @@ function IndividualGoalScreen({route, navigation}) {
           due: {item.milestoneMonth}/{item.milestoneDay}/
           {item.milestoneFullYear}
         </Text>
+
+        <TouchableOpacity
+          onPress={() => {
+            console.log('pressed');
+            // await requestMilestoneCompletion(
+            //   uid,
+            //   goal.goalId,
+            //   item.milestoneText,
+            // );
+          }}>
+          <Text>request completions</Text>
+        </TouchableOpacity>
       </View>
     );
   }
+
   return (
     <SafeAreaView style={styles.safe}>
       {/* back button */}

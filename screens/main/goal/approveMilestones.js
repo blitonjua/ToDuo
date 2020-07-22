@@ -11,6 +11,7 @@ import {
 import {approveMilestones} from '../../../assets/styles/styles.js';
 
 import {getMilestonesAsObjects} from '../../../services/getMilestoneData';
+import {markMilestoneAsComplete} from '../../../services/getMilestoneData';
 
 export default function ApproveMilestone({route, navigation}) {
   const [milestones, setMilestones] = useState([]);
@@ -29,24 +30,43 @@ export default function ApproveMilestone({route, navigation}) {
     getMilestones();
   });
   function MilestoneListItem({item}) {
+    // console.log(item);
     return (
       <View style={approveMilestones.miletoneContainer}>
-        <View style={approveMilestones.miletoneContainer2}>
-          <Text>{item.milestoneText}</Text>
-          <Text>
-            due: {item.milestoneMonth}/{item.milestoneDay}/
-            {item.milestoneFullYear}
-          </Text>
-        </View>
-        <TouchableOpacity style={approveMilestones.completeButton}>
-          <Text>Mark as complete</Text>
-        </TouchableOpacity>
+        {item.requestMark && (
+          <View>
+            <View style={approveMilestones.miletoneContainer2}>
+              <Text>{item.milestoneText}</Text>
+              <Text>
+                due: {item.milestoneMonth}/{item.milestoneDay}/
+                {item.milestoneFullYear}
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={async () => {
+                console.log('marked');
+                await markMilestoneAsComplete(
+                  accountaBuddyId,
+                  goal.matchedGoalId,
+                  item.milestoneText,
+                );
+              }}>
+              <Text> mark as complete</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     );
   }
 
   return (
     <SafeAreaView>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}>
+        <Text>{'<-'}</Text>
+      </TouchableOpacity>
       <FlatList
         data={milestones}
         renderItem={({item}) => <MilestoneListItem item={item} />}
