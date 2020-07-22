@@ -28,6 +28,7 @@ function AddGoalScreen({ route, navigation }) {
   const [datesArray, setDateArray] = useState([]);
   const [defaultDate, setDefaultDate] = useState(new Date());
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
+  const [validDate, setValidDate] = useState(true);
 
   const { user, setUser } = useContext(UserContext);
 
@@ -60,13 +61,21 @@ function AddGoalScreen({ route, navigation }) {
   }
   function onDateSelected(event, selectedDate) {
     const currentDate = selectedDate || datePicked;
-    setDatePicked([
-      currentDate.getMonth() + 1,
-      currentDate.getDate(),
-      currentDate.getFullYear(),
-      currentDate.valueOf(),
-    ]);
-    setDefaultDate(selectedDate);
+    console.log('hi')
+    if (currentDate <= new Date()) {
+      setDatePicked([
+        currentDate.getMonth() + 1,
+        currentDate.getDate(),
+        currentDate.getFullYear(),
+        currentDate.valueOf(),
+      ]);
+      setDefaultDate(selectedDate);
+      setValidDate(true);
+    }
+    else {
+      setValidDate(false);
+      console.log("invalid, try again")
+    }
   }
   return (
     <SafeAreaView>
@@ -96,6 +105,7 @@ function AddGoalScreen({ route, navigation }) {
               />
             </View>
           </View>
+
           {/* Display milestones added */}
           <FlatList
             data={milestones}
@@ -108,6 +118,7 @@ function AddGoalScreen({ route, navigation }) {
               item + 'x';
             }}
           />
+
           {/* adding a new milestone */}
           <View style={{ borderWidth: 1, backgroundColor: 'pink' }}>
             <TextInput
@@ -116,11 +127,17 @@ function AddGoalScreen({ route, navigation }) {
               ref={input => {
                 this.myTextInput = input;
               }}
+              maxLength={30}
             />
+
             <Button
               title="Show Calendar"
               onPress={() => setShowDateTimePicker(true)}
             />
+            {validDate && (
+              <Text>Date must be today or later</Text>
+            )}
+
             {showDateTimePicker && (
               <DateTimePicker
                 testID="dateTimePicker"
@@ -134,8 +151,10 @@ function AddGoalScreen({ route, navigation }) {
                 }}
               />
             )}
+
             <Button
               title="Add milestone"
+              disabled={validDate}
               onPress={() => {
                 if (Platform.OS === 'ios') {
                   setShowDateTimePicker(false);
