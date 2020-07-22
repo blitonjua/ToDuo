@@ -5,6 +5,7 @@ import {
   TextInput,
   SafeAreaView,
   TouchableOpacity,
+  StatusBar
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
@@ -32,8 +33,11 @@ function LoginScreen({ navigation }) {
 
   return (
     
-    <SafeAreaView style={styles.safe}>
+    <SafeAreaView style={styles.themedSafe}>
     <LinearGradient start={{x: 0, y: 0}} end={{x: 0, y: 1}} colors={['#002b54', '#53d681']} style={styles.safe}>
+      <View>
+        <StatusBar barStyle='light-content' backgroundColor='white'/>
+      </View>
       <View style={styles.padding}>
           <View style={styles.logoView}>
         <Text style={styles.titleTo}>To</Text>
@@ -42,6 +46,7 @@ function LoginScreen({ navigation }) {
         <View style={styles.container}>
           <TextInput style={styles.textInput}
             placeholder="Email"
+            placeholderTextColor="#fff"
             onChangeText={text => setEmailText(text)}
           />
         </View>
@@ -51,6 +56,7 @@ function LoginScreen({ navigation }) {
             style={styles.textInput}
             secureTextEntry={true}
             placeholder="Password"
+            placeholderTextColor="#fff"
             onChangeText={text => setPasswordText(text)}
           />
         </View>

@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 
 const colors = {
     blue: '#42aaf5',
@@ -10,7 +10,7 @@ const colors = {
     //background, highlights, secondary
     hollendaise: '#1e0e75',
     //main background, primary
-    lime: 'white',
+    lime: '#53d681',
 };
 
 export const appStyles = StyleSheet.create({
@@ -35,7 +35,7 @@ export const appStyles = StyleSheet.create({
         alignContent: 'center',
         alignItems: 'stretch',
         justifyContent: 'center',
-        backgroundColor: colors.hollendaise,
+        backgroundColor: '#002b54',
     }
 });
 
@@ -63,7 +63,7 @@ export const authStyles = StyleSheet.create({
         fontSize: 60,
         textAlign: 'center',
         fontFamily: 'BloggerSans-BoldItalic',
-        color: 'green',
+        color: '#002b54',
     },
     container: {
         //backgroundColor: 'white',
@@ -217,6 +217,7 @@ export const plusStyles = StyleSheet.create({
         height:250,
         alignItems:'center',
         justifyContent:'center',
+        paddingTop: Platform.OS === 'ios'? 20:0,
     },
     plus: {
         fontSize: 300,
