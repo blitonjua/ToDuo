@@ -2,7 +2,8 @@ import React from 'react';
 import { 
     SafeAreaView,
     TouchableOpacity,
-    Text
+    Text,
+    StatusBar,
 } from 'react-native'
 //styles
 import { plusStyles } from '../../../assets/styles/styles';
@@ -13,6 +14,7 @@ const styles = plusStyles;
 function PlusScreen({ navigation }) {
     return(
         <SafeAreaView  style={styles.main}>
+            <StatusBar barStyle='light-content' backgroundColor='white'/>
             <TouchableOpacity 
                 onPress={() => navigation.navigate('categoryScreen')}
                 style={styles.button}>

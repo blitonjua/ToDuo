@@ -99,7 +99,7 @@ export const authStyles = StyleSheet.create({
         marginTop: 15,
     },
     buttonText: {
-        color: '#002b54',
+        color: 'white',
         fontWeight: 'bold',
         fontSize: 15,
         letterSpacing: 2,
@@ -225,7 +225,7 @@ export const plusStyles = StyleSheet.create({
         backgroundColor: "#272b28",
     },
     button: {
-        backgroundColor: colors.hollendaise,
+        backgroundColor: '#ffc400',
         borderRadius: 300,
         width:250,
         height:250,
@@ -254,7 +254,8 @@ export const individualGoalStyles = StyleSheet.create({
     milestonesText: {
         textAlign: 'left',
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 20,
+        color: 'white',
     },
     flatListContainer: {
         marginTop: 10
@@ -330,7 +331,7 @@ export const buttonStyles = StyleSheet.create({
       borderRadius: 3
     },
     text: {
-      color: '#FFF'
+      color: 'white'
     }
 });
 
