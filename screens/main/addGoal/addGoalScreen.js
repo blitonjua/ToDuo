@@ -21,23 +21,33 @@ function AddGoalScreen({ route, navigation }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [submitted, setSubmitted] = useState(false);
-
+  //milestones
   const [milestones, setMilestones] = useState([]);
   const [milestoneText, setMilestoneText] = useState('');
   const [datePicked, setDatePicked] = useState([]);
   const [datesArray, setDateArray] = useState([]);
   const [defaultDate, setDefaultDate] = useState(new Date());
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
+  //validation
   const [validDate, setValidDate] = useState(true);
+  const [milestoneTitleInput, setMilestoneInput] = useState({});
+  const [validTitle, setValidTitle] = useState(false);
+  const [titleInput, setTitleInput] = useState({});
+  const [validDescription, setValidDescription] = useState(false);
+  const [descriptionInput, setDescriptionInput] = useState({});
 
   const { user, setUser } = useContext(UserContext);
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
-    if (title == '' || description == '') {
-      console.log("can't add; must have title and description");
-    }
-    else {
+    if (!validTitle)
+      setTitleInput({ backgroundColor: 'pink' });
+    else
+      setTitleInput({});
+    if (!validDescription)
+      setDescriptionInput({ backgroundColor: 'pink' });
+    else setDescriptionInput({});
+    if (validTitle && validDescription) {
       addGoalToUserGoalCollection(
         user,
         title,
@@ -53,12 +63,21 @@ function AddGoalScreen({ route, navigation }) {
   //sets title
   function titleHandler(enteredTitle) {
     setTitle(enteredTitle);
+    if (enteredTitle.length > 0)
+      setValidTitle(true);
+    else
+      setValidTitle(false);
   }
 
   //sets description
   function descriptionHandler(enteredDescription) {
     setDescription(enteredDescription);
+    if (enteredDescription.length > 0)
+      setValidDescription(true);
+    else
+      setValidDescription(false);
   }
+
   //add a milestone to array
   function addMilestone(enterText, date) {
     setMilestones(milestones.concat([enterText]));
@@ -66,23 +85,22 @@ function AddGoalScreen({ route, navigation }) {
   }
   function onDateSelected(event, selectedDate) {
     const currentDate = selectedDate || datePicked;
-    console.log(currentDate >= new Date() && milestoneText.length > 0)
-    if (milestoneText.length > 0 && currentDate >= new Date()) {
-      setDatePicked([
-        currentDate.getMonth() + 1,
-        currentDate.getDate(),
-        currentDate.getFullYear(),
-        currentDate.valueOf(),
-      ]);
-      setDefaultDate(selectedDate);
+    setDatePicked([
+      currentDate.getMonth() + 1,
+      currentDate.getDate(),
+      currentDate.getFullYear(),
+      currentDate.valueOf(),
+    ]);
+    setDefaultDate(selectedDate);
+
+    if (currentDate >= new Date() && milestoneText.length > 0) {
+      setMilestoneInput({});
       setValidDate(true);
-      console.log('here')
     }
     else {
+      setMilestoneInput({ backgroundColor: 'pink' });
       setValidDate(false);
-      console.log('else')
     }
-    console.log('validdate: ', validDate);
   }
   return (
     <SafeAreaView>
@@ -93,7 +111,7 @@ function AddGoalScreen({ route, navigation }) {
           </TouchableOpacity>
           <View>
             {/* title */}
-            <View style={{ borderWidth: 1 }}>
+            <View style={[{ borderWidth: 1 }, titleInput]}>
               <TextInput
                 placeholder="title"
                 onChangeText={titleHandler}
@@ -103,7 +121,7 @@ function AddGoalScreen({ route, navigation }) {
             </View>
 
             {/* description */}
-            <View style={{ borderWidth: 1 }}>
+            <View style={[{ borderWidth: 1 }, descriptionInput]}>
               <TextInput
                 placeholder="description"
                 onChangeText={descriptionHandler}
@@ -127,7 +145,7 @@ function AddGoalScreen({ route, navigation }) {
           />
 
           {/* adding a new milestone */}
-          <View style={{ borderWidth: 1, backgroundColor: 'pink' }}>
+          <View style={[{ borderWidth: 1 }, milestoneTitleInput]}>
             <TextInput
               placeholder="add milestone"
               onChangeText={text => setMilestoneText(text)}
@@ -175,7 +193,7 @@ function AddGoalScreen({ route, navigation }) {
 
           {/* add goal Button */}
           <Button
-            title="create "
+            title="create"
             onPress={() => {
               addGoalHandler();
             }}
