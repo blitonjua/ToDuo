@@ -4,6 +4,7 @@ import IndividualGoalScreen from './individualGoalScreen';
 import SearchingScreen from './searchingScreen';
 //constants
 import { status } from '../../../services/universalConstants';
+import { replaceToWaitingRoom } from '../../../services/setGoals';
 
 
 //displays the correct goal screen depending on which stage the goal is on.
@@ -19,7 +20,10 @@ function IndividualGoalDisplay({ route, navigation }) {
     //TODO: render for stage 2: planning
 
     //if there's no match
-    if (goal.status == status.matching){
+    if (goal.status == status.matching) {
+        if (goal.accountaBuddyId != '') {
+            replaceToWaitingRoom(goal);
+        }
         return (
             <SearchingScreen navigation={navigation} />
         )

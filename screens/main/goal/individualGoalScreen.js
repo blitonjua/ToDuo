@@ -8,10 +8,9 @@ import {
   TouchableOpacity,
   Button,
 } from 'react-native';
-import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
 //firebase
 import auth from '@react-native-firebase/auth';
-import {updateStatus} from '../../../services/setGoals';
+import {updateStatus, bailPartnership} from '../../../services/setGoals';
 //constants
 import {status} from '../../../services/universalConstants';
 //styles
@@ -77,6 +76,12 @@ function IndividualGoalScreen({route, navigation}) {
     );
   }
 
+  //bails the user out of the partnership
+  function bail() {
+    navigation.goBack();
+    bailPartnership(user, goal);
+  }
+
   return (
     <SafeAreaView style={styles.safe}>
       {/* back button */}
@@ -120,6 +125,9 @@ function IndividualGoalScreen({route, navigation}) {
         title="approve buddy milestones"
         onPress={() => navigation.navigate('approveMilestones', {goal: goal})}
       />
+
+      {/* accountabuddy bail */}
+      <Button title="bail buddy" onPress={() => bail()} />
     </SafeAreaView>
   );
 }
