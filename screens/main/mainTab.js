@@ -21,7 +21,7 @@ function MainTab() {
     tabBarOptions={{
       //labelStyle: { fontSize: 12 },
       //tabStyle: { height: 40 },
-      style: { backgroundColor: 'white'},
+      style: { backgroundColor: '#272b28'},
       showIcon: true,
       activeTintColor: '#53d681',
       inactiveTintColor: 'gray',

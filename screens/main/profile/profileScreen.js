@@ -34,7 +34,7 @@ function ProfileScreen({ navigation }) {
   }
 
   return (
-    <SafeAreaView styles={styles.safe}>
+    <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
         {/* Profile picture */}
         <View style={styles.profilePic} />
@@ -54,16 +54,9 @@ function ProfileScreen({ navigation }) {
               *User ID here*
             </Text>
           </View>
-
-          {/* Bio */}
-          <Text style={styles.detailsTitle}>
-            Bio:
-          </Text>
-          <Text style={styles.detailsBody}>
-            {'\t'}This will be where the main description of the user will be.
-          </Text>
         </View>
 
+        {/* archive*/ }
         <TouchableOpacity
           onPress={() => gotoPastGoals()}
           style={styles.settings}>

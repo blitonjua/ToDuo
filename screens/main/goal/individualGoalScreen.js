@@ -62,26 +62,16 @@ function IndividualGoalScreen({ route, navigation }) {
   setToDo();
   return (
     <SafeAreaView style={styles.safe}>
-      <View style={styles.padding}>
-        {/* overview info */}
-        <Text style={styles.title}>{goal.title}</Text>
-        <Text>
-          {goal.description}
-        </Text>
-
-        {/* milestones */}
-        <View style={styles.flatListContainer}>
-          <Text style={styles.milestonesText}>Milestones</Text>
-          <FlatList
-            data={goal.milestones}
-            renderItem={({ item }) => <MilestoneListItem item={item} />}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </View>
-
-        {/* todo list */}
-        <View style={styles.main}>
-          <Text>To Do</Text>
+      {/* messages button */}
+      <Button
+        title='msg'
+        onPress={() => gotoMessage()}
+      />
+      {/* overview info */}
+      <View style={styles.main}>
+        <View style={styles.listTitle}>
+          <Text style={styles.milestonesText}>To Do</Text>
+          </View>
           <FlatList
             data={toDoList}
             renderItem={({ item }) =>
@@ -120,13 +110,20 @@ function IndividualGoalScreen({ route, navigation }) {
             />
           </View>
         </View>
-      </View>
+      <View style={styles.padding}>
 
-      {/* messages button */}
-      <Button
-        title='msg'
-        onPress={() => gotoMessage()}
-      />
+        {/* milestones */}
+        <View style={styles.flatListContainer}>
+          <View style={styles.listTitle}>
+          <Text style={styles.milestonesText}>Milestones</Text>
+          </View>
+          <FlatList
+            data={goal.milestones}
+            renderItem={({ item }) => <MilestoneListItem item={item} />}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
+      </View>
 
       {/* archive goal */}
       <Button

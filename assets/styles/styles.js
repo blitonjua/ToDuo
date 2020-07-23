@@ -14,28 +14,37 @@ const colors = {
 };
 
 export const appStyles = StyleSheet.create({
+    listTitle: {
+        borderBottomColor: colors.lime,
+        borderBottomWidth: 2,
+        marginBottom: 10,
+    },
     safe: {
-        //flex: 1,
+        flex: 1,
         alignContent: 'center',
         alignItems: 'stretch',
         justifyContent: 'center',
         height: Dimensions.get('window').height,
         width: Dimensions.get('window').width,
+        backgroundColor: "#272b28",
     },
     padding: {
         padding: 20
     },
     main: {
+        flex: 1,
         padding: 20,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: "#272b28",
     },
     themedSafe: {
         flex: 1,
         alignContent: 'center',
         alignItems: 'stretch',
         justifyContent: 'center',
-        backgroundColor: '#002b54',
+        backgroundColor: "#272b28",
+
     }
 });
 
@@ -152,6 +161,10 @@ export const profileStyles = StyleSheet.create({
         borderRadius: 40,
         marginBottom: 20,
     },
+    safe:{
+        flex: 1,
+        backgroundColor: '#272b28',
+    },
     name: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -209,6 +222,7 @@ export const plusStyles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: "#272b28",
     },
     button: {
         backgroundColor: colors.hollendaise,
@@ -230,7 +244,7 @@ export const individualGoalStyles = StyleSheet.create({
     safe: {
         flex: 1,
         alignItems: 'stretch',
-        backgroundColor: 'white',
+        backgroundColor: "#272b28",
     },
     title: {
         fontSize: 30,
@@ -238,7 +252,7 @@ export const individualGoalStyles = StyleSheet.create({
         paddingBottom: 1,
     },
     milestonesText: {
-        textAlign: 'center',
+        textAlign: 'left',
         fontWeight: 'bold',
         fontSize: 20
     },
@@ -255,19 +269,15 @@ export const individualGoalStyles = StyleSheet.create({
         alignItems: 'stretch',
         borderColor: '#EBEBEB',
         borderRadius: 10,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 10,
-        elevation: 4
+        borderBottomWidth: 2,
     },
     toDoItem: {
         flexDirection: 'row',
         alignItems: 'center',
         alignSelf: 'flex-start',
+        borderBottomWidth: 2,
+        marginHorizontal: 5,
+        borderBottomColor: '#aaa',
     },
 });
 

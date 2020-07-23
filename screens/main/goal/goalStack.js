@@ -20,7 +20,13 @@ function GoalStack() {
       <Stack.Screen name="goalsListScreen" component={GoalsListScreen} options={{headerShown: false}}/>
       <Stack.Screen name="individualGoalDisplay" 
           component={IndividualGoalDisplay}
-          options={({ route }) => ({title: route.params.goal.title})}/>
+          options={({ route }) => ({title: route.params.goal.title, headerStyle: {
+            backgroundColor: '#272b28',
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },})}
+          />
       <Stack.Screen name="messageScreen" component={MessageScreen}/>
       <Stack.Screen name="doneScreen" component={DoneScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
