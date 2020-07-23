@@ -81,7 +81,7 @@ function SettingsScreen({ navigation }) {
                 </View>
                 <View style={styles.resetPassword}>
                 <TouchableOpacity style={styles.button} onPress={() => {
-                    deleteAccount()
+                    deleteAccount(uid)
                     }
                     }>
                     <Text> Deactivate Account </Text>

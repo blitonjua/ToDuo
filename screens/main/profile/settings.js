@@ -60,12 +60,15 @@ export function forgotPassword(email) {
     })
 }
 
-  
-export function deleteAccount() {
+export function deleteAccount(uid) {
   var user = auth().currentUser;
-  user.delete().then(function() {
-    // User deleted.
+  db.doc(uid).delete().then(function() {
+    console.log("deleted")
   }).catch(function(error) {
-    // An error happened.
-  });
+    console.log(error);
+  }).then(user.delete().then(function() {
+    console.log("user deleted")
+  }))
 }
+
+
