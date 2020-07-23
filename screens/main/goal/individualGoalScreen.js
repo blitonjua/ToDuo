@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  ScrollView,
 } from 'react-native';
 //firebase
 import auth from '@react-native-firebase/auth';
@@ -58,7 +59,6 @@ function IndividualGoalScreen({route, navigation}) {
           due: {item.milestoneMonth}/{item.milestoneDay}/
           {item.milestoneFullYear}
         </Text>
-
         <TouchableOpacity
           onPress={async () => {
             console.log('pressed');
@@ -72,6 +72,8 @@ function IndividualGoalScreen({route, navigation}) {
             <Text>request completions</Text>
           </View>
         </TouchableOpacity>
+        {item.completed && <Text>Completed</Text>}
+        {!item.completed && <Text>In progress</Text>}
       </View>
     );
   }
@@ -84,50 +86,46 @@ function IndividualGoalScreen({route, navigation}) {
 
   return (
     <SafeAreaView style={styles.safe}>
-      {/* back button */}
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text>GO BACK</Text>
-      </TouchableOpacity>
+      <ScrollView>
+        {/* back button */}
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text>GO BACK</Text>
+        </TouchableOpacity>
+        <View style={styles.padding}>
+          {/* overview info */}
+          <Text style={styles.title}>{goal.title}</Text>
+          <Text>{goal.description}</Text>
 
-      <View style={styles.padding}>
-        {/* overview info */}
-        <Text style={styles.title}>{goal.title}</Text>
-        <Text>{goal.description}</Text>
-
-        {/* milestones */}
-        <View style={styles.flatListContainer}>
-          <Text style={styles.milestonesText}>Milestones</Text>
-          <FlatList
-            data={milestones}
-            renderItem={({item}) => <MilestoneListItem item={item} />}
-            keyExtractor={(item, index) => index.toString()}
-          />
+          {/* milestones */}
+          <View style={styles.flatListContainer}>
+            <Text style={styles.milestonesText}>Milestones</Text>
+            <FlatList
+              data={milestones}
+              renderItem={({item}) => <MilestoneListItem item={item} />}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </View>
         </View>
-      </View>
-
-      {/* toDo list button */}
-      <Button
-        title="to-do list"
-        onPress={() => {
-          navigation.navigate('toDoListScreen', {goal: goal});
-        }}
-      />
-
-      {/* messages button */}
-      <Button title="msg" onPress={() => gotoMessage()} />
-
-      {/* archive goal */}
-      <Button title="archive" onPress={() => goalDone(status.archived)} />
-
-      {/* complete goal */}
-      <Button title="complete" onPress={() => goalDone(status.completed)} />
-      <Button
-        title="approve buddy milestones"
-        onPress={() => navigation.navigate('approveMilestones', {goal: goal})}
-      />
-
-      {/* accountabuddy bail */}
-      <Button title="bail buddy" onPress={() => bail()} />
+        {/* toDo list button */}
+        <Button
+          title="to-do list"
+          onPress={() => {
+            navigation.navigate('toDoListScreen', {goal: goal});
+          }}
+        />
+        {/* messages button */}
+        <Button title="msg" onPress={() => gotoMessage()} />
+        {/* archive goal */}
+        <Button title="archive" onPress={() => goalDone(status.archived)} />
+        {/* complete goal */}
+        <Button title="complete" onPress={() => goalDone(status.completed)} />
+        <Button
+          title="approve buddy milestones"
+          onPress={() => navigation.navigate('approveMilestones', {goal: goal})}
+        />
+        {/* accountabuddy bail */}
+        <Button title="bail buddy" onPress={() => bail()} />
+      </ScrollView>
     </SafeAreaView>
   );
 }
