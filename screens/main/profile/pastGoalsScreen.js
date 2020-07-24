@@ -37,22 +37,16 @@ function PastGoalsScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.safe}>
             <View style={styles.main}>
-                {/* back button */}
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Text>
-                        GO BACK
-                    </Text>
-                </TouchableOpacity>
 
                 {/* toggle completed */}
-                <TouchableOpacity onPress={() => setCompleted()}>
+                <TouchableOpacity style={styles.wideButton} onPress={() => setCompleted()}>
                     <Text>
                         completed
                     </Text>
                 </TouchableOpacity>
 
                 {/* toggle archived */}
-                <TouchableOpacity onPress={() => setArchived()}>
+                <TouchableOpacity style={styles.wideButton} onPress={() => setArchived()}>
                     <Text>
                         archived
                     </Text>

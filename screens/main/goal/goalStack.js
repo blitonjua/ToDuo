@@ -7,6 +7,8 @@ import MessageScreen from './messageScreen';
 import DoneScreen from './doneScreen';
 import IndividualGoalDisplay from './individualGoalDisplay';
 
+//header style
+import {headerStyles} from '../../../assets/styles/styles';
 const Stack = createStackNavigator();
 
 //the stack navigator of the goals stack where users can access existing goals.
@@ -20,14 +22,19 @@ function GoalStack() {
       <Stack.Screen name="goalsListScreen" component={GoalsListScreen} options={{headerShown: false}}/>
       <Stack.Screen name="individualGoalDisplay" 
           component={IndividualGoalDisplay}
-          options={({ route }) => ({title: route.params.goal.title, headerStyle: {
-            backgroundColor: '#272b28',
-            elevation: 0,
-            shadowOpacity: 0,
-            borderBottomWidth: 0,
-          },})}
+          options={({ route }) => ({
+            title: route.params.goal.title,
+            headerStyle: headerStyles.headerStyle,
+            headerTintColor: 'white',
+            headerBackTitle: ' ',
+          })}
           />
-      <Stack.Screen name="messageScreen" component={MessageScreen}/>
+      <Stack.Screen name="messageScreen" component={MessageScreen}
+        options={({ route }) => ({
+        headerStyle: headerStyles.headerStyle,
+        headerTintColor: 'white',
+        headerBackTitle: ' ',
+      })}/>
       <Stack.Screen name="doneScreen" component={DoneScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
   );

@@ -33,14 +33,9 @@ function CategoryScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.safe}>
             <View style={styles.main}>
-                {/* back button */}
-                <TouchableOpacity onPress={() => navigation.goBack()} >
-                    <Text>
-                        Press here to go goBack
-                </Text>
-                </TouchableOpacity>
-
-                <Text>Pick a category:</Text>
+                <View style={styles.padding}>
+                <Text style={styles.text}>Pick a category for your goal</Text>
+                </View>
 
                 {/* categories */}
                 <FlatList

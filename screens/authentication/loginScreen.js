@@ -33,7 +33,6 @@ function LoginScreen({ navigation }) {
 
   return (
     
-    <SafeAreaView style={styles.themedSafe}>
     <LinearGradient start={{x: 0, y: 0}} end={{x: 0, y: 1}} colors={['#002b54', '#53d681']} style={styles.safe}>
       <View>
         <StatusBar barStyle='light-content' backgroundColor='white'/>
@@ -87,7 +86,6 @@ function LoginScreen({ navigation }) {
         </View>
       </View>
       </LinearGradient>
-    </SafeAreaView>
   );
 };
 

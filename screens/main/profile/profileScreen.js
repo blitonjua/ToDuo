@@ -44,8 +44,7 @@ function ProfileScreen({ navigation }) {
           Firstname Lastname
         </Text>
 
-        <View style={styles.details}>
-          {/* User ID */}
+        {/* <View style={styles.details}>
           <View style={styles.row}>
             <Text style={styles.detailsTitle}>
               User ID:
@@ -54,7 +53,7 @@ function ProfileScreen({ navigation }) {
               *User ID here*
             </Text>
           </View>
-        </View>
+        </View> */}
 
         {/* archive*/ }
         <TouchableOpacity

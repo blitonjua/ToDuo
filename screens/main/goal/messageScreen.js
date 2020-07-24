@@ -30,11 +30,6 @@ function MessageScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <View style={styles.main}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text>Go Back</Text>
-        </TouchableOpacity>
-      </View>
 
       {/*TODO need to figure out way to remove tabs in chat*/}
       {/* messaging */}

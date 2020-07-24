@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProfileScreen from './profileScreen';
 import SettingsScreen from './settingsScreen';
 import PastGoalsScreen from './pastGoalsScreen';
+import {headerStyles} from '../../../assets/styles/styles'
 
 function ProfileStack() {
     const Stack = createStackNavigator();
@@ -15,9 +16,22 @@ function ProfileStack() {
                 screenOptions={{
                 gestureEnabled: false,
             }}>
-            <Stack.Screen name="profileScreen" component={ProfileScreen} options={{headerShown: false}}/>
-            <Stack.Screen name="settingsScreen" component={SettingsScreen} options={{title:'Settings'}}/>
-            <Stack.Screen name="pastGoalsScreen" component={PastGoalsScreen} options={{title:'Past Goals'}}/>
+            <Stack.Screen name="profileScreen" component={ProfileScreen} 
+                options={{headerShown: false}}/>
+            <Stack.Screen name="settingsScreen" component={SettingsScreen} 
+                options={{
+                    title:'Settings',
+                    headerStyle: headerStyles.headerStyle,
+                    headerTintColor: 'white',
+                    headerBackTitle: ' ',
+                    }}/>
+            <Stack.Screen name="pastGoalsScreen" component={PastGoalsScreen} 
+                options={{
+                    title:'Past Goals',
+                    headerStyle: headerStyles.headerStyle,
+                    headerTintColor: 'white',
+                    headerBackTitle: ' ',
+                    }}/>
         </Stack.Navigator>
     );
 };

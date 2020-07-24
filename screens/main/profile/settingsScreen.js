@@ -10,9 +10,6 @@ import {
 function SettingsScreen({ navigation }) {
     return(
         <SafeAreaView>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Text> Go Back </Text>
-            </TouchableOpacity>
             <Text>
                 This is the SettingsScreen
             </Text>

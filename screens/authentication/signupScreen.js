@@ -49,7 +49,6 @@ function SignupScreen({navigation}) {
   };
 
   return (
-    <SafeAreaView style={styles.themedSafe}>
       <LinearGradient start={{x: 0, y: 0}} end={{x: 0, y: 1}} colors={['#002b54', '#53d681']} style={styles.safe}>
       <View style={styles.padding}>
       <View style={styles.logoView}>
@@ -125,7 +124,6 @@ function SignupScreen({navigation}) {
         </View>
       </View>
       </LinearGradient>
-    </SafeAreaView>
   );
 }
 

@@ -54,7 +54,7 @@ function IndividualGoalScreen({ route, navigation }) {
     return (
       <View style={styles.goalContainerTwo}>
         <Text style={styles.goalText}>{item}</Text>
-        <Text>Due Date</Text>
+        <Text style={styles.goalText}>Due Date</Text>
       </View>
     )
   }
@@ -63,12 +63,14 @@ function IndividualGoalScreen({ route, navigation }) {
   return (
     <SafeAreaView style={styles.safe}>
       {/* messages button */}
-      <Button
-        title='msg'
-        onPress={() => gotoMessage()}
-      />
+      <View style={styles.padding}>
+        <TouchableOpacity style={styles.wideButton} onPress={() => gotoMessage()}>
+          <Text>Message Buddy (TODO put name here later)</Text>
+        </TouchableOpacity>
+      </View>
+
       {/* overview info */}
-      <View style={styles.main}>
+      <View style={styles.padding}>
         <View style={styles.listTitle}>
           <Text style={styles.milestonesText}>To Do</Text>
           </View>
@@ -76,8 +78,14 @@ function IndividualGoalScreen({ route, navigation }) {
             data={toDoList}
             renderItem={({ item }) =>
               //TODO: preferable to move this into a separate function
-              <View style={styles.toDoItem}>
+              <View>
                 <CircleCheckBox
+                  styleLabel={{color: 'white'}}
+                  outerSize={15}
+                  innerColor={'#272b28'}
+                  outerColor={'#53d681'}
+                  filterColor={'#272b28'}
+                  styleCheckboxContainer={{flex: 1}}
                   checked={false}
                   onToggle={() => {
                     let itemId = item.itemDescription;
@@ -93,6 +101,8 @@ function IndividualGoalScreen({ route, navigation }) {
           <View style={styles.toDoItem}>
             <TextInput
               placeholder="Add item to do list"
+              placeholderTextColor='gray'
+              style={{color: 'white', flex: 1}}
               onChangeText={text => setToDoText(text)}
               ref={input => {
                 this.textInput = input;
@@ -108,11 +118,11 @@ function IndividualGoalScreen({ route, navigation }) {
                 }
               }}
             />
+            </View>
           </View>
-        </View>
-      <View style={styles.padding}>
 
-        {/* milestones */}
+              {/* milestones */}
+      <View style={styles.padding}> 
         <View style={styles.flatListContainer}>
           <View style={styles.listTitle}>
           <Text style={styles.milestonesText}>Milestones</Text>
@@ -127,12 +137,14 @@ function IndividualGoalScreen({ route, navigation }) {
 
       {/* archive goal */}
       <Button
+        color='#53d681'
         title='archive'
         onPress={() => goalDone(status.archived)}
       />
 
       {/* complete goal */}
       <Button
+        color='#53d681'
         title='complete'
         onPress={() => goalDone(status.completed)}
       />

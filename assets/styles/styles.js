@@ -13,11 +13,37 @@ const colors = {
     lime: '#53d681',
 };
 
+export const headerStyles = {
+    headerStyle: {
+        backgroundColor: '#272b28',
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
+    },
+    hedaerTitleStyle:{
+        color: 'white',
+    }
+};
+
 export const appStyles = StyleSheet.create({
+    text: {
+        color: 'white',
+        fontSize: 24,
+    },
+    wideButton: {
+        backgroundColor: colors.lime,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 40,
+        borderRadius: 20,
+        marginBottom: 20,
+    },
     listTitle: {
         borderBottomColor: colors.lime,
         borderBottomWidth: 2,
         marginBottom: 10,
+        alignContent: 'stretch',
     },
     safe: {
         flex: 1,
@@ -32,10 +58,12 @@ export const appStyles = StyleSheet.create({
         padding: 20
     },
     main: {
-        flex: 1,
+        //flex: 1,
         padding: 20,
         justifyContent: 'center',
         alignItems: 'center',
+        alignContent: 'center',
+
         backgroundColor: "#272b28",
     },
     themedSafe: {
@@ -162,13 +190,15 @@ export const profileStyles = StyleSheet.create({
         marginBottom: 20,
     },
     safe:{
+        justifyContent: 'center',
         flex: 1,
         backgroundColor: '#272b28',
     },
     name: {
         fontSize: 20,
         fontWeight: 'bold',
-        margin: 20
+        margin: 20,
+        color: 'white',
     },
     row: {
         flexDirection: 'row',
@@ -238,9 +268,24 @@ export const plusStyles = StyleSheet.create({
     }
 })
 
+export const addGoalStyles = StyleSheet.create({
+    ...appStyles,
+})
+
 //goal
 export const individualGoalStyles = StyleSheet.create({
     ...appStyles,
+    goalText: {
+        color: 'white'
+    },
+    main: {
+        //flex: 1,
+        padding: 20,
+        alignItems: 'flex-start',
+        alignContent: 'stretch',
+
+        backgroundColor: "#272b28",
+    },
     safe: {
         flex: 1,
         alignItems: 'stretch',
@@ -261,15 +306,13 @@ export const individualGoalStyles = StyleSheet.create({
         marginTop: 10
     },
     goalContainerTwo: {
-        backgroundColor: 'white',
         padding: 7,
         marginTop: 10,
         marginRight: .5,
         marginLeft: .5,
         marginBottom: 1,
         alignItems: 'stretch',
-        borderColor: '#EBEBEB',
-        borderRadius: 10,
+        borderBottomColor: 'gray',
         borderBottomWidth: 2,
     },
     toDoItem: {
@@ -317,8 +360,9 @@ export const inputStyles =  StyleSheet.create({
       borderWidth: 1,
       borderRadius: 3,
       flexDirection: 'row',
-      paddingHorizontal: 10
-    }
+      paddingHorizontal: 10,
+      color: 'white'
+    },
 });
 
 // input button
@@ -327,7 +371,7 @@ export const buttonStyles = StyleSheet.create({
       marginHorizontal: 20,
       paddingVertical: 10,
       paddingHorizontal: 16,
-      backgroundColor: '#5FB0FF',
+      backgroundColor: '#53d681',
       borderRadius: 3
     },
     text: {
@@ -374,7 +418,7 @@ export const messageStyles = StyleSheet.create({
       justifyContent: 'flex-end'
     },
     rightTextContainer: {
-      backgroundColor: '#5FB0FF',
+      backgroundColor: '#53d681',
       marginRight: 10
     },
     leftText: {

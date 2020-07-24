@@ -12,6 +12,8 @@ import {
 import {addGoalToUserGoalCollection} from '../../../services/setGoals';
 import {UserContext} from '../../../services/userContext';
 
+import {addGoalStyles} from '../../../assets/styles/styles';
+
 //the form to add a goal and handles creating the goal.
 function AddGoalScreen({route, navigation}) {
   //hooks for goal creation
@@ -62,12 +64,9 @@ function AddGoalScreen({route, navigation}) {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={addGoalStyles.safe}>
       {!submitted ? (
         <View>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text>Go Back because you don't know what your goal is lame-o</Text>
-          </TouchableOpacity>
 
           {/* title */}
           <View style={{borderWidth: 1}}>
@@ -119,13 +118,12 @@ function AddGoalScreen({route, navigation}) {
         </View>
       ) : (
         //renders on successfully adding goal
-        <View>
-          <Text>Goal Added! You can access your goal in the Goal tab.</Text>
-
-          <TouchableOpacity onPress={() => navigation.navigate('plusScreen')}>
-            <Text>Go Back</Text>
-          </TouchableOpacity>
+        <View style={styles.main}>
+          <Text style={styles.text}>Goal Added! You can access your goal in the Goal tab.</Text>
         </View>
+
+        //maybe add an option to add another goal or make sure this goes back to
+        // the big plus button once we leave this screen
       )}
     </SafeAreaView>
   );
