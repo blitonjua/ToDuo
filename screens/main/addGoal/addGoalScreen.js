@@ -40,14 +40,19 @@ function AddGoalScreen({ route, navigation }) {
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
+    //ensures a title
     if (!validTitle)
       setTitleInput({ backgroundColor: 'pink' });
     else
       setTitleInput({});
+    //ensures a description
     if (!validDescription)
       setDescriptionInput({ backgroundColor: 'pink' });
-    else setDescriptionInput({});
-    if (validTitle && validDescription) {
+    else
+      setDescriptionInput({});
+    
+    //only adds a goal if milestone, title, and description provided
+    if (validTitle && validDescription && milestones.length > 0) {
       addGoalToUserGoalCollection(
         user,
         title,
