@@ -86,26 +86,26 @@ function IndividualGoalScreen({route, navigation}) {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <ScrollView>
-        {/* back button */}
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text>GO BACK</Text>
-        </TouchableOpacity>
-        <View style={styles.padding}>
-          {/* overview info */}
-          <Text style={styles.title}>{goal.title}</Text>
-          <Text>{goal.description}</Text>
+      {/* back button */}
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Text>GO BACK</Text>
+      </TouchableOpacity>
+      <View style={styles.padding}>
+        {/* overview info */}
+        <Text style={styles.title}>{goal.title}</Text>
+        <Text>{goal.description}</Text>
 
-          {/* milestones */}
-          <View style={styles.flatListContainer}>
-            <Text style={styles.milestonesText}>Milestones</Text>
-            <FlatList
-              data={milestones}
-              renderItem={({item}) => <MilestoneListItem item={item} />}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </View>
+        {/* milestones */}
+        <View style={styles.flatListContainer}>
+          <Text style={styles.milestonesText}>Milestones</Text>
+          <FlatList
+            data={milestones}
+            renderItem={({item}) => <MilestoneListItem item={item} />}
+            keyExtractor={(item, index) => index.toString()}
+          />
         </View>
+      </View>
+      <ScrollView>
         {/* toDo list button */}
         <Button
           title="to-do list"
