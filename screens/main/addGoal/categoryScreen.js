@@ -30,7 +30,7 @@ function CategoryScreen({ navigation }) {
         )
     }
 
-    return (
+  return (
         <SafeAreaView style={styles.safe}>
             <View style={styles.main}>
                 <View style={styles.padding}>
@@ -45,7 +45,7 @@ function CategoryScreen({ navigation }) {
                 />
             </View>
         </SafeAreaView>
-    )
+  )
 }
 
 export default CategoryScreen;
