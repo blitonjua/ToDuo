@@ -1,34 +1,34 @@
 import React from 'react';
 import {
-    SafeAreaView,
-    View,
-    TouchableOpacity,
-    FlatList,
-    Text,
+  SafeAreaView,
+  View,
+  TouchableOpacity,
+  FlatList,
+  Text,
 } from 'react-native';
 
-//constants
-import { categories } from '../../../services/universalConstants';
+//screens
+import {categories} from '../../../services/universalConstants';
+
 //styles
-import { appStyles, devFlatListStyles } from '../../../assets/styles/styles';
+import {appStyles, devFlatListStyles} from '../../../assets/styles/styles';
 const styles = appStyles;
 
-function CategoryScreen({ navigation }) {
+function CategoryScreen({navigation}) {
+  function handlePress(title) {
+    navigation.navigate('addGoalScreen', {category: title});
+  }
 
-    function handlePress(title) {
-        navigation.navigate('addGoalScreen', { category: title });
-    }
-
-    //item renderer for FlatList
-    function ListItem({ title }) {
-        return (
-            <TouchableOpacity onPress={() => handlePress(title)}>
-                <View style={devFlatListStyles.ListItem}>
-                    <Text style={devFlatListStyles.ListItemText}>{title}</Text>
-                </View>
-            </TouchableOpacity>
-        )
-    }
+//item renderer for FlatList
+function ListItem({title}) {
+  return (
+    <TouchableOpacity onPress={() => handlePress(title)}>
+      <View style={devFlatListStyles.ListItem}>
+        <Text style={devFlatListStyles.ListItemText}>{title}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
 
   return (
         <SafeAreaView style={styles.safe}>
