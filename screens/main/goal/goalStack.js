@@ -9,6 +9,7 @@ import IndividualGoalDisplay from './individualGoalDisplay';
 
 //header style
 import {headerStyles} from '../../../assets/styles/styles';
+import ToDoListScreen from './toDoListScreen';
 const Stack = createStackNavigator();
 
 //the stack navigator of the goals stack where users can access existing goals.
@@ -36,6 +37,7 @@ function GoalStack() {
         headerBackTitle: ' ',
       })}/>
       <Stack.Screen name="doneScreen" component={DoneScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="toDoListScreen" component={ToDoListScreen} />
     </Stack.Navigator>
   );
 }
