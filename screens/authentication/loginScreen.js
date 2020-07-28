@@ -18,7 +18,8 @@ function LoginScreen({ navigation }) {
   //manage state
   const [emailText, setEmailText] = useState('');
   const [passwordText, setPasswordText] = useState('');
-  const [validLoginStyle, setValidLoginStyle] = useState({});
+  const [validEmailStyle, setValidEmailStyle] = useState({});
+  const [validPassStyle, setValidPassStyle] = useState({});
 
   function gotoSignup() {
     // setScreen(!showSignIn);
@@ -28,7 +29,14 @@ function LoginScreen({ navigation }) {
   const signUserIn = (email, pass) => {
     auth().signInWithEmailAndPassword(email, pass)
       .catch(error => {
-        setValidLoginStyle({ backgroundColor: 'pink' })
+        //wrong password
+        error.code === 'auth/wrong-password' ?
+          setValidPassStyle({ backgroundColor: 'pink' }) :
+          setValidPassStyle({});
+        //wrong email
+        error.code === 'auth/invalid-email' || emailText.length == 0 ?
+          setValidEmailStyle({ backgroundColor: 'pink' }) :
+          setValidEmailStyle({});
       })
   };
 
@@ -36,14 +44,14 @@ function LoginScreen({ navigation }) {
     <SafeAreaView style={styles.safe}>
       <View style={styles.padding}>
         <Text style={styles.title}>ToDuo</Text>
-        <View style={[styles.container, validLoginStyle]}>
+        <View style={[styles.container, validEmailStyle]}>
           <TextInput style={styles.textInput}
             placeholder="Email"
             onChangeText={text => setEmailText(text)}
           />
         </View>
 
-        <View style={[styles.container, validLoginStyle]}>
+        <View style={[styles.container, validPassStyle]}>
           <TextInput
             style={styles.textInput}
             secureTextEntry={true}
