@@ -405,6 +405,10 @@ export const messageStyles = StyleSheet.create({
     },
     resetPassword:{
         marginTop:10
+    },
+    desc: {
+        fontSize:5
+
     }
   })
 

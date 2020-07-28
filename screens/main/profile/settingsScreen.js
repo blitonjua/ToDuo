@@ -85,6 +85,7 @@ function SettingsScreen({ navigation }) {
                     }
                     }>
                     <Text> Deactivate Account </Text>
+                    <Text style={styles.desc}>Note: You must be recently signed in to deactivate.</Text>
                 </TouchableOpacity>
                 </View>
     
