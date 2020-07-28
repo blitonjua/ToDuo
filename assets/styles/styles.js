@@ -315,6 +315,10 @@ export const individualGoalStyles = StyleSheet.create({
         borderBottomColor: 'gray',
         borderBottomWidth: 2,
     },
+});
+
+export const toDoStyles = StyleSheet.create({
+    ...individualGoalStyles,
     toDoItem: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -323,7 +327,7 @@ export const individualGoalStyles = StyleSheet.create({
         marginHorizontal: 5,
         borderBottomColor: '#aaa',
     },
-});
+})
 
 //TODO
 export const devFlatListStyles = StyleSheet.create({

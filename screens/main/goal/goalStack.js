@@ -37,7 +37,13 @@ function GoalStack() {
         headerBackTitle: ' ',
       })}/>
       <Stack.Screen name="doneScreen" component={DoneScreen} options={{headerShown: false}}/>
-      <Stack.Screen name="toDoListScreen" component={ToDoListScreen} />
+      <Stack.Screen name="toDoListScreen" component={ToDoListScreen} 
+      options={({ route }) => ({
+        headerStyle: headerStyles.headerStyle,
+        headerTintColor: 'white',
+        headerBackTitle: ' ',
+        title: 'To-do',
+      })}/>
     </Stack.Navigator>
   );
 }

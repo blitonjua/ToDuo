@@ -12,10 +12,12 @@ import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
 //firebase
 import auth from '@react-native-firebase/auth';
 import {addToDo, getToDoList, deleteItem} from '../../../services/toDoList';
+import {toDoStyles} from '../../../assets/styles/styles';
 function ToDoListSceen({route, navigation}) {
   const {goal} = route.params;
   const [toDoList, setToDoList] = useState([]);
   const [toDoText, setToDoText] = useState('');
+  const styles = toDoStyles;
 
   let uid = auth().currentUser.uid;
   //get to do list
@@ -25,11 +27,9 @@ function ToDoListSceen({route, navigation}) {
   }
   getToDoListData();
   return (
-    <SafeAreaView>
-      <Button title="<-" onPress={() => navigation.goBack()} />
+    <SafeAreaView style={styles.safe}>
       {/* todo list */}
       <View style={styles.main}>
-        <Text>To Do</Text>
         <FlatList
           data={toDoList}
           renderItem={({item}) => (
@@ -51,6 +51,7 @@ function ToDoListSceen({route, navigation}) {
         <View style={styles.toDoItem}>
           <TextInput
             placeholder="Add item to do list"
+            placeholderTextColor='gray'
             onChangeText={text => setToDoText(text)}
             ref={input => {
               this.textInput = input;
