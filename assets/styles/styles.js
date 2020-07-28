@@ -326,6 +326,7 @@ export const toDoStyles = StyleSheet.create({
         borderBottomWidth: 2,
         marginHorizontal: 5,
         borderBottomColor: '#aaa',
+        flex: 1,
     },
 })
 

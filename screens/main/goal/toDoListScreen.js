@@ -36,6 +36,12 @@ function ToDoListSceen({route, navigation}) {
             //TODO: preferable to move this into a separate function
             <View style={styles.toDoItem}>
               <CircleCheckBox
+                styleLabel={{color: 'white'}}
+                outerSize={15}
+                innerColor={'#272b28'}
+                outerColor={'#53d681'}
+                filterColor={'#272b28'}
+                styleCheckboxContainer={{flex: 1}}
                 checked={false}
                 onToggle={() => {
                   let itemId = item.itemDescription;
@@ -50,6 +56,7 @@ function ToDoListSceen({route, navigation}) {
         />
         <View style={styles.toDoItem}>
           <TextInput
+            style={{color: 'white'}}
             placeholder="Add item to do list"
             placeholderTextColor='gray'
             onChangeText={text => setToDoText(text)}
