@@ -19,7 +19,9 @@ function LoginScreen({ navigation }) {
   const [emailText, setEmailText] = useState('');
   const [passwordText, setPasswordText] = useState('');
   const [validEmailStyle, setValidEmailStyle] = useState({});
+  const [emailError, setEmailError] = useState('');
   const [validPassStyle, setValidPassStyle] = useState({});
+  const [passError, setPassError] = useState('');
 
   function gotoSignup() {
     // setScreen(!showSignIn);
@@ -27,23 +29,48 @@ function LoginScreen({ navigation }) {
   }
 
   const signUserIn = (email, pass) => {
-    auth().signInWithEmailAndPassword(email, pass)
-      .catch(error => {
-        //wrong password
-        error.code === 'auth/wrong-password' ?
-          setValidPassStyle({ backgroundColor: 'pink' }) :
-          setValidPassStyle({});
-        //wrong email
-        error.code === 'auth/invalid-email' || emailText.length == 0 ?
-          setValidEmailStyle({ backgroundColor: 'pink' }) :
-          setValidEmailStyle({});
-      })
+    if (email.length == 0) {
+      setValidEmailStyle({ backgroundColor: 'pink' });
+      setEmailError('Please enter an email');
+      setValidPassStyle({});
+      setPassError();
+    }
+    else if (pass.length == 0) {
+      setValidPassStyle({ backgroundColor: 'pink' });
+      setPassError('Please enter your password');
+      setValidEmailStyle({});
+      setEmailError();
+    }
+    else
+      auth().signInWithEmailAndPassword(email, pass)
+        .catch(error => {
+          console.log(error.code, error.message);
+          //wrong password
+          if (error.code === 'auth/wrong-password') {
+            setValidPassStyle({ backgroundColor: 'pink' });
+            setPassError(error.message);
+          }
+          else {
+            setValidPassStyle({});
+            setPassError();
+          }
+          //wrong email
+          if (error.code === 'auth/invalid-email' || error.code === 'auth/user-not-found') {
+            setValidEmailStyle({ backgroundColor: 'pink' });
+            setEmailError(error.message);
+          }
+          else {
+            setValidEmailStyle({});
+            setEmailError();
+          }
+        })
   };
 
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.padding}>
         <Text style={styles.title}>ToDuo</Text>
+        <Text style={styles.errorText}>{emailError}</Text>
         <View style={[styles.container, validEmailStyle]}>
           <TextInput style={styles.textInput}
             placeholder="Email"
@@ -51,6 +78,7 @@ function LoginScreen({ navigation }) {
           />
         </View>
 
+        <Text style={styles.errorText}>{passError}</Text>
         <View style={[styles.container, validPassStyle]}>
           <TextInput
             style={styles.textInput}
