@@ -44,7 +44,6 @@ function LoginScreen({ navigation }) {
     else
       auth().signInWithEmailAndPassword(email, pass)
         .catch(error => {
-          console.log(error.code, error.message);
           //wrong password
           if (error.code === 'auth/wrong-password') {
             setValidPassStyle({ backgroundColor: 'pink' });
