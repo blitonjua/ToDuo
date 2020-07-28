@@ -19,6 +19,7 @@ function CategoryScreen({navigation}) {
     navigation.navigate('addGoalScreen', {category: title});
   }
 
+<<<<<<< HEAD
 //item renderer for FlatList
 function ListItem({title}) {
   return (
@@ -30,6 +31,18 @@ function ListItem({title}) {
   );
 }
 
+=======
+  function ListItem({title}) {
+    return (
+      <TouchableOpacity onPress={() => handlePress(title)}>
+        <View style={devFlatListStyles.ListItem}>
+          <Text style={devFlatListStyles.ListItemText}>{title}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+  
+>>>>>>> 754a79502208214896ec8ebe6b47729d9722d072
   return (
         <SafeAreaView style={styles.safe}>
             <View style={styles.main}>

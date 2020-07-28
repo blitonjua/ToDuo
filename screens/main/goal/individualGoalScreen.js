@@ -71,7 +71,11 @@ function IndividualGoalScreen({route, navigation}) {
           <Text>Message Buddy (TODO put name here later)</Text>
         </TouchableOpacity>
       </View>
+<<<<<<< HEAD
 
+=======
+      <View style={styles.padding}>
+>>>>>>> 754a79502208214896ec8ebe6b47729d9722d072
       {/* toDo list button */}
       <Button
         title="to-do list"
@@ -79,6 +83,10 @@ function IndividualGoalScreen({route, navigation}) {
           navigation.navigate('toDoListScreen', {goal: goal});
         }}
       />
+<<<<<<< HEAD
+=======
+          </View>
+>>>>>>> 754a79502208214896ec8ebe6b47729d9722d072
 
       {/* milestones */}
       <View style={styles.padding}> 
