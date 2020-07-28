@@ -322,12 +322,14 @@ export const toDoStyles = StyleSheet.create({
     toDoItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        alignSelf: 'flex-start',
+        alignSelf: 'stretch',
         borderBottomWidth: 2,
         marginHorizontal: 5,
         borderBottomColor: '#aaa',
-        flex: 1,
     },
+    padding:{
+        padding: 20,
+    }
 })
 
 //TODO

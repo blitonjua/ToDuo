@@ -54,27 +54,27 @@ function ToDoListSceen({route, navigation}) {
           )}
           keyExtractor={(item, index) => index.toString()}
         />
-        <View style={styles.toDoItem}>
-          <TextInput
-            style={{color: 'white'}}
-            placeholder="Add item to do list"
-            placeholderTextColor='gray'
-            onChangeText={text => setToDoText(text)}
-            ref={input => {
-              this.textInput = input;
-            }}
-          />
-          <Button
-            title="+"
-            onPress={() => {
-              if (toDoText != '') {
-                addToDo(auth().currentUser.uid, goal.goalId, toDoText);
-                setToDoText('');
-                this.textInput.clear();
-              }
-            }}
-          />
-        </View>
+          <View style={styles.toDoItem}>
+            <TextInput
+              style={{color: 'white'}}
+              placeholder="Add item to do list"
+              placeholderTextColor='gray'
+              onChangeText={text => setToDoText(text)}
+              ref={input => {
+                this.textInput = input;
+              }}
+            />
+            <Button
+              title="+"
+              onPress={() => {
+                if (toDoText != '') {
+                  addToDo(auth().currentUser.uid, goal.goalId, toDoText);
+                  setToDoText('');
+                  this.textInput.clear();
+                }
+              }}
+            />
+          </View>
       </View>
     </SafeAreaView>
   );
