@@ -35,7 +35,7 @@ function LoginScreen({ navigation }) {
     
     <LinearGradient start={{x: 0, y: 0}} end={{x: 0, y: 1}} colors={['#002b54', '#53d681']} style={styles.safe}>
       <View>
-        <StatusBar barStyle='light-content' backgroundColor='white'/>
+        <StatusBar barStyle={Platform.OS === 'ios'? 'light-content':'default'} backgroundColor='black'/>
       </View>
       <View style={styles.padding}>
           <View style={styles.logoView}>
