@@ -50,7 +50,6 @@ export async function getMilestonesAsObjects(uid, goalId) {
         milestoneList.push(dataObject);
       });
     });
-
   return milestoneList;
 }
 

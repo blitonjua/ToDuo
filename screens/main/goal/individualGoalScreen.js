@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect, Component} from 'react';
 import {
   SafeAreaView,
   FlatList,
@@ -51,31 +51,44 @@ function IndividualGoalScreen({route, navigation}) {
     setMilestones(data);
   }
   getMilestones();
-  function MilestoneListItem({item}) {
-    return (
-      <View style={styles.goalContainerTwo}>
-        <Text style={styles.goalText}>{item.milestoneText}</Text>
-        <Text>
-          due: {item.milestoneMonth}/{item.milestoneDay}/
-          {item.milestoneFullYear}
-        </Text>
-        <TouchableOpacity
-          onPress={async () => {
-            console.log('pressed');
-            await requestMilestoneCompletion(
-              uid,
-              goal.goalId,
-              item.milestoneText,
-            );
-          }}>
-          <View>
-            <Text>request completions</Text>
-          </View>
-        </TouchableOpacity>
-        {item.completed && <Text>Completed</Text>}
-        {!item.completed && <Text>In progress</Text>}
-      </View>
-    );
+  class MilestoneListItem extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        item: props.item,
+      };
+      item = this.state.item;
+    }
+    render() {
+      return (
+        <View style={styles.goalContainerTwo}>
+          <Text style={styles.goalText}>{item.milestoneText}</Text>
+          <Text>
+            due: {item.milestoneMonth}/{item.milestoneDay}/
+            {item.milestoneFullYear}
+          </Text>
+          <TouchableOpacity
+            // onPress={async () => {
+            //   console.log('pressed');
+            //   await requestMilestoneCompletion(
+            //     uid,
+            //     goal.goalId,
+            //     item.milestoneText,
+            //   );
+            // }}
+            onPress={() => {
+              console.log('pressed');
+            }}>
+            <View>
+              <Text>request completions</Text>
+            </View>
+          </TouchableOpacity>
+          <Button title="click" onPress={() => console.log('pressed')} />
+          {item.completed && <Text>Completed</Text>}
+          {!item.completed && <Text>In progress</Text>}
+        </View>
+      );
+    }
   }
 
   //bails the user out of the partnership
@@ -121,7 +134,12 @@ function IndividualGoalScreen({route, navigation}) {
         <Button title="complete" onPress={() => goalDone(status.completed)} />
         <Button
           title="approve buddy milestones"
-          onPress={() => navigation.navigate('approveMilestones', {goal: goal})}
+          onPress={() => {
+            navigation.navigate('approveMilestones', {
+              goal: goal,
+              navigation: navigation,
+            });
+          }}
         />
         {/* accountabuddy bail */}
         <Button title="bail buddy" onPress={() => bail()} />
