@@ -12,7 +12,7 @@ export async function getUserData(uid) {
     await db
       .doc(uid)
       .get()
-      .then((docRef) => { 
+      .then((docRef) => {    
           let docData = docRef.data();
           let dataObject = {
               age: docData.age,
@@ -21,9 +21,9 @@ export async function getUserData(uid) {
               email: docData.email
           }
           user = dataObject
+        
         }
     )
-  .catch((error) => { })
   return user
   }
 

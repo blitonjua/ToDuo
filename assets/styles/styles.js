@@ -464,25 +464,32 @@ export const messageStyles = StyleSheet.create({
         flex: 1,
         alignContent: 'center',
         alignItems: 'stretch',
-       // justifyContent: 'center',
-        marginTop:10,
-        backgroundColor: 'white',
+        justifyContent: 'center',
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
       },
       padding: {
         padding: 20
     },
     main: {
+        flex:1,
         padding: 20,
-        //justifyContent: 'center',
+        justifyContent: 'center',
         alignItems: 'center',
     },
+    textInput: {
+        fontFamily:'BloggerSans-Medium',
+        fontSize:16,
+        marginRight:50,
+        color:'white'
+    },
     container: {
-        backgroundColor: 'white',
+        borderBottomWidth: 2,
+        borderBottomColor: 'white',
         padding: 7,
         marginTop: 10,
         alignItems: 'stretch',
-       // justifyContent: 'center',
-        borderColor: '#EBEBEB',
+        justifyContent: 'center',
         borderRadius: 10,
         marginBottom: 8,
         shadowColor: '#000',
@@ -495,23 +502,44 @@ export const messageStyles = StyleSheet.create({
         elevation: 3
     },
     button: {
+        color:'#fff',
+        alignItems:'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 5
+    },
+    secondButton: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#42aaf5',
+        backgroundColor: colors.lime,
         borderRadius: 60,
         height: 40
     },
+    buttonText:{
+        color:'#fff',
+        fontFamily:'BloggerSans-Medium',
+        fontSize:16,
+        
+    },
     title: {
-        marginTop:10,
-        fontSize: 20,
+        fontSize: 30,
         textAlign: 'center',
-        fontFamily: 'BloggerSans-BoldItalic'
+        fontFamily: 'BloggerSans-BoldItalic',
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 10,
+        color:'white'
     },
     goBack: {
-        marginTop:10
+       marginTop:30
     },
     resetPassword:{
-        marginTop:10
+        marginTop:15
     }
   })
 

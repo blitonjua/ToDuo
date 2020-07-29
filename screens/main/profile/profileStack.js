@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 //custom screens
 import ProfileScreen from './profileScreen';
-import SettingsScreen from './settingsScreen';
+import settingsStack from './settingsStack';
 import PastGoalsScreen from './pastGoalsScreen';
 import {headerStyles} from '../../../assets/styles/styles'
 
@@ -18,7 +18,7 @@ function ProfileStack() {
             }}>
             <Stack.Screen name="profileScreen" component={ProfileScreen} 
                 options={{headerShown: false}}/>
-            <Stack.Screen name="settingsScreen" component={SettingsScreen} 
+            <Stack.Screen name="settingsStack" component={settingsStack} 
                 options={{
                     title:'Settings',
                     headerStyle: headerStyles.headerStyle,

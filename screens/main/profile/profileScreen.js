@@ -25,7 +25,7 @@ function ProfileScreen({ navigation }) {
 
   //navigates to the settings
   function gotoSettings() {
-    navigation.navigate("settingsScreen");
+    navigation.navigate("settingsStack");
   }
 
   //navigates to the past goals
