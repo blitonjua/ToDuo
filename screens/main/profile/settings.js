@@ -54,7 +54,7 @@ export async function getUserData(uid) {
 export function forgotPassword(email) {
   auth().sendPasswordResetEmail(email)
     .then(function (user) {
-      alert('Please check your email...')
+      alert('Please check your email.')
     }).catch(function (e) {
       console.log(e)
     })
@@ -63,11 +63,14 @@ export function forgotPassword(email) {
 export function deleteAccount(uid) {
   var user = auth().currentUser;
   db.doc(uid).delete().then(function() {
+
     console.log("deleted")
   }).catch(function(error) {
     console.log(error);
   }).then(user.delete().then(function() {
+    alert('Your account has been deleted.')
     console.log("user deleted")
+
   }))
 }
 

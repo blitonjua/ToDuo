@@ -483,6 +483,14 @@ export const messageStyles = StyleSheet.create({
         marginRight:50,
         color:'white'
     },
+    generalText:{
+        fontFamily:'BloggerSans-Medium',
+        fontSize:16,
+        color:'white',
+        padding:5,
+        textAlign:'center'
+
+    },
     container: {
         borderBottomWidth: 2,
         borderBottomColor: 'white',
@@ -490,7 +498,6 @@ export const messageStyles = StyleSheet.create({
         marginTop: 10,
         alignItems: 'stretch',
         justifyContent: 'center',
-        borderRadius: 10,
         marginBottom: 8,
         shadowColor: '#000',
         shadowOffset: {
@@ -525,6 +532,13 @@ export const messageStyles = StyleSheet.create({
         fontFamily:'BloggerSans-Medium',
         fontSize:16,
         
+    },
+    secondContainer:{
+        margin:20
+
+    },
+    general:{
+        marginBottom:10
     },
     title: {
         fontSize: 30,
