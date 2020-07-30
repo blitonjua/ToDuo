@@ -23,9 +23,6 @@ function ProfileScreen({ navigation }) {
   const { user, setUser } = useContext(UserContext);
 
   async function getUser() {
-    // let user;
-    // user = await getUserData(user)
-    // setUserData(user)
     setUserData(await getUserData(user));
   }
 
@@ -55,7 +52,7 @@ function ProfileScreen({ navigation }) {
         {/* Profile picture */}
         <View style={styles.profilePic} >
           <Image
-            source={profileIcons[50]}
+            source={profileIcons[userData.profileIndex - 1].image}
             style={styles.profilePic}
           />
         </View>
@@ -72,7 +69,7 @@ function ProfileScreen({ navigation }) {
               User ID:
             </Text>
             <Text style={styles.detailsBody}>
-              *User ID here*
+              {user}
             </Text>
           </View>
 

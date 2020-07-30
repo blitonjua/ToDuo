@@ -18,7 +18,8 @@ export async function getUserData(uid) {
         age: docData.age,
         firstName: docData.firstName,
         lastName: docData.lastName,
-        email: docData.email
+        email: docData.email,
+        profileIndex: docData.profileIndex,
       }
       user = dataObject
     }
@@ -69,6 +70,14 @@ export function deleteAccount(uid) {
   }).then(user.delete().then(function () {
     console.log("user deleted")
   }))
+}
+
+export function updateProfileIndex(uid, index) {
+  db
+  .doc(uid)
+  .update({
+    profileIndex: index
+  })
 }
 
 

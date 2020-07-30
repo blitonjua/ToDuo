@@ -8,19 +8,19 @@ import {
 } from 'react-native';
 
 //screens
-import {categories} from '../../../services/universalConstants';
+import { categories } from '../../../services/universalConstants';
 
 //styles
-import {appStyles, devFlatListStyles} from '../../../assets/styles/styles';
+import { appStyles, devFlatListStyles } from '../../../assets/styles/styles';
 const styles = appStyles;
 
-function CategoryScreen({navigation}) {
+function CategoryScreen({ navigation }) {
   function handlePress(title) {
-    navigation.navigate('addGoalScreen', {category: title});
+    navigation.navigate('addGoalScreen', { category: title });
   }
 
   //item renderer for FlatList
-  function ListItem({title}) {
+  function ListItem({ title }) {
     return (
       <TouchableOpacity onPress={() => handlePress(title)}>
         <View style={devFlatListStyles.ListItem}>
@@ -43,7 +43,7 @@ function CategoryScreen({navigation}) {
         {/* categories */}
         <FlatList
           data={categories}
-          renderItem={({item}) => <ListItem title={item.title} />}
+          renderItem={({ item }) => <ListItem title={item.title} />}
           keyExtractor={item => item.title}
         />
       </View>

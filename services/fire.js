@@ -38,6 +38,7 @@ export const addUser = (uid, firstName, lastName, newAge, email) => {
       lastName: lastName,
       age: newAge,
       email: email,
+      profileIndex:Math.ceil((Math.random() * 50)),
     })
     .then(ref => {
       console.log(ref);
