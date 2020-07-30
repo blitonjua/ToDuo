@@ -37,7 +37,7 @@ export const appStyles = StyleSheet.create({
         justifyContent: 'center',
         height: 40,
         borderRadius: 20,
-        marginBottom: 20,
+        margin: 10,
     },
     listTitle: {
         borderBottomColor: colors.lime,
@@ -270,6 +270,12 @@ export const plusStyles = StyleSheet.create({
 
 export const addGoalStyles = StyleSheet.create({
     ...appStyles,
+    textInput: {
+        borderBottomWidth: 1,
+        borderBottomColor: 'white',
+        margin: 20,
+        padding: 5,
+    }
 })
 
 //goal

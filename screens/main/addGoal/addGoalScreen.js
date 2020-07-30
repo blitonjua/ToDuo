@@ -33,6 +33,8 @@ function AddGoalScreen({ route, navigation }) {
 
   const {user, setUser} = useContext(UserContext);
 
+  const styles = addGoalStyles;
+
   //creates a goal and adds it to the database
   function addGoalHandler() {
     console.log(datePicked);
@@ -79,21 +81,23 @@ function AddGoalScreen({ route, navigation }) {
   return (
     <SafeAreaView style={addGoalStyles.safe}>
       {!submitted ? (
-        <View>
+        <View styles={styles.main}>
 
           {/* title */}
-          <View style={{borderWidth: 1}}>
+          <View style={styles.textInput}>
             <TextInput
               placeholder="title"
+              placeholderTextColor='gray'
               onChangeText={titleHandler}
               value={title}
             />
           </View>
 
           {/* description */}
-          <View style={{borderWidth: 1}}>
+          <View style={styles.textInput}>
             <TextInput
               placeholder="description"
+              placeholderTextColor='gray'
               onChangeText={descriptionHandler}
               value={description}
             />
@@ -103,7 +107,7 @@ function AddGoalScreen({ route, navigation }) {
             data={milestones}
             renderItem={({item}) => (
               <View>
-                <Text>{item}</Text>
+                <Text style={{color:'white'}}>{item}</Text>
               </View>
             )}
             keyExtractor={item => {
@@ -111,23 +115,29 @@ function AddGoalScreen({ route, navigation }) {
             }}
           />
           {/* adding a new milestone */}
-          <View style={{borderWidth: 1, backgroundColor: 'pink'}}>
+          <View style={styles.textInput}>
             <TextInput
               placeholder="add milestone"
+              placeholderTextColor='gray'
               onChangeText={text => setMilestoneText(text)}
               ref={input => {
                 this.myTextInput = input;
               }}
             />
-            <Button
-              title="Show Calendar"
+            <View>
+            <Button 
+              title="Pick Date"
+              color='green'
               onPress={() => setShowDateTimePicker(true)}
             />
+            </View>
             {showDateTimePicker && (
               <DateTimePicker
                 testID="dateTimePicker"
                 value={defaultDate}
                 mode="date"
+                style={{backgroundColor:'gray',}}
+                darkisDarkModeEnabled={true}
                 onChange={(e, d) => {
                   if (Platform.OS === 'android') {
                     setShowDateTimePicker(false);
@@ -136,8 +146,10 @@ function AddGoalScreen({ route, navigation }) {
                 }}
               />
             )}
+            <View style={styles.wideButton}>
             <Button
               title="Add milestone"
+              color='white'
               onPress={() => {
                 if (Platform.OS === 'ios') {
                   setShowDateTimePicker(false);
@@ -147,6 +159,7 @@ function AddGoalScreen({ route, navigation }) {
                 this.myTextInput.clear();
               }}
             />
+            </View>
           </View>
 
           {/* add goal Button */}

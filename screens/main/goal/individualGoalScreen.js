@@ -49,7 +49,7 @@ function IndividualGoalScreen({route, navigation}) {
     return (
       <View style={styles.goalContainerTwo}>
         <Text style={styles.goalText}>{item.milestoneText}</Text>
-        <Text>
+        <Text style={styles.goalText}>
           due: {item.milestoneMonth}/{item.milestoneDay}/
           {item.milestoneFullYear}
         </Text>
@@ -74,6 +74,7 @@ function IndividualGoalScreen({route, navigation}) {
       {/* toDo list button */}
       <Button
         title="to-do list"
+        color='#53d681'
         onPress={() => {
           navigation.navigate('toDoListScreen', {goal: goal});
         }}
@@ -109,6 +110,7 @@ function IndividualGoalScreen({route, navigation}) {
 
       {/* accountabuddy bail */}
       <Button
+        color='#53d681'
         title='bail buddy'
         onPress={() => bail()}
       />
