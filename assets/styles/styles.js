@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
 const colors = {
   blue: '#42aaf5',
@@ -209,6 +209,7 @@ export const individualGoalStyles = StyleSheet.create({
   },
   flatListContainer: {
     marginTop: 10,
+    height: Dimensions.get('window').height / 3,
   },
   goalContainerTwo: {
     backgroundColor: 'white',

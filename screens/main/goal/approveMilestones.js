@@ -6,6 +6,7 @@ import {
   FlatList,
   Text,
   Button,
+  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 //styles
@@ -14,33 +15,71 @@ import {approveMilestones} from '../../../assets/styles/styles.js';
 import {getMilestonesAsObjects} from '../../../services/getMilestoneData';
 import {markMilestoneAsComplete} from '../../../services/getMilestoneData';
 
-/*------------------------------------------------------------------------------------------------------------------------------
-  component version*/
+//*------------------------------------------------------------------------------------------------------------------------------
+//component version
 export default class ApproveMilestone extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
-    console.log();
     // console.log('goals: ' + props.goal);
     this.state = {
       goal: props.route.params.goal,
       navigation: [],
       milestones: [],
+      isLoading: true,
     };
   }
   componentDidMount() {
+    this._isMounted = true;
+
     getMilestonesAsObjects(
       this.state.goal.accountaBuddyId,
       this.state.goal.matchedGoalId,
     ).then(async u => {
-      this.state.milestones = u;
-      console.log(this.state.milestones);
+      if (this._isMounted) {
+        this.setState({isLoading: false, milestones: u});
+      }
     });
   }
-
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
   render() {
     return (
       <SafeAreaView>
-        <Text>hi</Text>
+        <FlatList
+          data={this.state.milestones}
+          renderItem={({item}) => (
+            //------------------------------------------------------------------------------------------------------------------------------
+            <View style={approveMilestones.miletoneContainer}>
+              {item.requestMark && (
+                <View>
+                  <View style={approveMilestones.miletoneContainer2}>
+                    <Text>{item.milestoneText}</Text>
+                    <Text>
+                      due: {item.milestoneMonth}/{item.milestoneDay}/
+                      {item.milestoneFullYear}
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    onPress={async () => {
+                      await markMilestoneAsComplete(
+                        this.state.goal.accountaBuddyId,
+                        this.state.goal.matchedGoalId,
+                        item.milestoneText,
+                      );
+                    }}>
+                    <View>
+                      <Text> mark as complete</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+            //------------------------------------------------------------------------------------------------------------------------------
+          )}
+          keyExtractor={(item, index) => index.toString()}
+        />
         <Button
           title="<-"
           onPress={() => this.props.route.params.navigation.goBack()}
@@ -49,7 +88,7 @@ export default class ApproveMilestone extends Component {
     );
   }
 }
-
+//*/
 //------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -57,10 +96,9 @@ export default function ApproveMilestone({route, navigation}) {
   const [milestones, setMilestones] = useState([]);
   const {goal} = route.params;
 
-   //   console.log(goal);
-
-
   accountaBuddyId = goal.accountaBuddyId;
+
+  //get milestone data
   async function getMilestones() {
     let data = await getMilestonesAsObjects(
       accountaBuddyId,
@@ -69,7 +107,11 @@ export default function ApproveMilestone({route, navigation}) {
     setMilestones(data);
   }
   useEffect(() => {
-    getMilestones();
+    let isMounted = true;
+    if (isMounted) getMilestones();
+    return () => {
+      isMounted = false;
+    };
   });
   function MilestoneListItem({item}) {
     return (
@@ -84,16 +126,13 @@ export default function ApproveMilestone({route, navigation}) {
               </Text>
             </View>
             <TouchableOpacity
-              // onPress={async () => {
-              //   console.log('marked');
-              //   await markMilestoneAsComplete(
-              //     accountaBuddyId,
-              //     goal.matchedGoalId,
-              //     item.milestoneText,
-              //   );
-              // }}
-              onPress={() => {
+              onPress={async () => {
                 console.log('marked');
+                await markMilestoneAsComplete(
+                  accountaBuddyId,
+                  goal.matchedGoalId,
+                  item.milestoneText,
+                );
               }}>
               <View>
                 <Text> mark as complete</Text>
@@ -120,6 +159,5 @@ export default function ApproveMilestone({route, navigation}) {
       />
     </SafeAreaView>
   );
-  
 }
 //*/

@@ -50,14 +50,32 @@ function IndividualGoalScreen({route, navigation}) {
     let data = await getMilestonesAsObjects(uid, goal.goalId);
     setMilestones(data);
   }
-  getMilestones();
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) getMilestones();
+    return () => {
+      isMounted = false;
+    };
+  });
+
   class MilestoneListItem extends Component {
+    _isMounted = false;
     constructor(props) {
       super(props);
       this.state = {
         item: props.item,
+        isLoading: true,
       };
       item = this.state.item;
+    }
+    componentDidMount() {
+      this._isMounted = true;
+      if (this._isMounted) {
+        this.setState({isLoading: false});
+      }
+    }
+    componentWillUnmount() {
+      this._isMounted = false;
     }
     render() {
       return (
@@ -68,22 +86,21 @@ function IndividualGoalScreen({route, navigation}) {
             {item.milestoneFullYear}
           </Text>
           <TouchableOpacity
-            // onPress={async () => {
-            //   console.log('pressed');
-            //   await requestMilestoneCompletion(
-            //     uid,
-            //     goal.goalId,
-            //     item.milestoneText,
-            //   );
-            // }}
-            onPress={() => {
+            onPress={async () => {
               console.log('pressed');
+              await requestMilestoneCompletion(
+                uid,
+                goal.goalId,
+                item.milestoneText,
+              ).then(() => {
+                console.log('requested');
+                this.setState({});
+              });
             }}>
             <View>
               <Text>request completions</Text>
             </View>
           </TouchableOpacity>
-          <Button title="click" onPress={() => console.log('pressed')} />
           {item.completed && <Text>Completed</Text>}
           {!item.completed && <Text>In progress</Text>}
         </View>
@@ -111,11 +128,11 @@ function IndividualGoalScreen({route, navigation}) {
         {/* milestones */}
         <View style={styles.flatListContainer}>
           <Text style={styles.milestonesText}>Milestones</Text>
-          <FlatList
+          {/* <FlatList
             data={milestones}
             renderItem={({item}) => <MilestoneListItem item={item} />}
             keyExtractor={(item, index) => index.toString()}
-          />
+          /> */}
         </View>
       </View>
       <ScrollView>
@@ -132,7 +149,7 @@ function IndividualGoalScreen({route, navigation}) {
         <Button title="archive" onPress={() => goalDone(status.archived)} />
         {/* complete goal */}
         <Button title="complete" onPress={() => goalDone(status.completed)} />
-        <Button
+        {/* <Button
           title="approve buddy milestones"
           onPress={() => {
             navigation.navigate('approveMilestones', {
@@ -140,7 +157,7 @@ function IndividualGoalScreen({route, navigation}) {
               navigation: navigation,
             });
           }}
-        />
+        /> */}
         {/* accountabuddy bail */}
         <Button title="bail buddy" onPress={() => bail()} />
       </ScrollView>

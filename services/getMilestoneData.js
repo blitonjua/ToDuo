@@ -54,7 +54,6 @@ export async function getMilestonesAsObjects(uid, goalId) {
 }
 
 export async function markMilestoneAsComplete(uid, goalId, milestone) {
-  console.log('marked');
   await db
     .doc(uid)
     .collection('goals')
@@ -67,7 +66,6 @@ export async function markMilestoneAsComplete(uid, goalId, milestone) {
     });
 }
 export async function requestMilestoneCompletion(uid, goalId, milestone) {
-  console.log('requested');
   await db
     .doc(uid)
     .collection('goals')
