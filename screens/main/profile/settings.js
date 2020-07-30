@@ -9,46 +9,46 @@ var db = firestore().collection('Users');
 var user;
 
 export async function getUserData(uid) {
-    await db
-      .doc(uid)
-      .get()
-      .then((docRef) => { 
-          let docData = docRef.data();
-          let dataObject = {
-              age: docData.age,
-              firstName: docData.firstName,
-              lastName: docData.lastName,
-              email: docData.email
-          }
-          user = dataObject
-        }
+  await db
+    .doc(uid)
+    .get()
+    .then((docRef) => {
+      let docData = docRef.data();
+      let dataObject = {
+        age: docData.age,
+        firstName: docData.firstName,
+        lastName: docData.lastName,
+        email: docData.email
+      }
+      user = dataObject
+    }
     )
-  .catch((error) => { })
+    .catch((error) => { })
   return user
-  }
+}
 
-  export function updateFirstName(uid, firstName) {
-     db
-      .doc(uid)
-      .update({
-          firstName: firstName
-      })
-  }
-
-  export function updateLastName(uid, lastName) {
-    db
-     .doc(uid)
-     .update({
-         lastName: lastName
-     })
- }
-
- export function updateAge(uid, age) {
+export function updateFirstName(uid, firstName) {
   db
-   .doc(uid)
-   .update({
-       age: age,
-   })
+    .doc(uid)
+    .update({
+      firstName: firstName
+    })
+}
+
+export function updateLastName(uid, lastName) {
+  db
+    .doc(uid)
+    .update({
+      lastName: lastName
+    })
+}
+
+export function updateAge(uid, age) {
+  db
+    .doc(uid)
+    .update({
+      age: age,
+    })
 }
 
 export function forgotPassword(email) {
@@ -62,11 +62,11 @@ export function forgotPassword(email) {
 
 export function deleteAccount(uid) {
   var user = auth().currentUser;
-  db.doc(uid).delete().then(function() {
+  db.doc(uid).delete().then(function () {
     console.log("deleted")
-  }).catch(function(error) {
+  }).catch(function (error) {
     console.log(error);
-  }).then(user.delete().then(function() {
+  }).then(user.delete().then(function () {
     console.log("user deleted")
   }))
 }
