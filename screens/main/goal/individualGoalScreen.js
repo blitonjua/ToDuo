@@ -85,22 +85,25 @@ function IndividualGoalScreen({route, navigation}) {
             due: {item.milestoneMonth}/{item.milestoneDay}/
             {item.milestoneFullYear}
           </Text>
-          <TouchableOpacity
-            onPress={async () => {
-              console.log('pressed');
-              await requestMilestoneCompletion(
-                uid,
-                goal.goalId,
-                item.milestoneText,
-              ).then(() => {
-                console.log('requested');
-                this.setState({});
-              });
-            }}>
-            <View>
-              <Text>request completions</Text>
-            </View>
-          </TouchableOpacity>
+          {item.requestMark && <Text>requestested for completion</Text>}
+          {!item.requestMark && (
+            <TouchableOpacity
+              onPress={async () => {
+                console.log('pressed');
+                await requestMilestoneCompletion(
+                  uid,
+                  goal.goalId,
+                  item.milestoneText,
+                ).then(() => {
+                  console.log('requested');
+                  this.setState({});
+                });
+              }}>
+              <View>
+                <Text>Request Completion</Text>
+              </View>
+            </TouchableOpacity>
+          )}
           {item.completed && <Text>Completed</Text>}
           {!item.completed && <Text>In progress</Text>}
         </View>
@@ -128,11 +131,11 @@ function IndividualGoalScreen({route, navigation}) {
         {/* milestones */}
         <View style={styles.flatListContainer}>
           <Text style={styles.milestonesText}>Milestones</Text>
-          {/* <FlatList
+          <FlatList
             data={milestones}
             renderItem={({item}) => <MilestoneListItem item={item} />}
             keyExtractor={(item, index) => index.toString()}
-          /> */}
+          />
         </View>
       </View>
       <ScrollView>
@@ -149,7 +152,7 @@ function IndividualGoalScreen({route, navigation}) {
         <Button title="archive" onPress={() => goalDone(status.archived)} />
         {/* complete goal */}
         <Button title="complete" onPress={() => goalDone(status.completed)} />
-        {/* <Button
+        <Button
           title="approve buddy milestones"
           onPress={() => {
             navigation.navigate('approveMilestones', {
@@ -157,7 +160,7 @@ function IndividualGoalScreen({route, navigation}) {
               navigation: navigation,
             });
           }}
-        /> */}
+        />
         {/* accountabuddy bail */}
         <Button title="bail buddy" onPress={() => bail()} />
       </ScrollView>
