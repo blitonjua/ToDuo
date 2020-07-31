@@ -63,7 +63,6 @@ export const appStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignContent: 'center',
-
         backgroundColor: "#272b28",
     },
     themedSafe: {

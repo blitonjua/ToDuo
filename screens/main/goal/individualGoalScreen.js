@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   SafeAreaView,
   FlatList,
@@ -18,12 +18,22 @@ import {individualGoalStyles} from '../../../assets/styles/styles';
 import {getMilestonesAsObjects} from '../../../services/getMilestoneData';
 
 import {UserContext} from '../../../services/userContext';
+import firestore from '@react-native-firebase/firestore';
+
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
 function IndividualGoalScreen({route, navigation}) {
   const {goal} = route.params;
   const [milestones, setMilestones] = useState([]);
+  const [buddyName, setBuddyName] = useState('');
+
+  useEffect(()=>{
+    firestore().collection("Users").doc(goal.accountaBuddyId).get().then((docSnap) => {
+      setBuddyName(docSnap.data().firstName);
+      console.log('this alot?');
+    });
+  }, []);
 
   let uid = auth().currentUser.uid;
 
@@ -68,7 +78,7 @@ function IndividualGoalScreen({route, navigation}) {
       {/* messages button */}
       <View style={styles.padding}>
         <TouchableOpacity style={styles.wideButton} onPress={() => gotoMessage()}>
-          <Text>Message Buddy (TODO put name here later)</Text>
+          <Text>{'Message ' + buddyName}</Text>
         </TouchableOpacity>
       </View>
       {/* toDo list button */}

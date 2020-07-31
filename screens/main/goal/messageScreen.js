@@ -25,6 +25,7 @@ function MessageScreen({ route, navigation }) {
   useFocusEffect(() => {
     firestore().collection("Users").doc(goal.params.goal.accountaBuddyId).get().then((docSnap) => {
       navigation.setOptions({ title: docSnap.data().firstName });
+      console.log('vibe check');
     });
   }, [route]);
 

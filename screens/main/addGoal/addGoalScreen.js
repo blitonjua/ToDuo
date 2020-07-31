@@ -88,6 +88,7 @@ function AddGoalScreen({ route, navigation }) {
             <TextInput
               placeholder="title"
               placeholderTextColor='gray'
+              color='white'
               onChangeText={titleHandler}
               value={title}
             />
@@ -98,15 +99,21 @@ function AddGoalScreen({ route, navigation }) {
             <TextInput
               placeholder="description"
               placeholderTextColor='gray'
+              color='white'
               onChangeText={descriptionHandler}
               value={description}
             />
           </View>
+
+          <View style={styles.padding}>
           {/* Display milestones added */}
           <FlatList
             data={milestones}
             renderItem={({item}) => (
-              <View>
+              <View style={{padding: 5,
+              margin: 2,
+              borderBottomWidth: 1,
+              borderBottomColor: 'white'}}>
                 <Text style={{color:'white'}}>{item}</Text>
               </View>
             )}
@@ -114,23 +121,26 @@ function AddGoalScreen({ route, navigation }) {
               item + 'x';
             }}
           />
+          </View>
+
           {/* adding a new milestone */}
           <View style={styles.textInput}>
             <TextInput
               placeholder="add milestone"
               placeholderTextColor='gray'
+              color='white'
               onChangeText={text => setMilestoneText(text)}
               ref={input => {
                 this.myTextInput = input;
               }}
             />
-            <View>
-            <Button 
-              title="Pick Date"
-              color='green'
-              onPress={() => setShowDateTimePicker(true)}
-            />
-            </View>
+          </View>
+
+          <TouchableOpacity onPress={() => setShowDateTimePicker(true)}
+              style={styles.wideButton}> 
+              <Text style={styles.text}>Pick Date</Text>
+            </TouchableOpacity>
+
             {showDateTimePicker && (
               <DateTimePicker
                 testID="dateTimePicker"
@@ -146,29 +156,25 @@ function AddGoalScreen({ route, navigation }) {
                 }}
               />
             )}
-            <View style={styles.wideButton}>
-            <Button
-              title="Add milestone"
-              color='white'
-              onPress={() => {
-                if (Platform.OS === 'ios') {
-                  setShowDateTimePicker(false);
-                }
-                addMilestone(milestoneText, datePicked);
-                setMilestoneText('');
-                this.myTextInput.clear();
-              }}
-            />
-            </View>
-          </View>
-
-          {/* add goal Button */}
-          <Button
-            title="create "
+            <TouchableOpacity style={styles.wideButton}
             onPress={() => {
+              if (Platform.OS === 'ios') {
+                setShowDateTimePicker(false);
+              }
+              addMilestone(milestoneText, datePicked);
+              setMilestoneText('');
+              this.myTextInput.clear();
+            }}>
+            <Text style={styles.text}>Add Milestone</Text>
+            </TouchableOpacity>
+
+            {/* add goal Button */}
+          <TouchableOpacity style={styles.wideButton} onPress={() => {
               addGoalHandler();
-            }}
-          />
+            }}>
+              <Text style={styles.text}>Create</Text>
+          </TouchableOpacity>
+          
         </View>
       ) : (
         //renders on successfully adding goal
