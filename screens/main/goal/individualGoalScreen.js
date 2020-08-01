@@ -23,6 +23,8 @@ import {UserContext} from '../../../services/userContext';
 
 import {requestMilestoneCompletion} from '../../../services/getMilestoneData';
 
+//components
+import MileStoneList from './milestoneList';
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
@@ -89,13 +91,11 @@ function IndividualGoalScreen({route, navigation}) {
           {!item.requestMark && (
             <TouchableOpacity
               onPress={async () => {
-                console.log('pressed');
                 await requestMilestoneCompletion(
                   uid,
                   goal.goalId,
                   item.milestoneText,
                 ).then(() => {
-                  console.log('requested');
                   this.setState({});
                 });
               }}>
@@ -116,7 +116,7 @@ function IndividualGoalScreen({route, navigation}) {
     navigation.goBack();
     bailPartnership(user, goal);
   }
-
+  // console.log(goal);
   return (
     <SafeAreaView style={styles.safe}>
       {/* back button */}
@@ -129,14 +129,18 @@ function IndividualGoalScreen({route, navigation}) {
         <Text>{goal.description}</Text>
 
         {/* milestones */}
-        <View style={styles.flatListContainer}>
+        {/* ---------------------------------------------------------------------------------------------------------------- */}
+        {/* <View style={styles.flatListContainer}>
           <Text style={styles.milestonesText}>Milestones</Text>
           <FlatList
             data={milestones}
             renderItem={({item}) => <MilestoneListItem item={item} />}
             keyExtractor={(item, index) => index.toString()}
           />
-        </View>
+        </View> */}
+        {/* ---------------------------------------------------------------------------------------------------------------- */}
+        <MileStoneList goalInfo={goal.goalId} />
+        {/* ---------------------------------------------------------------------------------------------------------------- */}
       </View>
       <ScrollView>
         {/* toDo list button */}

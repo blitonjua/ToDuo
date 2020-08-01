@@ -1,5 +1,5 @@
 //constants
-import { status } from './universalConstants';
+import {status} from './universalConstants';
 //firebase
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
@@ -51,7 +51,6 @@ export function addGoalToUserGoalCollection(
       for (let i = 0; i < goalMilestones.length; i++) {
         let currentMilestone = goalMilestones[i];
         let currentDeadline = datesPicked[i];
-        console.log('dates:' + currentDeadline);
         usersCollection
           .doc(userId)
           .collection('goals')
@@ -133,21 +132,19 @@ async function matchUsersUpdateCollection(blacklist) {
 //finds another user to match to this goal
 async function matchUsers(blacklist) {
   var match = [];
-  await waitingRoom
-    .get()
-    .then(snap => {
-      snap.forEach(doc => {
-        let docData = doc.data();
-        if (!(blacklist[docData.userId] == true)) {
-          true;
-          let dataObject = {
-            goalId: docData.goalId,
-            userId: docData.userId,
-          };
-          match.push(dataObject);
-        }          
-      });
+  await waitingRoom.get().then(snap => {
+    snap.forEach(doc => {
+      let docData = doc.data();
+      if (!(blacklist[docData.userId] == true)) {
+        true;
+        let dataObject = {
+          goalId: docData.goalId,
+          userId: docData.userId,
+        };
+        match.push(dataObject);
+      }
     });
+  });
   return match;
 }
 
@@ -215,7 +212,7 @@ export function bailPartnership(user, goal) {
 export function replaceToWaitingRoom(goal) {
   setUserConsts(goal.userId);
   //updating user's blacklist
-  const blacklistedUsers = { ...goal.blacklist};
+  const blacklistedUsers = {...goal.blacklist};
   blacklistedUsers[goal.accountaBuddyId] = true;
 
   //resetting goal's fields
@@ -228,7 +225,7 @@ export function replaceToWaitingRoom(goal) {
       matchedGoalId: '',
       chatRoomId: '',
       blacklist: blacklistedUsers,
-    })
+    });
   setCategory(goal.category);
 
   matchGoals(goal.goalId, blacklistedUsers);
