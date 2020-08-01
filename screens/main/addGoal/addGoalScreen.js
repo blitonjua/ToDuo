@@ -88,7 +88,7 @@ function AddGoalScreen({ route, navigation }) {
             <TextInput
               placeholder="title"
               placeholderTextColor='gray'
-              color='white'
+              style={{color: 'white'}}
               onChangeText={titleHandler}
               value={title}
             />
@@ -99,7 +99,7 @@ function AddGoalScreen({ route, navigation }) {
             <TextInput
               placeholder="description"
               placeholderTextColor='gray'
-              color='white'
+              style={{color: 'white'}}
               onChangeText={descriptionHandler}
               value={description}
             />
@@ -128,7 +128,7 @@ function AddGoalScreen({ route, navigation }) {
             <TextInput
               placeholder="add milestone"
               placeholderTextColor='gray'
-              color='white'
+              style={{color: 'white'}}
               onChangeText={text => setMilestoneText(text)}
               ref={input => {
                 this.myTextInput = input;
