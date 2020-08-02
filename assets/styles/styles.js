@@ -357,6 +357,62 @@ export const flattenedStyles = {
   rightText: StyleSheet.flatten([messageStyles.rightText, messageStyles.text]),
 };
 
+export const settingsScreenStyles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    alignContent: 'center',
+    alignItems: 'stretch',
+    // justifyContent: 'center',
+    marginTop: 10,
+    backgroundColor: 'white',
+  },
+  padding: {
+    padding: 20,
+  },
+  main: {
+    padding: 20,
+    //justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    backgroundColor: 'white',
+    padding: 7,
+    marginTop: 10,
+    alignItems: 'stretch',
+    // justifyContent: 'center',
+    borderColor: '#EBEBEB',
+    borderRadius: 10,
+    marginBottom: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#42aaf5',
+    borderRadius: 60,
+    height: 40,
+  },
+  title: {
+    marginTop: 10,
+    fontSize: 20,
+    textAlign: 'center',
+    fontFamily: 'BloggerSans-BoldItalic',
+  },
+  goBack: {
+    marginTop: 10,
+  },
+  resetPassword: {
+    marginTop: 10,
+  },
+});
+
 //chat
 export const chatStyles = StyleSheet.create({
   messagesContainer: {
