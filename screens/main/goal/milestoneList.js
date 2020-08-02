@@ -67,7 +67,7 @@ export default class MileStoneList extends Component {
                 {item.milestoneMonth}/{item.milestoneDay}/
                 {item.milestoneFullYear}
               </Text>
-              {!item.requestMark && (
+              {!item.requestMark && !item.completed && (
                 <TouchableOpacity
                   onPress={async () => {
                     await requestMilestoneCompletion(
