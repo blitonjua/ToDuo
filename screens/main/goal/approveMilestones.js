@@ -30,18 +30,21 @@ export default class ApproveMilestone extends Component {
     };
   }
   componentDidMount() {
-    this._isMounted = true;
     getMilestonesAsObjects(
       this.state.goal.accountaBuddyId,
       this.state.goal.matchedGoalId,
     ).then(async u => {
-      if (this._isMounted) {
-        this.setState({isLoading: false, milestones: u});
-      }
+      this.setState({isLoading: false, milestones: u});
     });
   }
-  componentWillUnmount() {
-    this._isMounted = false;
+
+  componentDidUpdate() {
+    getMilestonesAsObjects(
+      this.state.goal.accountaBuddyId,
+      this.state.goal.matchedGoalId,
+    ).then(async u => {
+      this.setState({isLoading: false, milestones: u});
+    });
   }
   render() {
     return (

@@ -43,21 +43,8 @@ export default class MileStoneList extends Component {
   }
 
   //updating
-  /*
-  shouldComponentUpdate(nextProps, nextState) {
-    // console.log(nextProps);
-    if (this.state.milestones != nextState.milestones) {
-      console.log('updating');
-      return true;
-    }
-    return false;
-  }//*/
 
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    // console.log(this.state.milestones);
-    return null;
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     getMilestonesAsObjects(auth().currentUser.uid, this.state.goalId).then(
       u => {
         this.setState({
