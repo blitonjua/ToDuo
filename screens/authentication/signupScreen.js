@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -14,7 +14,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const styles = signupStyles;
 
-function SignupScreen({navigation}) {
+function SignupScreen({ navigation }) {
   //manage state
   const [showSignIn, setScreen] = useState(true);
   const [emailText, setEmailText] = useState('');
@@ -22,30 +22,28 @@ function SignupScreen({navigation}) {
   const [ageText, setAgeText] = useState('');
   const [firstNameText, setFirstNameText] = useState('');
   const [lastNameText, setLastNameText] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   function gotoLogin() {
     navigation.navigate('Login');
   }
 
-  const createUser = (email, pass, firstName, lastName, age) => {
-    auth()
-      .createUserWithEmailAndPassword(email, pass)
-      .then(() => {
-        //firstName, lastName, newAge, email
-        var user = auth().currentUser;
-        addUser(user.uid, firstNameText, lastNameText, ageText, email);
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
-
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-
-        console.error(error);
-      });
+  const createUser = (firstName, lastName, age, email, pass) => {
+    if (firstName.length == 0) setErrorMessage('Please enter a first name');
+    else if (lastName.length == 0) setErrorMessage('Please enter a last name');
+    else if (age.length == 0) setErrorMessage('Please enter an age');
+    else if (email.length == 0) setErrorMessage('Please enter an email');
+    else if (pass.length == 0) setErrorMessage('Please enter a password');
+    else
+      auth()
+        .createUserWithEmailAndPassword(email, pass)
+        .then(() => {
+          var user = auth().currentUser;
+          addUser(user.uid, firstNameText, lastNameText, ageText, email);
+        })
+        .catch(error => {
+          setErrorMessage(error.message);
+        });
   };
 
   return (
@@ -102,13 +100,14 @@ function SignupScreen({navigation}) {
           />
         </View>
 
+        <Text style={styles.errorText}>{errorMessage}</Text>
         <View style={styles.buttonView}>
           <TouchableOpacity
             style={styles.signupButton}
             onPress={() => {
               console.log('creating user');
               //send user to the welcome screen
-              createUser(emailText, passwordText);
+              createUser(firstNameText, lastNameText, ageText, emailText, passwordText);
             }}>
             <Text style={styles.buttonText}>SIGN UP</Text>
           </TouchableOpacity>
