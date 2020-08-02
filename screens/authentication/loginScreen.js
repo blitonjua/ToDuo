@@ -18,7 +18,10 @@ function LoginScreen({ navigation }) {
   //manage state
   const [emailText, setEmailText] = useState('');
   const [passwordText, setPasswordText] = useState('');
-
+  const [validEmailStyle, setValidEmailStyle] = useState({});
+  const [emailError, setEmailError] = useState('');
+  const [validPassStyle, setValidPassStyle] = useState({});
+  const [passError, setPassError] = useState('');
 
   function gotoSignup() {
     // setScreen(!showSignIn);
@@ -26,21 +29,56 @@ function LoginScreen({ navigation }) {
   }
 
   const signUserIn = (email, pass) => {
-    auth().signInWithEmailAndPassword(email, pass);
+    if (email.length == 0) {
+      setValidEmailStyle({ backgroundColor: 'pink' });
+      setEmailError('Please enter an email');
+      setValidPassStyle({});
+      setPassError();
+    }
+    else if (pass.length == 0) {
+      setValidPassStyle({ backgroundColor: 'pink' });
+      setPassError('Please enter your password');
+      setValidEmailStyle({});
+      setEmailError();
+    }
+    else
+      auth().signInWithEmailAndPassword(email, pass)
+        .catch(error => {
+          //wrong password
+          if (error.code === 'auth/wrong-password') {
+            setValidPassStyle({ backgroundColor: 'pink' });
+            setPassError(error.message);
+          }
+          else {
+            setValidPassStyle({});
+            setPassError();
+          }
+          //wrong email
+          if (error.code === 'auth/invalid-email' || error.code === 'auth/user-not-found') {
+            setValidEmailStyle({ backgroundColor: 'pink' });
+            setEmailError(error.message);
+          }
+          else {
+            setValidEmailStyle({});
+            setEmailError();
+          }
+        })
   };
 
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.padding}>
         <Text style={styles.title}>ToDuo</Text>
-        <View style={styles.container}>
+        <Text style={styles.errorText}>{emailError}</Text>
+        <View style={[styles.container, validEmailStyle]}>
           <TextInput style={styles.textInput}
             placeholder="Email"
             onChangeText={text => setEmailText(text)}
           />
         </View>
 
-        <View style={styles.container}>
+        <Text style={styles.errorText}>{passError}</Text>
+        <View style={[styles.container, validPassStyle]}>
           <TextInput
             style={styles.textInput}
             secureTextEntry={true}

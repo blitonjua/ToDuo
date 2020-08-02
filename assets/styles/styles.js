@@ -70,6 +70,9 @@ export const authStyles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10
     },
+    errorText: {
+        color: colors.red,
+    }
 });
 
 export const loginStyles = StyleSheet.create({
@@ -92,7 +95,7 @@ export const loginStyles = StyleSheet.create({
         fontSize: 15,
         letterSpacing: 2,
         fontWeight: 'bold'
-    }
+    },
 });
 
 export const signupStyles = StyleSheet.create({
