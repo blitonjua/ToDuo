@@ -9,10 +9,10 @@ import {
   Platform,
 } from 'react-native';
 
-import {addGoalToUserGoalCollection} from '../../../services/setGoals';
-import {FlatList} from 'react-native-gesture-handler';
+import { addGoalToUserGoalCollection } from '../../../services/setGoals';
+import { FlatList } from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {UserContext} from '../../../services/userContext';
+import { UserContext } from '../../../services/userContext';
 
 import {addGoalStyles} from '../../../assets/styles/styles';
 
@@ -23,46 +23,74 @@ function AddGoalScreen({ route, navigation }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [submitted, setSubmitted] = useState(false);
-
+  //milestones
   const [milestones, setMilestones] = useState([]);
   const [milestoneText, setMilestoneText] = useState('');
   const [datePicked, setDatePicked] = useState([]);
   const [datesArray, setDateArray] = useState([]);
   const [defaultDate, setDefaultDate] = useState(new Date());
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
+  //validation
+  const [validDate, setValidDate] = useState(true);
+  const [milestoneTitleInput, setMilestoneInput] = useState({});
+  const [validTitle, setValidTitle] = useState(false);
+  const [titleInput, setTitleInput] = useState({});
+  const [validDescription, setValidDescription] = useState(false);
+  const [descriptionInput, setDescriptionInput] = useState({});
 
-  const {user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const styles = addGoalStyles;
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
-    console.log(datePicked);
-    addGoalToUserGoalCollection(
-      user,
-      title,
-      description,
-      milestones,
-      datesArray,
-      category,
-    );
-    setSubmitted(true);
+    //ensures a title
+    if (!validTitle)
+      setTitleInput({ backgroundColor: 'pink' });
+    else
+      setTitleInput({});
+    //ensures a description
+    if (!validDescription)
+      setDescriptionInput({ backgroundColor: 'pink' });
+    else
+      setDescriptionInput({});
+    
+    //only adds a goal if milestone, title, and description provided
+    if (validTitle && validDescription && milestones.length > 0) {
+      addGoalToUserGoalCollection(
+        user,
+        title,
+        description,
+        milestones,
+        datesArray,
+        category,
+      );
+      setSubmitted(true);
+    }
   }
 
   //sets title
   function titleHandler(enteredTitle) {
     setTitle(enteredTitle);
+    if (enteredTitle.length > 0)
+      setValidTitle(true);
+    else
+      setValidTitle(false);
   }
 
   //sets description
   function descriptionHandler(enteredDescription) {
     setDescription(enteredDescription);
+    if (enteredDescription.length > 0)
+      setValidDescription(true);
+    else
+      setValidDescription(false);
   }
+
   //add a milestone to array
   function addMilestone(enterText, date) {
     setMilestones(milestones.concat([enterText]));
     setDateArray(datesArray.concat([date]));
-    console.log(milestones);
   }
   function onDateSelected(event, selectedDate) {
     const currentDate = selectedDate || datePicked;
@@ -73,10 +101,15 @@ function AddGoalScreen({ route, navigation }) {
       currentDate.valueOf(),
     ]);
     setDefaultDate(selectedDate);
-    console.log(currentDate);
-    // if (Platform.OS === 'android') {
-    //   setShowDateTimePicker(false);
-    // }
+
+    if (currentDate >= new Date() && milestoneText.length > 0) {
+      setMilestoneInput({});
+      setValidDate(true);
+    }
+    else {
+      setMilestoneInput({ backgroundColor: 'pink' });
+      setValidDate(false);
+    }
   }
   return (
     <SafeAreaView style={addGoalStyles.safe}>
@@ -133,6 +166,7 @@ function AddGoalScreen({ route, navigation }) {
               ref={input => {
                 this.myTextInput = input;
               }}
+              maxLength={30}
             />
           </View>
 
@@ -140,6 +174,9 @@ function AddGoalScreen({ route, navigation }) {
               style={styles.wideButton}> 
               <Text style={styles.text}>Pick Date</Text>
             </TouchableOpacity>
+            {!validDate && (
+              <Text>Date must be today or later</Text>
+            )}
 
             {showDateTimePicker && (
               <DateTimePicker
