@@ -31,7 +31,6 @@ export default class ApproveMilestone extends Component {
   }
   componentDidMount() {
     this._isMounted = true;
-
     getMilestonesAsObjects(
       this.state.goal.accountaBuddyId,
       this.state.goal.matchedGoalId,

@@ -24,6 +24,7 @@ import {UserContext} from '../../../services/userContext';
 import {requestMilestoneCompletion} from '../../../services/getMilestoneData';
 
 export default class MileStoneList extends Component {
+  //initial mount
   constructor(props) {
     super(props);
     this.state = {
@@ -32,20 +33,42 @@ export default class MileStoneList extends Component {
     };
   }
   componentDidMount() {
-    this._isMounted = true;
-
     getMilestonesAsObjects(auth().currentUser.uid, this.state.goalId).then(
       u => {
-        if (this._isMounted) {
-          this.setState({milestones: u});
-          console.log(u);
-        }
+        this.setState({
+          milestones: u,
+        });
       },
     );
   }
 
-  render() {
+  //updating
+  /*
+  shouldComponentUpdate(nextProps, nextState) {
+    // console.log(nextProps);
+    if (this.state.milestones != nextState.milestones) {
+      console.log('updating');
+      return true;
+    }
+    return false;
+  }//*/
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
     // console.log(this.state.milestones);
+    return null;
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    getMilestonesAsObjects(auth().currentUser.uid, this.state.goalId).then(
+      u => {
+        this.setState({
+          milestones: u,
+        });
+      },
+    );
+  }
+
+  //render
+  render() {
     return (
       <View>
         <FlatList
