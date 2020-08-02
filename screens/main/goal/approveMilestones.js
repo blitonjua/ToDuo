@@ -27,6 +27,7 @@ export default class ApproveMilestone extends Component {
       navigation: [],
       milestones: [],
       isLoading: true,
+      isEmpty: false,
     };
   }
   componentDidMount() {
@@ -37,6 +38,11 @@ export default class ApproveMilestone extends Component {
     ).then(async u => {
       if (this._isMounted) {
         this.setState({isLoading: false, milestones: u});
+      }
+      for (let i = 0; i < u.length; i++) {
+        if (u.requestMark) {
+          this.setState({isEmpty: true});
+        }
       }
     });
   }
@@ -50,44 +56,56 @@ export default class ApproveMilestone extends Component {
       if (this._isMounted) {
         this.setState({isLoading: false, milestones: u});
       }
+      for (let i = 0; i < u.length; i++) {
+        if (u.requestMark) {
+          this.setState({isEmpty: true});
+        }
+      }
     });
   }
   render() {
     return (
       <SafeAreaView>
-        <FlatList
-          data={this.state.milestones}
-          renderItem={({item}) => (
-            //------------------------------------------------------------------------------------------------------------------------------
-            <View style={approveMilestones.miletoneContainer}>
-              {item.requestMark && (
-                <View>
-                  <View style={approveMilestones.miletoneContainer2}>
-                    <Text>{item.milestoneText}</Text>
-                    <Text>
-                      due: {item.milestoneMonth}/{item.milestoneDay}/
-                      {item.milestoneFullYear}
-                    </Text>
-                  </View>
-                  <TouchableOpacity
-                    onPress={async () => {
-                      await markMilestoneAsComplete(
-                        this.state.goal.accountaBuddyId,
-                        this.state.goal.matchedGoalId,
-                        item.milestoneText,
-                      );
-                    }}>
-                    <View>
-                      <Text> mark as complete</Text>
+        {this.state.isEmpty && (
+          <FlatList
+            data={this.state.milestones}
+            renderItem={({item}) => (
+              //------------------------------------------------------------------------------------------------------------------------------
+              <View style={approveMilestones.miletoneContainer}>
+                {item.requestMark && (
+                  <View>
+                    <View style={approveMilestones.miletoneContainer2}>
+                      <Text>{item.milestoneText}</Text>
+                      <Text>
+                        due: {item.milestoneMonth}/{item.milestoneDay}/
+                        {item.milestoneFullYear}
+                      </Text>
                     </View>
-                  </TouchableOpacity>
-                </View>
-              )}
-            </View>
-            //------------------------------------------------------------------------------------------------------------------------------
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
+                    <TouchableOpacity
+                      onPress={async () => {
+                        await markMilestoneAsComplete(
+                          this.state.goal.accountaBuddyId,
+                          this.state.goal.matchedGoalId,
+                          item.milestoneText,
+                        );
+                      }}>
+                      <View>
+                        <Text> mark as complete</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                )}
+              </View>
+              //------------------------------------------------------------------------------------------------------------------------------
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        )}
+        {!this.state.isEmpty && (
+          <View>
+            <Text>No milestones need your mark...yet</Text>
+          </View>
+        )}
         <Button
           title="<-"
           onPress={() => this.props.route.params.navigation.goBack()}
