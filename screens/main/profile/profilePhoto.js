@@ -1,0 +1,55 @@
+import React, { Component } from 'react';
+import {
+    View,
+    Image,
+} from 'react-native';
+import { profileIcons } from '../../../assets/images/profileIcons';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import { profileStyles } from '../../../assets/styles/styles';
+
+export default class ProfilePhoto extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            profileIndex: 1,
+        };
+    }
+    
+    componentDidMount() {
+        firestore()
+            .collection('Users')
+            .doc(auth().currentUser.uid)
+            .get()
+            .then(async (docRef) => {
+                let docData = docRef.data();
+                this.setState({
+                    profileIndex: docData.profileIndex,
+                })
+            });
+    }
+
+    componentDidUpdate() {
+        firestore()
+            .collection('Users')
+            .doc(auth().currentUser.uid)
+            .get()
+            .then(async (docRef) => {
+                let docData = docRef.data();
+                this.setState({
+                    profileIndex: docData.profileIndex,
+                })
+            });
+    }
+
+    render() {
+        return (
+            <View style={profileStyles.profilePic} >
+                <Image
+                    source={profileIcons[this.state.profileIndex - 1].image}
+                    style={profileStyles.profilePic}
+                />
+            </View>
+        )
+    }
+}

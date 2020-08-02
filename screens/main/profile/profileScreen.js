@@ -14,6 +14,7 @@ import { profileIcons } from '../../../assets/images/profileIcons';
 //styles
 import { profileStyles } from '../../../assets/styles/styles';
 import { getUserData } from './settings';
+import ProfilePhoto from './profilePhoto';
 const styles = profileStyles;
 
 
@@ -50,12 +51,13 @@ function ProfileScreen({ navigation }) {
     <SafeAreaView styles={styles.safe}>
       <View style={styles.main}>
         {/* Profile picture */}
-        <View style={styles.profilePic} >
+        {/* <View style={styles.profilePic} >
           <Image
             source={profileIcons[userData.profileIndex - 1].image}
             style={styles.profilePic}
           />
-        </View>
+        </View> */}
+        <ProfilePhoto />
 
         {/* name */}
         <Text style={styles.name}>
