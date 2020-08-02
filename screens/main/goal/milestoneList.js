@@ -33,11 +33,14 @@ export default class MileStoneList extends Component {
     };
   }
   componentDidMount() {
+    this._isMounted = true;
     getMilestonesAsObjects(auth().currentUser.uid, this.state.goalId).then(
       u => {
-        this.setState({
-          milestones: u,
-        });
+        if (this._isMounted) {
+          this.setState({
+            milestones: u,
+          });
+        }
       },
     );
   }
@@ -45,11 +48,15 @@ export default class MileStoneList extends Component {
   //updating
 
   componentDidUpdate() {
+    this._isMounted = true;
+
     getMilestonesAsObjects(auth().currentUser.uid, this.state.goalId).then(
       u => {
-        this.setState({
-          milestones: u,
-        });
+        if (this._isMounted) {
+          this.setState({
+            milestones: u,
+          });
+        }
       },
     );
   }

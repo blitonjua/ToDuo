@@ -30,20 +30,26 @@ export default class ApproveMilestone extends Component {
     };
   }
   componentDidMount() {
+    this._isMounted = true;
     getMilestonesAsObjects(
       this.state.goal.accountaBuddyId,
       this.state.goal.matchedGoalId,
     ).then(async u => {
-      this.setState({isLoading: false, milestones: u});
+      if (this._isMounted) {
+        this.setState({isLoading: false, milestones: u});
+      }
     });
   }
 
   componentDidUpdate() {
+    this._isMounted = true;
     getMilestonesAsObjects(
       this.state.goal.accountaBuddyId,
       this.state.goal.matchedGoalId,
     ).then(async u => {
-      this.setState({isLoading: false, milestones: u});
+      if (this._isMounted) {
+        this.setState({isLoading: false, milestones: u});
+      }
     });
   }
   render() {
@@ -90,76 +96,3 @@ export default class ApproveMilestone extends Component {
     );
   }
 }
-//*/
-//------------------------------------------------------------------------------------------------------------------------------
-
-/*
-export default function ApproveMilestone({route, navigation}) {
-  const [milestones, setMilestones] = useState([]);
-  const {goal} = route.params;
-
-  accountaBuddyId = goal.accountaBuddyId;
-
-  //get milestone data
-  async function getMilestones() {
-    let data = await getMilestonesAsObjects(
-      accountaBuddyId,
-      goal.matchedGoalId,
-    );
-    setMilestones(data);
-  }
-  useEffect(() => {
-    let isMounted = true;
-    if (isMounted) getMilestones();
-    return () => {
-      isMounted = false;
-    };
-  });
-  function MilestoneListItem({item}) {
-    return (
-      <View style={approveMilestones.miletoneContainer}>
-        {item.requestMark && (
-          <View>
-            <View style={approveMilestones.miletoneContainer2}>
-              <Text>{item.milestoneText}</Text>
-              <Text>
-                due: {item.milestoneMonth}/{item.milestoneDay}/
-                {item.milestoneFullYear}
-              </Text>
-            </View>
-            <TouchableOpacity
-              onPress={async () => {
-                console.log('marked');
-                await markMilestoneAsComplete(
-                  accountaBuddyId,
-                  goal.matchedGoalId,
-                  item.milestoneText,
-                );
-              }}>
-              <View>
-                <Text> mark as complete</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
-    );
-  }
-
-  return (
-    <SafeAreaView>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.goBack();
-        }}>
-        <Text>{'<-'}</Text>
-      </TouchableOpacity>
-      <FlatList
-        data={milestones}
-        renderItem={({item}) => <MilestoneListItem item={item} />}
-        keyExtractor={item => item.milestoneText}
-      />
-    </SafeAreaView>
-  );
-}
-//*/
