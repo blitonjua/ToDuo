@@ -40,7 +40,7 @@ export default class ApproveMilestone extends Component {
         this.setState({isLoading: false, milestones: u});
       }
       for (let i = 0; i < u.length; i++) {
-        if (u.requestMark) {
+        if (u[i].requestMark) {
           this.setState({isEmpty: true});
         }
       }
@@ -57,7 +57,7 @@ export default class ApproveMilestone extends Component {
         this.setState({isLoading: false, milestones: u});
       }
       for (let i = 0; i < u.length; i++) {
-        if (u.requestMark) {
+        if (u[i].requestMark) {
           this.setState({isEmpty: true});
         }
       }
