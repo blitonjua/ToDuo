@@ -32,36 +32,40 @@ export default class ApproveMilestone extends Component {
   }
   componentDidMount() {
     this._isMounted = true;
-    getMilestonesAsObjects(
-      this.state.goal.accountaBuddyId,
-      this.state.goal.matchedGoalId,
-    ).then(async u => {
-      if (this._isMounted) {
+    if (this._isMounted) {
+      getMilestonesAsObjects(
+        this.state.goal.accountaBuddyId,
+        this.state.goal.matchedGoalId,
+      ).then(async u => {
         this.setState({isLoading: false, milestones: u});
-      }
-      for (let i = 0; i < u.length; i++) {
-        if (u[i].requestMark) {
-          this.setState({isEmpty: true});
+
+        for (let i = 0; i < u.length; i++) {
+          if (u[i].requestMark) {
+            this.setState({isEmpty: true});
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   componentDidUpdate() {
     this._isMounted = true;
-    getMilestonesAsObjects(
-      this.state.goal.accountaBuddyId,
-      this.state.goal.matchedGoalId,
-    ).then(async u => {
-      if (this._isMounted) {
+    if (this._isMounted) {
+      getMilestonesAsObjects(
+        this.state.goal.accountaBuddyId,
+        this.state.goal.matchedGoalId,
+      ).then(async u => {
         this.setState({isLoading: false, milestones: u});
-      }
-      for (let i = 0; i < u.length; i++) {
-        if (u[i].requestMark) {
-          this.setState({isEmpty: true});
+        for (let i = 0; i < u.length; i++) {
+          if (u[i].requestMark) {
+            this.setState({isEmpty: true});
+          }
         }
-      }
-    });
+      });
+    }
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
   }
   render() {
     return (
