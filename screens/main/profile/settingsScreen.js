@@ -1,16 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     SafeAreaView,
     TouchableOpacity,
     Text,
     TextInput,
-    Settings,
     View,
-    Button
+    Image,
+    FlatList,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import {getUserData, updateAge, updateFirstName, updateLastName, forgotPassword, deleteAccount} from './settings'
-import {settingsScreenStyles} from '../../../assets/styles/styles'
+import { getUserData, updateAge, updateFirstName, updateLastName, forgotPassword, deleteAccount, updateProfileIndex } from './settings';
+import { settingsScreenStyles } from '../../../assets/styles/styles';
+import { profileIcons } from '../../../assets/images/profileIcons';
 
 styles = settingsScreenStyles;
 
@@ -30,75 +31,87 @@ function SettingsScreen({ navigation }) {
         let user;
         user = await getUserData(uid)
         setUserData(user)
-      }
+    }
 
     useEffect(() => {
         getUser();
-    },[])
+    }, [])
+
+    //item renderer for FlatList
+    function ListItem({ icon }) {
+        return (
+            <TouchableOpacity onPress={() => updateProfileIndex(uid, icon.index)}>
+                <Image source={icon.image} style={{width: 50, height: 50}}/>
+            </TouchableOpacity>
+        );
+    }
 
 
-    return(
+    return (
         <SafeAreaView style={styles.mainContainer}>
             <Text style={styles.title}>Profile Settings</Text>
-            <View style={styles.padding}> 
+            <View style={styles.padding}>
                 <View style={styles.container}>
-                    <TextInput placeholderTextColor="#000" placeholder={userData.firstName} value={text} onChangeText={(val) => {setFirstName(val)} }/>
+                    <TextInput placeholderTextColor="#000" placeholder={userData.firstName} value={text} onChangeText={(val) => { setFirstName(val) }} />
                 </View>
-                    <TouchableOpacity style={styles.button} onPress={() => {
+                <TouchableOpacity style={styles.button} onPress={() => {
                     updateFirstName(uid, firstName)
                     getUser()
-                    }
-                    }>
+                }
+                }>
                     <Text> Change First Name </Text>
                 </TouchableOpacity>
                 <View style={styles.container}>
-                    <TextInput placeholderTextColor="#000" placeholder={userData.lastName} value={text} onChangeText={(val) => setLastName(val)}/>
+                    <TextInput placeholderTextColor="#000" placeholder={userData.lastName} value={text} onChangeText={(val) => setLastName(val)} />
                 </View>
-                    <TouchableOpacity style={styles.button} onPress={() => {
+                <TouchableOpacity style={styles.button} onPress={() => {
                     updateLastName(uid, lastName)
                     getUser()
-                    }
-                    }>
+                }
+                }>
                     <Text> Change Last Name </Text>
                 </TouchableOpacity>
                 <View style={styles.container}>
-                    <TextInput placeholderTextColor="#000" placeholder={userData.age} value = {text} onChangeText={(val) => setAge(val)}/>
+                    <TextInput placeholderTextColor="#000" placeholder={userData.age} value={text} onChangeText={(val) => setAge(val)} />
                 </View>
-                    <TouchableOpacity style={styles.button} onPress={() => {
+                <TouchableOpacity style={styles.button} onPress={() => {
                     updateAge(uid, age)
                     getUser()
-                    }
-                    }>
+                }
+                }>
                     <Text> Change Age </Text>
                 </TouchableOpacity>
                 <View style={styles.resetPassword}>
-                <TouchableOpacity style={styles.button} onPress={() => {
-                    forgotPassword(userData.email)
+                    <TouchableOpacity style={styles.button} onPress={() => {
+                        forgotPassword(userData.email)
                     }
                     }>
-                    <Text> Reset password </Text>
-                </TouchableOpacity>
+                        <Text> Reset password </Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.resetPassword}>
-                <TouchableOpacity style={styles.button} onPress={() => {
-                    deleteAccount(uid)
+                    <TouchableOpacity style={styles.button} onPress={() => {
+                        deleteAccount(uid)
                     }
                     }>
-                    <Text> Deactivate Account </Text>
-                </TouchableOpacity>
+                        <Text> Deactivate Account </Text>
+                    </TouchableOpacity>
                 </View>
-    
-                
-            
+
+                {/* profile pics */}
+                <FlatList
+                    data={profileIcons}
+                    renderItem={({ item }) => <ListItem icon={item} />}
+                    keyExtractor={item => item.index.toString()}
+                />
+
             </View>
             <View style={styles.goBack}>
-
-            <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
-                <Text> Go Back </Text>
-            </TouchableOpacity>
-
+                <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
+                    <Text> Go Back </Text>
+                </TouchableOpacity>
             </View>
-           
+
         </SafeAreaView>
     );
 };

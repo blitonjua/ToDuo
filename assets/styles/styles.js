@@ -121,7 +121,7 @@ export const profileStyles = StyleSheet.create({
     profilePic: {
         height: 80,
         width: 80,
-        backgroundColor: 'black',
+        backgroundColor: 'silver',
         borderRadius: 40,
         marginBottom: 20,
     },
