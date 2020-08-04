@@ -1,10 +1,5 @@
 import React, {useState, useContext, useEffect, Component} from 'react';
-import {
-  FlatList,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {FlatList, Text, View, TouchableOpacity} from 'react-native';
 //firebase
 import auth from '@react-native-firebase/auth';
 
@@ -23,32 +18,33 @@ export default class MileStoneList extends Component {
   }
   componentDidMount() {
     this._isMounted = true;
-    getMilestonesAsObjects(auth().currentUser.uid, this.state.goalId).then(
-      u => {
-        if (this._isMounted) {
+    if (this._isMounted) {
+      getMilestonesAsObjects(auth().currentUser.uid, this.state.goalId).then(
+        u => {
           this.setState({
             milestones: u,
           });
-        }
-      },
-    );
+        },
+      );
+    }
   }
 
   //updating
   componentDidUpdate() {
     this._isMounted = true;
-
-    getMilestonesAsObjects(auth().currentUser.uid, this.state.goalId).then(
-      u => {
-        if (this._isMounted) {
+    if (this._isMounted) {
+      getMilestonesAsObjects(auth().currentUser.uid, this.state.goalId).then(
+        u => {
           this.setState({
             milestones: u,
           });
-        }
-      },
-    );
+        },
+      );
+    }
   }
-
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
   //render
   render() {
     return (
