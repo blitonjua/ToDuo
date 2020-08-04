@@ -39,11 +39,11 @@ export default class ApproveMilestone extends Component {
       ).then(async u => {
         this.setState({isLoading: false, milestones: u});
 
-        for (let i = 0; i < u.length; i++) {
-          if (u[i].requestMark) {
-            this.setState({isEmpty: true});
-          }
-        }
+        // for (let i = 0; i < u.length; i++) {
+        //   if (u[i].requestMark) {
+        //     this.setState({isEmpty: true});
+        //   }
+        // }
       });
     }
   }
@@ -56,11 +56,11 @@ export default class ApproveMilestone extends Component {
         this.state.goal.matchedGoalId,
       ).then(async u => {
         this.setState({isLoading: false, milestones: u});
-        for (let i = 0; i < u.length; i++) {
-          if (u[i].requestMark) {
-            this.setState({isEmpty: true});
-          }
-        }
+        // for (let i = 0; i < u.length; i++) {
+        //   if (u[i].requestMark) {
+        //     this.setState({isEmpty: true});
+        //   }
+        // }
       });
     }
   }
@@ -70,7 +70,7 @@ export default class ApproveMilestone extends Component {
   render() {
     return (
       <SafeAreaView>
-        {this.state.isEmpty && (
+        {true && (
           <FlatList
             data={this.state.milestones}
             renderItem={({item}) => (
@@ -105,11 +105,11 @@ export default class ApproveMilestone extends Component {
             keyExtractor={(item, index) => index.toString()}
           />
         )}
-        {!this.state.isEmpty && (
+        {/* {!this.state.isEmpty && (
           <View>
             <Text>No milestones need your mark...yet</Text>
           </View>
-        )}
+        )} */}
         <Button
           title="<-"
           onPress={() => this.props.route.params.navigation.goBack()}
