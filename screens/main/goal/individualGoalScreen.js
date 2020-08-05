@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import {
   SafeAreaView,
   FlatList,
@@ -12,40 +12,37 @@ import {
 import auth from '@react-native-firebase/auth';
 import { updateStatus, bailPartnership } from '../../../services/setGoals';
 //constants
-import {status} from '../../../services/universalConstants';
+import { status } from '../../../services/universalConstants';
 //styles
-import {individualGoalStyles} from '../../../assets/styles/styles';
-import {getMilestonesAsObjects} from '../../../services/getMilestoneData';
+import { individualGoalStyles } from '../../../assets/styles/styles';
+import { getMilestonesAsObjects } from '../../../services/getMilestoneData';
 
-import {UserContext} from '../../../services/userContext';
+import { UserContext } from '../../../services/userContext';
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
-function IndividualGoalScreen({route, navigation}) {
-  const {goal} = route.params;
+function IndividualGoalScreen({ route, navigation }) {
+  const { goal } = route.params;
   const [milestones, setMilestones] = useState([]);
 
-  let uid = auth().currentUser.uid;
-
-  // let user = auth().currentUser.uid;
-  const {user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   //updates the status of the goal and goes to the done screen
   function goalDone(status) {
     updateStatus(user, goal.goalId, status);
-    navigation.navigate('doneScreen', {status: status});
+    navigation.navigate('doneScreen', { status: status });
   }
 
   function gotoMessage() {
-    navigation.navigate('messageScreen', {goal: route});
+    navigation.navigate('messageScreen', { goal: route });
   }
 
   async function getMilestones() {
-    let data = await getMilestonesAsObjects(uid, goal.goalId);
+    let data = await getMilestonesAsObjects(user, goal.goalId);
     setMilestones(data);
   }
   getMilestones();
-  function MilestoneListItem({item}) {
+  function MilestoneListItem({ item }) {
     return (
       <View style={styles.goalContainerTwo}>
         <Text style={styles.goalText}>{item.milestoneText}</Text>
@@ -80,7 +77,7 @@ function IndividualGoalScreen({route, navigation}) {
           <Text style={styles.milestonesText}>Milestones</Text>
           <FlatList
             data={milestones}
-            renderItem={({item}) => <MilestoneListItem item={item} />}
+            renderItem={({ item }) => <MilestoneListItem item={item} />}
             keyExtractor={(item, index) => index.toString()}
           />
         </View>
@@ -90,7 +87,7 @@ function IndividualGoalScreen({route, navigation}) {
       <Button
         title="to-do list"
         onPress={() => {
-          navigation.navigate('toDoListScreen', {goal: goal});
+          navigation.navigate('toDoListScreen', { goal: goal });
         }}
       />
 
