@@ -164,6 +164,9 @@ function AddGoalScreen({ route, navigation }) {
               title="Show Calendar"
               onPress={() => setShowDateTimePicker(true)}
             />
+            {milestoneText.length == 0 && (
+              <Text>Please enter a milestone description</Text>
+            )}
             {!validDate && (
               <Text>Date must be today or later</Text>
             )}
