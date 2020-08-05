@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AddGoalScreen from "./addGoalScreen";
 import PlusScreen from './plusScreen';
 import CategoryScreen from './categoryScreen';
+import {headerStyles} from '../../../assets/styles/styles';
 
 const Stack = createStackNavigator();
 
@@ -13,13 +14,21 @@ function AddGoalStack() {
   return (
     <Stack.Navigator
       mode='modal'
-      headerMode='none'
       screenOptions={{
         gestureEnabled: false
       }} >
-      <Stack.Screen name="plusScreen" component={PlusScreen} />
-      <Stack.Screen name="categoryScreen" component={CategoryScreen} />
-      <Stack.Screen name="addGoalScreen" component={AddGoalScreen} />
+      <Stack.Screen name="plusScreen" component={PlusScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="categoryScreen" component={CategoryScreen} options={{
+        title:'Categories',
+        headerStyle: headerStyles.headerStyle,
+        headerTintColor: 'white',
+        headerBackTitle: ' ',
+        }}/>
+      <Stack.Screen name="addGoalScreen" component={AddGoalScreen} options={{
+        title:'Add a new goal',
+        headerStyle: headerStyles.headerStyle,
+        headerTintColor: 'white',
+        headerBackTitle: ' ',}}/>
     </Stack.Navigator>
   );
 }

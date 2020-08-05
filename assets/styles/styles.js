@@ -1,26 +1,78 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 
 const colors = {
     blue: '#42aaf5',
     red: '#e33232',
+    white: '#ffffff',
+    mustard: '#FFDB58',
+    //titles, text
+    spinach: 'white',
+    //background, highlights, secondary
+    hollendaise: '#1e0e75',
+    //main background, primary
+    lime: '#53d681',
+};
+
+export const headerStyles = {
+    headerStyle: {
+        backgroundColor: '#272b28',
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
+    },
+    hedaerTitleStyle:{
+        color: 'white',
+    }
 };
 
 export const appStyles = StyleSheet.create({
+    text: {
+        color: 'white',
+        fontSize: 24,
+    },
+    wideButton: {
+        backgroundColor: colors.lime,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 40,
+        borderRadius: 20,
+        margin: 10,
+    },
+    listTitle: {
+        borderBottomColor: colors.lime,
+        borderBottomWidth: 2,
+        marginBottom: 10,
+        alignContent: 'stretch',
+    },
     safe: {
         flex: 1,
         alignContent: 'center',
         alignItems: 'stretch',
         justifyContent: 'center',
-        backgroundColor: 'white',
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
+        backgroundColor: "#272b28",
     },
     padding: {
         padding: 20
     },
     main: {
+        //flex: 1,
         padding: 20,
         justifyContent: 'center',
         alignItems: 'center',
+        alignContent: 'center',
+        backgroundColor: "#272b28",
     },
+    themedSafe: {
+        flex: 1,
+        alignContent: 'center',
+        alignItems: 'stretch',
+        justifyContent: 'center',
+        backgroundColor: "#272b28",
+
+    }
 });
 
 //authentication
@@ -29,30 +81,44 @@ export const authStyles = StyleSheet.create({
     textInput: {
         fontWeight: '100',
         fontSize: 16,
-        fontFamily: 'BloggerSans-Medium'
+        fontFamily: 'BloggerSans-Medium',
+        color: 'white',
     },
-    title: {
+    //To-Duo
+    logoView: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    titleTo: {
         fontSize: 60,
         textAlign: 'center',
-        fontFamily: 'BloggerSans-BoldItalic'
+        fontFamily: 'BloggerSans-BoldItalic',
+        color: colors.spinach,
+    },
+    titleDuo: {
+        fontSize: 60,
+        textAlign: 'center',
+        fontFamily: 'BloggerSans-BoldItalic',
+        color: '#002b54',
     },
     container: {
-        backgroundColor: 'white',
+        //backgroundColor: 'white',
         padding: 7,
         marginTop: 10,
         alignItems: 'stretch',
         justifyContent: 'center',
-        borderColor: '#EBEBEB',
-        borderRadius: 10,
+        //borderColor: '#EBEBEB',
+        borderBottomWidth: 2,
+        borderBottomColor: 'white',
         marginBottom: 8,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
-        elevation: 3
+        // shadowColor: '#000',
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 1,
+        // },
+        // shadowOpacity: 0.22,
+        // shadowRadius: 2.22,
+        // elevation: 3
     },
     //buttons--------------------
     buttonView: {
@@ -81,7 +147,7 @@ export const loginStyles = StyleSheet.create({
     logInButton: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#42aaf5',
+        backgroundColor: colors.lime,
         borderRadius: 60,
         height: 40
     },
@@ -91,7 +157,7 @@ export const loginStyles = StyleSheet.create({
         marginTop: 10
     },
     signupLinkText: {
-        color: colors.red,
+        color: colors.spinach,
         fontSize: 15,
         letterSpacing: 2,
         fontWeight: 'bold'
@@ -103,12 +169,12 @@ export const signupStyles = StyleSheet.create({
     signupButton: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: colors.red,
+        backgroundColor: colors.lime,
         borderRadius: 60,
         height: 40
     },
     loginLinkText: {
-        color: colors.blue,
+        color: colors.spinach,
         fontWeight: 'bold',
         fontSize: 15,
         letterSpacing: 2,
@@ -125,10 +191,16 @@ export const profileStyles = StyleSheet.create({
         borderRadius: 40,
         marginBottom: 20,
     },
+    safe:{
+        justifyContent: 'center',
+        flex: 1,
+        backgroundColor: '#272b28',
+    },
     name: {
         fontSize: 20,
         fontWeight: 'bold',
-        margin: 20
+        margin: 20,
+        color: 'white',
     },
     row: {
         flexDirection: 'row',
@@ -151,7 +223,7 @@ export const profileStyles = StyleSheet.create({
         marginVertical: 6,
     },
     settings: {
-        backgroundColor: 'gray',
+        backgroundColor: colors.lime,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
@@ -160,7 +232,7 @@ export const profileStyles = StyleSheet.create({
         marginBottom: 20,
     },
     signout: {
-        backgroundColor: 'red',
+        backgroundColor: colors.lime,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
@@ -182,24 +254,50 @@ export const plusStyles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: "#272b28",
     },
     button: {
-        backgroundColor: 'red',
-        borderRadius: 160,
-
+        backgroundColor: '#ffc400',
+        borderRadius: 300,
+        width:250,
+        height:250,
+        alignItems:'center',
+        justifyContent:'center',
+        paddingTop: Platform.OS === 'ios'? 20:0,
     },
     plus: {
         fontSize: 300,
     }
 })
 
+export const addGoalStyles = StyleSheet.create({
+    ...appStyles,
+    textInput: {
+        borderBottomWidth: 1,
+        borderBottomColor: 'white',
+        margin: 20,
+        padding: 5,
+    }
+})
+
 //goal
 export const individualGoalStyles = StyleSheet.create({
     ...appStyles,
+    goalText: {
+        color: 'white'
+    },
+    main: {
+        //flex: 1,
+        padding: 20,
+        alignItems: 'flex-start',
+        alignContent: 'stretch',
+
+        backgroundColor: "#272b28",
+    },
     safe: {
         flex: 1,
         alignItems: 'stretch',
-        backgroundColor: 'white',
+        backgroundColor: "#272b28",
     },
     title: {
         fontSize: 30,
@@ -207,44 +305,45 @@ export const individualGoalStyles = StyleSheet.create({
         paddingBottom: 1,
     },
     milestonesText: {
-        textAlign: 'center',
+        textAlign: 'left',
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 20,
+        color: 'white',
     },
     flatListContainer: {
         marginTop: 10
     },
     goalContainerTwo: {
-        backgroundColor: 'white',
         padding: 7,
         marginTop: 10,
         marginRight: .5,
         marginLeft: .5,
         marginBottom: 1,
         alignItems: 'stretch',
-        borderColor: '#EBEBEB',
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 10,
-        elevation: 4
+        borderBottomColor: 'gray',
+        borderBottomWidth: 2,
     },
+});
+
+export const toDoStyles = StyleSheet.create({
+    ...individualGoalStyles,
     toDoItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        alignSelf: 'flex-start',
+        alignSelf: 'stretch',
+        borderBottomWidth: 2,
+        marginHorizontal: 5,
+        borderBottomColor: '#aaa',
     },
-});
+    padding:{
+        padding: 20,
+    }
+})
 
 //TODO
 export const devFlatListStyles = StyleSheet.create({
     ListItem: {
-        backgroundColor: 'gray',
-        borderWidth: 1,
+        backgroundColor: colors.lime,
         height: 50,
         marginVertical: 5,
         borderRadius: 8,
@@ -254,7 +353,7 @@ export const devFlatListStyles = StyleSheet.create({
         justifyContent: 'center',
     },
     ListItemText: {
-        color: 'white',
+        color: colors.white,
         fontSize: 30,
     }
 });
@@ -276,8 +375,9 @@ export const inputStyles =  StyleSheet.create({
       borderWidth: 1,
       borderRadius: 3,
       flexDirection: 'row',
-      paddingHorizontal: 10
-    }
+      paddingHorizontal: 10,
+      color: 'white'
+    },
 });
 
 // input button
@@ -286,7 +386,7 @@ export const buttonStyles = StyleSheet.create({
       marginHorizontal: 20,
       paddingVertical: 10,
       paddingHorizontal: 16,
-      backgroundColor: '#5FB0FF',
+      backgroundColor: '#53d681',
       borderRadius: 3
     },
     text: {
@@ -297,18 +397,18 @@ export const buttonStyles = StyleSheet.create({
 
 // input loader
 export const loaderStyles = StyleSheet.create({
-    container: {
-      position: 'absolute',
-  
-      top: 0,
-      left: 0,
-  
-      height: '100%',
-      width: '100%',
-  
-      justifyContent: 'center',
-      alignItems: 'center'
-    }
+  container: {
+    position: 'absolute',
+
+    top: 0,
+    left: 0,
+
+    height: '100%',
+    width: '100%',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 //chat message
@@ -334,7 +434,7 @@ export const messageStyles = StyleSheet.create({
       justifyContent: 'flex-end'
     },
     rightTextContainer: {
-      backgroundColor: '#5FB0FF',
+      backgroundColor: '#53d681',
       marginRight: 10
     },
     leftText: {
@@ -348,14 +448,21 @@ export const messageStyles = StyleSheet.create({
     }
   })
   
-  export const flattenedStyles = {
-    container: StyleSheet.flatten([messageStyles.container, messageStyles.rightContainer]),
-    textContainer: StyleSheet.flatten([messageStyles.textContainer, messageStyles.rightTextContainer]),
-    leftText: StyleSheet.flatten([messageStyles.leftText, messageStyles.text]),
-    rightText: StyleSheet.flatten([messageStyles.rightText, messageStyles.text])
-  }
 
-  export const settingsScreenStyles = StyleSheet.create({
+export const flattenedStyles = {
+  container: StyleSheet.flatten([
+    messageStyles.container,
+    messageStyles.rightContainer,
+  ]),
+  textContainer: StyleSheet.flatten([
+    messageStyles.textContainer,
+    messageStyles.rightTextContainer,
+  ]),
+  leftText: StyleSheet.flatten([messageStyles.leftText, messageStyles.text]),
+  rightText: StyleSheet.flatten([messageStyles.rightText, messageStyles.text]),
+};
+
+export const settingsScreenStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         alignContent: 'center',
@@ -452,23 +559,3 @@ export const messageStyles = StyleSheet.create({
         marginTop:15
     }
   })
-
-//chat
-export const chatStyles = StyleSheet.create({
-    messagesContainer: {
-      height: '100%',
-      paddingBottom: 100
-    },
-    inputContainer: {
-      width: '100%',
-      height: 100,
-      position: 'absolute',
-      bottom: 0,
-      paddingVertical: 10,
-      paddingLeft: 20,
-  
-      borderTopWidth: 1,
-      borderTopColor: '#B4B4B4'
-    }
-  });
-    

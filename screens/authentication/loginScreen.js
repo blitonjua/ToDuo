@@ -5,12 +5,14 @@ import {
   TextInput,
   SafeAreaView,
   TouchableOpacity,
+  StatusBar
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
 //custom imports
 // import { authStyles } from './authStack';
 import { loginStyles } from '../../assets/styles/styles';
+import LinearGradient from 'react-native-linear-gradient';
 
 const styles = loginStyles;
 
@@ -66,13 +68,21 @@ function LoginScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.safe}>
+    
+    <LinearGradient start={{x: 0, y: 0}} end={{x: 0, y: 1}} colors={['#002b54', '#53d681']} style={styles.safe}>
+      <View>
+        <StatusBar barStyle={Platform.OS === 'ios'? 'light-content':'default'} backgroundColor='black'/>
+      </View>
       <View style={styles.padding}>
-        <Text style={styles.title}>ToDuo</Text>
+        <View style={styles.logoView}>
+        <Text style={styles.titleTo}>To</Text>
+        <Text style={styles.titleDuo}>Duo</Text>
+            </View>
         <Text style={styles.errorText}>{emailError}</Text>
         <View style={[styles.container, validEmailStyle]}>
           <TextInput style={styles.textInput}
             placeholder="Email"
+            placeholderTextColor="#fff"
             onChangeText={text => setEmailText(text)}
           />
         </View>
@@ -83,6 +93,7 @@ function LoginScreen({ navigation }) {
             style={styles.textInput}
             secureTextEntry={true}
             placeholder="Password"
+            placeholderTextColor="#fff"
             onChangeText={text => setPasswordText(text)}
           />
         </View>
@@ -112,7 +123,7 @@ function LoginScreen({ navigation }) {
 
         </View>
       </View>
-    </SafeAreaView>
+      </LinearGradient>
   );
 };
 

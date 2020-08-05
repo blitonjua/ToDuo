@@ -38,11 +38,9 @@ export default function Input () {
   return (
     <View style={inputStyles.container}>
       <View style={inputStyles.inputContainer}>
-        <TextInput style={inputStyles.input} value={message} onChangeText={setMessage} placeholder="Write you message" />
+        <TextInput style={inputStyles.input} value={message} onChangeText={setMessage} placeholder="Message" placeholderTextColor='gray'/>
       </View>
-
-      <Button text="Send" onPress={handlePress} disabled={isLoading} />
-
+      <Button color='#53d681' text="Send" onPress={handlePress} disabled={isLoading} />
       {isLoading && <Loader />}
     </View>
   )
