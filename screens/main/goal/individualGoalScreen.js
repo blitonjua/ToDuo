@@ -35,11 +35,15 @@ function IndividualGoalScreen({route, navigation}) {
   const [milestones, setMilestones] = useState([]);
   const [buddyName, setBuddyName] = useState('');
 
-  useEffect(()=>{
-    firestore().collection("Users").doc(goal.accountaBuddyId).get().then((docSnap) => {
-      setBuddyName(docSnap.data().firstName);
-      console.log('this alot?');
-    });
+  useEffect(() => {
+    firestore()
+      .collection('Users')
+      .doc(goal.accountaBuddyId)
+      .get()
+      .then(docSnap => {
+        setBuddyName(docSnap.data().firstName);
+        console.log('this alot?');
+      });
   }, []);
 
   // console.log(goal);
@@ -171,7 +175,6 @@ function IndividualGoalScreen({route, navigation}) {
           onPress={() => {
             navigation.navigate('approveMilestones', {
               goal: goal,
-              navigation: navigation,
             });
           }}
         />

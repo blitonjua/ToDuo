@@ -24,7 +24,6 @@ export default class ApproveMilestone extends Component {
     // console.log('goals: ' + props.goal);
     this.state = {
       goal: props.route.params.goal,
-      navigation: [],
       milestones: [],
       isLoading: true,
       isEmpty: false,
@@ -105,15 +104,6 @@ export default class ApproveMilestone extends Component {
             keyExtractor={(item, index) => index.toString()}
           />
         )}
-        {/* {!this.state.isEmpty && (
-          <View>
-            <Text>No milestones need your mark...yet</Text>
-          </View>
-        )} */}
-        <Button
-          title="<-"
-          onPress={() => this.props.route.params.navigation.goBack()}
-        />
       </SafeAreaView>
     );
   }
