@@ -6,6 +6,9 @@ import GoalsListScreen from './goalsListScreen';
 import MessageScreen from './messageScreen';
 import DoneScreen from './doneScreen';
 import IndividualGoalDisplay from './individualGoalDisplay';
+
+//header style
+import {headerStyles} from '../../../assets/styles/styles';
 import ToDoListScreen from './toDoListScreen';
 import ApproveMilestone from './approveMilestones';
 
@@ -16,18 +19,33 @@ function GoalStack() {
   return (
     <Stack.Navigator
       mode="modal"
-      headerMode="none"
       screenOptions={{
         gestureEnabled: false,
       }}>
-      <Stack.Screen name="goalsListScreen" component={GoalsListScreen} />
-      <Stack.Screen
-        name="individualGoalDisplay"
-        component={IndividualGoalDisplay}
-      />
-      <Stack.Screen name="messageScreen" component={MessageScreen} />
-      <Stack.Screen name="doneScreen" component={DoneScreen} />
-      <Stack.Screen name="toDoListScreen" component={ToDoListScreen} />
+      <Stack.Screen name="goalsListScreen" component={GoalsListScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="individualGoalDisplay" 
+          component={IndividualGoalDisplay}
+          options={({ route }) => ({
+            title: route.params.goal.title,
+            headerStyle: headerStyles.headerStyle,
+            headerTintColor: 'white',
+            headerBackTitle: ' ',
+          })}
+          />
+      <Stack.Screen name="messageScreen" component={MessageScreen}
+        options={({ route }) => ({
+        headerStyle: headerStyles.headerStyle,
+        headerTintColor: 'white',
+        headerBackTitle: ' ',
+      })}/>
+      <Stack.Screen name="doneScreen" component={DoneScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="toDoListScreen" component={ToDoListScreen} 
+      options={({ route }) => ({
+        headerStyle: headerStyles.headerStyle,
+        headerTintColor: 'white',
+        headerBackTitle: ' ',
+        title: 'To-do',
+      })}/>
       <Stack.Screen name="approveMilestones" component={ApproveMilestone} />
     </Stack.Navigator>
   );

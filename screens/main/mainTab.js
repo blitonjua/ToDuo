@@ -7,19 +7,44 @@ import { UserContext } from '../../services/userContext';
 import GoalStack from './goal/goalStack';
 import ProfileStack from './profile/profileStack';
 import AddGoalStack from './addGoal/addGoalStack';
-
-const Tab = createMaterialTopTabNavigator();
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 function MainTab() {
+  const Tab = createMaterialTopTabNavigator();
   const { user, setUser } = useContext(UserContext);
   let cUser = auth().currentUser;
   if (cUser)
     setUser(cUser.uid)
 
   return (
-    <Tab.Navigator initialRouteName="Goal" tabBarPosition="bottom">
+    <Tab.Navigator initialRouteName="Goal" tabBarPosition="bottom" 
+    tabBarOptions={{
+      //labelStyle: { fontSize: 12 },
+      //tabStyle: { height: 40 },
+      style: { backgroundColor: '#272b28'},
+      showIcon: true,
+      activeTintColor: '#53d681',
+      inactiveTintColor: 'gray',
+      indicatorStyle: {backgroundColor: '#53d681'},
+    }}
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === 'Profile') {
+          iconName = 'ios-person';
+        } else if (route.name === 'Goals') {
+          iconName = 'ios-disc';
+        } else if (route.name === 'New'){
+          iconName = 'ios-add-circle-outline';
+        }
+
+        return <Ionicons name={iconName} size={25} color={color} />;
+      },
+    })}
+    >
       <Tab.Screen name="Profile" component={ProfileStack} />
-      <Tab.Screen name="Goal" component={GoalStack} />
+      <Tab.Screen name="Goals" component={GoalStack} />
       <Tab.Screen name="New" component={AddGoalStack} />
     </Tab.Navigator>
   );

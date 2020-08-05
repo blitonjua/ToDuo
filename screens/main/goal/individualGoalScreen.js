@@ -25,12 +25,22 @@ import {requestMilestoneCompletion} from '../../../services/getMilestoneData';
 
 //components
 import MileStoneList from './milestoneList';
+import firestore from '@react-native-firebase/firestore';
+
 const styles = individualGoalStyles;
 
 //the detailed page of a particular goal, displaying milestones, their daily goals, etc.
 function IndividualGoalScreen({route, navigation}) {
   const {goal} = route.params;
   const [milestones, setMilestones] = useState([]);
+  const [buddyName, setBuddyName] = useState('');
+
+  useEffect(()=>{
+    firestore().collection("Users").doc(goal.accountaBuddyId).get().then((docSnap) => {
+      setBuddyName(docSnap.data().firstName);
+      console.log('this alot?');
+    });
+  }, []);
 
   // console.log(goal);
   let uid = auth().currentUser.uid;
