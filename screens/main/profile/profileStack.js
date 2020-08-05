@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 //custom screens
 import ProfileScreen from './profileScreen';
-import SettingsScreen from './settingsScreen';
+import settingsStack from './settingsStack';
 import PastGoalsScreen from './pastGoalsScreen';
 
 function ProfileStack() {
@@ -17,7 +17,7 @@ function ProfileStack() {
                 gestureEnabled: false
             }}>
             <Stack.Screen name="profileScreen" component={ProfileScreen} />
-            <Stack.Screen name="settingsScreen" component={SettingsScreen} />
+            <Stack.Screen name="settingsStack" component={SettingsScreen} />
             <Stack.Screen name="pastGoalsScreen" component={PastGoalsScreen} />
         </Stack.Navigator>
     );
