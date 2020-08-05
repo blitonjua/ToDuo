@@ -51,13 +51,7 @@ function ProfileScreen({ navigation }) {
     <SafeAreaView styles={styles.safe}>
       <View style={styles.main}>
         {/* Profile picture */}
-        {/* <View style={styles.profilePic} >
-          <Image
-            source={profileIcons[userData.profileIndex - 1].image}
-            style={styles.profilePic}
-          />
-        </View> */}
-        <ProfilePhoto />
+        <ProfilePhoto user={user}/>
 
         {/* name */}
         <Text style={styles.name}>

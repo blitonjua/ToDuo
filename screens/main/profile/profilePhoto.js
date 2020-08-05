@@ -12,6 +12,7 @@ export default class ProfilePhoto extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: this.props.user,
             profileIndex: 1,
         };
     }
@@ -19,7 +20,7 @@ export default class ProfilePhoto extends Component {
     componentDidMount() {
         firestore()
             .collection('Users')
-            .doc(auth().currentUser.uid)
+            .doc(this.state.user)
             .get()
             .then(async (docRef) => {
                 let docData = docRef.data();
@@ -32,7 +33,7 @@ export default class ProfilePhoto extends Component {
     componentDidUpdate() {
         firestore()
             .collection('Users')
-            .doc(auth().currentUser.uid)
+            .doc(this.state.user)
             .get()
             .then(async (docRef) => {
                 let docData = docRef.data();
