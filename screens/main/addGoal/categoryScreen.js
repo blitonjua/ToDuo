@@ -19,33 +19,33 @@ function CategoryScreen({navigation}) {
     navigation.navigate('addGoalScreen', {category: title});
   }
 
-//item renderer for FlatList
-function ListItem({title}) {
+  //item renderer for FlatList
+  function ListItem({title}) {
+    return (
+      <TouchableOpacity onPress={() => handlePress(title)}>
+        <View style={devFlatListStyles.ListItem}>
+          <Text style={devFlatListStyles.ListItemText}>{title}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
   return (
-    <TouchableOpacity onPress={() => handlePress(title)}>
-      <View style={devFlatListStyles.ListItem}>
-        <Text style={devFlatListStyles.ListItemText}>{title}</Text>
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.main}>
+        <View style={styles.padding}>
+          <Text style={styles.text}>Pick a category for your goal</Text>
+        </View>
+
+        {/* categories */}
+        <FlatList
+          data={categories}
+          renderItem={({item}) => <ListItem title={item.title} />}
+          keyExtractor={item => item.title}
+        />
       </View>
-    </TouchableOpacity>
+    </SafeAreaView>
   );
-}
-
-  return (
-        <SafeAreaView style={styles.safe}>
-            <View style={styles.main}>
-                <View style={styles.padding}>
-                <Text style={styles.text}>Pick a category for your goal</Text>
-                </View>
-
-                {/* categories */}
-                <FlatList
-                    data={categories}
-                    renderItem={({ item }) => <ListItem title={item.title} />}
-                    keyExtractor={item => item.title}
-                />
-            </View>
-        </SafeAreaView>
-  )
 }
 
 export default CategoryScreen;

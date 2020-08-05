@@ -63,7 +63,7 @@ function IndividualGoalScreen({route, navigation}) {
   }
 
   async function getMilestones() {
-    let data = await getMilestonesAsObjects(uid, goal.goalId);
+    let data = await getMilestonesAsObjects(user, goal.goalId);
     setMilestones(data);
   }
   useEffect(() => {
@@ -148,7 +148,7 @@ function IndividualGoalScreen({route, navigation}) {
           <Text style={styles.milestonesText}>Milestones</Text>
           <FlatList
             data={milestones}
-            renderItem={({item}) => <MilestoneListItem item={item} />}
+            renderItem={({ item }) => <MilestoneListItem item={item} />}
             keyExtractor={(item, index) => index.toString()}
           />
         </View> */}
