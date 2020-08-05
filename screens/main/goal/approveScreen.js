@@ -11,7 +11,6 @@ function ApproveScreen({navigation}) {
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text>Go Back</Text>
         </TouchableOpacity>
         <Text>This is the ApproveScreen</Text>
       </View>

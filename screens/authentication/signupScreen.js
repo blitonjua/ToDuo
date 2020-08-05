@@ -8,8 +8,9 @@ import {
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 //custom imports
-import { addUser } from '../../services/fire';
-import { signupStyles } from '../../assets/styles/styles';
+import {addUser} from '../../services/fire';
+import {signupStyles} from '../../assets/styles/styles';
+import LinearGradient from 'react-native-linear-gradient';
 
 const styles = signupStyles;
 
@@ -46,15 +47,19 @@ function SignupScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.safe}>
+      <LinearGradient start={{x: 0, y: 0}} end={{x: 0, y: 1}} colors={['#002b54', '#53d681']} style={styles.safe}>
       <View style={styles.padding}>
-        <Text style={styles.title}>ToDuo</Text>
+      <View style={styles.logoView}>
+        <Text style={styles.titleTo}>To</Text>
+        <Text style={styles.titleDuo}>Duo</Text>
+            </View>
 
         <View style={styles.container}>
           <TextInput
             style={styles.textInput}
             onChangeText={text => setFirstNameText(text)}
             placeholder="First Name"
+            placeholderTextColor='white'
           />
         </View>
 
@@ -63,6 +68,7 @@ function SignupScreen({ navigation }) {
             style={styles.textInput}
             onChangeText={text => setLastNameText(text)}
             placeholder="Last Name"
+            placeholderTextColor='white'
           />
         </View>
 
@@ -71,6 +77,7 @@ function SignupScreen({ navigation }) {
             style={styles.textInput}
             onChangeText={text => setAgeText(text)}
             placeholder="Age"
+            placeholderTextColor='white'
           />
         </View>
 
@@ -78,6 +85,7 @@ function SignupScreen({ navigation }) {
           <TextInput
             style={styles.textInput}
             placeholder="Email"
+            placeholderTextColor='white'
             onChangeText={text => setEmailText(text)}
           />
         </View>
@@ -86,6 +94,7 @@ function SignupScreen({ navigation }) {
           <TextInput
             style={styles.textInput}
             placeholder="Password"
+            placeholderTextColor='white'
             onChangeText={text => setPasswordText(text)}
             secureTextEntry={true}
           />
@@ -113,7 +122,7 @@ function SignupScreen({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+      </LinearGradient>
   );
 }
 
