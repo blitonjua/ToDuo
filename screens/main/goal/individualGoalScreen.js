@@ -150,7 +150,7 @@ function IndividualGoalScreen({route, navigation}) {
         </TouchableOpacity>
         {/* messages button */}
         <TouchableOpacity style={styles.wideButton} onPress={() => gotoMessage()}>
-          <Text>Message Buddy</Text>
+        <Text>{'Message ' + buddyName}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.wideButton} onPress={() => goalDone(status.archived)}>
           <Text>Archive</Text>
