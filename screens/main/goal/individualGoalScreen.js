@@ -135,8 +135,7 @@ function IndividualGoalScreen({route, navigation}) {
     <SafeAreaView style={styles.safe}>
       <View style={styles.padding}>
         {/* overview info */}
-        <Text style={styles.title}>{goal.title}</Text>
-        <Text>{goal.description}</Text>
+        <Text style={styles.goalText}>{goal.description}</Text>
         {/* ---------------------------------------------------------------------------------------------------------------- */}
         <MileStoneList goalInfo={goal.goalId} />
         {/* ---------------------------------------------------------------------------------------------------------------- */}
@@ -146,27 +145,27 @@ function IndividualGoalScreen({route, navigation}) {
         <TouchableOpacity style={styles.wideButton} onPress={() => {
             navigation.navigate('toDoListScreen', {goal: goal});
           }}>
-          <Text>Todo List</Text>
+          <Text style={styles.goalText}>Todo List</Text>
         </TouchableOpacity>
         {/* messages button */}
         <TouchableOpacity style={styles.wideButton} onPress={() => gotoMessage()}>
-        <Text>{'Message ' + buddyName}</Text>
+        <Text style={styles.goalText}>{'Message ' + buddyName}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.wideButton} onPress={() => goalDone(status.archived)}>
-          <Text>Archive</Text>
+          <Text style={styles.goalText}>Archive</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.wideButton} onPress={() => goalDone(status.completed)}>
-          <Text>Complete</Text>
+          <Text style={styles.goalText}>Complete</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.wideButton} onPress={() => bail()}>
-          <Text>Bail</Text>
+          <Text style={styles.goalText}>Bail</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.wideButton} onPress={() => {
             navigation.navigate('approveMilestones', {
               goal: goal,
             });
           }}>
-            <Text>approve buddy milestones</Text>
+            <Text style={styles.goalText}>approve buddy milestones</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

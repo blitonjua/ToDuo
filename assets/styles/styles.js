@@ -303,6 +303,7 @@ export const individualGoalStyles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         paddingBottom: 1,
+        color: 'white',
     },
     milestonesText: {
         textAlign: 'left',
