@@ -133,53 +133,41 @@ function IndividualGoalScreen({route, navigation}) {
   // console.log(goal);
   return (
     <SafeAreaView style={styles.safe}>
-      {/* back button */}
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text>GO BACK</Text>
-      </TouchableOpacity>
       <View style={styles.padding}>
         {/* overview info */}
         <Text style={styles.title}>{goal.title}</Text>
         <Text>{goal.description}</Text>
-
-        {/* milestones */}
-        {/* ---------------------------------------------------------------------------------------------------------------- */}
-        {/* <View style={styles.flatListContainer}>
-          <Text style={styles.milestonesText}>Milestones</Text>
-          <FlatList
-            data={milestones}
-            renderItem={({ item }) => <MilestoneListItem item={item} />}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </View> */}
         {/* ---------------------------------------------------------------------------------------------------------------- */}
         <MileStoneList goalInfo={goal.goalId} />
         {/* ---------------------------------------------------------------------------------------------------------------- */}
       </View>
       <ScrollView>
         {/* toDo list button */}
-        <Button
-          title="to-do list"
-          onPress={() => {
+        <TouchableOpacity style={styles.wideButton} onPress={() => {
             navigation.navigate('toDoListScreen', {goal: goal});
-          }}
-        />
+          }}>
+          <Text>Todo List</Text>
+        </TouchableOpacity>
         {/* messages button */}
-        <Button title="msg" onPress={() => gotoMessage()} />
-        {/* archive goal */}
-        <Button title="archive" onPress={() => goalDone(status.archived)} />
-        {/* complete goal */}
-        <Button title="complete" onPress={() => goalDone(status.completed)} />
-        <Button
-          title="approve buddy milestones"
-          onPress={() => {
+        <TouchableOpacity style={styles.wideButton} onPress={() => gotoMessage()}>
+          <Text>Message Buddy</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.wideButton} onPress={() => goalDone(status.archived)}>
+          <Text>Archive</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.wideButton} onPress={() => goalDone(status.completed)}>
+          <Text>Complete</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.wideButton} onPress={() => bail()}>
+          <Text>Bail</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.wideButton} onPress={() => {
             navigation.navigate('approveMilestones', {
               goal: goal,
             });
-          }}
-        />
-        {/* accountabuddy bail */}
-        <Button title="bail buddy" onPress={() => bail()} />
+          }}>
+            <Text>approve buddy milestones</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

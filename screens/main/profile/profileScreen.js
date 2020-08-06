@@ -13,7 +13,7 @@ const styles = profileStyles;
 
 function ProfileScreen({navigation}) {
   //current user state
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({firstName: 'first', lastName: 'last'});
   const {user, setUser} = useContext(UserContext);
 
   async function getUser() {
@@ -44,11 +44,11 @@ function ProfileScreen({navigation}) {
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
         {/* Profile picture */}
-        <ProfilePhoto user={user} />
+        {/* <ProfilePhoto user={user} /> */}
 
         {/* name */}
         <Text style={styles.name}>
-          {userData.firstName} {userData.lastName}
+          {/* {userData.firstName} {userData.lastName} */}
         </Text>
 
         {/* <View style={styles.details}>
