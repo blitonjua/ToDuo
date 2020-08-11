@@ -27,6 +27,7 @@ function App() {
   }
 
   useEffect(() => {
+    console.log('hi in app.js');
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);

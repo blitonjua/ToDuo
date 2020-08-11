@@ -31,6 +31,7 @@ export default class MileStoneList extends Component {
 
   //updating
   componentDidUpdate() {
+    console.log('hi in milestonelist');
     this._isMounted = true;
     if (this._isMounted) {
       getMilestonesAsObjects(auth().currentUser.uid, this.state.goalId).then(

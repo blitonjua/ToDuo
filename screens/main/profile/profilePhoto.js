@@ -18,6 +18,7 @@ export default class ProfilePhoto extends Component {
     }
     
     componentDidMount() {
+        if (this.state.user !== null)
         firestore()
             .collection('Users')
             .doc(this.state.user)
@@ -30,7 +31,9 @@ export default class ProfilePhoto extends Component {
             });
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
+        if (this.props.user !== prevProps.user){
+            console.log('in profilephoto active');
         firestore()
             .collection('Users')
             .doc(this.state.user)
@@ -41,6 +44,7 @@ export default class ProfilePhoto extends Component {
                     profileIndex: docData.profileIndex,
                 })
             });
+        }
     }
 
     render() {

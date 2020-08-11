@@ -9,6 +9,7 @@ var db = firestore().collection('Users');
 var user;
 
 export async function getUserData(uid) {
+  console.log('uid issssssssssssssss ' + uid);
   await db
     .doc(uid)
     .get()

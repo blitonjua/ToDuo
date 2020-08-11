@@ -16,7 +16,7 @@ function ProfileScreen({navigation}) {
   //current user state
   const [userData, setUserData] = useState({});
   const {user, setUser} = useContext(UserContext);
-  console.log('user is ' + user);
+  console.log('user context is ' + user);
 
   async function getUser() {
     setUserData(await getUserData(user));
@@ -24,25 +24,26 @@ function ProfileScreen({navigation}) {
 
   useEffect(() => {
     //getUser();
-    console.log('in use effect');
+    console.log('hi in profilescreen');
     console.log('user is in usefect ' + user);
+    if (user !== null){
     firestore()
       .collection('Users')
       .doc(user)
       .get()
       .then(
         docRef => {
-        let docData = docRef.data();
-        let dataObject = {
-        age: docData.age,
-        firstName: docData.firstName,
-        lastName: docData.lastName,
-        email: docData.email,
-        profileIndex: docData.profileIndex,
-        };
-        console.log("first: " + dataObject.firstName);
-        setUserData(dataObject);
+          console.log("got doc");
+          let docData = docRef.data();
+          let dataObject = {
+            firstName: docData.firstName,
+            lastName: docData.lastName,
+          //profileIndex: docData.profileIndex,
+          };
+          console.log("first: " + dataObject.firstName);
+          setUserData(dataObject);
       });
+    }
   }, [user]);
 
   //signs the user out and redirects to login screen

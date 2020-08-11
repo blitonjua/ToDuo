@@ -48,6 +48,7 @@ export default class ApproveMilestone extends Component {
   }
 
   componentDidUpdate() {
+    console.log('hi in approveMilestones');
     this._isMounted = true;
     if (this._isMounted) {
       getMilestonesAsObjects(

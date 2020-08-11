@@ -39,6 +39,7 @@ export default function Chat () {
   const chatRef = useContext(ChatContext);
   useEffect( //changed from funciotn () {} //change target database here
      () => {
+       console.log('hi in chat.js');
       return chatRef.orderBy('created_at', 'desc')
         .onSnapshot(function (snapshot) {
           dispatchMessages({ type: 'add', payload: snapshot.docs })

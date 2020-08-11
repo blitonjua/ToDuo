@@ -36,6 +36,7 @@ function IndividualGoalScreen({route, navigation}) {
   const [buddyName, setBuddyName] = useState('');
 
   useEffect(() => {
+    console.log('hi in indigoalscreen msg name');
     firestore()
       .collection('Users')
       .doc(goal.accountaBuddyId)
@@ -67,6 +68,7 @@ function IndividualGoalScreen({route, navigation}) {
     setMilestones(data);
   }
   useEffect(() => {
+    console.log('hi in indigaolscreen mounting');
     let isMounted = true;
     if (isMounted) getMilestones();
     return () => {

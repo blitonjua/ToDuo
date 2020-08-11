@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
     SafeAreaView,
     TouchableOpacity,
@@ -12,6 +12,7 @@ import auth from '@react-native-firebase/auth';
 import { getUserData, updateAge, updateFirstName, updateLastName, forgotPassword, deleteAccount, updateProfileIndex } from './settings';
 import { settingsScreenStyles } from '../../../assets/styles/styles';
 import { profileIcons } from '../../../assets/images/profileIcons';
+import { UserContext } from '../../../services/userContext';
 
 styles = settingsScreenStyles;
 
@@ -25,16 +26,19 @@ function SettingsScreen({ navigation }) {
     // const [newPassword, setNewPassword] = useState('')
     const [text, setText] = useState()
 
-    const uid = auth().currentUser.uid
+    const {uid, setUid} = useContext(UserContext);
 
     async function getUser() {
+        console.log("uid is " + uid);
         let user;
         user = await getUserData(uid)
         setUserData(user)
     }
 
     useEffect(() => {
-        getUser();
+        console.log('hi in settings');
+        if (uid !== null)
+            getUser();
     }, [])
 
     //item renderer for FlatList

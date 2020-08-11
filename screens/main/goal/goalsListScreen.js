@@ -23,8 +23,9 @@ function GoalsListScreen({navigation}) {
   }
 
   useEffect(() => {
+    console.log('hi in goalslistscreen');
     getGoals();
-  });
+  }, []);
 
   function gotoIndividualGoal(item) {
     navigation.navigate('individualGoalDisplay', {goal: item});
