@@ -3,6 +3,7 @@ import {Text, SafeAreaView, TouchableOpacity, View, Image} from 'react-native';
 //firebase
 import auth from '@react-native-firebase/auth';
 import {UserContext} from '../../../services/userContext';
+import firestore from '@react-native-firebase/firestore';
 //consts
 import {profileIcons} from '../../../assets/images/profileIcons';
 //styles
@@ -15,14 +16,34 @@ function ProfileScreen({navigation}) {
   //current user state
   const [userData, setUserData] = useState({});
   const {user, setUser} = useContext(UserContext);
+  console.log('user is ' + user);
 
   async function getUser() {
     setUserData(await getUserData(user));
   }
 
   useEffect(() => {
-    getUser();
-  }, []);
+    //getUser();
+    console.log('in use effect');
+    console.log('user is in usefect ' + user);
+    firestore()
+      .collection('Users')
+      .doc(user)
+      .get()
+      .then(
+        docRef => {
+        let docData = docRef.data();
+        let dataObject = {
+        age: docData.age,
+        firstName: docData.firstName,
+        lastName: docData.lastName,
+        email: docData.email,
+        profileIndex: docData.profileIndex,
+        };
+        console.log("first: " + dataObject.firstName);
+        setUserData(dataObject);
+      });
+  }, [user]);
 
   //signs the user out and redirects to login screen
   const signOut = () => {
