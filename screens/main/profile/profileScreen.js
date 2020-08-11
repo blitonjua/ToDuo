@@ -57,7 +57,7 @@ function ProfileScreen({ navigation }) {
             style={styles.profilePic}
           />
         </View> */}
-        <ProfilePhoto />
+        {/* <ProfilePhoto /> */}
 
         {/* name */}
         <Text style={styles.name}>

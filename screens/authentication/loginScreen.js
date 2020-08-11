@@ -23,45 +23,25 @@ function LoginScreen({ navigation }) {
   const [validPassStyle, setValidPassStyle] = useState({});
   const [passError, setPassError] = useState('');
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   function gotoSignup() {
-    // setScreen(!showSignIn);
     navigation.navigate('Signup');
   }
 
   const signUserIn = (email, pass) => {
-    if (email.length == 0) {
-      setValidEmailStyle({ backgroundColor: 'pink' });
-      setEmailError('Please enter an email');
-      setValidPassStyle({});
-      setPassError();
-    }
-    else if (pass.length == 0) {
-      setValidPassStyle({ backgroundColor: 'pink' });
-      setPassError('Please enter your password');
-      setValidEmailStyle({});
-      setEmailError();
-    }
+    if (email.length == 0) 
+      setErrorMessage('Please enter an email.');
+    else if (pass.length == 0) 
+      setErrorMessage('Please enter your password.');
     else
       auth().signInWithEmailAndPassword(email, pass)
         .catch(error => {
           //wrong password
-          if (error.code === 'auth/wrong-password') {
-            setValidPassStyle({ backgroundColor: 'pink' });
-            setPassError(error.message);
-          }
-          else {
-            setValidPassStyle({});
-            setPassError();
-          }
-          //wrong email
-          if (error.code === 'auth/invalid-email' || error.code === 'auth/user-not-found') {
-            setValidEmailStyle({ backgroundColor: 'pink' });
-            setEmailError(error.message);
-          }
-          else {
-            setValidEmailStyle({});
-            setEmailError();
-          }
+          if (error.code === 'auth/wrong-password') 
+            setErrorMessage(error.message);
+          if (error.code === 'auth/invalid-email' || error.code === 'auth/user-not-found') 
+            setErrorMessage(error.message);
         })
   };
 
@@ -89,6 +69,7 @@ function LoginScreen({ navigation }) {
 
 
         <View style={styles.buttonView}>
+          <Text style={styles.errorText}>{errorMessage}</Text>
           <TouchableOpacity
             style={styles.logInButton}
             onPress={() => {
