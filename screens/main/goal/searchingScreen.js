@@ -15,16 +15,8 @@ function SearchingScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.safe}>
             <View style={styles.main}>
-                {/* back button */}
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('goalsListScreen')}>
-                    {/* // onPress={() => navigation.goBack()}> */}
-                    <Text>Go Back</Text>
-                </TouchableOpacity>
-
                 {/* message */}
-                <Text>Hey! We're still finding you a buddy. Please wait :)</Text>
-
+                <Text style={{color: 'white',}}>Hey! We're still finding you a buddy. Please wait :)</Text>
             </View>
         </SafeAreaView>
     );

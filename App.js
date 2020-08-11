@@ -37,7 +37,8 @@ function App() {
     <NavigationContainer>
       <UserContext.Provider value={{ user, setUser }} >
         <Stack.Navigator
-          headerMode='none'>
+          screenOptions={({ route, navigation }) => ({
+            headerShown: false,})}>
           {!loggedIn ? (
             <Stack.Screen name="Authentication" component={AuthStack} />
           ) : (

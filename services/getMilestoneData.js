@@ -44,10 +44,36 @@ export async function getMilestonesAsObjects(uid, goalId) {
           milestoneMonth: docData.milestoneMonth,
           milestoneDay: docData.milestoneDay,
           milestoneFullYear: docData.milestoneFullYear,
+          completed: docData.completed,
+          requestMark: docData.requestMark,
         };
         milestoneList.push(dataObject);
       });
     });
-
   return milestoneList;
+}
+
+export async function markMilestoneAsComplete(uid, goalId, milestone) {
+  await db
+    .doc(uid)
+    .collection('goals')
+    .doc(goalId)
+    .collection('milestones')
+    .doc(milestone)
+    .update({
+      requestMark: false,
+      completed: true,
+    });
+}
+export async function requestMilestoneCompletion(uid, goalId, milestone) {
+  await db
+    .doc(uid)
+    .collection('goals')
+    .doc(goalId)
+    .collection('milestones')
+    .doc(milestone)
+    .update({
+      requestMark: true,
+      completed: false,
+    });
 }
