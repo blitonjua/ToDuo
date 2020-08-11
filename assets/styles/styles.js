@@ -21,6 +21,9 @@ export const appStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    errorText: {
+        color: colors.red,
+    }
 });
 
 //authentication
@@ -70,9 +73,6 @@ export const authStyles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10
     },
-    errorText: {
-        color: colors.red,
-    }
 });
 
 export const loginStyles = StyleSheet.create({
@@ -260,111 +260,111 @@ export const devFlatListStyles = StyleSheet.create({
 });
 
 //chat input
-export const inputStyles =  StyleSheet.create({
+export const inputStyles = StyleSheet.create({
     container: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-around',
-      width: '100%'
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        width: '100%'
     },
     inputContainer: {
-      width: '70%'
+        width: '70%'
     },
     input: {
-      height: 40,
-      borderColor: '#B4B4B4',
-      borderWidth: 1,
-      borderRadius: 3,
-      flexDirection: 'row',
-      paddingHorizontal: 10
+        height: 40,
+        borderColor: '#B4B4B4',
+        borderWidth: 1,
+        borderRadius: 3,
+        flexDirection: 'row',
+        paddingHorizontal: 10
     }
 });
 
 // input button
 export const buttonStyles = StyleSheet.create({
     container: {
-      marginHorizontal: 20,
-      paddingVertical: 10,
-      paddingHorizontal: 16,
-      backgroundColor: '#5FB0FF',
-      borderRadius: 3
+        marginHorizontal: 20,
+        paddingVertical: 10,
+        paddingHorizontal: 16,
+        backgroundColor: '#5FB0FF',
+        borderRadius: 3
     },
     text: {
-      color: '#FFF'
+        color: '#FFF'
     },
-    
+
 });
 
 // input loader
 export const loaderStyles = StyleSheet.create({
     container: {
-      position: 'absolute',
-  
-      top: 0,
-      left: 0,
-  
-      height: '100%',
-      width: '100%',
-  
-      justifyContent: 'center',
-      alignItems: 'center'
+        position: 'absolute',
+
+        top: 0,
+        left: 0,
+
+        height: '100%',
+        width: '100%',
+
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });
 
 //chat message
 export const messageStyles = StyleSheet.create({
     container: {
-      width: '100%',
-      paddingVertical: 3,
-      paddingHorizontal: 10,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start'
+        width: '100%',
+        paddingVertical: 3,
+        paddingHorizontal: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
     },
     textContainer: {
-      width: 160,
-      backgroundColor: '#B4B4B4',
-  
-      borderRadius: 40,
-      paddingHorizontal: 15,
-      paddingVertical: 12,
-      marginLeft: 10
+        width: 160,
+        backgroundColor: '#B4B4B4',
+
+        borderRadius: 40,
+        paddingHorizontal: 15,
+        paddingVertical: 12,
+        marginLeft: 10
     },
     rightContainer: {
-      justifyContent: 'flex-end'
+        justifyContent: 'flex-end'
     },
     rightTextContainer: {
-      backgroundColor: '#5FB0FF',
-      marginRight: 10
+        backgroundColor: '#5FB0FF',
+        marginRight: 10
     },
     leftText: {
-      textAlign: 'left'
+        textAlign: 'left'
     },
     rightText: {
-      textAlign: 'right'
+        textAlign: 'right'
     },
     text: {
-      fontSize: 12
+        fontSize: 12
     }
-  })
-  
-  export const flattenedStyles = {
+})
+
+export const flattenedStyles = {
     container: StyleSheet.flatten([messageStyles.container, messageStyles.rightContainer]),
     textContainer: StyleSheet.flatten([messageStyles.textContainer, messageStyles.rightTextContainer]),
     leftText: StyleSheet.flatten([messageStyles.leftText, messageStyles.text]),
     rightText: StyleSheet.flatten([messageStyles.rightText, messageStyles.text])
-  }
+}
 
-  export const settingsScreenStyles = StyleSheet.create({
-      mainContainer: {
+export const settingsScreenStyles = StyleSheet.create({
+    mainContainer: {
         flex: 1,
         alignContent: 'center',
         alignItems: 'stretch',
-       // justifyContent: 'center',
-        marginTop:10,
+        // justifyContent: 'center',
+        marginTop: 10,
         backgroundColor: 'white',
-      },
-      padding: {
+    },
+    padding: {
         padding: 20
     },
     main: {
@@ -377,7 +377,7 @@ export const messageStyles = StyleSheet.create({
         padding: 7,
         marginTop: 10,
         alignItems: 'stretch',
-       // justifyContent: 'center',
+        // justifyContent: 'center',
         borderColor: '#EBEBEB',
         borderRadius: 10,
         marginBottom: 8,
@@ -398,35 +398,34 @@ export const messageStyles = StyleSheet.create({
         height: 40
     },
     title: {
-        marginTop:10,
+        marginTop: 10,
         fontSize: 20,
         textAlign: 'center',
         fontFamily: 'BloggerSans-BoldItalic'
     },
     goBack: {
-        marginTop:10
+        marginTop: 10
     },
-    resetPassword:{
-        marginTop:10
+    resetPassword: {
+        marginTop: 10
     }
-  })
+})
 
 //chat
 export const chatStyles = StyleSheet.create({
     messagesContainer: {
-      height: '100%',
-      paddingBottom: 100
+        height: '100%',
+        paddingBottom: 100
     },
     inputContainer: {
-      width: '100%',
-      height: 100,
-      position: 'absolute',
-      bottom: 0,
-      paddingVertical: 10,
-      paddingLeft: 20,
-  
-      borderTopWidth: 1,
-      borderTopColor: '#B4B4B4'
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        bottom: 0,
+        paddingVertical: 10,
+        paddingLeft: 20,
+
+        borderTopWidth: 1,
+        borderTopColor: '#B4B4B4'
     }
-  });
-    
+});

@@ -13,6 +13,8 @@ import { addGoalToUserGoalCollection } from '../../../services/setGoals';
 import { FlatList } from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { UserContext } from '../../../services/userContext';
+import { appStyles } from '../../../assets/styles/styles';
+const styles = appStyles;
 
 //the form to add a goal and handles creating the goal.
 function AddGoalScreen({ route, navigation }) {
@@ -29,30 +31,25 @@ function AddGoalScreen({ route, navigation }) {
   const [defaultDate, setDefaultDate] = useState(new Date());
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   //validation
-  const [validDate, setValidDate] = useState(true);
-  const [milestoneTitleInput, setMilestoneInput] = useState({});
+  const [validDate, setValidDate] = useState(false);
   const [validTitle, setValidTitle] = useState(false);
-  const [titleInput, setTitleInput] = useState({});
   const [validDescription, setValidDescription] = useState(false);
-  const [descriptionInput, setDescriptionInput] = useState({});
+
+  const [errorMessage, setErrorMessage] = useState('');
+  const [milestoneErrorMessage, setMilestoneErrorMessage] = useState('');
 
   const { user, setUser } = useContext(UserContext);
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
-    //ensures a title
     if (!validTitle)
-      setTitleInput({ backgroundColor: 'pink' });
-    else
-      setTitleInput({});
-    //ensures a description
-    if (!validDescription)
-      setDescriptionInput({ backgroundColor: 'pink' });
-    else
-      setDescriptionInput({});
-    
+      setErrorMessage('Please enter a title.');
+    else if (!validDescription)
+      setErrorMessage('Please enter a description');
+    else if (milestones.length == 0)
+      setErrorMessage('Please enter at least 1 milestone.');
     //only adds a goal if milestone, title, and description provided
-    if (validTitle && validDescription && milestones.length > 0) {
+    else if (validTitle && validDescription && milestones.length > 0) {
       addGoalToUserGoalCollection(
         user,
         title,
@@ -85,8 +82,19 @@ function AddGoalScreen({ route, navigation }) {
 
   //add a milestone to array
   function addMilestone(enterText, date) {
-    setMilestones(milestones.concat([enterText]));
-    setDateArray(datesArray.concat([date]));
+    if (enterText.length == 0)
+      setMilestoneErrorMessage('Please enter a milestone description.');
+    else if (!validDate)
+      setMilestoneErrorMessage('Please enter an expected completion date tomorrow or later.');
+    else {
+      if (Platform.OS === 'ios') {
+        setShowDateTimePicker(false);
+      }
+      setMilestones(milestones.concat([enterText]));
+      setDateArray(datesArray.concat([date]));
+      setMilestoneText('');
+      this.myTextInput.clear();
+    }
   }
   function onDateSelected(event, selectedDate) {
     const currentDate = selectedDate || datePicked;
@@ -98,12 +106,12 @@ function AddGoalScreen({ route, navigation }) {
     ]);
     setDefaultDate(selectedDate);
 
-    if (currentDate >= new Date() && milestoneText.length > 0) {
-      setMilestoneInput({});
+    if (currentDate >= new Date()) {
+      setMilestoneErrorMessage('');
       setValidDate(true);
     }
     else {
-      setMilestoneInput({ backgroundColor: 'pink' });
+      setMilestoneErrorMessage('Please choose date tomorrow or later.');
       setValidDate(false);
     }
   }
@@ -116,7 +124,7 @@ function AddGoalScreen({ route, navigation }) {
           </TouchableOpacity>
           <View>
             {/* title */}
-            <View style={[{ borderWidth: 1 }, titleInput]}>
+            <View style={{ borderWidth: 1 }}>
               <TextInput
                 placeholder="title"
                 onChangeText={titleHandler}
@@ -126,7 +134,7 @@ function AddGoalScreen({ route, navigation }) {
             </View>
 
             {/* description */}
-            <View style={[{ borderWidth: 1 }, descriptionInput]}>
+            <View style={{ borderWidth: 1 }}>
               <TextInput
                 placeholder="description"
                 onChangeText={descriptionHandler}
@@ -150,7 +158,7 @@ function AddGoalScreen({ route, navigation }) {
           />
 
           {/* adding a new milestone */}
-          <View style={[{ borderWidth: 1 }, milestoneTitleInput]}>
+          <View style={{ borderWidth: 1 }}>
             <TextInput
               placeholder="add milestone"
               onChangeText={text => setMilestoneText(text)}
@@ -164,12 +172,6 @@ function AddGoalScreen({ route, navigation }) {
               title="Show Calendar"
               onPress={() => setShowDateTimePicker(true)}
             />
-            {milestoneText.length == 0 && (
-              <Text>Please enter a milestone description</Text>
-            )}
-            {!validDate && (
-              <Text>Date must be today or later</Text>
-            )}
 
             {showDateTimePicker && (
               <DateTimePicker
@@ -185,20 +187,16 @@ function AddGoalScreen({ route, navigation }) {
               />
             )}
 
+            <Text style={styles.errorText}>{milestoneErrorMessage}</Text>
             <Button
               title="Add milestone"
-              disabled={!validDate}
               onPress={() => {
-                if (Platform.OS === 'ios') {
-                  setShowDateTimePicker(false);
-                }
                 addMilestone(milestoneText, datePicked);
-                setMilestoneText('');
-                this.myTextInput.clear();
               }}
             />
           </View>
 
+          <Text style={styles.errorText}>{errorMessage}</Text>
           {/* add goal Button */}
           <Button
             title="create"
