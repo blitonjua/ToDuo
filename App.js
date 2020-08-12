@@ -33,6 +33,8 @@ function App() {
 
   if (initializing) return null;
 
+  console.disableYellowBox = true;
+
   return (
     <NavigationContainer>
       <UserContext.Provider value={{ user, setUser }} >

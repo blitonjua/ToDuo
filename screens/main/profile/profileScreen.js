@@ -44,11 +44,11 @@ function ProfileScreen({ navigation }) {
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
         {/* Profile picture */}
-        <ProfilePhoto user={user} />
+        {/* <ProfilePhoto user={user} /> */}
 
         {/* name */}
         <Text style={styles.name}>
-          {userData.firstName} {userData.lastName}
+          {/* {userData.firstName} {userData.lastName} */}
         </Text>
 
         {/* archive*/}

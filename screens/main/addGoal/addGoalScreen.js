@@ -91,6 +91,7 @@ function AddGoalScreen({ route, navigation }) {
     else if (!validDate)
       setMilestoneErrorMessage('Please enter an expected completion date tomorrow or later.');
     else {
+      setMilestoneErrorMessage('');
       if (Platform.OS === 'ios') {
         setShowDateTimePicker(false);
       }
@@ -154,14 +155,13 @@ function AddGoalScreen({ route, navigation }) {
                 <View style={{
                   padding: 5,
                   margin: 2,
-                  borderBottomWidth: 1,
-                  borderBottomColor: 'white'
                 }}>
-                  <Text style={{ color: 'white' }}>{item}</Text>
+                  <Text style={{ color: 'white' }}>• {item}</Text>
                 </View>
               )}
-              keyExtractor={item => {
-                item + 'x';
+              keyExtractor={(item, index) => {
+                index.toString();
+                console.log(index)
               }}
             />
           </View>
