@@ -13,6 +13,7 @@ const styles = appStyles;
 
 //displays the past goals of the user
 function PastGoalsScreen({ navigation }) {
+    const showCompleted = true;
     const [goals, setGoals] = useState();
 
     //sets goals to the completed goals

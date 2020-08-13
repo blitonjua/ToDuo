@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProfileScreen from './profileScreen';
 import settingsStack from './settingsStack';
 import PastGoalsScreen from './pastGoalsScreen';
-import {headerStyles} from '../../../assets/styles/styles'
+import {headerStyles} from '../../../assets/styles/styles';
 
 function ProfileStack() {
     const Stack = createStackNavigator();
@@ -27,11 +27,11 @@ function ProfileStack() {
                     }}/>
             <Stack.Screen name="pastGoalsScreen" component={PastGoalsScreen} 
                 options={{
-                    title:'Past Goals',
+                    title:'Completed Goals',
                     headerStyle: headerStyles.headerStyle,
                     headerTintColor: 'white',
                     headerBackTitle: ' ',
-                    }}/>
+                    }}/>  
         </Stack.Navigator>
     );
 };

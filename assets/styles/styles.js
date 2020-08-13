@@ -184,23 +184,43 @@ export const signupStyles = StyleSheet.create({
 //profile
 export const profileStyles = StyleSheet.create({
     ...appStyles,
-    profilePic: {
-        height: 80,
-        width: 80,
-        backgroundColor: 'white',
-        borderRadius: 40,
-        marginBottom: 10,
-    },
-    safe:{
+    main: {
+        //flex: 1,
+        padding: 20,
         justifyContent: 'center',
-        flex: 1,
-        backgroundColor: '#272b28',
+        alignItems: 'stretch',
+        alignContent: 'center',
+    },
+    button: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: colors.lime,
+      borderRadius: 60,
+      height: 40,
+      marginTop:15
+  },
+    profilePic: {
+        height: 100,
+        width: 100,
+        backgroundColor: 'white',
+        borderRadius: 50,
+        marginBottom:10
+    },
+    mainContainer: {
+      flex: 1,
+      alignItems: 'stretch',
+      justifyContent: 'center',
+      alignContent: 'center',
+      height: Dimensions.get('window').height,
+      width: Dimensions.get('window').width,
     },
     name: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        margin: 20,
-        color: 'white',
+      fontFamily:'BloggerSans-BoldItalic',
+      fontSize:30,
+      color:'white',
+      padding:5,
+      textAlign:'center',
+      textTransform:'capitalize',
     },
     row: {
         flexDirection: 'row',
@@ -239,12 +259,11 @@ export const profileStyles = StyleSheet.create({
         height: 40,
         borderRadius: 20,
     },
-    buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 15,
-        letterSpacing: 2,
-    },
+    buttonText:{
+      color:'#fff',
+      fontFamily:'BloggerSans-Medium',
+      fontSize:16   
+  }
 });
 
 //addGoal

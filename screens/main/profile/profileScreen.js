@@ -9,6 +9,10 @@ import {profileIcons} from '../../../assets/images/profileIcons';
 import {profileStyles} from '../../../assets/styles/styles';
 import {getUserData} from './settings';
 import ProfilePhoto from './profilePhoto';
+import LinearGradient from 'react-native-linear-gradient';
+
+
+
 const styles = profileStyles;
 
 function ProfileScreen({navigation}) {
@@ -32,7 +36,7 @@ function ProfileScreen({navigation}) {
 
   //navigates to the settings
   function gotoSettings() {
-    navigation.navigate('settingsStack');
+    navigation.navigate('settingsScreen');
   }
 
   //navigates to the past goals
@@ -41,46 +45,35 @@ function ProfileScreen({navigation}) {
   }
 
   return (
-    <SafeAreaView style={styles.safe}>
-      <View style={styles.main}>
-        {/* Profile picture */}
-        <ProfilePhoto user={user} />
-
-        {/* name */}
-        <Text style={styles.name}>
-          {/* {userData.firstName} {userData.lastName} */}
-        </Text>
-
-        {/* <View style={styles.details}>
-          <View style={styles.row}>
-            <Text style={styles.detailsTitle}>
-              User ID:
-            </Text>
-            <Text style={styles.detailsBody}>
-              {user}
-            </Text>
+    <LinearGradient start={{x: 0, y: 0}} end={{x: 0, y: 1}} colors={['#002b54', '#53d681']} style={styles.mainContainer}>
+        <View style={styles.main}>
+          <View style={{alignItems:'center'}}>
+          <ProfilePhoto user={user} />
           </View>
-        </View> */}
+
+        <Text style={styles.name}>
+          {userData.firstName} {userData.lastName}
+        </Text>
 
         {/* archive*/}
         <TouchableOpacity
           onPress={() => gotoPastGoals()}
-          style={styles.settings}>
-          <Text style={styles.buttonText}>See past goals</Text>
+          style={styles.button}>
+          <Text style={styles.buttonText}>See Past Goals</Text>
         </TouchableOpacity>
         {/* Settings button */}
         <TouchableOpacity
           onPress={() => gotoSettings()}
-          style={styles.settings}>
+          style={styles.button}>
           <Text style={styles.buttonText}>Settings</Text>
         </TouchableOpacity>
 
         {/* Logout button */}
-        <TouchableOpacity onPress={() => signOut()} style={styles.signout}>
+        <TouchableOpacity onPress={() => signOut()} style={styles.button}>
           <Text style={styles.buttonText}>Sign Out</Text>
         </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+        </View>
+      </LinearGradient>
   );
 }
 
