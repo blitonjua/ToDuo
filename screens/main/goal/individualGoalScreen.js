@@ -134,24 +134,11 @@ function IndividualGoalScreen({route, navigation}) {
   return (
     <SafeAreaView style={styles.safe}>
       {/* back button */}
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text>GO BACK</Text>
-      </TouchableOpacity>
       <View style={styles.padding}>
         {/* overview info */}
-        <Text style={styles.title}>{goal.title}</Text>
-        <Text>{goal.description}</Text>
+        <Text style={{color: 'white'}}>{goal.description}</Text>
 
-        {/* milestones */}
-        {/* ---------------------------------------------------------------------------------------------------------------- */}
-        {/* <View style={styles.flatListContainer}>
-          <Text style={styles.milestonesText}>Milestones</Text>
-          <FlatList
-            data={milestones}
-            renderItem={({ item }) => <MilestoneListItem item={item} />}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </View> */}
+        <Text style={styles.text}>Milestones</Text>
         {/* ---------------------------------------------------------------------------------------------------------------- */}
         <MileStoneList goalInfo={goal.goalId} />
         {/* ---------------------------------------------------------------------------------------------------------------- */}

@@ -52,9 +52,9 @@ export default class MileStoneList extends Component {
         <FlatList
           data={this.state.milestones}
           renderItem={({item}) => (
-            <View>
-              <Text>{item.milestoneText}</Text>
-              <Text>
+            <View style={{backgroundColor: '#202421', padding: 5, margin: 5, borderColor: '#53d681', borderWidth: 2, borderRadius: 5}}>
+              <Text style={{color: 'white', fontSize: 20}}>{item.milestoneText}</Text>
+              <Text style={{color: 'white'}}>
                 {item.milestoneMonth}/{item.milestoneDay}/
                 {item.milestoneFullYear}
               </Text>
@@ -70,12 +70,12 @@ export default class MileStoneList extends Component {
                     });
                   }}>
                   <View>
-                    <Text>Request Completion Mark</Text>
+                    <Text style={{color: 'white'}}>Request Completion Mark</Text>
                   </View>
                 </TouchableOpacity>
               )}
-              {item.completed && <Text>Completed</Text>}
-              {!item.completed && <Text>In Progress</Text>}
+              {item.completed && <Text style={{color: 'white'}}>Completed</Text>}
+              {!item.completed && <Text style={{color: 'white'}}>In Progress</Text>}
             </View>
           )}
           keyExtractor={(item, index) => index.toString()}
