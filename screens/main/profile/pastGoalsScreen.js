@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     SafeAreaView,
     View,
@@ -13,18 +13,22 @@ const styles = appStyles;
 
 //displays the past goals of the user
 function PastGoalsScreen({ navigation }) {
-    const showCompleted = true;
+    const [showingCompleted, setShowingCompleted] = useState(false);
     const [goals, setGoals] = useState();
 
-    //sets goals to the completed goals
-    async function setCompleted() {
-        setGoals(await getCompletedGoals());
-    }
-
-    //sets goals to the archived goals
-    async function setArchived() {
-        setGoals(await getArchivedGoals());
-    }
+    async function getGoals(showingCompleted) {
+        let goals;
+        if (showingCompleted)
+            goals = await getArchivedGoals();
+        else
+            goals = await getCompletedGoals();
+        setGoals(goals);
+      }
+    
+      useEffect(() => {
+        getGoals(showingCompleted);
+        navigation.setOptions({ title: showingCompleted? 'Completed Goals' : 'Archived Goals'});
+      }, [showingCompleted]);
 
     //renders the items in the list
     function ListItem({ item }) {
@@ -40,16 +44,9 @@ function PastGoalsScreen({ navigation }) {
             <View style={styles.main}>
 
                 {/* toggle completed */}
-                <TouchableOpacity style={styles.wideButton} onPress={() => setCompleted()}>
+                <TouchableOpacity style={styles.wideButton} onPress={() => {setShowingCompleted(!showingCompleted)}}>
                     <Text>
-                        completed
-                    </Text>
-                </TouchableOpacity>
-
-                {/* toggle archived */}
-                <TouchableOpacity style={styles.wideButton} onPress={() => setArchived()}>
-                    <Text>
-                        archived
+                        {showingCompleted? 'Show Archived' : 'Show Completed'}
                     </Text>
                 </TouchableOpacity>
 

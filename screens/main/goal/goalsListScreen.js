@@ -24,7 +24,7 @@ function GoalsListScreen({navigation}) {
 
   useEffect(() => {
     getGoals();
-  });
+  }, []);
 
   function gotoIndividualGoal(item) {
     navigation.navigate('individualGoalDisplay', {goal: item});
