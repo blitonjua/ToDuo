@@ -35,16 +35,37 @@ function IndividualGoalScreen({route, navigation}) {
   const [milestones, setMilestones] = useState([]);
   const [buddyName, setBuddyName] = useState('');
 
-  useEffect(() => {
-    console.log('in here ' + goal.accountaBuddyId);
-      firestore()
+  async function getBuddyName() {
+    console.log(goal.accountaBuddyId);
+    let name = await firestore()
       .collection('Users')
       .doc(goal.accountaBuddyId)
-      .get()
-      .then(docSnap => {
-        setBuddyName(docSnap.data().firstName);
-        console.log('this alot?');
-      });
+      .get();
+        console.log('this alot? '+ goal.accountaBuddyId);
+    setBuddyName(name.data().firstName);
+  }
+
+
+  useEffect(() => {
+    console.log('in here ' + goal.accountaBuddyId);
+    getBuddyName();
+    firestore()
+      .collection('Users')
+      .doc(goal.accountaBuddyId)
+      .get().then(docSnap => {
+        console.log(docSnap)
+        setBuddyName(docSnap.data().firstName)
+      })
+  //   firestore()
+  //   .collection('Users')
+  //   .get()
+  //   .then(querySnapshot => {
+  //     console.log('Total users: ', querySnapshot.size);
+
+  //   querySnapshot.forEach(documentSnapshot => {
+  //     console.log(documentSnapshot.data());
+  //   });
+  // });
   }, []);
 
   // console.log(goal);
@@ -77,7 +98,7 @@ function IndividualGoalScreen({route, navigation}) {
     return () => {
       isMounted = false;
     };
-  });
+  }, []);
 
   class MilestoneListItem extends Component {
     _isMounted = false;
@@ -130,11 +151,6 @@ function IndividualGoalScreen({route, navigation}) {
     }
   }
 
-  //bails the user out of the partnership
-  function bail() {
-    navigation.goBack();
-    bailPartnership(user, goal);
-  }
   // console.log(goal);
   return (
     <SafeAreaView style={styles.safe}>
@@ -142,7 +158,7 @@ function IndividualGoalScreen({route, navigation}) {
       <View style={styles.padding}>
         {/* overview info */}
         <Text style={{color: 'white', borderBottomWidth: 2, borderBottomColor: '#53d681', margin: 5}}>{goal.description}</Text>
-        <Button title={"msg" + buddyName} onPress={() => gotoMessage()} />
+        <Button title={"message " + buddyName} onPress={() => gotoMessage()} />
         <Text style={styles.text}>Milestones</Text>
         {/* ---------------------------------------------------------------------------------------------------------------- */}
         <MileStoneList goalInfo={goal.goalId} />
