@@ -20,7 +20,7 @@ export const headerStyles = {
         shadowOpacity: 0,
         borderBottomWidth: 0,
     },
-    hedaerTitleStyle:{
+    hedaerTitleStyle: {
         color: 'white',
     }
 };
@@ -64,6 +64,9 @@ export const appStyles = StyleSheet.create({
         alignItems: 'center',
         alignContent: 'center',
         backgroundColor: "#272b28",
+    },
+    errorText: {
+        color: colors.red,
     },
     themedSafe: {
         flex: 1,
@@ -136,9 +139,6 @@ export const authStyles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10
     },
-    errorText: {
-        color: colors.red,
-    }
 });
 
 export const loginStyles = StyleSheet.create({
@@ -191,7 +191,7 @@ export const profileStyles = StyleSheet.create({
         borderRadius: 40,
         marginBottom: 20,
     },
-    safe:{
+    safe: {
         justifyContent: 'center',
         flex: 1,
         backgroundColor: '#272b28',
@@ -259,11 +259,11 @@ export const plusStyles = StyleSheet.create({
     button: {
         backgroundColor: '#ffc400',
         borderRadius: 300,
-        width:250,
-        height:250,
-        alignItems:'center',
-        justifyContent:'center',
-        paddingTop: Platform.OS === 'ios'? 20:0,
+        width: 250,
+        height: 250,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: Platform.OS === 'ios' ? 20 : 0,
     },
     plus: {
         fontSize: 300,
@@ -335,7 +335,7 @@ export const toDoStyles = StyleSheet.create({
         marginHorizontal: 5,
         borderBottomColor: '#aaa',
     },
-    padding:{
+    padding: {
         padding: 20,
     }
 })
@@ -359,197 +359,197 @@ export const devFlatListStyles = StyleSheet.create({
 });
 
 //chat input
-export const inputStyles =  StyleSheet.create({
+export const inputStyles = StyleSheet.create({
     container: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-around',
-      width: '100%'
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        width: '100%'
     },
     inputContainer: {
-      width: '70%'
+        width: '70%'
     },
     input: {
-      height: 40,
-      borderColor: '#B4B4B4',
-      borderWidth: 1,
-      borderRadius: 3,
-      flexDirection: 'row',
-      paddingHorizontal: 10,
-      color: 'white'
+        height: 40,
+        borderColor: '#B4B4B4',
+        borderWidth: 1,
+        borderRadius: 3,
+        flexDirection: 'row',
+        paddingHorizontal: 10,
+        color: 'white'
     },
 });
 
 // input button
 export const buttonStyles = StyleSheet.create({
     container: {
-      marginHorizontal: 20,
-      paddingVertical: 10,
-      paddingHorizontal: 16,
-      backgroundColor: '#53d681',
-      borderRadius: 3
+        marginHorizontal: 20,
+        paddingVertical: 10,
+        paddingHorizontal: 16,
+        backgroundColor: '#53d681',
+        borderRadius: 3
     },
     text: {
-      color: '#FFF'
+        color: '#FFF'
     },
-    
+
 });
 
 // input loader
 export const loaderStyles = StyleSheet.create({
-  container: {
-    position: 'absolute',
+    container: {
+        position: 'absolute',
 
-    top: 0,
-    left: 0,
+        top: 0,
+        left: 0,
 
-    height: '100%',
-    width: '100%',
+        height: '100%',
+        width: '100%',
 
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
 
 //chat message
 export const messageStyles = StyleSheet.create({
     container: {
-      width: '100%',
-      paddingVertical: 3,
-      paddingHorizontal: 10,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start'
+        width: '100%',
+        paddingVertical: 3,
+        paddingHorizontal: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
     },
     textContainer: {
-      width: 160,
-      backgroundColor: '#B4B4B4',
-  
-      borderRadius: 40,
-      paddingHorizontal: 15,
-      paddingVertical: 12,
-      marginLeft: 10
+        width: 160,
+        backgroundColor: '#B4B4B4',
+
+        borderRadius: 40,
+        paddingHorizontal: 15,
+        paddingVertical: 12,
+        marginLeft: 10
     },
     rightContainer: {
-      justifyContent: 'flex-end'
+        justifyContent: 'flex-end'
     },
     rightTextContainer: {
-      backgroundColor: '#53d681',
-      marginRight: 10
+        backgroundColor: '#53d681',
+        marginRight: 10
     },
     leftText: {
-      textAlign: 'left'
+        textAlign: 'left'
     },
     rightText: {
-      textAlign: 'right'
+        textAlign: 'right'
     },
     text: {
-      fontSize: 12
+        fontSize: 12
     }
-  })
-  
+})
+
 
 export const flattenedStyles = {
-  container: StyleSheet.flatten([
-    messageStyles.container,
-    messageStyles.rightContainer,
-  ]),
-  textContainer: StyleSheet.flatten([
-    messageStyles.textContainer,
-    messageStyles.rightTextContainer,
-  ]),
-  leftText: StyleSheet.flatten([messageStyles.leftText, messageStyles.text]),
-  rightText: StyleSheet.flatten([messageStyles.rightText, messageStyles.text]),
+    container: StyleSheet.flatten([
+        messageStyles.container,
+        messageStyles.rightContainer,
+    ]),
+    textContainer: StyleSheet.flatten([
+        messageStyles.textContainer,
+        messageStyles.rightTextContainer,
+    ]),
+    leftText: StyleSheet.flatten([messageStyles.leftText, messageStyles.text]),
+    rightText: StyleSheet.flatten([messageStyles.rightText, messageStyles.text]),
 };
 
 export const settingsScreenStyles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    alignContent: 'center',
-    alignItems: 'stretch',
-    // justifyContent: 'center',
-    marginTop: 10,
-    backgroundColor: 'white',
-  },
-  padding: {
-    padding: 20,
-  },
-  main: {
-    padding: 20,
-    //justifyContent: 'center',
-    alignItems: 'center',
-  },
-  container: {
-    backgroundColor: 'white',
-    padding: 7,
-    marginTop: 10,
-    alignItems: 'stretch',
-    // justifyContent: 'center',
-    borderColor: '#EBEBEB',
-    borderRadius: 10,
-    marginBottom: 8,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
+    mainContainer: {
+        flex: 1,
+        alignContent: 'center',
+        alignItems: 'stretch',
+        // justifyContent: 'center',
+        marginTop: 10,
+        backgroundColor: 'white',
     },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#42aaf5',
-    borderRadius: 60,
-    height: 40,
-  },
-  title: {
-    marginTop: 10,
-    fontSize: 20,
-    textAlign: 'center',
-    fontFamily: 'BloggerSans-BoldItalic',
-  },
-  goBack: {
-    marginTop: 10,
-  },
-  resetPassword: {
-    marginTop: 10,
-  },
+    padding: {
+        padding: 20,
+    },
+    main: {
+        padding: 20,
+        //justifyContent: 'center',
+        alignItems: 'center',
+    },
+    container: {
+        backgroundColor: 'white',
+        padding: 7,
+        marginTop: 10,
+        alignItems: 'stretch',
+        // justifyContent: 'center',
+        borderColor: '#EBEBEB',
+        borderRadius: 10,
+        marginBottom: 8,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 3,
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#42aaf5',
+        borderRadius: 60,
+        height: 40,
+    },
+    title: {
+        marginTop: 10,
+        fontSize: 20,
+        textAlign: 'center',
+        fontFamily: 'BloggerSans-BoldItalic',
+    },
+    goBack: {
+        marginTop: 10,
+    },
+    resetPassword: {
+        marginTop: 10,
+    },
 });
 
 //chat
 export const chatStyles = StyleSheet.create({
-  messagesContainer: {
-    height: '100%',
-    paddingBottom: 100,
-  },
-  inputContainer: {
-    width: '100%',
-    height: 100,
-    position: 'absolute',
-    bottom: 0,
-    paddingVertical: 10,
-    paddingLeft: 20,
+    messagesContainer: {
+        height: '100%',
+        paddingBottom: 100,
+    },
+    inputContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        bottom: 0,
+        paddingVertical: 10,
+        paddingLeft: 20,
 
-    borderTopWidth: 1,
-    borderTopColor: '#B4B4B4',
-  },
+        borderTopWidth: 1,
+        borderTopColor: '#B4B4B4',
+    },
 });
 //approve milestones
 export const approveMilestones = StyleSheet.create({
-  miletoneContainer: {
-    backgroundColor: '#eaffdb',
-    margin: '1%',
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  miletoneContainer2: {
-    marginRight: '2%',
-  },
-  completeButton: {
-    color: 'black',
-  },
+    miletoneContainer: {
+        backgroundColor: '#eaffdb',
+        margin: '1%',
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    miletoneContainer2: {
+        marginRight: '2%',
+    },
+    completeButton: {
+        color: 'black',
+    },
 });

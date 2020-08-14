@@ -1,20 +1,20 @@
-import React, {useContext, useState, useEffect} from 'react';
-import {Text, SafeAreaView, TouchableOpacity, View, Image} from 'react-native';
+import React, { useContext, useState, useEffect } from 'react';
+import { Text, SafeAreaView, TouchableOpacity, View, Image } from 'react-native';
 //firebase
 import auth from '@react-native-firebase/auth';
-import {UserContext} from '../../../services/userContext';
+import { UserContext } from '../../../services/userContext';
 //consts
-import {profileIcons} from '../../../assets/images/profileIcons';
+import { profileIcons } from '../../../assets/images/profileIcons';
 //styles
-import {profileStyles} from '../../../assets/styles/styles';
-import {getUserData} from './settings';
+import { profileStyles } from '../../../assets/styles/styles';
+import { getUserData } from './settings';
 import ProfilePhoto from './profilePhoto';
 const styles = profileStyles;
 
-function ProfileScreen({navigation}) {
+function ProfileScreen({ navigation }) {
   //current user state
   const [userData, setUserData] = useState({});
-  const {user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   async function getUser() {
     setUserData(await getUserData(user));
@@ -44,23 +44,12 @@ function ProfileScreen({navigation}) {
     <SafeAreaView style={styles.safe}>
       <View style={styles.main}>
         {/* Profile picture */}
-        <ProfilePhoto user={user} />
+        {/* <ProfilePhoto user={user} /> */}
 
         {/* name */}
         <Text style={styles.name}>
-          {userData.firstName} {userData.lastName}
+          {/* {userData.firstName} {userData.lastName} */}
         </Text>
-
-        {/* <View style={styles.details}>
-          <View style={styles.row}>
-            <Text style={styles.detailsTitle}>
-              User ID:
-            </Text>
-            <Text style={styles.detailsBody}>
-              {user}
-            </Text>
-          </View>
-        </View> */}
 
         {/* archive*/}
         <TouchableOpacity

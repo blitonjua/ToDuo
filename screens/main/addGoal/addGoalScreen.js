@@ -13,8 +13,10 @@ import { addGoalToUserGoalCollection } from '../../../services/setGoals';
 import { FlatList } from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { UserContext } from '../../../services/userContext';
+import { appStyles } from '../../../assets/styles/styles';
+const styles = appStyles;
 
-import {addGoalStyles} from '../../../assets/styles/styles';
+import { addGoalStyles } from '../../../assets/styles/styles';
 
 //the form to add a goal and handles creating the goal.
 function AddGoalScreen({ route, navigation }) {
@@ -31,12 +33,12 @@ function AddGoalScreen({ route, navigation }) {
   const [defaultDate, setDefaultDate] = useState(new Date());
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   //validation
-  const [validDate, setValidDate] = useState(true);
-  const [milestoneTitleInput, setMilestoneInput] = useState({});
+  const [validDate, setValidDate] = useState(false);
   const [validTitle, setValidTitle] = useState(false);
-  const [titleInput, setTitleInput] = useState({});
   const [validDescription, setValidDescription] = useState(false);
-  const [descriptionInput, setDescriptionInput] = useState({});
+
+  const [errorMessage, setErrorMessage] = useState('');
+  const [milestoneErrorMessage, setMilestoneErrorMessage] = useState('');
 
   const { user, setUser } = useContext(UserContext);
 
@@ -44,19 +46,14 @@ function AddGoalScreen({ route, navigation }) {
 
   //creates a goal and adds it to the database
   function addGoalHandler() {
-    //ensures a title
     if (!validTitle)
-      setTitleInput({ backgroundColor: 'pink' });
-    else
-      setTitleInput({});
-    //ensures a description
-    if (!validDescription)
-      setDescriptionInput({ backgroundColor: 'pink' });
-    else
-      setDescriptionInput({});
-    
+      setErrorMessage('Please enter a title.');
+    else if (!validDescription)
+      setErrorMessage('Please enter a description');
+    else if (milestones.length == 0)
+      setErrorMessage('Please enter at least 1 milestone.');
     //only adds a goal if milestone, title, and description provided
-    if (validTitle && validDescription && milestones.length > 0) {
+    else if (validTitle && validDescription && milestones.length > 0) {
       addGoalToUserGoalCollection(
         user,
         title,
@@ -89,8 +86,20 @@ function AddGoalScreen({ route, navigation }) {
 
   //add a milestone to array
   function addMilestone(enterText, date) {
-    setMilestones(milestones.concat([enterText]));
-    setDateArray(datesArray.concat([date]));
+    if (enterText.length == 0)
+      setMilestoneErrorMessage('Please enter a milestone description.');
+    else if (!validDate)
+      setMilestoneErrorMessage('Please enter an expected completion date tomorrow or later.');
+    else {
+      setMilestoneErrorMessage('');
+      if (Platform.OS === 'ios') {
+        setShowDateTimePicker(false);
+      }
+      setMilestones(milestones.concat([enterText]));
+      setDateArray(datesArray.concat([date]));
+      setMilestoneText('');
+      this.myTextInput.clear();
+    }
   }
   function onDateSelected(event, selectedDate) {
     const currentDate = selectedDate || datePicked;
@@ -102,12 +111,12 @@ function AddGoalScreen({ route, navigation }) {
     ]);
     setDefaultDate(selectedDate);
 
-    if (currentDate >= new Date() && milestoneText.length > 0) {
-      setMilestoneInput({});
+    if (currentDate >= new Date()) {
+      setMilestoneErrorMessage('');
       setValidDate(true);
     }
     else {
-      setMilestoneInput({ backgroundColor: 'pink' });
+      setMilestoneErrorMessage('Please choose date tomorrow or later.');
       setValidDate(false);
     }
   }
@@ -121,7 +130,7 @@ function AddGoalScreen({ route, navigation }) {
             <TextInput
               placeholder="title"
               placeholderTextColor='gray'
-              style={{color: 'white'}}
+              style={{ color: 'white' }}
               onChangeText={titleHandler}
               value={title}
             />
@@ -132,28 +141,29 @@ function AddGoalScreen({ route, navigation }) {
             <TextInput
               placeholder="description"
               placeholderTextColor='gray'
-              style={{color: 'white'}}
+              style={{ color: 'white' }}
               onChangeText={descriptionHandler}
               value={description}
             />
           </View>
 
           <View style={styles.padding}>
-          {/* Display milestones added */}
-          <FlatList
-            data={milestones}
-            renderItem={({item}) => (
-              <View style={{padding: 5,
-              margin: 2,
-              borderBottomWidth: 1,
-              borderBottomColor: 'white'}}>
-                <Text style={{color:'white'}}>{item}</Text>
-              </View>
-            )}
-            keyExtractor={item => {
-              item + 'x';
-            }}
-          />
+            {/* Display milestones added */}
+            <FlatList
+              data={milestones}
+              renderItem={({ item }) => (
+                <View style={{
+                  padding: 5,
+                  margin: 2,
+                }}>
+                  <Text style={{ color: 'white' }}>• {item}</Text>
+                </View>
+              )}
+              keyExtractor={(item, index) => {
+                index.toString();
+                console.log(index)
+              }}
+            />
           </View>
 
           {/* adding a new milestone */}
@@ -161,7 +171,7 @@ function AddGoalScreen({ route, navigation }) {
             <TextInput
               placeholder="add milestone"
               placeholderTextColor='gray'
-              style={{color: 'white'}}
+              style={{ color: 'white' }}
               onChangeText={text => setMilestoneText(text)}
               ref={input => {
                 this.myTextInput = input;
@@ -170,58 +180,53 @@ function AddGoalScreen({ route, navigation }) {
             />
           </View>
 
-          <TouchableOpacity onPress={() => setShowDateTimePicker(true)}
-              style={styles.wideButton}> 
-              <Text style={styles.text}>Pick Date</Text>
-            </TouchableOpacity>
-            {!validDate && (
-              <Text>Date must be today or later</Text>
-            )}
+          <Button
+            title="Show Calendar"
+            onPress={() => setShowDateTimePicker(true)}
+          />
 
-            {showDateTimePicker && (
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={defaultDate}
-                mode="date"
-                style={{backgroundColor:'gray',}}
-                darkisDarkModeEnabled={true}
-                onChange={(e, d) => {
-                  if (Platform.OS === 'android') {
-                    setShowDateTimePicker(false);
-                  }
-                  onDateSelected(e, d);
-                }}
-              />
-            )}
-            <TouchableOpacity style={styles.wideButton}
+          {showDateTimePicker && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={defaultDate}
+              mode="date"
+              style={{ backgroundColor: 'gray', }}
+              darkisDarkModeEnabled={true}
+              onChange={(e, d) => {
+                if (Platform.OS === 'android') {
+                  setShowDateTimePicker(false);
+                }
+                onDateSelected(e, d);
+              }}
+            />
+          )}
+
+          <Text style={styles.errorText}>{milestoneErrorMessage}</Text>
+          <TouchableOpacity style={styles.wideButton}
             onPress={() => {
-              if (Platform.OS === 'ios') {
-                setShowDateTimePicker(false);
-              }
               addMilestone(milestoneText, datePicked);
-              setMilestoneText('');
-              this.myTextInput.clear();
             }}>
             <Text style={styles.text}>Add Milestone</Text>
-            </TouchableOpacity>
-
-            {/* add goal Button */}
-          <TouchableOpacity style={styles.wideButton} onPress={() => {
-              addGoalHandler();
-            }}>
-              <Text style={styles.text}>Create</Text>
           </TouchableOpacity>
-          
+
+          <Text style={styles.errorText}>{errorMessage}</Text>
+          {/* add goal Button */}
+          <TouchableOpacity style={styles.wideButton} onPress={() => {
+            addGoalHandler();
+          }}>
+            <Text style={styles.text}>Create</Text>
+          </TouchableOpacity>
+
         </View>
       ) : (
-        //renders on successfully adding goal
-        <View style={styles.main}>
-          <Text style={styles.text}>Goal Added! You can access your goal in the Goal tab.</Text>
-        </View>
+          //renders on successfully adding goal
+          <View style={styles.main}>
+            <Text style={styles.text}>Goal Added! You can access your goal in the Goal tab.</Text>
+          </View>
 
-        //maybe add an option to add another goal or make sure this goes back to
-        // the big plus button once we leave this screen
-      )}
+          //maybe add an option to add another goal or make sure this goes back to
+          // the big plus button once we leave this screen
+        )}
     </SafeAreaView>
   );
 }
