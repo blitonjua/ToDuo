@@ -52,7 +52,7 @@ function ProfileScreen({navigation}) {
           </View>
 
         <Text style={styles.name}>
-          {/* {userData.firstName} {userData.lastName} */}
+          {userData.firstName} {userData.lastName}
         </Text>
 
         {/* archive*/}

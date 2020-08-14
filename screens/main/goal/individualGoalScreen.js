@@ -158,21 +158,24 @@ function IndividualGoalScreen({route, navigation}) {
       <View style={styles.padding}>
         {/* overview info */}
         <Text style={{color: 'white', borderBottomWidth: 2, borderBottomColor: '#53d681', margin: 5}}>{goal.description}</Text>
-        <Button title={"message " + buddyName} onPress={() => gotoMessage()} />
-        <Text style={styles.text}>Milestones</Text>
-        {/* ---------------------------------------------------------------------------------------------------------------- */}
-        <MileStoneList goalInfo={goal.goalId} />
-        {/* ---------------------------------------------------------------------------------------------------------------- */}
-      </View>
-      <ScrollView>
-        {/* toDo list button */}
         <Button
           title="to-do list"
           onPress={() => {
             navigation.navigate('toDoListScreen', {goal: goal});
           }}
         />
-        <Button title="End Goal" onPress={() => endGoal()}/>
+        <TouchableOpacity onPress={() => gotoMessage()}>
+          <View style={{
+            alignSelf: 'center',
+            backgroundColor: '#ffc400',
+            width: '100%',
+            alignContent: 'center'
+            }}>
+          <Text style={{color: 'white'}}>{'message ' + buddyName}</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Text style={styles.text}>Milestones</Text>
         <Button
           title="approve buddy milestones"
           onPress={() => {
@@ -181,8 +184,16 @@ function IndividualGoalScreen({route, navigation}) {
             });
           }}
         />
-        {/* accountabuddy bail */}
-      </ScrollView>
+        </View>
+        {/* ---------------------------------------------------------------------------------------------------------------- */}
+        <MileStoneList goalInfo={goal.goalId} />
+        {/* ---------------------------------------------------------------------------------------------------------------- */}
+      </View>
+        <TouchableOpacity  onPress={() => endGoal()}>
+          <View style={{alignSelf: 'center'}}>
+          <Text style={{color: 'red', fontWeight: 'bold'}}>End Goal</Text>
+          </View>
+        </TouchableOpacity>
     </SafeAreaView>
   );
 }

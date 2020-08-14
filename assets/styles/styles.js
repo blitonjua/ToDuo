@@ -90,35 +90,31 @@ export const authStyles = StyleSheet.create({
         flexDirection: 'row',
     },
     titleTo: {
-        fontSize: 60,
+        fontSize: 80,
         textAlign: 'center',
         fontFamily: 'BloggerSans-BoldItalic',
-        color: colors.spinach,
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 10,
+        color:'white'
     },
     titleDuo: {
-        fontSize: 60,
+        fontSize: 80,
+        color:colors.lime,
         textAlign: 'center',
         fontFamily: 'BloggerSans-BoldItalic',
-        color: '#002b54',
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 10,
     },
     container: {
-        //backgroundColor: 'white',
-        padding: 7,
+        padding: 1,
         marginTop: 10,
         alignItems: 'stretch',
         justifyContent: 'center',
-        //borderColor: '#EBEBEB',
         borderBottomWidth: 2,
         borderBottomColor: 'white',
         marginBottom: 8,
-        // shadowColor: '#000',
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 1,
-        // },
-        // shadowOpacity: 0.22,
-        // shadowRadius: 2.22,
-        // elevation: 3
     },
     //buttons--------------------
     buttonView: {
@@ -126,10 +122,9 @@ export const authStyles = StyleSheet.create({
         marginTop: 15,
     },
     buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 15,
-        letterSpacing: 2,
+        color: '#fff',
+        fontFamily:'BloggerSans-Medium',
+        fontSize:20,
     },
     //links----------------------
     linkView: {
@@ -157,10 +152,9 @@ export const loginStyles = StyleSheet.create({
         marginTop: 10
     },
     signupLinkText: {
-        color: colors.spinach,
-        fontSize: 15,
-        letterSpacing: 2,
-        fontWeight: 'bold'
+        color:'#fff',
+        fontFamily:'BloggerSans-Medium',
+        fontSize:20,
     },
 });
 
@@ -170,14 +164,15 @@ export const signupStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: colors.lime,
+       // borderColor: 'white',
+       // borderWidth: 2,
         borderRadius: 60,
         height: 40
     },
     loginLinkText: {
-        color: colors.spinach,
-        fontWeight: 'bold',
-        fontSize: 15,
-        letterSpacing: 2,
+        color:'#fff',
+        fontFamily:'BloggerSans-Medium',
+        fontSize:20,
     },
 });
 
@@ -260,7 +255,7 @@ export const profileStyles = StyleSheet.create({
         borderRadius: 20,
     },
     buttonText:{
-      color:'#fff',
+      color: 'white',
       fontFamily:'BloggerSans-Medium',
       fontSize:16   
   }
@@ -519,19 +514,11 @@ generalText:{
 container: {
     borderBottomWidth: 2,
     borderBottomColor: 'white',
-    padding: 7,
+    padding: 1,
     marginTop: 10,
     alignItems: 'stretch',
     justifyContent: 'center',
     marginBottom: 8,
-    shadowColor: '#000',
-    shadowOffset: {
-        width: 0,
-        height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3
 },
 button: {
     color:'#fff',
@@ -553,7 +540,7 @@ secondButton: {
     height: 40
 },
 buttonText:{
-    color:'#fff',
+    color: 'white',
     fontFamily:'BloggerSans-Medium',
     fontSize:16,
     

@@ -107,7 +107,7 @@ function LoginScreen({ navigation }) {
               signUserIn(emailText, passwordText);
             }}>
             <Text style={styles.buttonText}>
-              LOG IN
+              Login
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -117,7 +117,7 @@ function LoginScreen({ navigation }) {
               gotoSignup();
             }}>
             <Text style={styles.signupLinkText}>
-              SIGN UP
+              Sign Up
             </Text>
           </TouchableOpacity>
 

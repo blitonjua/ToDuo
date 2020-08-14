@@ -109,7 +109,7 @@ function SignupScreen({ navigation }) {
               //send user to the welcome screen
               createUser(firstNameText, lastNameText, ageText, emailText, passwordText);
             }}>
-            <Text style={styles.buttonText}>SIGN UP</Text>
+            <Text style={styles.buttonText}>Sign up</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -118,7 +118,7 @@ function SignupScreen({ navigation }) {
               //send user to log in screen
               gotoLogin();
             }}>
-            <Text style={styles.loginLinkText}>LOG IN</Text>
+            <Text style={styles.loginLinkText}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>
