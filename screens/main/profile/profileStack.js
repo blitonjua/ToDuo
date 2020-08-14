@@ -16,11 +16,6 @@ function ProfileStack() {
                 screenOptions={{
                 gestureEnabled: false,
             }}>
-<<<<<<< HEAD
-            <Stack.Screen name="profileScreen" component={ProfileScreen} />
-            <Stack.Screen name="settingsStack" component={SettingsScreen} />
-            <Stack.Screen name="pastGoalsScreen" component={PastGoalsScreen} />
-=======
             <Stack.Screen name="profileScreen" component={ProfileScreen} 
                 options={{headerShown: false}}/>
             <Stack.Screen name="settingsScreen" component={SettingsScreen} 
@@ -37,7 +32,6 @@ function ProfileStack() {
                     headerTintColor: 'white',
                     headerBackTitle: ' ',
                     }}/>
->>>>>>> 85783bd01ad80544b069a8f8ad1490a352d8392e
         </Stack.Navigator>
     );
 };
