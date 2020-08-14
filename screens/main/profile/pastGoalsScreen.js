@@ -27,7 +27,7 @@ function PastGoalsScreen({ navigation }) {
     
       useEffect(() => {
         getGoals(showingCompleted);
-        navigation.setOptions({ title: showingCompleted? 'Completed Goals' : 'Archived Goals'});
+        navigation.setOptions({ title: showingCompleted? 'Archived Goals' : 'Completed Goals'});
       }, [showingCompleted]);
 
     //renders the items in the list
@@ -44,9 +44,9 @@ function PastGoalsScreen({ navigation }) {
             <View style={styles.main}>
 
                 {/* toggle completed */}
-                <TouchableOpacity style={styles.wideButton} onPress={() => {setShowingCompleted(!showingCompleted)}}>
-                    <Text>
-                        {showingCompleted? 'Show Archived' : 'Show Completed'}
+                <TouchableOpacity onPress={() => {setShowingCompleted(!showingCompleted)}}>
+                    <Text style={{fontFamily:'BloggerSans-Bold',color: '#53d681', fontSize: 20}}>
+                        {showingCompleted? 'Show Completed' : 'Show Archived'}
                     </Text>
                 </TouchableOpacity>
 

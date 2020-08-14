@@ -22,9 +22,9 @@ function DoneScreen({ route, navigation }) {
     //displays different message depending on status
     function DoneMessage() {
         if (stat == status.completed)
-            return (<Text>CONGRATULATIONS!!!!!! YOU'VE ACHIEVED YOUR GOAL!!!!!</Text>);
+            return (<Text style={{color: 'white', fontFamily:'BloggerSans-Medium'}}>Congratulations on completing your goal! Woohoo!</Text>);
         if (stat == status.archived)
-            return (<Text>wow.... lame.</Text>);
+            return (<Text style={{color: 'white', fontFamily:'BloggerSans-Medium'}}>Work hard to finish your goal next time!</Text>);
     }
 
     return (
@@ -32,8 +32,15 @@ function DoneScreen({ route, navigation }) {
             <View style={styles.main}>
                 <DoneMessage />
                 <TouchableOpacity
-                    onPress={() => gotoGoalsListScreen()}>
-                    <Text>
+                    onPress={() => gotoGoalsListScreen()}
+                    style={{backgroundColor: '#53d681',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius: 50,
+                        padding: 10,
+                        margin: 10}}>
+                    <Text
+                        style={{color: 'white', fontFamily:'BloggerSans-Medium'}}>
                         Go Home
                     </Text>
                 </TouchableOpacity>

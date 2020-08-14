@@ -299,7 +299,8 @@ export const addGoalStyles = StyleSheet.create({
 export const individualGoalStyles = StyleSheet.create({
     ...appStyles,
     goalText: {
-        color: 'white'
+        color: 'white',
+        fontFamily: 'BloggerSans-Medium'
     },
     main: {
         //flex: 1,
@@ -318,12 +319,14 @@ export const individualGoalStyles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         paddingBottom: 1,
+        fontFamily: 'BloggerSans-Medium'
     },
     milestonesText: {
         textAlign: 'left',
         fontWeight: 'bold',
         fontSize: 20,
         color: 'white',
+        fontFamily: 'BloggerSans-Medium'
     },
     flatListContainer: {
         marginTop: 10
@@ -338,6 +341,11 @@ export const individualGoalStyles = StyleSheet.create({
         borderBottomColor: 'gray',
         borderBottomWidth: 2,
     },
+    touchableText: {
+        color: colors.mustard,
+        fontSize: 14,
+        fontFamily: 'BloggerSans-Medium'
+    }
 });
 
 export const toDoStyles = StyleSheet.create({
