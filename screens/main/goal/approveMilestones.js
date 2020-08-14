@@ -10,13 +10,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 //styles
-import {approveMilestones} from '../../../assets/styles/styles.js';
+
+import {approveStyles} from '../../../assets/styles/styles'
 
 import {getMilestonesAsObjects} from '../../../services/getMilestoneData';
 import {markMilestoneAsComplete} from '../../../services/getMilestoneData';
 
-//*------------------------------------------------------------------------------------------------------------------------------
-//component version
+const styles = approveStyles;
+
 export default class ApproveMilestone extends Component {
   _isMounted = false;
   constructor(props) {
@@ -37,12 +38,6 @@ export default class ApproveMilestone extends Component {
         this.state.goal.matchedGoalId,
       ).then(async u => {
         this.setState({isLoading: false, milestones: u});
-
-        // for (let i = 0; i < u.length; i++) {
-        //   if (u[i].requestMark) {
-        //     this.setState({isEmpty: true});
-        //   }
-        // }
       });
     }
   }
@@ -55,11 +50,6 @@ export default class ApproveMilestone extends Component {
         this.state.goal.matchedGoalId,
       ).then(async u => {
         this.setState({isLoading: false, milestones: u});
-        // for (let i = 0; i < u.length; i++) {
-        //   if (u[i].requestMark) {
-        //     this.setState({isEmpty: true});
-        //   }
-        // }
       });
     }
   }
@@ -68,19 +58,19 @@ export default class ApproveMilestone extends Component {
   }
   render() {
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.mainContainer}>
         {true && (
           <FlatList
             data={this.state.milestones}
-            renderItem={({item}) => (
+            renderItem={({item}) => (!item.completed && (
               //------------------------------------------------------------------------------------------------------------------------------
-              <View style={approveMilestones.miletoneContainer}>
+              <View style={styles.milestoneContainer}>
                 {item.requestMark && (
                   <View>
-                    <View style={approveMilestones.miletoneContainer2}>
-                      <Text>{item.milestoneText}</Text>
-                      <Text>
-                        due: {item.milestoneMonth}/{item.milestoneDay}/
+                    <View style={styles.milestoneContainer2}>
+                      <Text style={styles.mainText}>{item.milestoneText}</Text>
+                      <Text style={styles.date}>
+                        Due: {item.milestoneMonth}/{item.milestoneDay}/
                         {item.milestoneFullYear}
                       </Text>
                     </View>
@@ -93,14 +83,14 @@ export default class ApproveMilestone extends Component {
                         );
                       }}>
                       <View>
-                        <Text> mark as complete</Text>
+                        <Text style={styles.complete}>Mark as Complete</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
                 )}
               </View>
               //------------------------------------------------------------------------------------------------------------------------------
-            )}
+            ))}
             keyExtractor={(item, index) => index.toString()}
           />
         )}

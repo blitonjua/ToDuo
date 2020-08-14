@@ -11,6 +11,7 @@ const colors = {
     hollendaise: '#1e0e75',
     //main background, primary
     lime: '#53d681',
+    dark: '#272b28',
 };
 
 export const headerStyles = {
@@ -580,20 +581,41 @@ export const chatStyles = StyleSheet.create({
     borderTopColor: '#B4B4B4',
   },
 });
-//approve milestones
-export const approveMilestones = StyleSheet.create({
-  miletoneContainer: {
-    backgroundColor: '#eaffdb',
-    margin: '1%',
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  miletoneContainer2: {
-    marginRight: '2%',
-  },
-  completeButton: {
-    color: 'black',
-  },
-});
+
+
+export const approveStyles = StyleSheet.create({
+    mainContainer: {
+      flex: 1,
+      alignContent: 'center',
+      alignItems: 'stretch',
+      justifyContent: 'center',
+      height: Dimensions.get('window').height,
+      width: Dimensions.get('window').width,
+      backgroundColor:'#272b28',
+    },
+    mainText: {
+        fontFamily:'BloggerSans-Bold',color: 'white', fontSize: 20
+    },
+    date: {
+        fontFamily:'BloggerSans-BoldItalic',color: 'white',
+    },
+    complete: {
+        fontFamily: 'BloggerSans-Bold',
+        color:'white',
+    },
+    milestoneContainer: {
+        padding: 10,
+        margin: 5, 
+        backgroundColor:'#53d681', 
+        //borderColor: '#53d681', 
+        //borderWidth: 2, 
+        borderRadius: 20
+      },
+      milestoneContainer2: {
+        marginRight: '2%',
+      },
+      completeButton: {
+        color: 'black',
+      }
+
+  })

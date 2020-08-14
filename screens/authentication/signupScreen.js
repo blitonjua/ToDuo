@@ -105,8 +105,6 @@ function SignupScreen({ navigation }) {
           <TouchableOpacity
             style={styles.signupButton}
             onPress={() => {
-              console.log('creating user');
-              //send user to the welcome screen
               createUser(firstNameText, lastNameText, ageText, emailText, passwordText);
             }}>
             <Text style={styles.buttonText}>Sign up</Text>

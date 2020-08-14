@@ -1,11 +1,11 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {Text, SafeAreaView, TouchableOpacity, View, Image} from 'react-native';
-//firebase
+
 import auth from '@react-native-firebase/auth';
 import {UserContext} from '../../../services/userContext';
-//consts
+
 import {profileIcons} from '../../../assets/images/profileIcons';
-//styles
+
 import {profileStyles} from '../../../assets/styles/styles';
 import {getUserData} from './settings';
 import ProfilePhoto from './profilePhoto';
@@ -52,7 +52,7 @@ function ProfileScreen({navigation}) {
           </View>
 
         <Text style={styles.name}>
-          {userData.firstName} {userData.lastName}
+          {/* {userData.firstName} {userData.lastName} */}
         </Text>
 
         {/* archive*/}

@@ -22,9 +22,10 @@ function GoalsListScreen({navigation}) {
     setGoalData(goals);
   }
 
+  //this should be limited later
   useEffect(() => {
     getGoals();
-  }, []);
+  }, );
 
   function gotoIndividualGoal(item) {
     navigation.navigate('individualGoalDisplay', {goal: item});

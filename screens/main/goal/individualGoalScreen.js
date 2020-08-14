@@ -171,7 +171,7 @@ function IndividualGoalScreen({route, navigation}) {
             width: '100%',
             alignContent: 'center'
             }}>
-          <Text style={{color: 'white'}}>{'message ' + buddyName}</Text>
+          <Text style={{color: 'white', alignSelf: 'center'}}>{'message ' + buddyName}</Text>
           </View>
         </TouchableOpacity>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
