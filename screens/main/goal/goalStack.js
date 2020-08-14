@@ -6,6 +6,7 @@ import GoalsListScreen from './goalsListScreen';
 import MessageScreen from './messageScreen';
 import DoneScreen from './doneScreen';
 import IndividualGoalDisplay from './individualGoalDisplay';
+import EndGoalScreen from './endGoalScreen';
 
 //header style
 import {headerStyles} from '../../../assets/styles/styles';
@@ -46,7 +47,20 @@ function GoalStack() {
         headerBackTitle: ' ',
         title: 'To-do',
       })}/>
-      <Stack.Screen name="approveMilestones" component={ApproveMilestone} />
+      <Stack.Screen name="approveMilestones" component={ApproveMilestone} 
+      options={({ route }) => ({
+        headerStyle: headerStyles.headerStyle,
+        headerTintColor: 'white',
+        headerBackTitle: ' ',
+        title: 'Approve Milestones',
+      })}/>
+      <Stack.Screen name="endGoalScreen" component={EndGoalScreen}
+      options={({ route }) => ({
+        headerStyle: headerStyles.headerStyle,
+        headerTintColor: 'white',
+        headerBackTitle: ' ',
+        title: 'End Goal',
+      })}/>
     </Stack.Navigator>
   );
 }

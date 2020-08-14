@@ -36,7 +36,8 @@ function IndividualGoalScreen({route, navigation}) {
   const [buddyName, setBuddyName] = useState('');
 
   useEffect(() => {
-    firestore()
+    console.log('in here ' + goal.accountaBuddyId);
+      firestore()
       .collection('Users')
       .doc(goal.accountaBuddyId)
       .get()
@@ -60,6 +61,10 @@ function IndividualGoalScreen({route, navigation}) {
 
   function gotoMessage() {
     navigation.navigate('messageScreen', {goal: route});
+  }
+
+  function endGoal() {
+    navigation.navigate('endGoalScreen', {goal: route});
   }
 
   async function getMilestones() {
@@ -136,8 +141,8 @@ function IndividualGoalScreen({route, navigation}) {
       {/* back button */}
       <View style={styles.padding}>
         {/* overview info */}
-        <Text style={{color: 'white'}}>{goal.description}</Text>
-
+        <Text style={{color: 'white', borderBottomWidth: 2, borderBottomColor: '#53d681', margin: 5}}>{goal.description}</Text>
+        <Button title={"msg" + buddyName} onPress={() => gotoMessage()} />
         <Text style={styles.text}>Milestones</Text>
         {/* ---------------------------------------------------------------------------------------------------------------- */}
         <MileStoneList goalInfo={goal.goalId} />
@@ -151,12 +156,7 @@ function IndividualGoalScreen({route, navigation}) {
             navigation.navigate('toDoListScreen', {goal: goal});
           }}
         />
-        {/* messages button */}
-        <Button title="msg" onPress={() => gotoMessage()} />
-        {/* archive goal */}
-        <Button title="archive" onPress={() => goalDone(status.archived)} />
-        {/* complete goal */}
-        <Button title="complete" onPress={() => goalDone(status.completed)} />
+        <Button title="End Goal" onPress={() => endGoal()}/>
         <Button
           title="approve buddy milestones"
           onPress={() => {
@@ -166,7 +166,6 @@ function IndividualGoalScreen({route, navigation}) {
           }}
         />
         {/* accountabuddy bail */}
-        <Button title="bail buddy" onPress={() => bail()} />
       </ScrollView>
     </SafeAreaView>
   );

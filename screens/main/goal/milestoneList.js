@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect, Component} from 'react';
-import {FlatList, Text, View, TouchableOpacity} from 'react-native';
+import {FlatList, Text, View, TouchableOpacity, ScrollView} from 'react-native';
 //firebase
 import auth from '@react-native-firebase/auth';
 
