@@ -18,7 +18,7 @@ function ProfileStack() {
             }}>
             <Stack.Screen name="profileScreen" component={ProfileScreen} 
                 options={{headerShown: false}}/>
-            <Stack.Screen name="settingsScreen" component={SettingsScreen} 
+            <Stack.Screen name="settingsScreen" component={settingsStack} 
                 options={{
                     title:'Settings',
                     headerStyle: headerStyles.headerStyle,

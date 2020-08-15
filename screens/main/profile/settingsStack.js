@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 import SettingsScreen from './settingsScreen';
-import DeactivationScreen from './DeactivationScreen';
+import DeactivationScreen from './deactivationScreen';
 
 
 function settingsStack() {
