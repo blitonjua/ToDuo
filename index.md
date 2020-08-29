@@ -1,5 +1,5 @@
 <head><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300" rel="stylesheet"></head><center>
-<div style="margin: 40%; max-width:500px; padding:7px;border:2px solid #00ff00;border-radius:10px;box-shadow: 2px 2px 2px #ccc;">
+<div style="margin: 40 auto; max-width:500px; padding:7px;border:2px solid #00ff00;border-radius:10px;box-shadow: 2px 2px 2px #ccc;">
 <h1 style="font-family:'Source Sans Pro';color:#00ff00;">ToDuo</h1>
   
 <p style="font-family:'Source Sans Pro';">For a summer-long hackathon, three students and I worked on a mobile application on both Android/iOS using React Native (Front-end) and Firebase (Back-end). I mainly worked on the front-end design of the app but worked on the back-end of the app as well. The mobile application is a productivity app that helps users achieve their goals by matching them with other users and assigning them as accountability buddies.
